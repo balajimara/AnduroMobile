@@ -1,16 +1,16 @@
 import { Navigation } from "react-native-navigation";
-import { FirstScreen } from '../component/FirstScreen/FirstScreen';
-import { NewandExisting } from '../component/NewandExisting/NewandExisting';
-import { Newaccount } from '../component/Newaccount/Newaccount';
-import { CreateWallet } from '../component/CreateWallet/CreateWallet';
-import { CreateWalletName} from '../component/CreateWalletName/CreateWalletName';
-import { SecretRecoveryPhase} from '../component/SecretRecoveryPhase/SecretRecoveryPhase';
-import { Securepassword} from '../component/Securepassword/Securepassword';
-import { Accountcreated} from '../component/Accountcreated/Accountcreated';
-import { Recoveryphase} from '../component/Recoveryphase/Recoveryphase';
-import { Walletimported} from '../component/Walletimported/Walletimported';
-import { ConfirmBackup} from '../component/ConfirmBackup/ConfirmBackup';
-import { Authorizedscreen} from '../component/Authorizedscreen/Authorizedscreen';
+import { FirstScreen } from '../component/CreateWallet/FirstScreen/FirstScreen';
+import { NewandExisting } from '../component/CreateWallet/NewandExisting/NewandExisting';
+import { Newaccount } from '../component/CreateWallet/Newaccount/Newaccount';
+import { CreateWallet } from '../component/CreateWallet/CreateWallet/CreateWallet';
+import { CreateWalletName} from '../component/CreateWallet/CreateWalletName/CreateWalletName';
+import { SecretRecoveryPhase} from '../component/CreateWallet/SecretRecoveryPhase/SecretRecoveryPhase';
+import { Securepassword} from '../component/CreateWallet/Securepassword/Securepassword';
+import { Accountcreated} from '../component/CreateWallet/Accountcreated/Accountcreated';
+import { Recoveryphase} from '../component/CreateWallet/Recoveryphase/Recoveryphase';
+import { Walletimported} from '../component/CreateWallet/Walletimported/Walletimported';
+import { ConfirmBackup} from '../component/CreateWallet/ConfirmBackup/ConfirmBackup';
+import { Authorizedscreen} from '../component/CreateWallet/Authorizedscreen/Authorizedscreen';
 
 Navigation.registerComponent('Firstscreen', () => FirstScreen);
 Navigation.registerComponent('NewandExisting', () => NewandExisting);
