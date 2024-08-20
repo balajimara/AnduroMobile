@@ -9,6 +9,7 @@
  */
 
 import React, {type PropsWithChildren} from 'react';
+import SplashScreen from "react-native-splash-screen"
 import {
   SafeAreaView,
   ScrollView,
@@ -59,7 +60,6 @@ const Section: React.FC<
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };

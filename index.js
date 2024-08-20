@@ -1,5 +1,5 @@
 import {Navigation} from 'react-native-navigation';
-import 'nativewind/types';
+// import 'nativewind/types';
 import App from './App';
 Navigation.registerComponent('com.myApp.WelcomeScreen', () => App);
 Navigation.events().registerAppLaunchedListener(() => {
