@@ -1,94 +1,63 @@
 package com.anduromobile;
-
 import android.app.Application;
-import android.content.Context;
-import com.facebook.react.PackageList;
-import com.reactnativenavigation.NavigationApplication;
-import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
-import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.config.ReactFeatureFlags;
+import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.anduromobile.newarchitecture.MainApplicationReactNativeHost;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
+// import com.reactnativenavigation.NavigationApplication;
+// import com.reactnativenavigation.react.NavigationReactNativeHost;
+import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
-
-public class MainApplication extends NavigationApplication {
+public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
-      new NavigationReactNativeHost(this) {
+      new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
         }
 
-        @Override
-        protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
+      @Override
+      protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+            new SplashScreenReactPackage()  //here
+            );
         }
 
         @Override
         protected String getJSMainModuleName() {
           return "index";
         }
+
+        // @Override
+        // protected boolean isNewArchEnabled() {
+        //   super.isNewArchEnabled();
+        //   return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+        // }
+
+        // @Override
+        // protected Boolean isHermesEnabled() {
+        //   return BuildConfig.IS_HERMES_ENABLED;
+        // }
       };
 
-  private final ReactNativeHost mNewArchitectureNativeHost =
-      new MainApplicationReactNativeHost(this);
-
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-      return mNewArchitectureNativeHost;
-    } else {
-      return mReactNativeHost;
-    }
-  }
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    // If you opted-in for the New Architecture, we enable the TurboModule system
-    ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
-    
-    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-  }
-
-  /**
-   * Loads Flipper in React Native templates. Call this in the onCreate method with something like
-   * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-   *
-   * @param context
-   * @param reactInstanceManager
-   */
-  private static void initializeFlipper(
-      Context context, ReactInstanceManager reactInstanceManager) {
-    if (BuildConfig.DEBUG) {
-      try {
-        /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
-        Class<?> aClass = Class.forName("com.anduromobile.ReactNativeFlipper");
-        aClass
-            .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
-            .invoke(null, context, reactInstanceManager);
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
-      } catch (InvocationTargetException e) {
-        e.printStackTrace();
+      @Override
+      public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
       }
-    }
-  }
+
+    @Override
+public void onCreate() {
+  super.onCreate();
+  SoLoader.init(this, /* native exopackage */ false); // add this one
+  ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+}
+
+
 }

@@ -1,20 +1,28 @@
 package com.anduromobile;
 
-import com.reactnativenavigation.NavigationActivity;
+import android.os.Bundle;
+// import com.reactnativenavigation.NavigationActivity;
+import android.app.Activity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-import android.os.Bundle;
-import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;
 
-public class MainActivity extends NavigationActivity, ReactActivity {
+public class MainActivity extends Activity {
 
-  
+     
+  // @Override
+  // protected String getMainComponentName() {
+  //   return "testActivity";
+  // }
 
-  
+   @Override
+     protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.show(this);
+    super.onCreate(savedInstanceState);
+  }
 
-  public static class MainActivityDelegate extends ReactActivityDelegate {
-    public MainActivityDelegate(NavigationActivity activity, String mainComponentName) {
+   public static class MainActivityDelegate extends ReactActivityDelegate {
+    public MainActivityDelegate(Activity activity, String mainComponentName) {
       super(activity, mainComponentName);
     }
 
@@ -33,10 +41,11 @@ public class MainActivity extends NavigationActivity, ReactActivity {
       return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen.show(this);  // here
-        super.onCreate(savedInstanceState);
-    }
-  }
+   };
+  
+
+    
+   
+  // }
 }
+

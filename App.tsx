@@ -8,8 +8,7 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
-import SplashScreen from "react-native-splash-screen"
+import React, {useEffect, type PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -28,11 +27,13 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+
 const Section: React.FC<
   PropsWithChildren<{
     title: string;
   }>
 > = ({children, title}) => {
+
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View className="mt-8 px-2 bg-black">
