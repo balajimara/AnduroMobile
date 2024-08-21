@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {useEffect, type PropsWithChildren} from 'react';
+import React, {type PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
