@@ -6,10 +6,11 @@ import android.app.Activity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import org.devio.rn.splashscreen.SplashScreen;
+import com.facebook.react.ReactActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ReactActivity {
 
-     
+
   // @Override
   // protected String getMainComponentName() {
   //   return "testActivity";
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
    @Override
      protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this);
+    setTheme(R.style.AppTheme);
     super.onCreate(savedInstanceState);
   }
 
@@ -42,10 +44,10 @@ public class MainActivity extends Activity {
     }
 
    };
-  
 
-    
-   
+
+
+
   // }
 }
 

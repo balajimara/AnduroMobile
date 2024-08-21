@@ -52,12 +52,17 @@ public class MainApplication extends Application implements ReactApplication {
         return mReactNativeHost;
       }
 
-    @Override
+//     @Override
+// public void onCreate() {
+//   super.onCreate();
+//   SoLoader.init(this, /* native exopackage */ false); // add this one
+//   ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+// }
+
+@Override
 public void onCreate() {
   super.onCreate();
   SoLoader.init(this, /* native exopackage */ false); // add this one
   ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 }
-
-
 }
