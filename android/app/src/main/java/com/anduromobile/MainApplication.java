@@ -60,7 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
 @Override
 public void onCreate() {
   super.onCreate();
-  SoLoader.init(this, /* native exopackage */ false); // add this one
+  // SoLoader.init(this, /* native exopackage */ false); // add this one
   ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 }
 }
