@@ -12,10 +12,7 @@ const beforeLogin = {
       children: [
         {
           component: {
-            name: "AnduroLanding",
-            passProps: {
-              from: "auth",
-            },
+            name: "AnduroLanding",      
             options: {
               animations: {
                 setRoot: {
