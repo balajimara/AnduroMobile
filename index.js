@@ -7,6 +7,16 @@ Navigation.registerComponent('com.anduromobile.WelcomeScreen', () => App);
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
   Navigation.setRoot({
-      root: route.beforeLogin,
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'com.anduromobile.WelcomeScreen',
+            },
+          },
+        ],
+      },
+    },
   });
 });
