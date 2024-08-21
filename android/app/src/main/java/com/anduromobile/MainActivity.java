@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-import org.devio.rn.splashscreen.SplashScreen;
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
@@ -15,14 +14,6 @@ public class MainActivity extends ReactActivity {
   // protected String getMainComponentName() {
   //   return "testActivity";
   // }
-
-   @Override
-     protected void onCreate(Bundle savedInstanceState) {
-    SplashScreen.show(this);
-    setTheme(R.style.AppTheme);
-    super.onCreate(savedInstanceState);
-  }
-
    public static class MainActivityDelegate extends ReactActivityDelegate {
     public MainActivityDelegate(Activity activity, String mainComponentName) {
       super(activity, mainComponentName);

@@ -8,7 +8,6 @@ import com.facebook.soloader.SoLoader;
 // import com.reactnativenavigation.NavigationApplication;
 // import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.facebook.react.ReactActivity;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -25,8 +24,7 @@ public class MainApplication extends Application implements ReactApplication {
       @Override
       protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
-                    new MainReactPackage(),
-            new SplashScreenReactPackage()  //here
+                    new MainReactPackage()
             );
         }
 

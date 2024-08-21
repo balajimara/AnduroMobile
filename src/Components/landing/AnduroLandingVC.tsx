@@ -1,47 +1,76 @@
-import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    useColorScheme,
-    Image,
-    Text,
-    View,
-  } from 'react-native';
-import React from "react"
+import React, { useState } from 'react';
+import { View, Text,SafeAreaView,Image} from 'react-native';
+import { Navigation } from 'react-native-navigation';
+import { CheckBox } from '@rneui/themed';
+// import Logo from '../../../UI/Icons/Logo';
 
+// import CheckBox from '@react-native-community/checkbox';
+// import Custom from '../../styles/Custom';
 
+export const AnduroLandingVC = (props:any) => {
+  const [agree, setAgree] = React.useState(false);
 
-const AnduroLandingVC = () => {
-
-  React.useEffect(() => {
-    // Use setTimeout to update the message after 2000 milliseconds (2 seconds)
-
-  }, [])
+  const handleStartAction = () => {
+      setAgree(!agree)
+      if(!agree) {
+        Navigation.push(props.componentId, {
+          component: {
+            name: 'NewandExisting',
+            options: {
+              topBar: {
+                visible: false,
+              }
+            }
+          }
+        })
+      }
+    }
 
   return (
-    <View className="bg-continue after:bg-continue flex flex-col h-screen max-w-7-full after:fixed after:w-full after:h-full after:bottom-0 after:left-0 after:right-0 after:m-auto">
-      <View className="flex-1 relative z-10">
-        <View className="flex flex-col justify-center align-center h-full">
-          <View>
-            <Image
-              className="mb-2.5 w-[200px] mx-auto app-logo"
-              source={require("/assets/images/walletLogo.png")}
+    <SafeAreaView>
+      <View className='bg-gray h-full'>
+        <View className="flex-1 items-center h-full bg-gray p-10 gap-7 mt-10">
+          {/* <Logo/> */}
+          <Text className="font-['Geist-Regular'] text-lg text-lightgray opacity-60 text-center">
+            The wallet designed to make your Bitcoin journey seamless.
+          </Text>
+        </View>
+        <View className="items-center p-5 mb-9">
+          <View className="flex-row items-center">
+          <CheckBox
+              checked={agree}
+              onPress={handleStartAction}
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              checkedColor="#FFF2F0"
+              uncheckedColor="#FFF2F0"
+              containerStyle={{
+                backgroundColor: 'transparent',
+                borderWidth: 0,
+                padding: 0,
+              }}
             />
-            <View className="text-center max-w-64 m-auto pt-11">
-              <Text>Multiple chains, one Bitcoin experienceaaa</Text>
+          {!agree && (
+            <Text className="font-['Geist-Regular'] text-xs p-2 text-lightgray flex-1">
+            I agree with Privacy Notice and acknowledge that the Anduro wallet and network are in beta. I will only put in funds that I am comfortable losing.
+            </Text>
+          )}
+
+          {agree && (
+            <Text className="font-['Geist-Regular'] text-xs p-2 text-lightgray flex-1 opacity-30">
+            I agree with Privacy Notice and acknowledge that the Anduro wallet and network are in beta. I will only put in funds that I am comfortable losing.
+            </Text>
+          )}
+
+        </View>
+        </View>
+        <View className="w-full h-0.5 bg-lodercolor absolute bottom-6 left-0 right-0">
+           <View className="w-1/4 h-0.5 bg-loginloader">
             </View>
           </View>
-        </View>
       </View>
-      <View className="py-3 pt-0 px-2 opacity-60 text-center max-w-72 m-auto relative z-10">
-        <Text>        
-         
-            "By continuing, I agree to the Terms of Service and consent to the Privacy Policy."
-          
-          </Text>
-      </View>
-    </View>
-  )
-}
-export default AnduroLandingVC
+    </SafeAreaView>
+  );
+};
+export default AnduroLandingVC;
