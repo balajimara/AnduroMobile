@@ -2,13 +2,30 @@ import React, {useState} from 'react';
 import { View, Text,SafeAreaView,Image} from 'react-native';
 import { CheckBox, LinearProgress } from '@rneui/themed';
 import Logo from '../../Common/Icons/Logo';
+import { Navigation } from 'react-native-navigation';
+
 export const AnduroLandingVC = (props:any) => {
 const [agree, setAgree] = useState(false);
 const [progress, setProgress] = React.useState(0)
+
 React.useEffect(() => {
   if (agree) {
     setProgress(1)
+    Navigation.push(props.componentId, {
+      component: {
+        name: 'AnduroCreateType',
+        options: {
+          topBar: {
+            visible: false,
+          },
+          bottomTabs: {
+            visible: false,
+          }
+        }
+      }
+    })
   }
+  
 }, [agree])
 return (
 
