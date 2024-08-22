@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text,SafeAreaView,Image} from 'react-native';
 import { CheckBox, LinearProgress } from '@rneui/themed';
-import Logo from '../../Common/Icons/Logo';
+import Logo from '../../../Common/Icons/Logo';
 import { Navigation } from 'react-native-navigation';
 
 export const AnduroLandingVC = (props:any) => {
