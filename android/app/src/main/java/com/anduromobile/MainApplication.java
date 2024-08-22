@@ -1,4 +1,4 @@
-package com.andurowallet;
+package com.anduromobile;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
@@ -9,7 +9,9 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.facebook.soloader.SoLoader;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import java.util.List;
+import java.util.Arrays;
 
 
 public class MainApplication extends NavigationApplication {
@@ -21,12 +23,13 @@ public class MainApplication extends NavigationApplication {
           return BuildConfig.DEBUG;
         }
 
-        @Override
+       @Override
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          new SplashScreenReactPackage();  //here
           return packages;
         }
 
@@ -51,7 +54,7 @@ public class MainApplication extends NavigationApplication {
     return mReactNativeHost;
   }
 
-  @Override
+@Override
   public void onCreate() {
     super.onCreate();
 
@@ -59,6 +62,6 @@ public class MainApplication extends NavigationApplication {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       DefaultNewArchitectureEntryPoint.load();
     }
-    // ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 }

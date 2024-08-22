@@ -10,9 +10,11 @@ import App from './App';
 //screens();
 import { Navigation } from "react-native-navigation";
 import route from './src/Route/Route';
+import SplashScreen from 'react-native-splash-screen';
 
 
 Navigation.events().registerAppLaunchedListener(() => {
+  SplashScreen.hide();
   Navigation.setRoot({
     root: route.beforeLogin,
   });
