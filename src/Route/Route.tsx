@@ -12,7 +12,7 @@ const beforeLogin = {
       children: [
         {
           component: {
-            name: "AnduroLanding",      
+            name: "AnduroLanding",
             options: {
               animations: {
                 setRoot: {

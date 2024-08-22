@@ -1,38 +1,20 @@
-// In index.js of a new project
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { Navigation } from 'react-native-navigation';
+/**
+ * @format
+ */
+//import {AppRegistry} from 'react-native';
+import App from './App';
+//import {name as appName} from './app.json';
 
-const HomeScreen = (props) => {
-  return (
-    <View style={styles.root}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-};
-Navigation.registerComponent('Home', () => HomeScreen);
+//AppRegistry.registerComponent(appName, () => App);
+//import route, { screens } from './src/Route/Route';
+//screens();
+import { Navigation } from "react-native-navigation";
+import route from './src/Route/Route';
 
-Navigation.events().registerAppLaunchedListener(async () => {
+
+Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
-    root: {
-      stack: {
-        children: [
-          {
-            component: {
-              name: 'Home'
-            }
-          }
-        ]
-      }
-    }
+    root: route.beforeLogin,
   });
 });
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
-});
