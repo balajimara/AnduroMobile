@@ -3,10 +3,7 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
-
-
 const HomeScreen = (props) => {
-  console.log("consoleTransport")
   return (
     <View style={styles.root}>
       <Text>Home Screen</Text>
@@ -15,7 +12,7 @@ const HomeScreen = (props) => {
 };
 Navigation.registerComponent('Home', () => HomeScreen);
 
-Navigation.events().registerAppLaunchedListener(() => {
+Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setRoot({
     root: {
       stack: {
@@ -31,15 +28,11 @@ Navigation.events().registerAppLaunchedListener(() => {
   });
 });
 
-Navigation.events().registerComponentDidAppearListener(() => {
-  console.log('event')
-})
-
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    backgroundColor: '#000000'
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'whitesmoke'
   }
 });

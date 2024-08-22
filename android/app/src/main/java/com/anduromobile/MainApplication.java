@@ -1,31 +1,35 @@
 package com.anduromobile;
+
 import android.app.Application;
-import com.facebook.react.ReactApplication;
+import com.facebook.react.PackageList;
+import com.reactnativenavigation.NavigationApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
+import com.facebook.react.defaults.DefaultReactNativeHost;
+import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.facebook.soloader.SoLoader;
-// import com.reactnativenavigation.NavigationApplication;
-// import com.reactnativenavigation.react.NavigationReactNativeHost;
-import com.facebook.react.ReactActivity;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
-public class MainApplication extends Application implements ReactApplication {
+
+public class MainApplication extends NavigationApplication {
 
   private final ReactNativeHost mReactNativeHost =
-      new ReactNativeHost(this) {
+      new NavigationReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
         }
 
-      @Override
-      protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                    new MainReactPackage()
-            );
+        @Override
+        protected List<ReactPackage> getPackages() {
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
+          // Packages that cannot be autolinked yet can be added manually here, for example:
+          // packages.add(new MyReactNativePackage());
+          new SplashScreenReactPackage();  //here
+          return packages;
         }
 
         @Override
@@ -33,34 +37,30 @@ public class MainApplication extends Application implements ReactApplication {
           return "index";
         }
 
-        // @Override
-        // protected boolean isNewArchEnabled() {
-        //   super.isNewArchEnabled();
-        //   return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
-        // }
+        @Override
+        protected boolean isNewArchEnabled() {
+          return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+        }
 
-        // @Override
-        // protected Boolean isHermesEnabled() {
-        //   return BuildConfig.IS_HERMES_ENABLED;
-        // }
+        @Override
+        protected Boolean isHermesEnabled() {
+          return BuildConfig.IS_HERMES_ENABLED;
+        }
       };
 
-      @Override
-      public ReactNativeHost getReactNativeHost() {
-        return mReactNativeHost;
-      }
+  @Override
+  public ReactNativeHost getReactNativeHost() {
+    return mReactNativeHost;
+  }
 
-//     @Override
-// public void onCreate() {
-//   super.onCreate();
-//   SoLoader.init(this, /* native exopackage */ false); // add this one
-//   ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-// }
+  @Override
+  public void onCreate() {
+    super.onCreate();
 
-@Override
-public void onCreate() {
-  super.onCreate();
-  // SoLoader.init(this, /* native exopackage */ false); // add this one
-  ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-}
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+      // If you opted-in for the New Architecture, we load the native entry point for this app.
+      DefaultNewArchitectureEntryPoint.load();
+    }
+    ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+  }
 }
