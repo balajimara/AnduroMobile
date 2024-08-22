@@ -1,6 +1,6 @@
 import { Navigation } from "react-native-navigation";
-import AnduroLandingVC from "../Components/landing/AnduroLandingVC";
-import AnduroCreateTypeVC from "../Components/createtype/AnduroCreateTypeVC";
+import AnduroLandingVC from "../Components/wallet/landing/AnduroLandingVC";
+import AnduroCreateTypeVC from "../Components/wallet/createtype/AnduroCreateTypeVC";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
