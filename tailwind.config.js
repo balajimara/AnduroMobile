@@ -48,6 +48,7 @@ module.exports = {
         reviewoutline: "#4B4B4B",
         reviewhead: "#B9ABA8",
         skeletonbg: "#5b3c35",
+        progbg: "#534846",
         existaccount: "rgb(255 242 240 / 70%)",
         import: "rgb(250 250 250 / 30%)",
         clipboard: "rgb(255 255 255 / 5%)",
