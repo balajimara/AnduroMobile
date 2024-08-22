@@ -8,23 +8,24 @@ Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
  */
 
 const beforeLogin = {
-    stack: {
-      children: [
-        {
-          component: {
-            name: "AnduroLanding",
-            options: {
-              animations: {
-                setRoot: {
-                  waitForRender: true,
-                },
-              },
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroLanding",
+          options: {
+            topBar: {
+              visible: false,
             },
+            bottomTabs: {
+              visible: false
+            }
           },
         },
-      ],
-    },
-  };
+      },
+    ],
+  },
+};
 
   const route = {
     beforeLogin : beforeLogin,

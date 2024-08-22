@@ -1,0 +1,52 @@
+[
+    {
+      "id": 1,
+      "name": "bitcoin",
+      "image": "assets/images/networks/bitcoin-regtest.png",
+      "explorer": "http://192.168.1.43:3002",
+      "symbol": "tBTC",
+      "pegNetwork": "coordinate",
+      "blockCount": 0,
+      "balance": 0,
+      "networkType": "bitcoin",
+      "networkMode": "regtest",
+      "isSandbox": true,
+      "derivationIndex": 0,
+      "chromaBookApi": "http://192.168.1.55:4000/",
+      "federationApi": ""
+    },
+    {
+      "id": 2,
+      "name": "coordinate",
+      "image": "assets/images/networks/coordinate-main.png",
+      "explorer": "http://192.168.1.43:3005",
+      "symbol": "tCBTC",
+      "pegNetwork": "bitcoin",
+      "blockCount": 0,
+      "balance": 0,
+      "networkType": "sidechain",
+      "networkMode": "regtest",
+      "isSandbox": true,
+      "derivationIndex": 0,
+      "chromaBookApi": "http://192.168.1.55:4001/",
+      "federationApi": ""
+    },
+    {
+      "id": 3,
+      "name": "alys",
+      "image": "/assets/images/networks/alys.png",
+      "explorer": "https://alyscan.io",
+      "symbol": "tALYS",  
+      "pegNetwork": "ethereum",
+      "blockCount": 0,
+      "balance": 0,
+      "networkType": "alys",
+      "networkMode": "regtest",
+      "isSandbox": true,
+      "derivationIndex": 0,       
+      "url": "https://alyscan.io/api/v2/",
+      "chromaBookApi": "http://54.224.209.248:8545",
+      "federationApi": "http://192.168.1.55:4001/",
+      "chainId": 212121
+    }
+  ]
