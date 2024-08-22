@@ -22,7 +22,7 @@
     "react-native-logs": "^5.1.0",
     "react-native-navigation": "^7.40.1",
     "react-native-splash-screen": "^3.3.0",
-    "react-native-svg": "^15.6.0",
+    "react-native-svg": "^13.6.0",
     "react-native-svg-transformer": "^1.5.0",
     "react-native-vector-icons": "^10.1.0",
     "tailwind-scrollbar-hide": "^1.1.7"
