@@ -5,28 +5,10 @@ import { UserDataModel } from "../model/AnduroUserDataModel"
 import { NetworkListModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
 
-const getNativeCoins = (): string[] => {
-  const nativeCoins: string[] = []
-  for (let index = 0; index < networks.length; index++) {
-    nativeCoins.push(networks[index].name)
-  }
-  return nativeCoins
-}
-export const userData = atom<UserDataModel>(
-  getCachedData(StorageTypes.userData) === null
-    ? {
-        developerMode: true,
-        showFiatValue: false,
-        showCollectionArt: false,
-        hideBalance: false,
-        selectedCurrency: "tUSD",
-        selectedLanguage: "en",
-        defaultReserveAmount: 0,
-        nativeCoins: getNativeCoins(),
-        isLogged: false,
-      }
-    : JSON.parse(getCachedData(StorageTypes.userData) || "{}"),
-)
+
+// export const userData = atom<UserDataModel>(
+//   getCachedData
+// )
 export const networkList = atom<NetworkListModel[]>(networks)
 export const xpubkeys = atom<XpubKeysModel[]>([])
 const currentNetwork = atom<string>("")
@@ -52,9 +34,10 @@ export const setData = atom(null, (get, set, value: any): any => {
  * @param type -type
  */
 const getState = (type: string): any => {
-  if (type === StorageTypes.userData) {
-    return userData
-  } else if (type === StorageTypes.networkList) {
+  // if (type === StorageTypes.userData) {
+  //   return userData
+  // } else 
+  if (type === StorageTypes.networkList) {
     return networkList
   } else if (type === StorageTypes.xpubKeys) {
     return xpubkeys
