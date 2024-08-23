@@ -20,7 +20,7 @@ const AnduroCreateTypeVC = (props: any) => {
              <View className="bg-accountbg hover:bg-accounthighlightbg hover:border-existaccount hover:border-accounthighlightline border-accountline rounded-xl p-4 px-4 flex flex-col justify-between border">
               <TouchableOpacity onPress={() => { Navigation.push(props.componentId, {
             component: {
-              name: 'AnduroSeeds',
+              name: 'WalletCreate',
               options: {
                 topBar: {
                   visible: false,
@@ -40,7 +40,7 @@ const AnduroCreateTypeVC = (props: any) => {
                  <Text className="font-geistregular text-end text-headingcolor text-xs max-sm:text-left">Create a New Wallet and Recovery Phrase</Text>
                 </View>
                </View>
-               <View><Icon name='chevron_right' type='material' color="#FAFAFA" /></View>
+               {/* <View><Icon name='chevron_right' type='material' color="#FAFAFA" /></View> */}
               </View>
               </TouchableOpacity>
              </View>
@@ -59,7 +59,7 @@ const AnduroCreateTypeVC = (props: any) => {
                  <Text className="font-geistregular text-end text-headingcolor text-xs max-sm:text-left">Restore your Wallet using your Recovery Phrase</Text>
                 </View>
                </View>
-               <View><Icon name='chevron_right' type='material' color="#FAFAFA" /></View>
+               {/* <View><Icon name='chevron_right' type='material' color="#FAFAFA" /></View> */}
               </View>
              </TouchableOpacity>
              </View>

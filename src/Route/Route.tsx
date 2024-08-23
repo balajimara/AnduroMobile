@@ -4,13 +4,14 @@ import AnduroCreateTypeVC from "../Components/wallet/createtype/AnduroCreateType
 import AnduroSeedsVC from "../Components/wallet/seeds/AnduroSeedsVC";
 import AnduroCreatePasswordVC from "../Components/wallet/createpassword/AnduroCreatePasswordVC";
 import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConfirmVC";
-
+import AnduroCreateVC from "../Components/wallet/AnduroCreateVC";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
 Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC);
 Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC);
 Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
+Navigation.registerComponent("WalletCreate", () => AnduroCreateVC);
 
 /**
  * default root before login
@@ -99,10 +100,41 @@ const seeds = {
   },
 };
 
+
+/**
+ * default crete type page 
+ */
+
+const walletCreate = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "WalletCreate",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+
   const route = {
     beforeLogin : privacy,
     createType: createType,
-    seeds: seeds
+    seeds: seeds,
+    walletCreate: walletCreate
 
   };
   export default route;
