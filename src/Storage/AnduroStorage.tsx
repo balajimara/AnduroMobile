@@ -6,9 +6,35 @@ import { NetworkListModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
 
 
-// export const userData = atom<UserDataModel>(
-//   getCachedData
+const getNativeCoins = (): string[] => {
+  const nativeCoins: string[] = []
+  for (let index = 0; index < networks.length; index++) {
+    nativeCoins.push(networks[index].name)
+  }
+  return nativeCoins
+}
+
+// export const userData = atom(
+//   {
+//     developerMode: true,
+//     showFiatValue: false,
+//     showCollectionArt: false,
+//     hideBalance: false,
+//     selectedCurrency: "USD",
+//     selectedLanguage: "en",
+//     defaultReserveAmount: 0,
+//     nativeCoins: getNativeCoins(),
+//     isLogged: false,
+//     privacyPolicy: false,
+//   }
 // )
+
+export const userData = atom(
+  async () => { 
+    let cachedData = await getCachedData(StorageTypes.userData)
+    return JSON.parse(cachedData || "{}")  
+ })
+
 export const networkList = atom<NetworkListModel[]>(networks)
 export const xpubkeys = atom<XpubKeysModel[]>([])
 const currentNetwork = atom<string>("")
@@ -21,12 +47,12 @@ export const selectedConvertNetwork = atom<any>(null)
 export const requestType = atom<string>("")
 export const isInjector = atom<boolean>(false)
 
-export const getData = atom(null, (get, set, value: any): any => {
-  return get(getState(value.type)) ? get(getState(value.type)) : getState(value.type).init
+export const getData = atom(null, async (get, set, value: any): Promise<any> => {
+  return await get(getState(value.type)) ? await get(getState(value.type)) : getState(value.type).init
   // return getState(value.type).init
 })
-export const setData = atom(null, (get, set, value: any): any => {
-  set(getState(value.type), value.data)
+export const setData = atom(null, async (get, set, value: any): Promise<any> => {
+  return set(getState(value.type), value.data)
 })
 
 /**
@@ -34,10 +60,9 @@ export const setData = atom(null, (get, set, value: any): any => {
  * @param type -type
  */
 const getState = (type: string): any => {
-  // if (type === StorageTypes.userData) {
-  //   return userData
-  // } else 
-  if (type === StorageTypes.networkList) {
+  if (type === StorageTypes.userData) {
+    return userData
+  } else if (type === StorageTypes.networkList) {
     return networkList
   } else if (type === StorageTypes.xpubKeys) {
     return xpubkeys

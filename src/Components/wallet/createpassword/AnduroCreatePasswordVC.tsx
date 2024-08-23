@@ -3,7 +3,7 @@ import { View } from "react-native"
 
 const AnduroCreatePasswordVC = () => {
     return (
-        <View><Text>Seeds VC</Text></View>
+        <View><Text>PAssword VC</Text></View>
     )
 }
 

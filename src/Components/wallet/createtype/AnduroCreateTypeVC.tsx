@@ -1,7 +1,8 @@
 import { View, Text,SafeAreaView,Image,TouchableOpacity} from 'react-native';
 import { Icon } from '@rneui/themed';
+import { Navigation } from 'react-native-navigation';
 
-const AnduroCreateTypeVC = () => {
+const AnduroCreateTypeVC = (props: any) => {
     return (
        <SafeAreaView> 
         <View className='bg-gray h-full flex flex-col justify-between'>
@@ -17,7 +18,19 @@ const AnduroCreateTypeVC = () => {
            <View className="mb-3.5">
             <View className="flex flex-col gap-6">
              <View className="bg-accountbg hover:bg-accounthighlightbg hover:border-existaccount hover:border-accounthighlightline border-accountline rounded-xl p-4 px-4 flex flex-col justify-between border">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => { Navigation.push(props.componentId, {
+            component: {
+              name: 'AnduroSeeds',
+              options: {
+                topBar: {
+                  visible: false,
+                },
+                bottomTabs: {
+                  visible: false,
+                }
+              }
+            }
+          })}}>
               <View className="flex flex-row items-center justify-between">
                <View>
                 <View className="mb-1.5">

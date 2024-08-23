@@ -28,6 +28,7 @@ export const getCachedData = async (key: string): Promise<string | null> => {
       defaultReserveAmount: 0,
       nativeCoins: getNativeCoins(),
       isLogged: false,
+      privacyPolicy: false,
     })
   }
  
@@ -40,5 +41,5 @@ export const getCachedData = async (key: string): Promise<string | null> => {
  * @param value -value
  */
 export const setCachedData = async (key: string, value: string) => {
-  await AsyncStorage.setItem(key, value)
+  return await AsyncStorage.setItem(key, value)
 }

@@ -1,14 +1,22 @@
 import { Navigation } from "react-native-navigation";
 import AnduroLandingVC from "../Components/wallet/landing/AnduroLandingVC";
 import AnduroCreateTypeVC from "../Components/wallet/createtype/AnduroCreateTypeVC";
+import AnduroSeedsVC from "../Components/wallet/seeds/AnduroSeedsVC";
+import AnduroCreatePasswordVC from "../Components/wallet/createpassword/AnduroCreatePasswordVC";
+import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConfirmVC";
+
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
+Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC);
+Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC);
+Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
+
 /**
  * default root before login
  */
 
-const beforeLogin = {
+const privacy = {
   stack: {
     children: [
       {
@@ -20,6 +28,11 @@ const beforeLogin = {
             },
             bottomTabs: {
               visible: false
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
             }
           },
         },
@@ -44,7 +57,41 @@ const createType = {
             },
             bottomTabs: {
               visible: false
-            }
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+
+/**
+ * default crete type page 
+ */
+
+const seeds = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroSeeds",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
           },
         },
       },
@@ -53,7 +100,9 @@ const createType = {
 };
 
   const route = {
-    beforeLogin : beforeLogin,
-    createType: createType
+    beforeLogin : privacy,
+    createType: createType,
+    seeds: seeds
+
   };
   export default route;
