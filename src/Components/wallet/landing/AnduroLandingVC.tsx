@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { View, Text,SafeAreaView,Image} from 'react-native';
 import { CheckBox, LinearProgress } from '@rneui/themed';
-import Logo from '../../../Common/Icons/Logo';
 import { Navigation } from 'react-native-navigation';
 
 export const AnduroLandingVC = (props:any) => {
@@ -31,10 +30,10 @@ return (
 
   <SafeAreaView>
    <View className='bg-gray h-full flex flex-col justify-between'>
-   <View className="p-8">
-    <View className="m-auto my-4 mb-3"><Logo/ ></View>
+   <View className="p-14">
+    <View className="m-auto my-4 mb-4"><Image resizeMode={'contain'} source={require('../../../assets/images/logo.png')} className="w-60" /></View>
     <View className="w-64 m-auto">
-      <Text className="font-geistmedium text-headingcolor text-sm text-center leading-5">
+      <Text className="font-geistmedium text-headingcolor text-base text-center leading-6">
         The wallet designed to make your Bitcoin journey seamless.
       </Text>
     </View>
