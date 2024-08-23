@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Geist-Bold.ttf",
+      "sha1": "16e60dd7befe405595c839e0b462070658239e67"
+    },
+    {
+      "path": "src/assets/fonts/Geist-Medium.ttf",
+      "sha1": "041728990bff5cff684605274e487eab257c6d94"
+    },
+    {
+      "path": "src/assets/fonts/Geist-Regular.ttf",
+      "sha1": "7898b00016098e83c29190ecac4e8667580e0b97"
+    },
+    {
+      "path": "src/assets/fonts/Geist-SemiBold.ttf",
+      "sha1": "2e9b604d33d320ad489ef58fe85790e850f8b6cc"
+    },
+    {
+      "path": "src/assets/fonts/JetBrainsMono-SemiBold.ttf",
+      "sha1": "e3d7be641d058d453e939a65ecf875a825476d85"
+    }
+  ]
+}
