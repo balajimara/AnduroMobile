@@ -6,35 +6,19 @@ import AnduroTypeVW from '../../../Common/Views/AccountTypeVW';
 export const AnduroCreateTypeVC = (props: any) => {
   const {t} = useTranslation()
   const navigatePage = function(type: String) {
-    if (type === "new") {
-        Navigation.push(props.componentId, {
-            component: {
-              name: 'AnduroWalletCreate',
-              options: {
-                topBar: {
-                  visible: false,
-                },
-                bottomTabs: {
-                  visible: false,
-                }
-              }
+    Navigation.push(props.componentId, {
+        component: {
+          name: type === "new" ? 'AnduroWalletCreate' : 'AnduroWalletImport',
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
             }
-        })
-    } else {
-        Navigation.push(props.componentId, {
-            component: {
-              name: 'AnduroWalletImport',
-              options: {
-                topBar: {
-                  visible: false,
-                },
-                bottomTabs: {
-                  visible: false,
-                }
-              }
-            }
-        })
-    }   
+          }
+        }
+    })   
   }
     return (
        <SafeAreaView> 
