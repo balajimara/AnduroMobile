@@ -18,7 +18,14 @@ Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
   Navigation.setDefaultOptions({
     topBar: {
-      visible: false,
+      background:{
+        color: "#140401"
+      },
+      title: {
+         color: "#fff",
+         fontFamily: "Geist-SemiBold",
+      },
+      visible: true,
       drawBehind: true,
       animate: true,
     },

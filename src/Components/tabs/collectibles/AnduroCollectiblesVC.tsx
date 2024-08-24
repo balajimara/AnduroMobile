@@ -1,9 +1,9 @@
 import { Text } from "@rneui/base"
-import { View } from "react-native"
+import { SafeAreaView } from "react-native"
 
 const AnduroCollectiblesVC = () => {
     return (
-        <View><Text>Collectibles</Text></View>
+        <SafeAreaView><Text>Collectibles</Text></SafeAreaView>
     )
 }
 

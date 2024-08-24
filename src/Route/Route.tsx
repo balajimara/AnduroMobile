@@ -79,11 +79,11 @@ const afterLogin = {
     children: [
       {
         stack: {
-          id: "collectibles",
+          id: "collectible",
           children: [
             {
               component: {
-                name: "collectibles",
+                name: "collectible",
               },
             },
           ],
