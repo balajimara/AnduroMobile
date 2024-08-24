@@ -1,8 +1,16 @@
 import { View, Text,SafeAreaView,TextInput,TouchableOpacity} from 'react-native';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { StorageTypes } from '../../model/AnduroStorageModel';
+import { getData } from "../../Storage/AnduroStorage"
+import { useAtom } from 'jotai';
 
 const AnduroCreateVC = () => {
     const {t} = useTranslation()
+    const [, getdata] = useAtom(getData)
+    React.useEffect(() => {
+        console.log("dataaaaa", getdata({ type: StorageTypes.userData}))
+    })
     return (
         <SafeAreaView> 
          <View className="bg-gray h-full flex flex-col justify-between">

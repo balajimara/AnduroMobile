@@ -2,9 +2,16 @@ import { View, Text,SafeAreaView,Image,TouchableOpacity} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { useTranslation } from 'react-i18next';
 import AnduroTypeVW from '../../../Common/Views/AccountTypeVW';
+import { getData, setData } from "../../../Storage/AnduroStorage"
+import { useAtom } from 'jotai';
+import { StorageTypes } from '../../../model/AnduroStorageModel';
+import React from 'react';
+
 
 export const AnduroCreateTypeVC = (props: any) => {
   const {t} = useTranslation()
+  const [, getdata] = useAtom(getData)
+  const [, setdata] = useAtom(setData)
   const navigatePage = function(type: String) {
     Navigation.push(props.componentId, {
         component: {
@@ -20,6 +27,11 @@ export const AnduroCreateTypeVC = (props: any) => {
         }
     })   
   }
+  
+  React.useEffect(() => {
+    console.log("data", getdata({ type: StorageTypes.userData}))
+  })
+
     return (
        <SafeAreaView> 
         <View className='bg-gray h-full flex flex-col justify-between'>

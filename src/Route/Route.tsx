@@ -6,6 +6,7 @@ import AnduroCreatePasswordVC from "../Components/wallet/createpassword/AnduroCr
 import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConfirmVC";
 import AnduroCreateVC from "../Components/wallet/AnduroCreateVC";
 import AnduroImportVC from "../Components/wallet/import/AnduroImportVC";
+import AnduroLoginVC from "../Components/wallet/login/AnduroLoginVC";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
@@ -13,7 +14,8 @@ Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC);
 Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC);
 Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
 Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC);
-Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC)
+Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC);
+Navigation.registerComponent("AnduroLogin", () => AnduroLoginVC)
 
 /**
  * default root before login
@@ -25,13 +27,7 @@ const privacy = {
       {
         component: {
           name: "AnduroLanding",
-          options: {
-            topBar: {
-              visible: false,
-            },
-            bottomTabs: {
-              visible: false
-            },
+          options: {          
             animations: {
               setRoot: {
                 waitForRender: true,
@@ -48,100 +44,12 @@ const privacy = {
  * default crete type page 
  */
 
-const createType = {
+const login = {
   stack: {
     children: [
       {
         component: {
-          name: "AnduroCreateType",
-          options: {
-            topBar: {
-              visible: false,
-            },
-            bottomTabs: {
-              visible: false
-            },
-            animations: {
-              setRoot: {
-                waitForRender: true,
-              },
-            },
-          },
-        },
-      },
-    ],
-  },
-};
-
-/**
- * default crete type page 
- */
-
-const seeds = {
-  stack: {
-    children: [
-      {
-        component: {
-          name: "AnduroSeeds",
-          options: {
-            topBar: {
-              visible: false,
-            },
-            bottomTabs: {
-              visible: false
-            },
-            animations: {
-              setRoot: {
-                waitForRender: true,
-              },
-            },
-          },
-        },
-      },
-    ],
-  },
-};
-
-
-/**
- * default crete type page 
- */
-
-const walletCreate = {
-  stack: {
-    children: [
-      {
-        component: {
-          name: "AnduroWalletCreate",
-          options: {
-            topBar: {
-              visible: false,
-            },
-            bottomTabs: {
-              visible: false
-            },
-            animations: {
-              setRoot: {
-                waitForRender: true,
-              },
-            },
-          },
-        },
-      },
-    ],
-  },
-};
-
-/**
- * default crete type page 
- */
-
-const walletImport = {
-  stack: {
-    children: [
-      {
-        component: {
-          name: "AnduroWalletImport",
+          name: "AnduroLogin",
           options: {
             topBar: {
               visible: false,
@@ -163,10 +71,7 @@ const walletImport = {
 
   const route = {
     beforeLogin : privacy,
-    createType: createType,
-    seeds: seeds,
-    walletCreate: walletCreate,
-    walletImport: walletImport
+    login: login
 
   };
   export default route;

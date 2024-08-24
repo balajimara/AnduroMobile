@@ -3,9 +3,9 @@ import { View, Text,SafeAreaView,Image} from 'react-native';
 import { CheckBox, LinearProgress } from '@rneui/themed';
 import { Navigation } from 'react-native-navigation';
 import { useAtom } from "jotai"
-import { StorageTypes } from '../../../model/AnduroStorageModel';
+import { CachedDataTypes, StorageTypes } from '../../../model/AnduroStorageModel';
 import { setCachedData, getCachedData } from '../../../Utility/AndurocommonUtils';
-import { getData, setData,  userData } from "../../../Storage/AnduroStorage"
+import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useTranslation } from "react-i18next"
 
 
@@ -15,6 +15,42 @@ export const AnduroLandingVC = (props:any) => {
   const [progress, setProgress] = useState(0)
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
+  React.useEffect(() => {
+    const userData = getdata({ type:  StorageTypes.userData})
+    getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
+      if (mnemonic !== null) {
+        Navigation.push(props.componentId, {
+          component: {
+            name: "AnduroLogin",
+            options: {
+              topBar: {
+                visible: false,
+              },
+              bottomTabs: {
+                visible: false,
+              }
+            }
+          }
+       }) 
+      } else {
+        if (userData.privacyPolicy) {
+          Navigation.push(props.componentId, {
+            component: {
+              name: "AnduroCreateType",
+              options: {
+                topBar: {
+                  visible: false,
+                },
+                bottomTabs: {
+                  visible: false,
+                }
+              }
+            }
+         }) 
+        }
+      }
+    })
+  })
   React.useEffect(() => {
     if (agree) {
       const interval = setInterval(() => {
@@ -29,11 +65,9 @@ export const AnduroLandingVC = (props:any) => {
       }, 200)
       const timeout = setTimeout(async () => {
         clearInterval(interval)
-        console.log("from atom", getdata({ type: StorageTypes.userData }))
-        let userData = await getCachedData(StorageTypes.userData)     
+        let userData = await getCachedData(StorageTypes.userData)           
         let userDataV = JSON.parse(userData || "{}")  
         userDataV.privacyPolicy = true
-        console.log('userData', userData, userDataV)
         await setCachedData(StorageTypes.userData, JSON.stringify(userDataV))
         setdata({ type: StorageTypes.userData, data: userDataV})
           Navigation.push(props.componentId, {
@@ -84,9 +118,9 @@ export const AnduroLandingVC = (props:any) => {
                 }}
                 onPress={() => setAgree(true)}
               />
-              <Text className="font-geistregular text-white text-xs">
+              <Text className={`font-geistregular ${agree ? "text-headingcolor" : "text-white"} text-xs`}>
               {t("privacyagree")}
-              </Text>
+              </Text>            
               </View> 
               <LinearProgress variant="determinate" color="lightgray" trackColor='gray' value={progress}/>
               </View> 
