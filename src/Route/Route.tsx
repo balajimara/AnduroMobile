@@ -5,13 +5,15 @@ import AnduroSeedsVC from "../Components/wallet/seeds/AnduroSeedsVC";
 import AnduroCreatePasswordVC from "../Components/wallet/createpassword/AnduroCreatePasswordVC";
 import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConfirmVC";
 import AnduroCreateVC from "../Components/wallet/AnduroCreateVC";
+import AnduroImportVC from "../Components/wallet/import/AnduroImportVC";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
 Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC);
 Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC);
 Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
-Navigation.registerComponent("WalletCreate", () => AnduroCreateVC);
+Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC);
+Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC)
 
 /**
  * default root before login
@@ -110,7 +112,36 @@ const walletCreate = {
     children: [
       {
         component: {
-          name: "WalletCreate",
+          name: "AnduroWalletCreate",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+
+/**
+ * default crete type page 
+ */
+
+const walletImport = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroWalletImport",
           options: {
             topBar: {
               visible: false,
@@ -134,7 +165,8 @@ const walletCreate = {
     beforeLogin : privacy,
     createType: createType,
     seeds: seeds,
-    walletCreate: walletCreate
+    walletCreate: walletCreate,
+    walletImport: walletImport
 
   };
   export default route;

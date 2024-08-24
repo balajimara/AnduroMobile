@@ -4,6 +4,6 @@
     "newaccount": "New account",
     "existingaccount": "Existing account",
     "createnewwalletdesc":"Create a New Wallet and Recovery Phrase",
-    "existingwalletdesc":"Create a New Wallet and Recovery Phrase",
+    "existingwalletdesc":"Restore your Wallet using your Recovery Phrase",
     "restorewallet": "Restore your Wallet using your Recovery Phrase"
 }

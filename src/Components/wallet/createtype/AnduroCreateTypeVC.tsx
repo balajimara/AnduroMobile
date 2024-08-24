@@ -5,6 +5,37 @@ import AnduroTypeVW from '../../../Common/Views/AccountTypeVW';
 
 export const AnduroCreateTypeVC = (props: any) => {
   const {t} = useTranslation()
+  const navigatePage = function(type: String) {
+    if (type === "new") {
+        Navigation.push(props.componentId, {
+            component: {
+              name: 'AnduroWalletCreate',
+              options: {
+                topBar: {
+                  visible: false,
+                },
+                bottomTabs: {
+                  visible: false,
+                }
+              }
+            }
+        })
+    } else {
+        Navigation.push(props.componentId, {
+            component: {
+              name: 'AnduroWalletImport',
+              options: {
+                topBar: {
+                  visible: false,
+                },
+                bottomTabs: {
+                  visible: false,
+                }
+              }
+            }
+        })
+    }   
+  }
     return (
        <SafeAreaView> 
         <View className='bg-gray h-full flex flex-col justify-between'>
@@ -17,8 +48,8 @@ export const AnduroCreateTypeVC = (props: any) => {
            </View>
           </View>
           <View className="p-4 pb-5 px-4">
-           <AnduroTypeVW type="new"/>
-           <AnduroTypeVW type="existing"/>
+           <AnduroTypeVW type="new" title={t("newaccount")} subtitle={t("createnewwalletdesc")} callback={() => navigatePage("new")}/>
+           <AnduroTypeVW type="existing" title={t("existingaccount")} subtitle={t("existingwalletdesc")} callback={() => navigatePage("existing")}/>
           </View>
          </View>
        </SafeAreaView> 
