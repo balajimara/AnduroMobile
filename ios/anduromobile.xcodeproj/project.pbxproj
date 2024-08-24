@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* anduromobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* anduromobileTests.m */; };
+		02018600CEF74EC18475685A /* Geist-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB6D603A023F4414AED09A45 /* Geist-SemiBold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-anduromobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-anduromobile.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2CF1F95B18D0473E9B3D45DE /* Geist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */; };
 		48575B8A2C6FA430005E358A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 48575B892C6FA430005E358A /* splash.png */; };
+		68F9DE189A7C4F128B3B9A14 /* Geist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-anduromobile-anduromobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-anduromobile-anduromobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		68F9DE189A7C4F128B3B9A14 /* Geist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */; };
-		2CF1F95B18D0473E9B3D45DE /* Geist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */; };
 		B4E6BED4F6664C938AB37E67 /* Geist-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A01DCD8BFB24A5DA8CEE3CB /* Geist-Regular.ttf */; };
-		02018600CEF74EC18475685A /* Geist-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB6D603A023F4414AED09A45 /* Geist-SemiBold.ttf */; };
 		CC2152E82F34499AAB05061B /* JetBrainsMono-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06CD616074B1451C97074406 /* JetBrainsMono-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +36,7 @@
 		00E356EE1AD99517003FC87E /* anduromobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = anduromobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* anduromobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = anduromobileTests.m; sourceTree = "<group>"; };
+		06CD616074B1451C97074406 /* JetBrainsMono-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "JetBrainsMono-SemiBold.ttf"; path = "../src/assets/fonts/JetBrainsMono-SemiBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* anduromobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = anduromobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = anduromobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = anduromobile/AppDelegate.mm; sourceTree = "<group>"; };
@@ -48,14 +49,13 @@
 		5709B34CF0A7D63546082F79 /* Pods-anduromobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anduromobile.release.xcconfig"; path = "Target Support Files/Pods-anduromobile/Pods-anduromobile.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-anduromobile-anduromobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anduromobile-anduromobileTests.debug.xcconfig"; path = "Target Support Files/Pods-anduromobile-anduromobileTests/Pods-anduromobile-anduromobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-anduromobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-anduromobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Geist-Medium.ttf"; path = "../src/assets/fonts/Geist-Medium.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = anduromobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-anduromobile-anduromobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anduromobile-anduromobileTests.release.xcconfig"; path = "Target Support Files/Pods-anduromobile-anduromobileTests/Pods-anduromobile-anduromobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		8A01DCD8BFB24A5DA8CEE3CB /* Geist-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Geist-Regular.ttf"; path = "../src/assets/fonts/Geist-Regular.ttf"; sourceTree = "<group>"; };
+		E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Geist-Bold.ttf"; path = "../src/assets/fonts/Geist-Bold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */ = {isa = PBXFileReference; name = "Geist-Bold.ttf"; path = "../src/assets/fonts/Geist-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */ = {isa = PBXFileReference; name = "Geist-Medium.ttf"; path = "../src/assets/fonts/Geist-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8A01DCD8BFB24A5DA8CEE3CB /* Geist-Regular.ttf */ = {isa = PBXFileReference; name = "Geist-Regular.ttf"; path = "../src/assets/fonts/Geist-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FB6D603A023F4414AED09A45 /* Geist-SemiBold.ttf */ = {isa = PBXFileReference; name = "Geist-SemiBold.ttf"; path = "../src/assets/fonts/Geist-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		06CD616074B1451C97074406 /* JetBrainsMono-SemiBold.ttf */ = {isa = PBXFileReference; name = "JetBrainsMono-SemiBold.ttf"; path = "../src/assets/fonts/JetBrainsMono-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FB6D603A023F4414AED09A45 /* Geist-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Geist-SemiBold.ttf"; path = "../src/assets/fonts/Geist-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +127,18 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		67B1E293AB41429E896209C3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */,
+				608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */,
+				8A01DCD8BFB24A5DA8CEE3CB /* Geist-Regular.ttf */,
+				FB6D603A023F4414AED09A45 /* Geist-SemiBold.ttf */,
+				06CD616074B1451C97074406 /* JetBrainsMono-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,19 +181,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		67B1E293AB41429E896209C3 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */,
-				608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */,
-				8A01DCD8BFB24A5DA8CEE3CB /* Geist-Regular.ttf */,
-				FB6D603A023F4414AED09A45 /* Geist-SemiBold.ttf */,
-				06CD616074B1451C97074406 /* JetBrainsMono-SemiBold.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -530,6 +529,7 @@
 				DEVELOPMENT_TEAM = 2ZTVGV2634;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = anduromobile/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Anduro Wallet";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -556,6 +556,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2ZTVGV2634;
 				INFOPLIST_FILE = anduromobile/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Anduro Wallet";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -641,10 +642,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
@@ -714,10 +712,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
