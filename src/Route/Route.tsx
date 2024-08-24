@@ -10,6 +10,7 @@ import AnduroLoginVC from "../Components/wallet/login/AnduroLoginVC";
 import AnduroCollectiblesVC from "../Components/tabs/collectibles/AnduroCollectiblesVC";
 import AnduroDashboardVC from "../Components/tabs/dashboard/AnduroDashboardVC";
 import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC";
+import AnduroMenuVC from "../Components/menu/AnduroMenuVC";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
@@ -22,6 +23,9 @@ Navigation.registerComponent("AnduroLogin", () => AnduroLoginVC)
 Navigation.registerComponent("collectible", () => AnduroCollectiblesVC)
 Navigation.registerComponent("dashboard", () => AnduroDashboardVC)
 Navigation.registerComponent("apps", () => AnduroAppsVC)
+Navigation.registerComponent("menu", () => AnduroMenuVC)
+
+
 /**
  * default root before login
  */
@@ -75,62 +79,71 @@ const login = {
 };
 
 const afterLogin = {
-  bottomTabs: {
-    children: [
-      {
-        stack: {
-          id: "collectible",
+    sideMenu:{
+      left:{
+        component:{
+            name:'menu'
+        }
+      },
+      center: {
+        bottomTabs: {
           children: [
             {
-              component: {
-                name: "collectible",
+              stack: {
+                id: "collectible",
+                children: [
+                  {
+                    component: {
+                      name: "collectible",
+                    },
+                  },
+                ],
+                options: {
+                  bottomTab: {
+                    icon: require("./../assets/images/tab/collectible.png")
+                  }
+                }
+              },
+            },
+            {
+              stack: {
+                id: "dashboard",
+                children: [
+                  {
+                    component: {
+                      name: "dashboard", 
+                    },
+                  },
+                ],
+                options: {
+                  bottomTab: {
+                    icon: require("./../assets/images/tab/dashboard.png")
+                  }
+                }
+              },
+            },
+            {
+              stack: {
+                id: "apps",
+                children: [
+                  {
+                    component: {
+                      name: "apps", 
+                    },
+                  },
+                ],
+                options: {
+                  bottomTab: {
+                    icon: require("./../assets/images/tab/apps.png"),
+                    selectedIcon: require("./../assets/images/tab/apps_active.png"),
+                  }
+                }
               },
             },
           ],
-          options: {
-            bottomTab: {
-              icon: require("./../assets/images/tab/collectible.png")
-            }
-          }
         },
-      },
-      {
-        stack: {
-          id: "dashboard",
-          children: [
-            {
-              component: {
-                name: "dashboard", 
-              },
-            },
-          ],
-          options: {
-            bottomTab: {
-              icon: require("./../assets/images/tab/dashboard.png")
-            }
-          }
-        },
-      },
-      {
-        stack: {
-          id: "apps",
-          children: [
-            {
-              component: {
-                name: "apps", 
-              },
-            },
-          ],
-          options: {
-            bottomTab: {
-              icon: require("./../assets/images/tab/apps.png"),
-              selectedIcon: require("./../assets/images/tab/apps_active.png"),
-            }
-          }
-        },
-      },
-    ],
-  },
+      }
+    }
 };
 
 
