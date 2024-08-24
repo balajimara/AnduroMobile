@@ -28,10 +28,10 @@ export const AnduroTypeVW = (props: any) => {
               <View className="flex flex-row items-center justify-between">
                <View>
                 <View className="mb-1.5">
-                 <Text className="text-lg text-lightgray leading-5 font-geistregular">New account</Text>
+                 <Text className="text-lg text-lightgray leading-5 font-geistregular">{t("newaccount")}</Text>
                 </View>
                 <View>
-                 <Text className="font-geistregular text-end text-headingcolor text-xs max-sm:text-left">Create a New Wallet and Recovery Phrase</Text>
+                 <Text className="font-geistregular text-end text-headingcolor text-xs max-sm:text-left">{t('createnewwalletdesc')}</Text>
                 </View>
                </View>
                {/* <View><Icon name='chevron_right' type='material' color="#FAFAFA" /></View> */}
