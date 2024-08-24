@@ -7,6 +7,9 @@ import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConf
 import AnduroCreateVC from "../Components/wallet/AnduroCreateVC";
 import AnduroImportVC from "../Components/wallet/import/AnduroImportVC";
 import AnduroLoginVC from "../Components/wallet/login/AnduroLoginVC";
+import AnduroCollectiblesVC from "../Components/tabs/collectibles/AnduroCollectiblesVC";
+import AnduroDashboardVC from "../Components/tabs/dashboard/AnduroDashboardVC";
+import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
@@ -16,7 +19,9 @@ Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
 Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC);
 Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC);
 Navigation.registerComponent("AnduroLogin", () => AnduroLoginVC)
-
+Navigation.registerComponent("collectible", () => AnduroCollectiblesVC)
+Navigation.registerComponent("dashboard", () => AnduroDashboardVC)
+Navigation.registerComponent("apps", () => AnduroAppsVC)
 /**
  * default root before login
  */
@@ -69,9 +74,70 @@ const login = {
   },
 };
 
-  const route = {
-    beforeLogin : privacy,
-    login: login
+const afterLogin = {
+  bottomTabs: {
+    children: [
+      {
+        stack: {
+          id: "collectibles",
+          children: [
+            {
+              component: {
+                name: "collectibles",
+              },
+            },
+          ],
+          options: {
+            bottomTab: {
+              icon: require("./../assets/images/tab/collectible.png")
+            }
+          }
+        },
+      },
+      {
+        stack: {
+          id: "dashboard",
+          children: [
+            {
+              component: {
+                name: "dashboard", 
+              },
+            },
+          ],
+          options: {
+            bottomTab: {
+              icon: require("./../assets/images/tab/dashboard.png")
+            }
+          }
+        },
+      },
+      {
+        stack: {
+          id: "apps",
+          children: [
+            {
+              component: {
+                name: "apps", 
+              },
+            },
+          ],
+          options: {
+            bottomTab: {
+              icon: require("./../assets/images/tab/apps.png"),
+              selectedIcon: require("./../assets/images/tab/apps_active.png"),
+            }
+          }
+        },
+      },
+    ],
+  },
+};
 
-  };
-  export default route;
+
+const route = {
+  beforeLogin : privacy,
+  login: login,
+  afterLogin
+
+};
+export default route;

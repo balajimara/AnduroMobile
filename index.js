@@ -2,7 +2,6 @@
  * @format
  */
 //import {AppRegistry} from 'react-native';
-import App from './App';
 //import {name as appName} from './app.json';
 
 //AppRegistry.registerComponent(appName, () => App);
@@ -24,15 +23,16 @@ Navigation.events().registerAppLaunchedListener(() => {
       animate: true,
     },
     bottomTab: {
-      fontSize: 12,
+      margin: 12,
       selectedFontSize: 12,
       textColor: "#c3c3c3",
       selectedTextColor: "#ffffff",
       fontFamily: "Montserrat-SemiBold",
     },
     bottomTabs: {
-      backgroundColor: "#017DA4",
-      titleDisplayMode: "alwaysShow",
+      backgroundColor: "#140401",
+      titleDisplayMode: "alwaysHide",
+      currentTabIndex: 1
     },
     layout: {
       orientation: ["portrait"],
@@ -44,10 +44,10 @@ Navigation.events().registerAppLaunchedListener(() => {
 
 // Method that chooses to show between App intro slider and other screens
 const navigationLogic = async () => {
-  const userToken = await getCachedData("user");
+  const userToken = await getValueFromStorage("user");
   if (userToken === null) {
     Navigation.setRoot({
-      root: route.beforeLogin,
+      root: route.afterLogin,
     });
   } else {
     
