@@ -77,3 +77,13 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+# Configure IOS 
+1. Go to ios directory
+2. Run 'bundle install'
+3. run 'bundle exec pod install'
+4. Open anduromobile/ios/anduromobile.xcodeproj in Xcode
+
+Use below command to link font react native
+npx react-native-asset

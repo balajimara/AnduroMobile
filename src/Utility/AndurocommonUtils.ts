@@ -9,13 +9,15 @@ const getNativeCoins = (): string[] => {
   return nativeCoins
 }
 
+
+
 /**
  * This function is used to get cached data from the local storage.
  * @param key -key name
  */
 export const getCachedData = async (key: string): Promise<string | null> => {
   let value = await AsyncStorage.getItem(key)
-  if (value == null) {
+  if (value != null) {
     return value
   } else {
     return JSON.stringify({

@@ -11,7 +11,7 @@ import App from './App';
 import { Navigation } from "react-native-navigation";
 import route from './src/Route/Route';
 import SplashScreen from 'react-native-splash-screen';
-
+import "./i18n"
 
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
