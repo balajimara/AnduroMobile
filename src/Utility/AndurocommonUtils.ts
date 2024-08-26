@@ -16,24 +16,13 @@ const getNativeCoins = (): string[] => {
  * @param key -key name
  */
 export const getCachedData = async (key: string): Promise<string | null> => {
-  let value = await AsyncStorage.getItem(key)
-  if (value != null) {
+  try {
+    let value = await AsyncStorage.getItem(key)
     return value
-  } else {
-    return JSON.stringify({
-      developerMode: true,
-      showFiatValue: false,
-      showCollectionArt: false,
-      hideBalance: false,
-      selectedCurrency: "USD",
-      selectedLanguage: "en",
-      defaultReserveAmount: 0,
-      nativeCoins: getNativeCoins(),
-      isLogged: false,
-      privacyPolicy: false,
-    })
-  }
- 
+  } catch (error) {
+    console.log('error', error)
+    return null
+  }  
 }
 
 

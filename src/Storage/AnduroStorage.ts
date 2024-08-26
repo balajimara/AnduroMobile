@@ -109,26 +109,25 @@ export const setData = atom(null, (get, set, value: any): any => {
  * @param type -type
  */
 const getState = (type: string):any => {
-    if (type === StorageTypes.userData) {
-      return userData
-    } else if (type === StorageTypes.networkList) {
-      return networkList
-    } else if (type === StorageTypes.xpubKeys) {
-      return xpubkeys
-    } else if (type === StorageTypes.currentNetwork) {
-      return currentNetwork
-    } else if (type === StorageTypes.alysAddress) {
-      return alysAddress
-    } else if (type === StorageTypes.pageTitle) {
-      return pageTitle
-    } else if (type === StorageTypes.requestType) {
-      return requestType
-    } else if (type === StorageTypes.isInjector) {
-      return isInjector
-    } else if (type === StorageTypes.selectedConvertNetwork) {
-      return selectedConvertNetwork
-    }
-  
+  if (type === StorageTypes.userData) {
+    return userData
+  } else if (type === StorageTypes.networkList) {
+    return networkList
+  } else if (type === StorageTypes.xpubKeys) {
+    return xpubkeys
+  } else if (type === StorageTypes.currentNetwork) {
+    return currentNetwork
+  } else if (type === StorageTypes.alysAddress) {
+    return alysAddress
+  } else if (type === StorageTypes.pageTitle) {
+    return pageTitle
+  } else if (type === StorageTypes.requestType) {
+    return requestType
+  } else if (type === StorageTypes.isInjector) {
+    return isInjector
+  } else if (type === StorageTypes.selectedConvertNetwork) {
+    return selectedConvertNetwork
+  }  
 }
 
 
