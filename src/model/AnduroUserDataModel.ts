@@ -8,7 +8,8 @@ export interface UserDataModel {
   walletName: string
   defaultReserveAmount: number
   nativeCoins: string[]
-  isLogged: boolean
+  isLogged: boolean,
+  privacyPolicy: boolean
 }
 
 export interface CurrencyDataModel {

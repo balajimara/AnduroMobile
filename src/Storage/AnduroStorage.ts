@@ -64,7 +64,7 @@ export const pageHeader = atom<boolean>(false)
 export const selectedConvertNetwork = atom<any>(null)
 export const requestType = atom<string>("")
 export const isInjector = atom<boolean>(false)
-export const userData = atom(
+export const userData = atom<UserDataModel>(
   {
         developerMode: true,
         showFiatValue: false,
@@ -76,6 +76,7 @@ export const userData = atom(
         nativeCoins: getNativeCoins(),
         isLogged: false,
         privacyPolicy: false,
+        walletName: ""
       })
 
 export const getData = atom(null, (get, set, value: any): any => {

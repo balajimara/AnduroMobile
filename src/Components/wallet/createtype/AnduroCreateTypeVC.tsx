@@ -17,15 +17,7 @@ export const AnduroCreateTypeVC = (props: any) => {
   const navigatePage = function(type: String) {
     Navigation.push(props.componentId, {
         component: {
-          name: type === "new" ? 'AnduroWalletCreate' : 'AnduroWalletImport',
-          options: {
-            topBar: {
-              visible: false,
-            },
-            bottomTabs: {
-              visible: false,
-            }
-          }
+          name: type === "new" ? 'AnduroWalletCreate' : 'AnduroWalletImport',        
         }
     })   
   }
@@ -33,6 +25,7 @@ export const AnduroCreateTypeVC = (props: any) => {
   React.useEffect(() => {
     getCachedData(StorageTypes.userData).then((userdata) => {
       let userinfo = JSON.parse(userdata || "{}")
+      console.log('userinfo', userinfo)
       if (Object.keys(userinfo).length == 0) {
         setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
       } else {

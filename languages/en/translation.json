@@ -14,4 +14,6 @@
     "importkeys": "Import keys from a file",
     "walletlogin":"Login to wallet",
     "walletname":"wallet name",
+    "walletnameminmax": "Wallet name should be between 3 to 50 characters",
+    "walletnameempty": "Please enter your wallet name"
 }
