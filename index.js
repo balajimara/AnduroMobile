@@ -39,7 +39,8 @@ Navigation.events().registerAppLaunchedListener(() => {
     bottomTabs: {
       backgroundColor: "#140401",
       titleDisplayMode: "alwaysHide",
-      currentTabIndex: 1
+      currentTabIndex: 1,
+      visible: false
     },
     layout: {
       orientation: ["portrait"],
@@ -50,14 +51,19 @@ Navigation.events().registerAppLaunchedListener(() => {
 });
 
 // Method that chooses to show between App intro slider and other screens
-const navigationLogic = async () => {
-  const userToken = await getValueFromStorage("user");
-  if (userToken === null) {
-    Navigation.setRoot({
-      root: route.afterLogin,
-    });
-  } else {
-    
-  }
-};
-
+navigationLogic = () => {
+  getCachedData(CachedDataTypes.userdata).then((userdata) => {  
+    getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
+      console.log('mnemonic', mnemonic)
+      if (mnemonic !== null) {
+        Navigation.setRoot({
+          root: route.login,
+        });
+      } else {     
+          Navigation.setRoot({
+            root: route.beforeLogin,
+          });      
+      }
+    })
+  })
+}
