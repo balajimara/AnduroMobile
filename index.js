@@ -13,6 +13,7 @@ import SplashScreen from 'react-native-splash-screen';
 import "./i18n"
 import { getValueFromStorage } from './src/Storage/AnduroStorage';
 import { getCachedData } from './src/Utility/AndurocommonUtils';
+import { CachedDataTypes } from "./src/model/AnduroStorageModel"
 
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
@@ -52,18 +53,16 @@ Navigation.events().registerAppLaunchedListener(() => {
 
 // Method that chooses to show between App intro slider and other screens
 navigationLogic = () => {
-  getCachedData(CachedDataTypes.userdata).then((userdata) => {  
-    getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
-      console.log('mnemonic', mnemonic)
-      if (mnemonic !== null) {
+  getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
+    console.log('mnemonic', mnemonic)
+    if (mnemonic !== null) {
+      Navigation.setRoot({
+        root: route.login,
+      });
+    } else {     
         Navigation.setRoot({
-          root: route.login,
-        });
-      } else {     
-          Navigation.setRoot({
-            root: route.beforeLogin,
-          });      
-      }
-    })
+          root: route.beforeLogin,
+        });      
+    }
   })
 }
