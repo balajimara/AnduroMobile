@@ -13,6 +13,7 @@ import SplashScreen from 'react-native-splash-screen';
 import "./i18n"
 import { getValueFromStorage } from './src/Storage/AnduroStorage';
 import { getCachedData } from './src/Utility/AndurocommonUtils';
+import './shim';
 
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
