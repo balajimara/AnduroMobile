@@ -1,4 +1,5 @@
 import { View, Text,SafeAreaView,Image,TouchableOpacity} from 'react-native';
+import  Icon  from 'react-native-vector-icons/FontAwesome';
 
 
 export interface WalletTypeProps {
@@ -26,7 +27,7 @@ const AnduroTypeVW = (props: WalletTypeProps) => {
                  <Text className="font-geistregular text-end text-headingcolor text-xs max-sm:text-left">{subtitle}</Text>
                 </View>
                </View>
-               {/* <View><Icon name='chevron_right' type='material' color="#FAFAFA" /></View> */}
+               <View><Icon name='chevron-right'color="#FAFAFA" /></View>
               </View>
               </TouchableOpacity>
              </View>
