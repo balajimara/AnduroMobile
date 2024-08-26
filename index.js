@@ -14,6 +14,7 @@ import "./i18n"
 import { getValueFromStorage } from './src/Storage/AnduroStorage';
 import { getCachedData } from './src/Utility/AndurocommonUtils';
 import { CachedDataTypes } from "./src/model/AnduroStorageModel"
+import './shim.js'
 
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
@@ -59,10 +60,10 @@ navigationLogic = () => {
       Navigation.setRoot({
         root: route.login,
       });
-    } else {     
+    } else {
         Navigation.setRoot({
           root: route.beforeLogin,
-        });      
+        });
     }
   })
 }

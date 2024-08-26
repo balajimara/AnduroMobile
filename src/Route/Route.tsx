@@ -15,6 +15,7 @@ import AnduroMenuVC from "../Components/menu/AnduroMenuVC";
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
 Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC);
+Navigation.registerComponent("AnduroCreate", () => AnduroCreateVC);
 Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC);
 Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
 Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC);
@@ -36,7 +37,7 @@ const privacy = {
       {
         component: {
           name: "AnduroLanding",
-          options: {          
+          options: {
             animations: {
               setRoot: {
                 waitForRender: true,
@@ -50,7 +51,7 @@ const privacy = {
 };
 
 /**
- * default crete type page 
+ * default crete type page
  */
 
 const login = {
@@ -111,7 +112,7 @@ const afterLogin = {
                 children: [
                   {
                     component: {
-                      name: "dashboard", 
+                      name: "dashboard",
                     },
                   },
                 ],
@@ -128,7 +129,7 @@ const afterLogin = {
                 children: [
                   {
                     component: {
-                      name: "apps", 
+                      name: "apps",
                     },
                   },
                 ],
