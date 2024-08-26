@@ -1,10 +1,19 @@
 import { View, Text,SafeAreaView,Image,TouchableOpacity} from 'react-native';
 
-export const AnduroTypeVW = (props: any) => {
-  let { title, subtitle, type, callback} = props  
+
+export interface WalletTypeProps {
+  title: String;
+  subtitle: String;
+  type: String;
+  callback: any;
+}
+
+const AnduroTypeVW = (props: WalletTypeProps) => {
+  const { title, subtitle, type, callback} = props  
+
     return (
        <SafeAreaView> 
-             <View className="mb-3.5">
+          <View className="mb-3.5">
             <View className="flex flex-col gap-6">
              <View className="bg-accountbg hover:bg-accounthighlightbg hover:border-existaccount hover:border-accounthighlightline border-accountline rounded-xl p-4 px-4 flex flex-col justify-between border">
               <TouchableOpacity onPress={callback}>
@@ -22,8 +31,8 @@ export const AnduroTypeVW = (props: any) => {
               </TouchableOpacity>
              </View>
             </View>
-           </View>
-       </SafeAreaView> 
+          </View>
+        </SafeAreaView> 
     )
 }
 

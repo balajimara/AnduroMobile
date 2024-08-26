@@ -78,6 +78,35 @@ const login = {
   },
 };
 
+/**
+ * default crete type page 
+ */
+
+const afterPrivacy = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroCreateType",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+
 const afterLogin = {
     sideMenu:{
       left:{
@@ -150,7 +179,8 @@ const afterLogin = {
 const route = {
   beforeLogin : privacy,
   login: login,
-  afterLogin
+  afterLogin,
+  afterPrivacy
 
 };
 export default route;

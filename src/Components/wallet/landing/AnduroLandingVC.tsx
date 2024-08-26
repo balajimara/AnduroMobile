@@ -7,7 +7,7 @@ import { CachedDataTypes, StorageTypes } from '../../../model/AnduroStorageModel
 import { setCachedData, getCachedData } from '../../../Utility/AndurocommonUtils';
 import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useTranslation } from "react-i18next"
-
+import AnduroTypeHeaderVW  from "../../../Common/Views/AccountTypeHeaderVW"
 
 export const AnduroLandingVC = (props:any) => {
   const {t, i18n} = useTranslation()
@@ -16,41 +16,15 @@ export const AnduroLandingVC = (props:any) => {
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
   React.useEffect(() => {
-    const userData = getdata({ type:  StorageTypes.userData})
-    getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
-      if (mnemonic !== null) {
-        Navigation.push(props.componentId, {
-          component: {
-            name: "AnduroLogin",
-            options: {
-              topBar: {
-                visible: false,
-              },
-              bottomTabs: {
-                visible: false,
-              }
-            }
-          }
-       }) 
+    getCachedData(StorageTypes.userData).then((userdata) => {
+      let userinfo = JSON.parse(userdata || "{}")
+      if (Object.keys(userinfo).length == 0) {
+        setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
       } else {
-        if (userData.privacyPolicy) {
-          Navigation.push(props.componentId, {
-            component: {
-              name: "AnduroCreateType",
-              options: {
-                topBar: {
-                  visible: false,
-                },
-                bottomTabs: {
-                  visible: false,
-                }
-              }
-            }
-         }) 
-        }
-      }
+        setdata({ type: StorageTypes.userData, data: userinfo})
+      }            
     })
-  })
+  },[])
   React.useEffect(() => {
     if (agree) {
       const interval = setInterval(() => {
@@ -65,8 +39,11 @@ export const AnduroLandingVC = (props:any) => {
       }, 200)
       const timeout = setTimeout(async () => {
         clearInterval(interval)
-        let userData = await getCachedData(StorageTypes.userData)           
-        let userDataV = JSON.parse(userData || "{}")  
+        let userData = await getCachedData(StorageTypes.userData)   
+        let userDataV = JSON.parse(userData || "{}")      
+        // if (Object.keys(userDataV) == 0) {
+
+        // }
         userDataV.privacyPolicy = true
         await setCachedData(StorageTypes.userData, JSON.stringify(userDataV))
         setdata({ type: StorageTypes.userData, data: userDataV})
@@ -93,15 +70,7 @@ export const AnduroLandingVC = (props:any) => {
   return (
     <SafeAreaView>
     <View className='bg-gray h-full flex flex-col justify-between'>
-    
-      <View className="p-14">
-      <View className="m-auto my-4 mb-4"><Image resizeMode={'contain'} source={require('../../../assets/images/logo.png')} className="w-60" /></View>
-      <View className="w-64 m-auto">
-        <Text className="font-geistmedium text-headingcolor text-base text-center leading-5">
-          {t("landingtext")}
-        </Text>
-      </View>
-      </View>
+     <AnduroTypeHeaderVW/>
       <View className="items-center p-8 px-0">
       <View className="flex-row items-center px-8 pb-3">
       <CheckBox

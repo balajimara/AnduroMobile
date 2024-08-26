@@ -6,6 +6,8 @@ import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useAtom } from 'jotai';
 import { StorageTypes } from '../../../model/AnduroStorageModel';
 import React from 'react';
+import AnduroTypeHeaderVW from '../../../Common/Views/AccountTypeHeaderVW';
+import { getCachedData, setCachedData } from '../../../Utility/AndurocommonUtils';
 
 
 export const AnduroCreateTypeVC = (props: any) => {
@@ -29,20 +31,20 @@ export const AnduroCreateTypeVC = (props: any) => {
   }
   
   React.useEffect(() => {
-    console.log("data", getdata({ type: StorageTypes.userData}))
-  })
+    getCachedData(StorageTypes.userData).then((userdata) => {
+      let userinfo = JSON.parse(userdata || "{}")
+      if (Object.keys(userinfo).length == 0) {
+        setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
+      } else {
+        setdata({ type: StorageTypes.userData, data: userinfo})
+      }            
+    })
+  },[])
 
     return (
        <SafeAreaView> 
         <View className='bg-gray h-full flex flex-col justify-between'>
-         <View className="p-14">
-          <View className="m-auto my-4 mb-4"><Image resizeMode={'contain'} source={require('../../../assets/images/logo.png')} className="w-60" /></View>
-           <View className="w-64 m-auto">
-            <Text className="font-geistmedium text-headingcolor text-base text-center leading-6">
-            {t("landingtext")}
-            </Text>
-           </View>
-          </View>
+          <AnduroTypeHeaderVW/>
           <View className="p-4 pb-5 px-4">
            <AnduroTypeVW type="new" title={t("newaccount")} subtitle={t("createnewwalletdesc")} callback={() => navigatePage("new")}/>
            <AnduroTypeVW type="existing" title={t("existingaccount")} subtitle={t("existingwalletdesc")} callback={() => navigatePage("existing")}/>
