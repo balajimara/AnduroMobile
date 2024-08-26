@@ -12,5 +12,6 @@
     "walletphrase":"Enter your wallet's recovery phrase",
     "importwallet":"Type the words in sequence, or import them",
     "importkeys": "Import keys from a file",
-    "walletlogin":"Login to wallet"
+    "walletlogin":"Login to wallet",
+    "walletname":"wallet name",
 }

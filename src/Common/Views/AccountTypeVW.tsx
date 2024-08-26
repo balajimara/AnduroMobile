@@ -21,7 +21,7 @@ const AnduroTypeVW = (props: WalletTypeProps) => {
               <View className="flex flex-row items-center justify-between">
                <View>
                 <View className="mb-1.5">
-                 <Text className="text-lg text-lightgray leading-5 font-geistregular">{title}</Text>
+                 <Text className="text-xl text-lightgray leading-7 font-geistregular">{title}</Text>
                 </View>
                 <View>
                  <Text className="font-geistregular text-end text-headingcolor text-xs max-sm:text-left">{subtitle}</Text>
