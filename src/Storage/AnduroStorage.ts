@@ -6,26 +6,8 @@ import { NetworkListModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
 import { atomWithStorage,createJSONStorage,loadable } from 'jotai/utils'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { produce } from "immer";
-
- export const getValueFromStorage = async (key: string) => {
-    try {
-      const value = await AsyncStorage.getItem(key);
-      return value;
-    } catch (error) {
-      return null
-    }
-  }
-
-  export const setValueFromStorage = async (key: string, value: string) => {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch (error) {}
-  }
 
 
-
-const storage = createJSONStorage(() => AsyncStorage);
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
   for (let index = 0; index < networks.length; index++) {

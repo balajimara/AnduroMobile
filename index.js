@@ -11,9 +11,8 @@ import { Navigation } from "react-native-navigation";
 import route from './src/Route/Route';
 import SplashScreen from 'react-native-splash-screen';
 import "./i18n"
-import { getValueFromStorage } from './src/Storage/AnduroStorage';
 import { getCachedData } from './src/Utility/AndurocommonUtils';
-import { CachedDataTypes } from "./src/model/AnduroStorageModel"
+import { CachedDataTypes, StorageTypes } from "./src/model/AnduroStorageModel"
 import './shim.js'
 
 Navigation.events().registerAppLaunchedListener(() => {
@@ -54,16 +53,30 @@ Navigation.events().registerAppLaunchedListener(() => {
 
 // Method that chooses to show between App intro slider and other screens
 navigationLogic = () => {
-  getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
-    console.log('mnemonic', mnemonic)
-    if (mnemonic !== null) {
-      Navigation.setRoot({
-        root: route.login,
-      });
-    } else {
+  getCachedData(StorageTypes.userData).then((userData) => {
+    getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
+      let userinfo = JSON.parse(userData || "{}")
+      if (mnemonic !== null) {
         Navigation.setRoot({
-          root: route.beforeLogin,
+          root: route.login,
         });
-    }
+      } else {
+        if (Object.keys(userinfo).length === 0) {
+          Navigation.setRoot({
+            root: route.beforeLogin,
+          });
+        } else {
+          if (userinfo.privacyPolicy) {
+            Navigation.setRoot({
+              root: route.afterPrivacy,
+            });
+          } else {
+            Navigation.setRoot({
+              root: route.beforeLogin,
+            });
+          }
+        }
+      }
+    })
   })
 }
