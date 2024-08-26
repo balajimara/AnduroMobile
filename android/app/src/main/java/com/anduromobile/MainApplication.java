@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import java.util.List;
 import java.util.Arrays;
+ import com.oblador.vectoricons.VectorIconsPackage;
 
 
 public class MainApplication extends NavigationApplication {
@@ -30,6 +31,7 @@ public class MainApplication extends NavigationApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           new SplashScreenReactPackage();  //here
+          new VectorIconsPackage();
           return packages;
         }
 
