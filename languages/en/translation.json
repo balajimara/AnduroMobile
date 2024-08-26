@@ -8,5 +8,9 @@
     "restorewallet": "Restore your Wallet using your Recovery Phrase",
     "createwalletdec":"Let's name your wallet",
     "createwalletsubdec": "Back it up, and do not share this with anyone.",
-    "continue": "Continue"
+    "continue": "Continue",
+    "walletphrase":"Enter your wallet's recovery phrase",
+    "importwallet":"Type the words in sequence, or import them",
+    "importkeys": "Import keys from a file",
+    "walletlogin":"Login to wallet"
 }
