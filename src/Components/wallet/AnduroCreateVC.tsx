@@ -5,10 +5,10 @@ import { StorageTypes } from '../../model/AnduroStorageModel';
 import { getData, setData } from "../../Storage/AnduroStorage"
 import { useAtom } from 'jotai';
 import { Button, Input } from "@rneui/themed"
-import Icon from 'react-native-vector-icons/FontAwesome';
 import validator from "validator"
 import { getCachedData, setCachedData } from '../../Utility/AndurocommonUtils';
 import { Navigation } from 'react-native-navigation';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 const AnduroCreateVC = (props: any) => {
     const {t} = useTranslation()
@@ -98,7 +98,7 @@ const AnduroCreateVC = (props: any) => {
            <View>
             <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("walletname")}</Text>
             <View className="bg-popupclr h-11 pl-9 rounded-lg">
-             <Input placeholder='Ex: Aarons Wallet' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
+             <Icon name="wallet"></Icon><Input placeholder='Ex: Aarons Wallet' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
             </View>
            </View>
           </View>
