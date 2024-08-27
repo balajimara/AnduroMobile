@@ -1,4 +1,4 @@
-import { View, Text,SafeAreaView,TextInput,TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text,SafeAreaView,TextInput, StyleSheet} from 'react-native';
 import { useSSR, useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import { StorageTypes } from '../../model/AnduroStorageModel';
@@ -97,15 +97,22 @@ const AnduroCreateVC = (props: any) => {
            </View>
            <View>
             <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("walletname")}</Text>
-            <View className="w-full bg-popupclr placeholder-headingcolor text-sm font-geistsemibold h-12 pl-8 text-lightgray rounded-lg focus:outline-none">
-             <Input placeholder='Ex: Aarons Wallet' placeholderTextColor="#968F8D" style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
+            <View className="bg-popupclr h-11 pl-9 rounded-lg">
+             <Input placeholder='Ex: Aarons Wallet' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
             </View>
            </View>
           </View>
           <View className="w-full p-5 px-6">
-           <TouchableOpacity className="bg-continue w-full h-12 py-2.5 rounded-lg font-[jetbrains]">
-            <Text className="text-white w-full text-center text-base" onPress={handleSubmitWalletName}>{t("continue")}</Text>
-           </TouchableOpacity>
+           <Button className="w-full"
+              title="Continue"
+              buttonStyle={{
+                backgroundColor: '#E8705C',
+                borderRadius: 8,
+                fontFamily:'JetBrains Mono',
+                fontSize: 16,
+                height: 48,
+              }}
+            />
           </View>
          </View>
         </SafeAreaView>
@@ -117,8 +124,12 @@ const styles = StyleSheet.create({
     height: 40,
     fontFamily:'Geist-SemiBold',
     fontSize: 14,
-    // outline: 'none',
-    // boxShadow: 'none',
+    padding:0,
+    color: '#fff',
+  },
+  inputOne: {
+    borderBottomWidth:0,
+    borderRadius:8,
   },
 });
 

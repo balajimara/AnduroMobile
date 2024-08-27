@@ -72,7 +72,7 @@ export const AnduroLandingVC = (props:any) => {
     <View className='bg-gray h-full flex flex-col justify-between'>
      <AnduroTypeHeaderVW/>
       <View className="items-center p-8 px-0">
-      <View className="flex-row items-center px-8 pb-10">
+      <View className="flex-row items-center px-6 pb-10">
       <CheckBox
                 checked={agree}
                 iconType="material-community"
@@ -87,7 +87,7 @@ export const AnduroLandingVC = (props:any) => {
                 }}
                 onPress={() => setAgree(true)}
               />
-              <Text className={`font-geistregular ${agree ? "text-headingcolor" : "text-white"} text-sm`}>
+              <Text className={`font-geistregular ${agree ? "text-headingcolor" : "text-white"} text-xs`}>
               {t("privacyagree")}
               </Text>            
               </View> 
