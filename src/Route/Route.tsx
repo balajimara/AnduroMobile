@@ -12,6 +12,7 @@ import AnduroDashboardVC from "../Components/tabs/dashboard/AnduroDashboardVC";
 import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC";
 import AnduroMenuVC from "../Components/menu/AnduroMenuVC";
 import Toast from "../Common/Views/Toast";
+import AnduroHeaderVC from "../Components/header/AnduroHeader";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
@@ -22,6 +23,7 @@ Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
 Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC);
 Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC);
 Navigation.registerComponent("AnduroLogin", () => AnduroLoginVC)
+Navigation.registerComponent("AnduroHeader", () => AnduroHeaderVC)
 Navigation.registerComponent("collectible", () => AnduroCollectiblesVC)
 Navigation.registerComponent("dashboard", () => AnduroDashboardVC)
 Navigation.registerComponent("apps", () => AnduroAppsVC)
@@ -114,7 +116,7 @@ const afterLogin = {
     sideMenu:{
       left:{
         component:{
-            name:'menu'
+            name:'menu',
         }
       },
       center: {

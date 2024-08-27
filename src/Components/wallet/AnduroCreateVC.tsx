@@ -108,10 +108,11 @@ const AnduroCreateVC = (props: any) => {
               buttonStyle={{
                 backgroundColor: '#E8705C',
                 borderRadius: 8,
-                fontFamily:'JetBrains Mono',
-                fontSize: 16,
+                // fontFamily:'JetBrains Mono',
+                // fontSize: 16,
                 height: 48,
               }}
+              onPress={() => {handleSubmitWalletName()}}
             />
           </View>
          </View>

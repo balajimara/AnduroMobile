@@ -3,34 +3,39 @@ import { useEffect } from "react"
 import { Button, SafeAreaView, View } from "react-native"
 import { Navigation } from "react-native-navigation"
 import route from "../../../Route/Route"
+import { Icon } from "react-native-vector-icons/Icon"
+import AnduroHeaderVC from "../../header/AnduroHeader"
 
 const AnduroDashboardVC = (props:any) => {
-    useEffect(()=>{
+    useEffect(()=>{        
         Navigation.mergeOptions(props.componentId, {
             topBar: {
               title: {
-                text: "test134"
-              }
+                component: {                        
+                    name: "AnduroHeader",                                            
+                },             
+              },
+              background: {
+                color: "#000000"
+                }
             }
         });
     })
 
     const onMenuOpen = () => {
+        console.log('ssfsdfsfsfsdsdfsdfsdddddsdfsdsdfsf')
         Navigation.mergeOptions(props.componentId, {
             sideMenu: {
                 left: {
-                    visible: true
-                }
-            }
+                    visible: true                    
+                }                
+            },            
         });
-    }
+    }  
     
     return (
         <SafeAreaView>
-            <Text className="text-black">
-               <Button onPress={onMenuOpen} title="Menu" />
-
-            </Text>
+          <AnduroHeaderVC callback={onMenuOpen}></AnduroHeaderVC>
         </SafeAreaView>
     )
 }
