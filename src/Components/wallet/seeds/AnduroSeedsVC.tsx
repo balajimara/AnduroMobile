@@ -2,23 +2,49 @@ import { View, Text,SafeAreaView,StyleSheet} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import 'react-native-get-random-values';
+import Clipboard from '@react-native-clipboard/clipboard';
 import * as bip39 from 'bip39';
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigation } from 'react-native-navigation';
-// import { randomBytes } from 'react-native-crypto'
+import RNFS, {DownloadDirectoryPath, writeFile} from 'react-native-fs';
 
 
 
 const AnduroSeedsVC = (props: any) => {
     const {t} = useTranslation()
+    const [mnemonic, setMnemonic] = useState("")
     React.useEffect(() => {
-        // generateMnemonic()
-    })
-    // const generateMnemonic = () => {
-    //     const entropy = Aes.randomKey(16);
-    //     const mnemonic = bip39.entropyToMnemonic(entropy);
-    //     console.log('mnemonic', mnemonic)
-    // }
+         generateMnemonic()
+    },[])
+    const generateMnemonic = () => {
+        const mnemonic = bip39.generateMnemonic();
+        setMnemonic(mnemonic)
+    }
+
+    const copyToClipboard = () => {
+      console.log('sdsdsd')
+      Clipboard.setString(mnemonic);
+    };
+
+    const downloadMnemonic = async () => {
+      try {
+        var path = `${RNFS.DownloadDirectoryPath}/Anduro`;
+        RNFS.mkdir(path);
+        path += '/data.json';
+        // write the file
+        RNFS.writeFile(path, JSON.stringify(mnemonic.split(" ")), 'utf8')
+        .then((response: any) => {
+            console.log('FILE WRITTEN!', response);
+        })
+        .catch((err:any) => {
+            console.log(err.message);
+        });
+      } catch (e) {
+        console.log('error', e);
+      }
+    };
+
     return (
         <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
@@ -117,6 +143,7 @@ const AnduroSeedsVC = (props: any) => {
                 height: 40,
               }}
               titleStyle={{ fontFamily: 'Geist-Regular', fontSize: 12, opacity:0.55 }}
+              onPress={() => copyToClipboard()}
             />
             </View>
             <View className="w-1/2 pl-1.5">
@@ -134,6 +161,7 @@ const AnduroSeedsVC = (props: any) => {
                 height: 40,
               }}
               titleStyle={{ fontFamily: 'Geist-Regular', fontSize: 12, opacity:0.55 }}
+              onPress={() => downloadMnemonic()}
             />
             </View>
            </View>
