@@ -1,10 +1,24 @@
 import { View, Text,SafeAreaView,StyleSheet} from 'react-native';
-import { useSSR, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Button } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import * as bip39 from 'bip39';
+import React from 'react';
+import { Navigation } from 'react-native-navigation';
+// import { randomBytes } from 'react-native-crypto'
 
-const AnduroSeedsVC = () => {
+
+
+const AnduroSeedsVC = (props: any) => {
     const {t} = useTranslation()
+    React.useEffect(() => {
+        // generateMnemonic()
+    })
+    // const generateMnemonic = () => {
+    //     const entropy = Aes.randomKey(16);
+    //     const mnemonic = bip39.entropyToMnemonic(entropy);
+    //     console.log('mnemonic', mnemonic)
+    // }
     return (
         <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
@@ -94,9 +108,9 @@ const AnduroSeedsVC = () => {
                 name: 'content-copy',
                 size: 15,
                 color: 'white',
-                opacity:0.55 
+                // opacity:0.55 
               }}
-              title="Copy to Clipboard"
+              title={t("copytoclipboard")}
               buttonStyle={{
                 backgroundColor: '#231B19',
                 borderRadius: 24,
@@ -111,9 +125,9 @@ const AnduroSeedsVC = () => {
                 name: 'crop-free',
                 size: 15,
                 color: 'white',
-                opacity:0.55 
+                // opacity:0.55 
               }}
-              title="Download keys"
+              title={t("downloadkeys")}
               buttonStyle={{
                 backgroundColor: '#231B19',
                 borderRadius: 24,
@@ -134,6 +148,13 @@ const AnduroSeedsVC = () => {
                 height: 48,
               }}
               titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
+              onPress={() => {
+                Navigation.push(props.componentId, {
+                    component: {
+                      name: 'AnduroCreatePassword',        
+                    }
+                })  
+              }}
             />
            </View>
           </View> 
