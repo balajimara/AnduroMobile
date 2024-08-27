@@ -11,6 +11,7 @@
     "postinstall": "rn-nodeify --install buffer,stream,assert,events,crypto,vm,process --hack"
   },
   "dependencies": {
+    "@mtourj/react-native-skeleton-content": "^1.0.33",
     "@os-team/i18next-react-native-language-detector": "^1.0.34",
     "@react-native-async-storage/async-storage": "^2.0.0",
     "@rneui/base": "^4.0.0-rc.7",
