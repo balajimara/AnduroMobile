@@ -134,7 +134,8 @@ const afterLogin = {
                 ],
                 options: {
                   bottomTab: {
-                    icon: require("./../assets/images/tab/collectible.png")
+                    icon: require("./../assets/images/tab/collectible.png"),
+                    selectedIcon: require("./../assets/images/tab/collectible_active.png"),
                   }
                 }
               },
@@ -151,7 +152,8 @@ const afterLogin = {
                 ],
                 options: {
                   bottomTab: {
-                    icon: require("./../assets/images/tab/dashboard.png")
+                    icon: require("./../assets/images/tab/dashboard.png"),
+                    selectedIcon: require("./../assets/images/tab/dashboard_active.png"),
                   }
                 }
               },
