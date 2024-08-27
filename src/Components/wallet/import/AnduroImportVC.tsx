@@ -6,8 +6,7 @@ import { Navigation } from "react-native-navigation";
 import DocumentPicker from 'react-native-document-picker';
 import { SafeAreaView,TouchableOpacity, View } from "react-native";
 import RNFS from 'react-native-fs';
-// @ts-ignore
-import * as bip39 from 'react-native-bip39';
+import * as bip39 from 'bip39';
 
 const AnduroImportVC = (props: any) => {
   const {t} = useTranslation()
@@ -56,7 +55,7 @@ const AnduroImportVC = (props: any) => {
       component: {
         name: 'AnduroCreate',
         passProps: {
-          type: { mnemonic: mnemonic.join(" ") }
+        mnemonic: mnemonic.join(" ")
         }
       }
     });

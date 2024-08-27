@@ -29,7 +29,7 @@ const AnduroCreateVC = (props: any) => {
         ) {
             setToastMessage(t("walletnameempty"))
             setIsShownToast(true)
-            setToasttype("error")     
+            setToasttype("error")
             return false
         }
         if (!validator.isLength(value, { min: 3, max: 50 })) {
@@ -39,8 +39,8 @@ const AnduroCreateVC = (props: any) => {
             return false
         }
         setWalletname(value)
-        return true        
-          
+        return true
+
     }
 
     const handleSubmitWalletName = async () => {
@@ -52,12 +52,20 @@ const AnduroCreateVC = (props: any) => {
             console.log('CachedUserData', CachedUserData, walletname)
             CachedUserData.walletName = walletname
             setdata({ type: StorageTypes.userData, value: CachedUserData })
-            await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))  
-            Navigation.push(props.componentId, {
-              component: {
-                name: "AnduroSeeds",        
-              }
-          }) 
+            await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
+            if (props.mnemonic) {
+              Navigation.push(props.componentId, {
+                component: {
+                  name: "AnduroCreatePassword",
+                }
+              })
+            } else {
+              Navigation.push(props.componentId, {
+                component: {
+                  name: "AnduroSeeds",
+                }
+              })
+            }
         } else {
             Navigation.dismissAllOverlays()
             Navigation.showOverlay({
@@ -77,10 +85,10 @@ const AnduroCreateVC = (props: any) => {
                   }
                 }
               });
-        }      
+        }
     }
     return (
-        <SafeAreaView>       
+        <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
           <View className="p-14 px-6">
            <View className="text-center w-44 m-auto mb-4"><Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold">{t("createwalletdec")}</Text></View>
@@ -100,7 +108,7 @@ const AnduroCreateVC = (props: any) => {
            </TouchableOpacity>
           </View>
          </View>
-        </SafeAreaView>  
+        </SafeAreaView>
     )
 }
 
