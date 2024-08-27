@@ -98,7 +98,7 @@ const AnduroCreateVC = (props: any) => {
            <View>
             <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("walletname")}</Text>
             <View className="relative">
-            <View className="absolute top-3 left-4 z-10"><Icon style={[styles.icon]} name="wallet"></Icon></View>
+            <View className="absolute top-3.5 left-4 z-10"><Icon style={[styles.icon]} name="wallet-outline"></Icon></View>
             <View className="bg-popupclr h-11 pl-8 rounded-lg">
              <Input placeholder='Ex: Aarons Wallet' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
             </View>
