@@ -10,7 +10,7 @@ import validator from "validator"
 import { getCachedData, setCachedData } from '../../Utility/AndurocommonUtils';
 import { Navigation } from 'react-native-navigation';
 
-const AnduroCreateVC = () => {
+const AnduroCreateVC = (props: any) => {
     const {t} = useTranslation()
     const [, getdata] = useAtom(getData)
     const [, setdata] = useAtom(setData)
@@ -53,6 +53,11 @@ const AnduroCreateVC = () => {
             CachedUserData.walletName = walletname
             setdata({ type: StorageTypes.userData, value: CachedUserData })
             await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))  
+            Navigation.push(props.componentId, {
+              component: {
+                name: "AnduroSeeds",        
+              }
+          }) 
         } else {
             Navigation.dismissAllOverlays()
             Navigation.showOverlay({

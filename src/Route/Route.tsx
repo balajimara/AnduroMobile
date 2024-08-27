@@ -11,6 +11,7 @@ import AnduroCollectiblesVC from "../Components/tabs/collectibles/AnduroCollecti
 import AnduroDashboardVC from "../Components/tabs/dashboard/AnduroDashboardVC";
 import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC";
 import AnduroMenuVC from "../Components/menu/AnduroMenuVC";
+import Toast from "../Common/Views/Toast";
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
@@ -25,6 +26,7 @@ Navigation.registerComponent("collectible", () => AnduroCollectiblesVC)
 Navigation.registerComponent("dashboard", () => AnduroDashboardVC)
 Navigation.registerComponent("apps", () => AnduroAppsVC)
 Navigation.registerComponent("menu", () => AnduroMenuVC)
+Navigation.registerComponent("Toast", () => Toast)
 
 
 /**
