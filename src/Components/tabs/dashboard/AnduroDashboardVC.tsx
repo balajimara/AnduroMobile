@@ -11,31 +11,15 @@ const AnduroDashboardVC = (props:any) => {
         Navigation.mergeOptions(props.componentId, {
             topBar: {
               title: {
-                component: {                        
-                    name: "AnduroHeader",                                            
-                },             
-              },
-              background: {
-                color: "#000000"
-                }
+                text: "AnduroHeader",             
+              }
             }
         });
-    })
-
-    const onMenuOpen = () => {
-        console.log('ssfsdfsfsfsdsdfsdfsdddddsdfsdsdfsf')
-        Navigation.mergeOptions(props.componentId, {
-            sideMenu: {
-                left: {
-                    visible: true                    
-                }                
-            },            
-        });
-    }  
+    },[])
     
     return (
         <SafeAreaView>
-          <AnduroHeaderVC callback={onMenuOpen}></AnduroHeaderVC>
+          <Text>test</Text>
         </SafeAreaView>
     )
 }

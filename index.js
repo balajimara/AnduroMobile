@@ -41,7 +41,7 @@ Navigation.events().registerAppLaunchedListener(() => {
       backgroundColor: "#140401",
       titleDisplayMode: "alwaysHide",
       currentTabIndex: 1,
-      visible: false
+      visible: true
     },
     layout: {
       orientation: ["portrait"],
