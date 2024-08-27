@@ -36,7 +36,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
-
+.yarn/
 # node.js
 #
 node_modules/
