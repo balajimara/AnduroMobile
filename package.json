@@ -7,13 +7,14 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "rn-nodeify --install buffer,stream,assert,events,crypto,vm,process --hack"
+    "lint": "eslint . --ext .ts,.tsx",
+    "postinstall": "rn-nodeify --install buffer,stream,assert,events,crypto,vm,process --hack",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,scss,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.34",
     "@react-native-async-storage/async-storage": "^2.0.0",
-    "@react-native-masked-view/masked-view": "^0.3.1",
+    "@react-native-masked-view/masked-view": "^0.2.8",
     "@react-native-clipboard/clipboard": "^1.13.0",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.7",
