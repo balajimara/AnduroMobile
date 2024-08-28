@@ -74,7 +74,7 @@ export const AnduroLandingVC = (props:any) => {
     <SafeAreaView>
     <View className='bg-gray h-full flex flex-col justify-between'>
      <AnduroTypeHeaderVW/>
-      <View className="items-center p-8 px-0">
+      <View className="items-center p-8 px-0 pb-3">
       <View className="flex-row items-center px-6 pb-10">
       <CheckBox
                 checked={agree}
@@ -94,7 +94,7 @@ export const AnduroLandingVC = (props:any) => {
               {t("privacyagree")}
               </Text>            
               </View> 
-              <LinearProgress variant="determinate" color="lightgray" trackColor='gray' value={progress}/>
+              <LinearProgress style={{height:2}} variant="determinate" color="lightgray" trackColor='gray' value={progress}/>
               </View> 
     </View>
     </SafeAreaView>
