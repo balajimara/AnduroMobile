@@ -14,6 +14,8 @@ import "./i18n"
 import { getCachedData } from './src/Utility/AndurocommonUtils';
 import { CachedDataTypes, StorageTypes } from "./src/model/AnduroStorageModel"
 import './shim.js'
+import { PermissionsAndroid } from "react-native"
+
 
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide();
@@ -49,6 +51,7 @@ Navigation.events().registerAppLaunchedListener(() => {
     },
   });
   navigationLogic()
+  requestStoragePermission()
 });
 
 // Method that chooses to show between App intro slider and other screens
@@ -80,3 +83,34 @@ navigationLogic = () => {
     })
   })
 }
+
+// grant permission 
+const requestStoragePermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.requestMultiple(
+      [
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+      ],
+      {
+        title: 'Cool Photo App Camera Permission',
+        message:
+          'Cool Photo App needs access to your camera ' +
+          'so you can take awesome pictures.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    console.log('granted', granted)
+    const readGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE); 
+    const writeGranted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+    if(!readGranted || !writeGranted) {
+      console.log('Read and write permissions have not been granted');
+      return;
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+};
+

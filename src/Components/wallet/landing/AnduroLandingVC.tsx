@@ -16,15 +16,9 @@ export const AnduroLandingVC = (props:any) => {
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
   React.useEffect(() => {
-    getCachedData(StorageTypes.userData).then((userdata) => {
-      let userinfo = JSON.parse(userdata || "{}")
-      if (Object.keys(userinfo).length == 0) {
-        setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
-      } else {
-        setdata({ type: StorageTypes.userData, data: userinfo})
-      }            
-    })
+    setUserInfo()
   },[])
+
   React.useEffect(() => {
     if (agree) {
       const interval = setInterval(() => {
@@ -41,9 +35,7 @@ export const AnduroLandingVC = (props:any) => {
         clearInterval(interval)
         let userData = await getCachedData(StorageTypes.userData)   
         let userDataV = JSON.parse(userData || "{}")      
-        // if (Object.keys(userDataV) == 0) {
-
-        // }
+    
         userDataV.privacyPolicy = true
         await setCachedData(StorageTypes.userData, JSON.stringify(userDataV))
         setdata({ type: StorageTypes.userData, data: userDataV})
@@ -66,7 +58,18 @@ export const AnduroLandingVC = (props:any) => {
         clearTimeout(timeout)
       }   
     }  
-  }, [agree])      
+  }, [agree])     
+  
+  const setUserInfo = async () => {
+    let userdata = await getCachedData(StorageTypes.userData)
+    let userinfo = JSON.parse(userdata || "{}")
+      if (Object.keys(userinfo).length == 0) {
+        setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
+      } else {
+        setdata({ type: StorageTypes.userData, data: userinfo})
+      }   
+  }
+
   return (
     <SafeAreaView>
     <View className='bg-gray h-full flex flex-col justify-between'>

@@ -31,7 +31,7 @@ const AnduroSeedsVC = (props: any) => {
       try {
         var path = `${RNFS.DownloadDirectoryPath}/Anduro`;
         RNFS.mkdir(path);
-        path += '/data.json';
+        path += '/data.txt';
         // write the file
         RNFS.writeFile(path, JSON.stringify(mnemonic.split(" ")), 'utf8')
         .then((response: any) => {
@@ -179,7 +179,7 @@ const AnduroSeedsVC = (props: any) => {
               onPress={() => {
                 Navigation.push(props.componentId, {
                     component: {
-                      name: 'AnduroCreatePassword',        
+                      name: 'AnduroSeedConfirm',        
                     }
                 })  
               }}

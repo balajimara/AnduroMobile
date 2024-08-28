@@ -3,7 +3,7 @@ import { View } from "react-native"
 
 const AnduroSeedConfirmVC = () => {
     return (
-        <View><Text>Seeds VC</Text></View>
+        <View><Text>Seeds confirm VC</Text></View>
     )
 }
 
