@@ -1,4 +1,4 @@
-import { View, Text,SafeAreaView } from 'react-native';
+import { View, Text,SafeAreaView} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
@@ -53,13 +53,9 @@ const AnduroSeedsVC = (props: any) => {
            <View className="list-numbers mb-6 bg-popupclr px-4 py-4 pb-3 rounded-3xl flex-row flex-wrap">
            {mnemonic.length > 0 &&
             mnemonic.map((val: string, i: number) => (
-               <View className="mb-3 w-1/2 px-4" key={i}>
-                  {/*<SeedItemVW title={val} index={i+1}></SeedItemVW>*/}
-                  <View className="border-b border-bottomLineTwo flex-row">
-              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">1</Text>
-              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">test</Text>
-             </View>
-               </View>
+            <View className="mb-4 w-1/2 px-4" key={i}>
+              <SeedItemVW title={val} index={i+1}></SeedItemVW>
+            </View>
             ))}
            </View>
            <View className="flex-row flex-wrap mb-0">
