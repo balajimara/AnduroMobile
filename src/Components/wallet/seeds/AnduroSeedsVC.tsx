@@ -72,7 +72,6 @@ const AnduroSeedsVC = (props: any) => {
             </Text>
           </View>
           <View className="list-numbers mb-6 bg-popupclr px-4 py-4 pb-3 rounded-3xl flex-row flex-wrap">
-        
             <View className="w-1/2 px-4">
               {mnemonic.length > 0 &&
             mnemonicFirst.map((val: string, i: number) => (    
