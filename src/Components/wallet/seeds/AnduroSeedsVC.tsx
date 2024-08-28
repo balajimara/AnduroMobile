@@ -51,12 +51,64 @@ const AnduroSeedsVC = (props: any) => {
             <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("createwalletsubdec")}</Text>
            </View>
            <View className="list-numbers mb-6 bg-popupclr px-4 py-4 pb-3 rounded-3xl flex-row flex-wrap">
-           {mnemonic.length > 0 &&
+           {/*{mnemonic.length > 0 &&
             mnemonic.map((val: string, i: number) => (
             <View className="mb-4 w-1/2 px-4" key={i}>
               <SeedItemVW title={val} index={i+1}></SeedItemVW>
             </View>
-            ))}
+            ))}*/}
+            <View className="w-1/2 px-4">
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">1</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">2</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">3</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">4</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">5</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">6</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+            </View>
+            <View className="w-1/2 px-4">
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">7</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">8</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">9</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">10</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">11</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+             <View className="border-b border-bottomLineTwo flex-row mb-4">
+              <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">12</Text>
+              <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
+             </View>
+            </View>
            </View>
            <View className="flex-row flex-wrap mb-0">
             <View className="w-1/2 pr-1.5">
