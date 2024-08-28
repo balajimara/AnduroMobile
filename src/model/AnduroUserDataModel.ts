@@ -8,7 +8,7 @@ export interface UserDataModel {
   walletName: string
   defaultReserveAmount: number
   nativeCoins: string[]
-  isLogged: boolean,
+  isLogged: boolean
   privacyPolicy: boolean
 }
 
@@ -21,7 +21,6 @@ export interface LanguageDataModel {
   language_code: string
 }
 
-/* eslint-disable no-unused-vars */
 export enum UserDataTypes {
   developerMode = "developer-mode",
   fiat = "fiat",

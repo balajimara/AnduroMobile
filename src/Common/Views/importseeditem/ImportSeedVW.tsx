@@ -20,13 +20,12 @@ const ImportSeedVW: React.FC<ImportSeedVWProps> = ({ index, word, onUpdateWord }
         onChangeText={handleChange}
       />
       <View className="absolute left-4 top-3 font-geistsemibold font-semibold text-white text-xs">
-      <View className="absolute left-4 top-3 font-geistsemibold font-semibold text-white text-xs">
-        <Text>{index + 1}</Text>
-      </View>
+        <View className="absolute left-4 top-3 font-geistsemibold font-semibold text-white text-xs">
+          <Text>{index + 1}</Text>
+        </View>
       </View>
     </View>
   )
 }
 
 export default ImportSeedVW
-

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, ListItem, Dialog } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 
-const AnduroSeedConfirmVC = () => {
+const AnduroSeedConfirmVC = (props:any) => {
     const [visible1, setVisible1] = useState(false);
     const toggleDialog1 = () => {
       setVisible1(!visible1);

@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { Navigation } from "react-native-navigation"
 
 const Toast = function (props: any) {
- const { message, type, componentId } = props
+  const { message, type, componentId } = props
   return (
     <View style={styles.root}>
       <View style={styles.root}>
@@ -16,27 +16,27 @@ const Toast = function (props: any) {
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    flexDirection: 'column-reverse',
+    flexDirection: "column-reverse",
   },
   toast: {
     elevation: 2,
-    flexDirection: 'row',
+    flexDirection: "row",
     height: 40,
     margin: 16,
     borderRadius: 20,
     backgroundColor: "#000000",
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    position: 'absolute',
+    alignItems: "center",
+    justifyContent: "space-between",
+    position: "absolute",
   },
   text: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
     marginLeft: 16,
   },
@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
-});
+})
 
 // Toast.options = {
 //   layout: {

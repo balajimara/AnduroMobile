@@ -1,12 +1,10 @@
 import { atom } from "jotai"
-import { getCachedData } from "../Utility/AndurocommonUtils"
 import networks from "../Config/network.json"
 import { UserDataModel } from "../model/AnduroUserDataModel"
 import { NetworkListModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
-import { atomWithStorage,createJSONStorage,loadable } from 'jotai/utils'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import { atomWithStorage, createJSONStorage } from "jotai/utils"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
@@ -17,27 +15,25 @@ const getNativeCoins = (): string[] => {
 }
 
 export const atomWithAsyncStorage = (key: string, initialValue: any) => {
-  const storage = createJSONStorage(() => AsyncStorage);
+  const storage = createJSONStorage(() => AsyncStorage)
 
   // preserve original getItem and setItem
-  const {getItem, setItem} = storage;
+  const { getItem, setItem } = storage
 
   // override setItem
   storage.setItem = (value) => {
- 
-    return setItem(key, value);
-  };
+    return setItem(key, value)
+  }
 
   // override getItem
   storage.getItem = async () => {
-    const value = await getItem(key, initialValue);
+    const value = await getItem(key, initialValue)
     return value
-  };
-  return atomWithStorage(key, initialValue, storage);
-};
+  }
+  return atomWithStorage(key, initialValue, storage)
+}
 
-
-// export const userData = 
+// export const userData =
 // atomWithAsyncStorage(StorageTypes.userData, {
 //     developerMode: true,
 //     showFiatValue: false,
@@ -51,8 +47,6 @@ export const atomWithAsyncStorage = (key: string, initialValue: any) => {
 //     privacyPolicy: false,
 //   })
 
-
-
 export const networkList = atom<NetworkListModel[]>(networks)
 export const xpubkeys = atom<XpubKeysModel[]>([])
 const currentNetwork = atom<string>("")
@@ -64,34 +58,32 @@ export const pageHeader = atom<boolean>(false)
 export const selectedConvertNetwork = atom<any>(null)
 export const requestType = atom<string>("")
 export const isInjector = atom<boolean>(false)
-export const userData = atom<UserDataModel>(
-  {
-        developerMode: true,
-        showFiatValue: false,
-        showCollectionArt: false,
-        hideBalance: false,
-        selectedCurrency: "USD",
-        selectedLanguage: "en",
-        defaultReserveAmount: 0,
-        nativeCoins: getNativeCoins(),
-        isLogged: false,
-        privacyPolicy: false,
-        walletName: ""
-      })
+export const userData = atom<UserDataModel>({
+  developerMode: true,
+  showFiatValue: false,
+  showCollectionArt: false,
+  hideBalance: false,
+  selectedCurrency: "USD",
+  selectedLanguage: "en",
+  defaultReserveAmount: 0,
+  nativeCoins: getNativeCoins(),
+  isLogged: false,
+  privacyPolicy: false,
+  walletName: "",
+})
 
 export const getData = atom(null, (get, set, value: any): any => {
   return get(getState(value.type)) ? get(getState(value.type)) : getState(value.type).init
 })
 export const setData = atom(null, (get, set, value: any): any => {
-    set(getState(value.type),value.data)  
-
+  set(getState(value.type), value.data)
 })
 
 /**
  * This function is used to get state variables by name.
  * @param type -type
  */
-const getState = (type: string):any => {
+const getState = (type: string): any => {
   if (type === StorageTypes.userData) {
     return userData
   } else if (type === StorageTypes.networkList) {
@@ -110,7 +102,5 @@ const getState = (type: string):any => {
     return isInjector
   } else if (type === StorageTypes.selectedConvertNetwork) {
     return selectedConvertNetwork
-  }  
+  }
 }
-
-
