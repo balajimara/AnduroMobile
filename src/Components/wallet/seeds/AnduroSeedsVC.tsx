@@ -61,8 +61,8 @@ const AnduroSeedsVC = (props: any) => {
     <SafeAreaView>
       <View className="bg-gray h-full flex flex-col justify-between">
         <View className="p-14 px-6">
-          <View className="text-center w-56 m-auto mb-4">
-            <Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">
+          <View className="w-60 m-auto mb-4">
+            <Text className="text-3xl text-center text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">
               {t("secret")}
             </Text>
           </View>
