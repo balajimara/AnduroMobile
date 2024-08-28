@@ -91,7 +91,7 @@ const AnduroCreateVC = (props: any) => {
         <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
           <View className="p-14 px-6">
-           <View className="text-center w-44 m-auto mb-4"><Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("createwalletdec")}</Text></View>
+           <View className="w-48 m-auto mb-4"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("createwalletdec")}</Text></View>
            <View className="mb-10">
             <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("createwalletsubdec")}</Text>
            </View>
