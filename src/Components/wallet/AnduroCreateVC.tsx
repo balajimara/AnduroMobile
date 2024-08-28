@@ -91,14 +91,14 @@ const AnduroCreateVC = (props: any) => {
         <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
           <View className="p-14 px-6">
-           <View className="text-center w-44 m-auto mb-4"><Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("createwalletdec")}</Text></View>
+           <View className="w-48 m-auto mb-4"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("createwalletdec")}</Text></View>
            <View className="mb-10">
             <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("createwalletsubdec")}</Text>
            </View>
            <View>
             <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("walletname")}</Text>
             <View className="relative">
-            <View className="absolute top-3 left-4 z-10"><Icon style={[styles.icon]} name="wallet"></Icon></View>
+            <View className="absolute top-3.5 left-4 z-10"><Icon style={[styles.icon]} name="wallet-outline"></Icon></View>
             <View className="bg-popupclr h-11 pl-8 rounded-lg">
              <Input placeholder='Ex: Aarons Wallet' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
             </View>

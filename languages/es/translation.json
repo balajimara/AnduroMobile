@@ -10,5 +10,8 @@
     "createwalletsubdec": "Back it up, and do not share this with anyone.",
     "continue": "Continue",
     "walletnameminmax": "Wallet name should be between 3 to 50 characters",
-    "walletnameempty": "Please enter your wallet name"
+    "walletnameempty": "Please enter your wallet name",
+    "copytoclipboard": "Copy to Clipboard",
+    "downloadkeys": "Download Keys",
+    "secret": "Secret"
 }

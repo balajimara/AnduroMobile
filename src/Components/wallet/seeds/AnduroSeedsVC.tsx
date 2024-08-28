@@ -1,10 +1,47 @@
 import { View, Text,SafeAreaView,StyleSheet} from 'react-native';
-import { useSSR, useTranslation } from 'react-i18next';
-import { Button } from "@rneui/themed"
+import { useTranslation } from 'react-i18next';
+import { Button, ListItem } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import 'react-native-get-random-values';
+import Clipboard from '@react-native-clipboard/clipboard';
+import React, { useState } from 'react';
+import { Navigation } from 'react-native-navigation';
+import RNFS, {DownloadDirectoryPath, writeFile} from 'react-native-fs';
+import SeedItemVW from "../../../Common/Views/seeditem/SeedItem"
+import { generateMnemonic } from "../../../Utility/AndurocommonUtils"
 
-const AnduroSeedsVC = () => {
+
+const AnduroSeedsVC = (props: any) => {
     const {t} = useTranslation()
+    const [mnemonic, setMnemonic] = useState<any>([])
+    React.useEffect(() => {
+      setTimeout(() => {
+        setMnemonic(generateMnemonic().toString().split(" "))
+      },1000)      
+    },[])
+
+    const copyToClipboard = () => {
+      Clipboard.setString(mnemonic.join(" "));
+    };
+
+    const downloadMnemonic = async () => {
+      try {
+        var path = `${RNFS.DownloadDirectoryPath}/Anduro`;
+        RNFS.mkdir(path);
+        path += '/data.txt';
+        // write the file
+        RNFS.writeFile(path, JSON.stringify(mnemonic.split(" ")), 'utf8')
+        .then((response: any) => {
+            console.log('FILE WRITTEN!', response);
+        })
+        .catch((err:any) => {
+            console.log(err.message);
+        });
+      } catch (e) {
+        console.log('error', e);
+      }
+    };
+
     return (
         <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
@@ -14,7 +51,7 @@ const AnduroSeedsVC = () => {
             <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("createwalletsubdec")}</Text>
            </View>
            <View className="list-numbers mb-6 bg-popupclr px-4 py-4 pb-3 rounded-3xl flex-row flex-wrap" style={[styles.listphase]}>
-            <View className="mb-2.5 w-1/2 px-4">
+            {/* <View className="mb-2.5 w-1/2 px-4">
              <View className="border-b border-bottomLineTwo flex-row">
               <Text className="text-walletLight text-sm font-geistregular opacity-25 w-5">1</Text>
               <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">vivid</Text>
@@ -86,7 +123,13 @@ const AnduroSeedsVC = () => {
               <Text className="capitalize font-geistmedium text-xs text-walletLight text-sm">Similar</Text>
              </View>
             </View>
-           </View> 
+           </View>  */}
+           {mnemonic.length > 0 &&
+            mnemonic.map((val: string, i: number) => (
+              <ListItem key={i}>
+                  <SeedItemVW title={val} index={i+1}></SeedItemVW>
+              </ListItem>
+            ))}
            <View className="flex-row flex-wrap mb-0">
             <View className="w-1/2 pr-1.5">
             <Button className="w-full bg-popupclr h-9 rounded-3xl text-lightgray"
@@ -94,15 +137,16 @@ const AnduroSeedsVC = () => {
                 name: 'content-copy',
                 size: 15,
                 color: 'white',
-                opacity:0.55 
+                // opacity:0.55 
               }}
-              title="Copy to Clipboard"
+              title={t("copytoclipboard")}
               buttonStyle={{
                 backgroundColor: '#231B19',
                 borderRadius: 24,
                 height: 40,
               }}
               titleStyle={{ fontFamily: 'Geist-Regular', fontSize: 12, opacity:0.55 }}
+              onPress={() => copyToClipboard()}
             />
             </View>
             <View className="w-1/2 pl-1.5">
@@ -111,18 +155,20 @@ const AnduroSeedsVC = () => {
                 name: 'crop-free',
                 size: 15,
                 color: 'white',
-                opacity:0.55 
+                // opacity:0.55 
               }}
-              title="Download keys"
+              title={t("downloadkeys")}
               buttonStyle={{
                 backgroundColor: '#231B19',
                 borderRadius: 24,
                 height: 40,
               }}
               titleStyle={{ fontFamily: 'Geist-Regular', fontSize: 12, opacity:0.55 }}
+              onPress={() => downloadMnemonic()}
             />
             </View>
-           </View>
+           </View>  
+       
            </View>
            <View className="p-5">
             <Text className="font-geistregular text-center text-headingcolor text-xs font-normal mb-5">You’ll be asked to confirm the positions in the next step. Make sure you’ve backed these up somewhere</Text>
@@ -134,9 +180,17 @@ const AnduroSeedsVC = () => {
                 height: 48,
               }}
               titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
+              onPress={() => {
+                Navigation.push(props.componentId, {
+                    component: {
+                      name: 'AnduroSeedConfirm',        
+                    }
+                })  
+              }}
             />
            </View>
           </View> 
+          </View>
          </SafeAreaView> 
     )
 }

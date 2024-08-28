@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import networks from "../Config/network.json"
+import * as bip39 from 'bip39';
+
 
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
@@ -33,4 +35,15 @@ export const getCachedData = async (key: string): Promise<string | null> => {
  */
 export const setCachedData = async (key: string, value: string) => {
   return await AsyncStorage.setItem(key, value)
+}
+
+/**
+ * This is the function used to generate new mnemonic key
+ */
+export const generateMnemonic = () : string => {
+  console.log('time', new Date())
+  const mnemonicval: string = bip39.generateMnemonic();
+  console.log('mnemonicval', mnemonicval)
+  console.log('time1', new Date())
+  return mnemonicval;
 }

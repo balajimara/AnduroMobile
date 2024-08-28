@@ -23,18 +23,21 @@ export const AnduroCreateTypeVC = (props: any) => {
   }
   
   React.useEffect(() => {
-    getCachedData(StorageTypes.userData).then((userdata) => {
-      let userinfo = JSON.parse(userdata || "{}")
-      console.log('userinfo', userinfo)
-      if (Object.keys(userinfo).length == 0) {
-        setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
-      } else {
-        setdata({ type: StorageTypes.userData, data: userinfo})
-      }            
-    })
+    setUserInfo()
   },[])
 
-    return (
+    
+  const setUserInfo = async () => {
+    let userdata = await getCachedData(StorageTypes.userData)
+    let userinfo = JSON.parse(userdata || "{}")
+    if (Object.keys(userinfo).length == 0) {
+      setCachedData(StorageTypes.userData, JSON.stringify(getdata({type : StorageTypes.userData})))          
+    } else {
+      setdata({ type: StorageTypes.userData, data: userinfo})
+    }   
+  }
+
+  return (
        <SafeAreaView> 
         <View className='bg-gray h-full flex flex-col justify-between'>
           <AnduroTypeHeaderVW/>
