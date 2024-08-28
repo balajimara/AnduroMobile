@@ -127,7 +127,7 @@ const AnduroSeedsVC = (props: any) => {
           </View>
         </View>
 
-        <View className="p-5">
+        <View className="p-5 pt-0">
           <Text className="font-geistregular text-center text-headingcolor text-xs font-normal mb-5">
             You’ll be asked to confirm the positions in the next step. Make sure you’ve backed these
             up somewhere
