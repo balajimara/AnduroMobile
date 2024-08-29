@@ -17,8 +17,8 @@ const ConfirmSeedItemVW = (props: confirmseedItemProps) => {
     <TouchableOpacity  onPress={changeBgColor}>
     <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
     <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl w-full">
-    <View><Text className="text-walletLight text-sm mb-1 font-geistregular">{mnemonicKey}</Text></View>
-    <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
+    <View><Text style={styles.headtitle}>{mnemonicKey}</Text></View>
+    <View className="py-1.5 w-14 border-transparent border"><Text style={styles.subheadtitle}>x</Text></View>
     </View>
   </ListItem>
  </TouchableOpacity>
@@ -40,6 +40,17 @@ const styles = StyleSheet.create({
     borderRadius:12,
     padding:10,
     marginBottom:10
+  },
+  headtitle: {
+    color:'#FFF2F0',
+    fontSize: 16,
+    marginBottom:1,
+    fontFamily: 'Geist-Regular'
+  },
+  subheadtitle: {
+    color:'#FAFAFA',
+    fontSize:16,
+    textAlign:"center"
   }
 });
 
