@@ -131,7 +131,7 @@ const AnduroSeedsVC = (props: any) => {
                 onPress={() => copyToClipboard()}
               />
             </View>
-            {/* <View className="w-1/2 pl-1.5">
+            <View className="w-1/2 pl-1.5">
               <Button
                 className="w-full bg-popupclr h-9 rounded-3xl text-lightgray"
                 icon={{
@@ -149,7 +149,7 @@ const AnduroSeedsVC = (props: any) => {
                 titleStyle={{ fontFamily: "Geist-Regular", fontSize: 12, opacity: 0.55 }}
                 onPress={() => downloadMnemonic()}
               />
-            </View> */}
+            </View>
           </View>
         </View>
 
