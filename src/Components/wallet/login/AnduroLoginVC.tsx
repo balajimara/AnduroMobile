@@ -22,7 +22,7 @@ const AnduroLoginVC = (props: any) => {
        <View>
         <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
         <View className="relative">
-        <View className="absolute top-3.5 right-4 z-10"><Icon name='eye-slash' color="#FAFAFA" /></View>
+        <View className="absolute top-3.5 right-4 z-10 opacity-70"><Icon name='eye-slash' color="#FAFAFA" /></View>
         <View className="bg-popupclr h-11 pr-8 rounded-lg">
          <Input placeholder='Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
         </View>
@@ -58,19 +58,7 @@ const styles = StyleSheet.create({
   inputOne: {
     borderBottomWidth:0,
     borderRadius:8,
-  },
-  icon: {
-    color: '#fff',
-    fontSize: 14,
-  },
-  subtitleView: {
-    color: '#000',
-    padding:0
-  },
-  listView: {
-    backgroundColor: 'transparent',
-    padding:0,
-    marginBottom:5
+    paddingLeft:10
   }
 });
 
