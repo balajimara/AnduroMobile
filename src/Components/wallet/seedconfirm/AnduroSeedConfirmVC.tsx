@@ -112,16 +112,17 @@ const AnduroSeedConfirmVC = (props:any) => {
           </View>
           <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={visible1} onBackdropPress={toggleDialog1} animation={"slideInUp"}>
            <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
-           <View className="mb-0.5"> 
-            <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold">Warning</Text>
+           <View className="mb-1"> 
+            <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold w-44">Do you want to review the recovery keys?</Text>
            </View>
-           <View className="opacity-70 pt-2">
-            <Text className="font-geistregular text-headingcolor text-xs">Warning: Due to security reasons, we strongly recommend you set the password for the wallet</Text>
+           <View className="opacity-70 pt-2 pb-4">
+            <Text className="font-geistregular text-headingcolor text-xs mb-4">A secret recovery phrase is a set of words that correspond to numbers. These numbers make up a seed integer that generates all of the private keys in your wallet.</Text>
+            <Text className="font-geistregular text-headingcolor text-xs">Each address for every crypto has its own private key. Private keys are used to authorize transactions and prove ownership of your funds.</Text>
            </View>
            <View className="flex-row flex-wrap pt-4">
             <View className="w-1/2 pr-1">
                 <Button className="w-full"
-                  title="Continue"
+                  title="No thanks"
                   buttonStyle={{
                     backgroundColor: 'transparent',
                     borderWidth:1,
@@ -129,12 +130,12 @@ const AnduroSeedConfirmVC = (props:any) => {
                     borderRadius: 0,
                     height: 40,
                   }}
-                  titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }} 
+                  titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }} 
                 />
             </View>
             <View className="w-1/2 pl-1">
             <Button className="w-full"
-              title="Close"
+              title="Yes, let's review"
               buttonStyle={{
                 backgroundColor: '#E8705C',
                 borderWidth:1,
@@ -142,7 +143,7 @@ const AnduroSeedConfirmVC = (props:any) => {
                 borderRadius: 0,
                 height: 40,
               }}
-              titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
+              titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }}
             />
             </View>
            </View>
