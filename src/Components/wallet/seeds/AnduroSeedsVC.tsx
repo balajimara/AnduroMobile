@@ -26,6 +26,24 @@ const AnduroSeedsVC = (props: any) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(mnemonic.join(" "))
+    Navigation.dismissAllOverlays()
+    Navigation.showOverlay({
+      component: {
+        name: "Toast",
+        options: {
+          layout: {
+            componentBackgroundColor: "transparent",
+          },
+          overlay: {
+            interceptTouchOutside: false,
+          },
+        },
+        passProps: {
+          type: "success",
+          message: `${t("copymnemonic")}`,
+        },
+      },
+    })
   }
 
   const downloadMnemonic = async () => {

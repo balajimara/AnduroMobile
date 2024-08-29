@@ -14,7 +14,10 @@ const AnduroSeedConfirmVC = (props:any) => {
     const [shufflemnemonicKey, setShuffleMnemoniKey] = useState<string[]>(_.shuffle(mnemonic.split(" ")))
     const [selectedmnemonicKey, setSelectedMnemoniKey] = useState<string[]>([])
     const [isDisabled, setIsDisabled] = useState(true)
-    console.log("shufflemnemonicKey", shufflemnemonicKey,mnemonicKey )
+    React.useEffect(() => {   
+      console.log('inside selected')
+    }, [selectedmnemonicKey])
+
     const toggleDialog1 = () => {
       setVisible1(!visible1);
     };
@@ -28,6 +31,7 @@ const AnduroSeedConfirmVC = (props:any) => {
    * @param index -selected index
    */
   const selectAction = (index: number) => {
+    console.log('inside selectAction', index)
     // checking if the key has already been selected or not; if the key has not been selected, add selected keys.
     if (!selectedmnemonicKey.includes(shufflemnemonicKey[index])) {
       let selectedMnemonicNew = selectedmnemonicKey
@@ -38,12 +42,12 @@ const AnduroSeedConfirmVC = (props:any) => {
       // Remove it from the selected keys.
       let mnemonicKeys: string[] = []
       let isFound = false
-      for (let i = 0; i < mnemonic.selectedMnemonic.length; i++) {
-        const key = mnemonic.selectedMnemonic[i]
-        if (key !== mnemonic.shuffledMnemonic[index]) {
+      for (let i = 0; i < selectedmnemonicKey.length; i++) {
+        const key = selectedmnemonicKey[i]
+        if (key !== shufflemnemonicKey[index]) {
           mnemonicKeys.push(key)
         } else {
-          if (key == mnemonic.shuffledMnemonic[index]) {
+          if (key == shufflemnemonicKey[index]) {
             if (isFound) {
               mnemonicKeys.push(key)
             } else {
@@ -74,10 +78,8 @@ const AnduroSeedConfirmVC = (props:any) => {
               mnemonicKey={val} 
               position={selectedmnemonicKey.indexOf(val) + 1}
               selectAction={() => selectAction(i)}
-              key={i}
-              >
-
-              </ConfirmSeedItemVW>
+              index={i}
+              />
             ))}   
             </View>
             </ScrollView>
@@ -105,6 +107,7 @@ const AnduroSeedConfirmVC = (props:any) => {
                 height: 48,
               }}
               titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
+              disabled={isDisabled}
             />
           </View>
           <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={visible1} onBackdropPress={toggleDialog1} animation={"slideInUp"}>

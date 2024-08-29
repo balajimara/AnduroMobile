@@ -35,7 +35,7 @@ const AnduroCreateVC = (props: any) => {
     if (!validator.isLength(value, { min: 3, max: 50 })) {
       setToastMessage(t("walletnameminmax"))
       setIsShownToast(true)
-      setToasttype("success")
+      setToasttype("error")
       return false
     }
     setWalletname(value)

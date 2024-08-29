@@ -1,28 +1,32 @@
 import { View, StyleSheet, TouchableOpacity } from "react-native"
 import { Text, ListItem } from "@rneui/themed"
+import { useState } from "react"
+import React from "react"
 
 interface confirmseedItemProps {
   mnemonicKey: string
-  position?: number
-  selectAction: number
-  key: number
+  position: number
+  selectAction: () => void,
+  index:number
 }
 
 const ConfirmSeedItemVW = (props: confirmseedItemProps) => {
-  const { mnemonicKey, position, selectAction } = props
+  const { mnemonicKey, position, selectAction, index } = props
+  console.log('positionitem', position)
+  const [positionval] = useState<number>(position)
+  React.useEffect(() => {
+    console.log(positionval)
+  },[positionval])
   const changeBgColor = () => {
     styles.wrapper.backgroundColor = "#2E2825";
   };
   return (
-    <TouchableOpacity  onPress={changeBgColor}>
-    <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
+    <ListItem style={styles.subtitleView} containerStyle={styles.listView} key={index}  onPress={selectAction}>
     <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl w-full">
     <View><Text style={styles.headtitle}>{mnemonicKey}</Text></View>
-    <View className="py-1.5 w-14 border-transparent border"><Text style={styles.subheadtitle}>x</Text></View>
+    <View className="py-1.5 w-14 border-transparent border"><Text style={styles.subheadtitle}> {positionval > 0 ? positionval : "X"}</Text></View>
     </View>
   </ListItem>
- </TouchableOpacity>
-
   )
 }
 
