@@ -11,6 +11,10 @@ import * as bip39 from 'bip39';
 const AnduroImportVC = (props: any) => {
   const {t} = useTranslation()
   const [mnemonic, setMnemonic] = React.useState<string[]>([]);
+  const [isShownToast, setIsShownToast] = React.useState<boolean>(false);
+  const [toasttype, setToasttype] = React.useState<string>("");
+  const [toastmessage, setToastMessage] = React.useState<string>("");
+
 
   const handleFileUpload = async () => {
       const pickedFile = await DocumentPicker.pickSingle({
@@ -22,10 +26,10 @@ const AnduroImportVC = (props: any) => {
         if (Array.isArray(parsedWords) && parsedWords.length === 12) {
           setMnemonic(parsedWords);
         } else {
-          console.error("Invalid JSON Format,Expected an array of 12 words");
+          showToast(t("invalidjsonformat"), "error");
         }
       } catch (error) {
-        console.error("Invalid JSON file Format");
+        showToast(t("invalidjsonfile"), "error");
       }
   };
 
@@ -36,18 +40,17 @@ const AnduroImportVC = (props: any) => {
     setMnemonic(updatedWords);
   };
 
-  useEffect(() => {
-    setMnemonic(Array(12).fill(""));
-  }, []);
 
   const validateMnemonic = () => {
     const isValid = bip39.validateMnemonic(mnemonic.join(" "))
     if (!isValid) {
-      mnemonic.some((word: string) => word.trim() === "")
-      ? console.error("Enter your mnemonic secret phrase")
-      : console.error("Invalid seed phrase, please try again")
-      return
+      const errorMessage = mnemonic.some((word: string) => word.trim() === "")
+        ? t("mnemonic")
+        : t("invalidseedphrase");
+      showToast(errorMessage, "error");
+      return;
     }
+    Navigation.dismissAllOverlays();
     Navigation.push(props.componentId, {
       component: {
         name: 'AnduroCreate',
@@ -57,6 +60,40 @@ const AnduroImportVC = (props: any) => {
       }
     });
   };
+
+  const showToast = (message: string, type: string) => {
+    setToastMessage(message);
+    setToasttype(type);
+    setIsShownToast(true);
+  };
+
+  React.useEffect(() => {
+    if (isShownToast) {
+      Navigation.dismissAllOverlays();
+      Navigation.showOverlay({
+        component: {
+          name: "Toast",
+          options: {
+            layout: {
+              componentBackgroundColor: "transparent",
+            },
+            overlay: {
+              interceptTouchOutside: false,
+            },
+          },
+          passProps: {
+            type: toasttype,
+            message: toastmessage,
+          },
+        },
+      });
+      setIsShownToast(false);
+    }
+  }, [isShownToast]);
+
+  React.useEffect(() => {
+    setMnemonic(Array(12).fill(""));
+  }, []);
 
   return (
     <SafeAreaView>
