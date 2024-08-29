@@ -1,11 +1,14 @@
 import { Text } from "@rneui/base"
 import { useEffect, useState } from "react"
-import { Button, Dimensions, SafeAreaView, View } from "react-native"
+import { Button, Dimensions, FlatList, SafeAreaView, View } from "react-native"
 import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
 import route from "../../../Route/Route"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
 import AnduroHeaderVC from "../../header/AnduroHeader"
-import SkeletonPlaceholder from "react-native-skeleton-placeholder"
+import BalanceSkeleton from "../../../Common/Skeleton/Dashboard/BalanceSkeleton"
+import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
+import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
+
 
 const AnduroDashboardVC = (props: any) => {
   useEffect(() => {
@@ -47,12 +50,22 @@ const AnduroDashboardVC = (props: any) => {
     <SafeAreaView className="bg-gray flex flex-1">
       <View className="m-4">
         <View className="bg-popupclr rounded-xl p-3.5">
-          <SkeletonPlaceholder backgroundColor={"#40322e"} highlightColor={"#785d55"}>
-            <SkeletonPlaceholder.Item flexDirection="row" alignItems="center">
-              <SkeletonPlaceholder.Item width={60} height={60} borderRadius={50} />
-            </SkeletonPlaceholder.Item>
-          </SkeletonPlaceholder>
+          <View className="py-10">
+              <BalanceSkeleton />
+          </View>
+          <ActionSkeleton />
         </View>
+
+        {
+            Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((item, i) => (
+                <FlatList
+                    data={Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}
+                    renderItem={({item}) => <ListSkeleton />}
+                    keyExtractor={item => item.toString()}
+                />
+            ))
+        }
+    
       </View>
     </SafeAreaView>
   )
