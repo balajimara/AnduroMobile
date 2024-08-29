@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
   subheadtitle: {
     color:'#FAFAFA',
     fontSize:16,
-    textAlign:"center"
+    textAlign:"center",
+    opacity:0.30
   }
 });
 
