@@ -63,9 +63,9 @@ const AnduroImportVC = (props: any) => {
     <SafeAreaView>
   <View className="bg-gray h-full flex flex-col justify-between">
       <View className="p-14 pb-0 px-4">
-        <View className="mb-3 px-5 relative">
+        <View className="m-auto mb-3 px-5 relative w-80">
           <Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("walletphrase")}</Text>
-          </View>
+        </View>
         <View className="text-center mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("importwallet")}</Text>
           </View>
