@@ -19,7 +19,7 @@ const Toast = function (props: any) {
     <View className="fixed top-3 left-5">
       <View className={`${toastclass} w-11/12 rounded-lg p-5 pr-8`}>
         <Text className="text-geistregular text-lightgray">{message}</Text>
-        <View className="absolute right-3 top-1.5">
+        <View className="absolute right-2 top-1.5">
          <TouchableOpacity  onPress={() => Navigation.dismissOverlay(props.componentId)}>
           <Text><Icon name='close' size={20} color="#FAFAFA" /></Text>
          </TouchableOpacity>
