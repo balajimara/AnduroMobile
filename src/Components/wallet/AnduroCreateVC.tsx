@@ -52,14 +52,32 @@ const AnduroCreateVC = (props: any) => {
             passProps:{
               mnemonic:props.mnemonic,
               type:"import"
-            }
+            },
+            options: {
+              topBar: {
+                visible: false,
+              },
+              bottomTabs: {
+                visible: false,
+              },
+            },
           },
+
         })
       } else {
         Navigation.push(props.componentId, {
           component: {
             name: "AnduroSeeds",
+            options: {
+              topBar: {
+                visible: false,
+              },
+              bottomTabs: {
+                visible: false,
+              },
+            },
           },
+
         })
       }
     }

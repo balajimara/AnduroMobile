@@ -17,6 +17,14 @@ export const AnduroCreateTypeVC = (props: any) => {
     Navigation.push(props.componentId, {
       component: {
         name: type === "new" ? "AnduroWalletCreate" : "AnduroWalletImport",
+        options: {
+          topBar: {
+            visible: false,
+          },
+          bottomTabs: {
+            visible: false,
+          },
+        },
       },
     })
   }

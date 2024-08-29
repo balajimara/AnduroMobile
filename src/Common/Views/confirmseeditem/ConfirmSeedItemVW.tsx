@@ -11,20 +11,12 @@ interface confirmseedItemProps {
 }
 
 const ConfirmSeedItemVW = (props: confirmseedItemProps) => {
-  const { mnemonicKey, position, selectAction, index } = props
-  console.log('positionitem', position)
-  const [positionval] = useState<number>(position)
-  React.useEffect(() => {
-    console.log(positionval)
-  },[positionval])
-  const changeBgColor = () => {
-    styles.wrapper.backgroundColor = "#2E2825";
-  };
+  const { mnemonicKey, position, selectAction, index } = props 
   return (
-    <ListItem style={styles.subtitleView} containerStyle={styles.listView} key={index}  onPress={selectAction}>
+    <ListItem style={styles.subtitleView} containerStyle={styles.listView} onPress={selectAction}>
     <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl w-full">
-    <View><Text style={styles.headtitle}>{mnemonicKey}</Text></View>
-    <View className="py-1.5 w-14 border-transparent border"><Text style={styles.subheadtitle}> {positionval > 0 ? positionval : "X"}</Text></View>
+    <View><Text style={styles.headtitle}>{mnemonicKey.charAt(0).toUpperCase() + mnemonicKey.substring(1).toLowerCase()}</Text></View>
+    <View className="py-1.5 w-14 border-transparent border"><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
     </View>
   </ListItem>
   )

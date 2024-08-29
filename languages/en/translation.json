@@ -34,5 +34,9 @@
   "invalidjsonformat": "Invalid JSON Format,Expected an array of 12 words",
   "invalidjsonfile": "Invalid JSON file Format",
   "mnemonic":"Enter your mnemonic secret phrase",
-  "invalidseedphrase":"Invalid seed phrase, please try again"
+  "invalidseedphrase":"Invalid seed phrase, please try again",
+  "nothanks": "No thanks",
+  "letreview": "Yes, let's review",
+  "secretrecoverytext": "A secret recovery phrase is a set of words that correspond to numbers. These numbers make up a seed integer that generates all of the private keys in your wallet.",
+  "secretrecoverysubtext": "Each address for every crypto has its own private key. Private keys are used to authorize transactions and prove ownership of your funds."
 }

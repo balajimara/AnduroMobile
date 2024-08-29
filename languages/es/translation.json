@@ -29,5 +29,11 @@
   "characterlistFour": "At least 1 number (0-9)",
   "characterlistFive": "Make sure the passwords match",
   "confirmbackup": "Confirm your backup",
-  "copymnemonic": "Mnemonic has been copied successfully"
+  "copymnemonic": "Mnemonic has been copied successfully",
+  "signanduro": "Sign into Anduro Wallet",
+  "close": "Close",
+  "nothanks": "No thanks",
+  "letreview": "Yes, let's review",
+  "secretrecoverytext": "A secret recovery phrase is a set of words that correspond to numbers. These numbers make up a seed integer that generates all of the private keys in your wallet.",
+
 }
