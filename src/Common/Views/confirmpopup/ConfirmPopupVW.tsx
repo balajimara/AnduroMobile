@@ -7,14 +7,15 @@ import Icon from "react-native-vector-icons/FontAwesome"
 import { Navigation } from "react-native-navigation"
 
 interface confirmProps {
-    mnemonic: string[]
+    mnemonic: string
     onClose: () => void
     isopen: Boolean,
-    componentId: string
+    componentId?: string,
+    onRedirectPage: () => void
   }
   
 const confirmPopupVW = (props: confirmProps) => { 
-    const {mnemonic, onClose, isopen} = props
+    const {mnemonic, onClose, isopen, onRedirectPage, componentId} = props
     const {t} = useTranslation()
     const [isVisible, setIsVisible] = React.useState(false)
 
@@ -26,28 +27,10 @@ const confirmPopupVW = (props: confirmProps) => {
         }
       }, [isopen])
 
-      const gotoNewPassword = () => {
-        Navigation.push(props.componentId, {
-          component: {
-            name: "AnduroCreatePassword",
-            passProps: {
-              mnemonic: mnemonic,
-              type: "create"
-            },
-            options: {
-                topBar: {
-                  visible: false,
-                },
-                bottomTabs: {
-                  visible: false,
-                },
-              },
-          },
-        })
-      }
+  
 
     return (
-    <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={visible1} onBackdropPress={toggleDialog1} animation={"slideInUp"}>
+    <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={isVisible} onBackdropPress={() => onClose()} animation={"slideInUp"}>
     <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
     <View className="mb-1"> 
     <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold w-44">Do you want to review the recovery keys?</Text>
@@ -68,7 +51,7 @@ const confirmPopupVW = (props: confirmProps) => {
             height: 40,
         }}
         titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }} 
-        onPress={() => gotoNewPassword()}
+        onPress={() => onRedirectPage()}
         />
     </View>
     <View className="w-1/2 pl-1">
