@@ -1,62 +1,20 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { Navigation } from "react-native-navigation"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 const Toast = function (props: any) {
   const { message, type, componentId } = props
   return (
-    <View style={styles.root}>
-      <View style={styles.root}>
-        <Text style={styles.text}>{message}</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => Navigation.dismissOverlay(props.componentId)}
-        >
-          <Text style={styles.buttonText}>OK</Text>
-        </TouchableOpacity>
+    <View className="fixed top-3 left-5">
+      <View className="bg-toastred w-11/12 rounded-lg p-5 pr-8">
+        <Text className="text-geistregular text-lightgray">{message}</Text>
+        <View className="absolute right-3 top-1.5" onPress={() => Navigation.dismissOverlay(props.componentId)}>
+          <Text><Icon name='close' size={20} color="#FAFAFA" /></Text>
+        </View>
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: "column-reverse",
-  },
-  toast: {
-    elevation: 2,
-    flexDirection: "row",
-    height: 40,
-    margin: 16,
-    borderRadius: 20,
-    backgroundColor: "#000000",
-    alignItems: "center",
-    justifyContent: "space-between",
-    position: "absolute",
-  },
-  text: {
-    color: "white",
-    fontSize: 16,
-    marginLeft: 16,
-  },
-  button: {
-    marginRight: 16,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-})
-
-// Toast.options = {
-//   layout: {
-//     componentBackgroundColor: 'transparent',
-//   },
-//   overlay: {
-//     interceptTouchOutside: false,
-//   },
-// };
 
 export default Toast

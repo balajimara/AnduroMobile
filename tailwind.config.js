@@ -64,6 +64,7 @@ module.exports = {
         backgroundDark: "rgb(0 0 0 / 0.90)",
         headingcolor: "#968F8D",
         headingborder: "#3D2F2D",
+        toastred: "#BD362F",
       },
       backgroundImage: {
         checkboximage: "url('/public/assets/images/checkboxIcon.svg')",
