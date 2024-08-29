@@ -3,9 +3,18 @@ import { View, Text,SafeAreaView,StyleSheet,ScrollView} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, ListItem, Dialog } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
+import ConfirmSeedItemVW from '../../../Common/Views/confirmseeditem/ConfirmSeedItemVW';
+import _ from "lodash"
+
 
 const AnduroSeedConfirmVC = (props:any) => {
+    const { mnemonic } = props
     const [visible1, setVisible1] = useState(false);
+    const [mnemonicKey, setMnemoniKey] = useState(mnemonic.split(" "))
+    const [shufflemnemonicKey, setShuffleMnemoniKey] = useState<string[]>(_.shuffle(mnemonic.split(" ")))
+    const [selectedmnemonicKey, setSelectedMnemoniKey] = useState<string[]>([])
+    const [isDisabled, setIsDisabled] = useState(true)
+    console.log("shufflemnemonicKey", shufflemnemonicKey,mnemonicKey )
     const toggleDialog1 = () => {
       setVisible1(!visible1);
     };
@@ -13,6 +22,41 @@ const AnduroSeedConfirmVC = (props:any) => {
     const changeBgColor = () => {
         styles.wrapper.backgroundColor = "#2E2825";
       };
+
+    /**
+   * This function is used to select the seed key.
+   * @param index -selected index
+   */
+  const selectAction = (index: number) => {
+    // checking if the key has already been selected or not; if the key has not been selected, add selected keys.
+    if (!selectedmnemonicKey.includes(shufflemnemonicKey[index])) {
+      let selectedMnemonicNew = selectedmnemonicKey
+      selectedMnemonicNew.push(shufflemnemonicKey[index])   
+      setSelectedMnemoniKey(selectedMnemonicNew)
+      setIsDisabled(mnemonic !== selectedMnemonicNew.join(" "))
+    } else {
+      // Remove it from the selected keys.
+      let mnemonicKeys: string[] = []
+      let isFound = false
+      for (let i = 0; i < mnemonic.selectedMnemonic.length; i++) {
+        const key = mnemonic.selectedMnemonic[i]
+        if (key !== mnemonic.shuffledMnemonic[index]) {
+          mnemonicKeys.push(key)
+        } else {
+          if (key == mnemonic.shuffledMnemonic[index]) {
+            if (isFound) {
+              mnemonicKeys.push(key)
+            } else {
+              isFound = true
+            }
+          }
+        }
+      }
+      setSelectedMnemoniKey(mnemonicKeys)
+      setIsDisabled(true)
+    }
+  }
+
     return (
         <SafeAreaView>
          <View className="bg-gray h-full flex flex-col justify-between">
@@ -24,48 +68,17 @@ const AnduroSeedConfirmVC = (props:any) => {
           <View className="max-h-[60%]">
            <ScrollView>
            <View>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl w-full"  onPress={changeBgColor}>
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl group-hover:bg-backuphighlightbg w-full">
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl group-hover:bg-backuphighlightbg w-full">
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl group-hover:bg-backuphighlightbg w-full">
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl group-hover:bg-backuphighlightbg w-full">
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl group-hover:bg-backuphighlightbg w-full">
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
-               <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl group-hover:bg-backuphighlightbg w-full">
-                <View><Text className="text-walletLight text-sm mb-1 font-geistregular">Power</Text></View>
-                <View className="py-1.5 w-14 border-transparent border"><Text className="text-center text-sm text-lightgray">x</Text></View>
-               </View>
-              </ListItem>
+           {shufflemnemonicKey.length > 0 &&
+            shufflemnemonicKey.map((val: string, i: number) => (    
+              <ConfirmSeedItemVW 
+              mnemonicKey={val} 
+              position={selectedmnemonicKey.indexOf(val) + 1}
+              selectAction={() => selectAction(i)}
+              key={i}
+              >
+
+              </ConfirmSeedItemVW>
+            ))}   
             </View>
             </ScrollView>
             </View>

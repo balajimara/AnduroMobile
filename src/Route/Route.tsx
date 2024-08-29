@@ -1,27 +1,27 @@
-import { Navigation } from "react-native-navigation";
-import AnduroLandingVC from "../Components/wallet/landing/AnduroLandingVC";
-import AnduroCreateTypeVC from "../Components/wallet/createtype/AnduroCreateTypeVC";
-import AnduroSeedsVC from "../Components/wallet/seeds/AnduroSeedsVC";
-import AnduroCreatePasswordVC from "../Components/wallet/createpassword/AnduroCreatePasswordVC";
-import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConfirmVC";
-import AnduroCreateVC from "../Components/wallet/AnduroCreateVC";
-import AnduroImportVC from "../Components/wallet/import/AnduroImportVC";
-import AnduroLoginVC from "../Components/wallet/login/AnduroLoginVC";
-import AnduroCollectiblesVC from "../Components/tabs/collectibles/AnduroCollectiblesVC";
-import AnduroDashboardVC from "../Components/tabs/dashboard/AnduroDashboardVC";
-import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC";
-import AnduroMenuVC from "../Components/menu/AnduroMenuVC";
-import Toast from "../Common/Views/Toast";
-import AnduroHeaderVC from "../Components/header/AnduroHeader";
+import { Navigation } from "react-native-navigation"
+import AnduroLandingVC from "../Components/wallet/landing/AnduroLandingVC"
+import AnduroCreateTypeVC from "../Components/wallet/createtype/AnduroCreateTypeVC"
+import AnduroSeedsVC from "../Components/wallet/seeds/AnduroSeedsVC"
+import AnduroCreatePasswordVC from "../Components/wallet/createpassword/AnduroCreatePasswordVC"
+import AnduroSeedConfirmVC from "../Components/wallet/seedconfirm/AnduroSeedConfirmVC"
+import AnduroCreateVC from "../Components/wallet/AnduroCreateVC"
+import AnduroImportVC from "../Components/wallet/import/AnduroImportVC"
+import AnduroLoginVC from "../Components/wallet/login/AnduroLoginVC"
+import AnduroCollectiblesVC from "../Components/tabs/collectibles/AnduroCollectiblesVC"
+import AnduroDashboardVC from "../Components/tabs/dashboard/AnduroDashboardVC"
+import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC"
+import AnduroMenuVC from "../Components/menu/AnduroMenuVC"
+import Toast from "../Common/Views/Toast"
+import AnduroHeaderVC from "../Components/header/AnduroHeader"
 
-Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC);
-Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC);
-Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC);
-Navigation.registerComponent("AnduroCreate", () => AnduroCreateVC);
-Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC);
-Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC);
-Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC);
-Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC);
+Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC)
+Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC)
+Navigation.registerComponent("AnduroSeeds", () => AnduroSeedsVC)
+Navigation.registerComponent("AnduroCreate", () => AnduroCreateVC)
+Navigation.registerComponent("AnduroCreatePassword", () => AnduroCreatePasswordVC)
+Navigation.registerComponent("AnduroSeedConfirm", () => AnduroSeedConfirmVC)
+Navigation.registerComponent("AnduroWalletCreate", () => AnduroCreateVC)
+Navigation.registerComponent("AnduroWalletImport", () => AnduroImportVC)
 Navigation.registerComponent("AnduroLogin", () => AnduroLoginVC)
 Navigation.registerComponent("AnduroHeader", () => AnduroHeaderVC)
 Navigation.registerComponent("collectible", () => AnduroCollectiblesVC)
@@ -29,7 +29,6 @@ Navigation.registerComponent("dashboard", () => AnduroDashboardVC)
 Navigation.registerComponent("apps", () => AnduroAppsVC)
 Navigation.registerComponent("menu", () => AnduroMenuVC)
 Navigation.registerComponent("Toast", () => Toast)
-
 
 /**
  * default root before login
@@ -46,13 +45,13 @@ const privacy = {
               setRoot: {
                 waitForRender: true,
               },
-            }
+            },
           },
         },
       },
     ],
   },
-};
+}
 
 /**
  * default crete type page
@@ -69,7 +68,7 @@ const login = {
               visible: false,
             },
             bottomTabs: {
-              visible: false
+              visible: false,
             },
             animations: {
               setRoot: {
@@ -81,10 +80,10 @@ const login = {
       },
     ],
   },
-};
+}
 
 /**
- * default crete type page 
+ * default crete type page
  */
 
 const afterPrivacy = {
@@ -98,7 +97,7 @@ const afterPrivacy = {
               visible: false,
             },
             bottomTabs: {
-              visible: false
+              visible: false,
             },
             animations: {
               setRoot: {
@@ -110,84 +109,82 @@ const afterPrivacy = {
       },
     ],
   },
-};
+}
 
 const afterLogin = {
-    sideMenu:{
-      left:{
-        component:{
-            name:'menu',
-        }
+  sideMenu: {
+    left: {
+      component: {
+        name: "menu",
       },
-      center: {
-        bottomTabs: {
-          children: [
-            {
-              stack: {
-                id: "collectible",
-                children: [
-                  {
-                    component: {
-                      name: "collectible",
-                    },
+    },
+    center: {
+      bottomTabs: {
+        children: [
+          {
+            stack: {
+              id: "collectible",
+              children: [
+                {
+                  component: {
+                    name: "collectible",
                   },
-                ],
-                options: {
-                  bottomTab: {
-                    icon: require("./../assets/images/tab/collectible.png"),
-                    selectedIcon: require("./../assets/images/tab/collectible_active.png"),
-                  }
-                }
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require("./../assets/images/tab/collectible.png"),
+                  selectedIcon: require("./../assets/images/tab/collectible_active.png"),
+                },
               },
             },
-            {
-              stack: {
-                id: "dashboard",
-                children: [
-                  {
-                    component: {
-                      name: "dashboard",
-                    },
+          },
+          {
+            stack: {
+              id: "dashboard",
+              children: [
+                {
+                  component: {
+                    name: "dashboard",
                   },
-                ],
-                options: {
-                  bottomTab: {
-                    icon: require("./../assets/images/tab/dashboard.png"),
-                    selectedIcon: require("./../assets/images/tab/dashboard_active.png"),
-                  }
-                }
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require("./../assets/images/tab/dashboard.png"),
+                  selectedIcon: require("./../assets/images/tab/dashboard_active.png"),
+                },
               },
             },
-            {
-              stack: {
-                id: "apps",
-                children: [
-                  {
-                    component: {
-                      name: "apps",
-                    },
+          },
+          {
+            stack: {
+              id: "apps",
+              children: [
+                {
+                  component: {
+                    name: "apps",
                   },
-                ],
-                options: {
-                  bottomTab: {
-                    icon: require("./../assets/images/tab/apps.png"),
-                    selectedIcon: require("./../assets/images/tab/apps_active.png"),
-                  }
-                }
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require("./../assets/images/tab/apps.png"),
+                  selectedIcon: require("./../assets/images/tab/apps_active.png"),
+                },
               },
             },
-          ],
-        },
-      }
-    }
-};
-
+          },
+        ],
+      },
+    },
+  },
+}
 
 const route = {
-  beforeLogin : privacy,
+  beforeLogin: privacy,
   login: login,
   afterLogin,
-  afterPrivacy
-
-};
-export default route;
+  afterPrivacy,
+}
+export default route
