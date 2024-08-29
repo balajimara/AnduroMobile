@@ -65,7 +65,7 @@ const AnduroSeedConfirmVC = (props:any) => {
            <View className="mb-10">
             <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
            </View>
-          <View className="max-h-[65%] pb-10">
+          <View className="max-h-[65%] pb-14">
            <ScrollView>
            <View>
            {shufflemnemonicKey.length > 0 &&
