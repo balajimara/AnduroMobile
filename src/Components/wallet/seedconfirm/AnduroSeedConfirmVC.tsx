@@ -3,14 +3,14 @@ import { View, Text,SafeAreaView,StyleSheet,ScrollView} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
-import ConfirmSeedItemVW from '../../../Common/Views/confirmseeditem/ConfirmSeedItemVW';
 import _ from "lodash"
 import { Navigation } from 'react-native-navigation';
+import ConfirmSeedItemVW from '../../../Common/Views/confirmseeditem/ConfirmSeedItemVW';
+import ConfirmPopupVW from '../../../Common/Views/confirmpopup/ConfirmPopupVW';
 
 
 const AnduroSeedConfirmVC = (props:any) => {
     const { mnemonic } = props
-    const [visible1, setVisible1] = useState(false);
     const [open, setOpen] = useState(false)
     const [isDisabled, setIsDisabled] = useState(true)
     const [mnemonicVal, setMnemonicVal] = React.useState<{
@@ -30,9 +30,7 @@ const AnduroSeedConfirmVC = (props:any) => {
       }
     }, [])
 
-    const toggleDialog1 = () => {
-      setVisible1(!visible1);
-    };
+   
     const {t} = useTranslation() 
 
     /**
@@ -96,6 +94,27 @@ const AnduroSeedConfirmVC = (props:any) => {
     })
   }
 
+  const gotoNewPassword = () => {
+    setOpen(false)
+    Navigation.push(props.componentId!, {
+      component: {
+        name: "AnduroCreatePassword",
+        passProps: {
+          mnemonic: mnemonic,
+          type: "create"
+        },
+        options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
+          },
+      },
+    })
+  }
+
   return (
       <SafeAreaView>
         <View className="bg-gray h-full flex flex-col justify-between">
@@ -133,7 +152,7 @@ const AnduroSeedConfirmVC = (props:any) => {
               marginBottom:15
             }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
-            onPress={toggleDialog1}
+            onPress={() => { setOpen(true) }}
           />
           <Button className="w-full"
             title="Continue"
@@ -147,44 +166,7 @@ const AnduroSeedConfirmVC = (props:any) => {
             onPress={handleNavigation}
           />
         </View>
-        <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={visible1} onBackdropPress={toggleDialog1} animation={"slideInUp"}>
-          <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
-          <View className="mb-1"> 
-          <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold w-44">Do you want to review the recovery keys?</Text>
-          </View>
-          <View className="opacity-70 pt-2 pb-4">
-          <Text className="font-geistregular text-headingcolor text-xs mb-4">A secret recovery phrase is a set of words that correspond to numbers. These numbers make up a seed integer that generates all of the private keys in your wallet.</Text>
-          <Text className="font-geistregular text-headingcolor text-xs">Each address for every crypto has its own private key. Private keys are used to authorize transactions and prove ownership of your funds.</Text>
-          </View>
-          <View className="flex-row flex-wrap pt-4">
-          <View className="w-1/2 pr-1">
-              <Button className="w-full"
-                title="No thanks"
-                buttonStyle={{
-                  backgroundColor: 'transparent',
-                  borderWidth:1,
-                  borderColor:'#514e4e',
-                  borderRadius: 0,
-                  height: 40,
-                }}
-                titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }} 
-              />
-          </View>
-          <View className="w-1/2 pl-1">
-          <Button className="w-full"
-            title="Yes, let's review"
-            buttonStyle={{
-              backgroundColor: '#E8705C',
-              borderWidth:1,
-              borderColor: '#E8705C',
-              borderRadius: 0,
-              height: 40,
-            }}
-            titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }}
-          />
-          </View>
-          </View>
-        </Dialog>
+        <ConfirmPopupVW  mnemonic={mnemonic} isopen={open} onClose={() => handleClosePopup()} onRedirectPage={() => gotoNewPassword()}/>
         </View>
       </SafeAreaView> 
   )
