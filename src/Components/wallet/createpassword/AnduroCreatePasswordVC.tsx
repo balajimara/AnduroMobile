@@ -9,7 +9,7 @@ const AnduroCreatePasswordVC = () => {
     const toggleDialog1 = () => {
       setVisible1(!visible1);
     };
-    const {t} = useTranslation() 
+    const {t} = useTranslation()
     const list = [
   {
     name: 'Amy Farha',
@@ -36,7 +36,7 @@ const AnduroCreatePasswordVC = () => {
             <View className="relative">
             <View className="absolute top-3.5 right-4 z-10"><Icon name='eye-slash' color="#FAFAFA" /></View>
             <View className="bg-popupclr h-11 pr-8 rounded-lg">
-             <Input placeholder='Enter Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
+             <Input placeholder='Enter Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} />
             </View>
             </View>
            </View>
@@ -45,24 +45,24 @@ const AnduroCreatePasswordVC = () => {
             <View className="relative">
             <View className="absolute top-3.5 right-4 z-10"><Icon name='eye-slash' color="#FAFAFA" /></View>
             <View className="bg-popupclr h-11 pr-8 rounded-lg">
-             <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} onChangeText={(value) => { setWalletname(value) }}/>
+             <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} />
             </View>
             </View>
            </View>
            <View className="opacity-40 mt-8">
               <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
                <Text className="text-list text-sm mb-1 font-geistregular"><Icon name='check' color="#9AA2A7" /> {t("characterlistOne")}</Text>
-              </ListItem> 
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>  
+              </ListItem>
+              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
                <Text className="text-list text-sm mb-1 font-geistregular"><Icon name='check' color="#9AA2A7" /> {t("characterlistTwo")}</Text>
               </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>  
+              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
                <Text className="text-list text-sm mb-1 font-geistregular"><Icon name='check' color="#9AA2A7" /> {t("characterlistThree")}</Text>
               </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>  
+              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
                <Text className="text-list text-sm mb-1 font-geistregular"><Icon name='check' color="#9AA2A7" /> {t("characterlistFour")}</Text>
               </ListItem>
-              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>  
+              <ListItem style={styles.subtitleView} containerStyle={styles.listView}>
                <Text className="text-list text-sm mb-1 font-geistregular"><Icon name='check' color="#9AA2A7" /> {t("characterlistFive")}</Text>
               </ListItem>
             </View>
@@ -91,9 +91,9 @@ const AnduroCreatePasswordVC = () => {
               titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
             />
           </View>
-          <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={visible1} onBackdropPress={toggleDialog1} animation={"slideInUp"}>
+          <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={visible1} onBackdropPress={toggleDialog1}>
            <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
-           <View className="mb-0.5"> 
+           <View className="mb-0.5">
             <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold">Warning</Text>
            </View>
            <View className="opacity-70 pt-2">
@@ -110,7 +110,7 @@ const AnduroCreatePasswordVC = () => {
                     borderRadius: 0,
                     height: 40,
                   }}
-                  titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }} 
+                  titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }}
                 />
             </View>
             <View className="w-1/2 pl-1">
@@ -129,7 +129,7 @@ const AnduroCreatePasswordVC = () => {
            </View>
           </Dialog>
          </View>
-        </SafeAreaView> 
+        </SafeAreaView>
     )
 }
 

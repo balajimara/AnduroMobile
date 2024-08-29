@@ -18,24 +18,18 @@ const AnduroCreateVC = (props: any) => {
   const [toasttype, setToasttype] = useState<string>("")
   const [toastmessage, setToastMessage] = useState<string>("")
   const [walletname, setWalletname] = useState<string>("")
-  React.useEffect(() => {
-    // console.log("dataaaaa", getdata({ type: StorageTypes.userData}))
-  })
+
   const validateWalletName = (value: string) => {
     if (
       validator.isEmpty(value, {
         ignore_whitespace: true,
       })
     ) {
-      setToastMessage(t("walletnameempty"))
-      setIsShownToast(true)
-      setToasttype("error")
+      showToast(t("walletnameempty"), "error");
       return false
     }
     if (!validator.isLength(value, { min: 3, max: 50 })) {
-      setToastMessage(t("walletnameminmax"))
-      setIsShownToast(true)
-      setToasttype("error")
+      showToast(t("walletnameminmax"), "error");
       return false
     }
     setWalletname(value)
@@ -55,6 +49,10 @@ const AnduroCreateVC = (props: any) => {
         Navigation.push(props.componentId, {
           component: {
             name: "AnduroCreatePassword",
+            passProps:{
+              mnemonic:props.mnemonic,
+              type:"import"
+            }
           },
         })
       } else {
@@ -64,27 +62,38 @@ const AnduroCreateVC = (props: any) => {
           },
         })
       }
-    } else {
-      Navigation.dismissAllOverlays()
-      Navigation.showOverlay({
-        component: {
-          name: "Toast",
-          options: {
-            layout: {
-              componentBackgroundColor: "transparent",
-            },
-            overlay: {
-              interceptTouchOutside: false,
-            },
-          },
-          passProps: {
-            type: toasttype,
-            message: toastmessage,
-          },
-        },
-      })
     }
   }
+    const showToast = (message: string, type: string) => {
+      setToastMessage(message);
+      setToasttype(type);
+      setIsShownToast(true);
+    };
+
+    React.useEffect(() => {
+      if (isShownToast) {
+        Navigation.dismissAllOverlays();
+        Navigation.showOverlay({
+          component: {
+            name: "Toast",
+            options: {
+              layout: {
+                componentBackgroundColor: "transparent",
+              },
+              overlay: {
+                interceptTouchOutside: false,
+              },
+            },
+            passProps: {
+              type: toasttype,
+              message: toastmessage,
+            },
+          },
+        });
+        setIsShownToast(false);
+      }
+    }, [isShownToast]);
+
   return (
     <SafeAreaView>
       <View className="bg-gray h-full flex flex-col justify-between">
