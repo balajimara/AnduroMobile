@@ -103,8 +103,8 @@ const AnduroSeedsVC = (props: any) => {
             ))}   
             </View>
           </View>
-          <View className="flex-row flex-wrap mb-0">
-            <View className="w-1/2 pr-1.5">
+          <View className="w-full">
+            <View className="w-1/2 pr-1.5 m-auto">
               <Button
                 className="w-full bg-popupclr h-9 rounded-3xl text-lightgray"
                 icon={{

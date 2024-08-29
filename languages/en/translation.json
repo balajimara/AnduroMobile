@@ -30,6 +30,7 @@
   "characterlistFive": "Make sure the passwords match",
   "confirmbackup": "Confirm your backup",
   "copymnemonic": "Mnemonic has been copied successfully",
+  "signanduro": "Sign into Anduro Wallet",
   "invalidjsonformat": "Invalid JSON Format,Expected an array of 12 words",
   "invalidjsonfile": "Invalid JSON file Format",
   "mnemonic":"Enter your mnemonic secret phrase",

@@ -110,7 +110,7 @@ const AnduroCreatePasswordVC = () => {
                     borderRadius: 0,
                     height: 40,
                   }}
-                  titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }} 
+                  titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }} 
                 />
             </View>
             <View className="w-1/2 pl-1">
@@ -123,7 +123,7 @@ const AnduroCreatePasswordVC = () => {
                 borderRadius: 0,
                 height: 40,
               }}
-              titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
+              titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 14 }}
             />
             </View>
            </View>
