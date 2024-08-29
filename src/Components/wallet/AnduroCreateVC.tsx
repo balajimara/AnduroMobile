@@ -55,13 +55,31 @@ const AnduroCreateVC = (props: any) => {
         Navigation.push(props.componentId, {
           component: {
             name: "AnduroCreatePassword",
+            options: {
+              topBar: {
+                visible: false,
+              },
+              bottomTabs: {
+                visible: false,
+              },
+            },
           },
+          
         })
       } else {
         Navigation.push(props.componentId, {
           component: {
             name: "AnduroSeeds",
+            options: {
+              topBar: {
+                visible: false,
+              },
+              bottomTabs: {
+                visible: false,
+              },
+            },
           },
+         
         })
       }
     } else {

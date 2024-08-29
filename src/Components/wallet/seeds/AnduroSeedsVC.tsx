@@ -71,6 +71,14 @@ const AnduroSeedsVC = (props: any) => {
         passProps: {
           mnemonic: mnemonic.join(" "),
         },
+        options: {
+          topBar: {
+            visible: false,
+          },
+          bottomTabs: {
+            visible: false,
+          },
+        },
       },
     })
   }
