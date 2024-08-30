@@ -12,7 +12,7 @@ const AnduroSuccessVC = (props: any) => {
           source={require("../../assets/images/success.png")}
           className="w-56 m-auto"
          />
-         <View className="w-64 m-auto"><Text className="text-center text-3xl leading-10 font-geistsemibold text-lightgray">Your account has been created</Text></View>
+         <View className="w-80 m-auto"><Text className="text-center text-3xl leading-10 font-geistsemibold text-lightgray">Your account has been created</Text></View>
          <View className="opacity-50 mt-6"><Text className="text-center text-base font-geistregular text-lightgray">Let's write something here.</Text></View>
          </View>
         </View>
