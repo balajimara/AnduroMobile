@@ -57,23 +57,23 @@ export const getNetwork = (networkMode: string, networkType: string) => {
  * @param secretKey -secretKey
  */
 export const decrypteData = async (mnemonic: string, xPubKey: string, secretKey: string): Promise<string> => {
-  // try {
-  //   let data = mnemonic
-  //   if (xPubKey.length > 0) data = xPubKey
-  //   const decryptedResult = cryptoJS.AES.decrypt(data, secretKey).toString(cryptoJS.enc.Utf8)
-  //   if (xPubKey.length > 0) return decryptedResult
-  //   if (bip39.validateMnemonic(decryptedResult)) {
-  //     return decryptedResult
-  //   } else {
-  //     return ""
-  //   }
-  // } catch (error) {
-  //   return ""
-  // }
-  let key = await Aes.pbkdf2(secretKey, '', 5000 , 256, 'sha256')
-  let iv = await Aes.randomKey(16)
-  let decrypteInfo = await Aes.decrypt(xPubKey, key, iv, "aes-256-cbc")
-  return decrypteInfo;
+  
+  try {
+    let data = mnemonic
+    if (xPubKey.length > 0) data = xPubKey
+    let key = await Aes.pbkdf2(secretKey, 'salt', 5000 , 256, 'sha256')
+    let decryptedResult = await Aes.decrypt(data, key, "c935a0b1b9094849fe752d343d1f902d", "aes-256-cbc")
+    console.log("decryptedResult", decryptedResult)
+    if (xPubKey.length > 0) return decryptedResult
+    if (bip39.validateMnemonic(decryptedResult)) {
+      return decryptedResult
+    } else {
+      return ""
+    }
+  } catch (error) {
+    return ""
+  }
+ 
 }
 
 const getNativeCoins = (): string[] => {
@@ -184,9 +184,8 @@ export const getWallet = (
 // }
 
 export const encrypteData = async (dataToEncrypt: any, secretKey: string): Promise<string> => {
- let key = await Aes.pbkdf2(secretKey, '', 5000 , 256, 'sha256')
- let iv = await Aes.randomKey(16)
- let encrypteData = await Aes.encrypt(dataToEncrypt, key ,iv,"aes-256-cbc")
+ let key = await Aes.pbkdf2(secretKey, 'salt', 5000 , 256, 'sha256')
+ let encrypteData = await Aes.encrypt(dataToEncrypt, key ,"c935a0b1b9094849fe752d343d1f902d" ,"aes-256-cbc")
  return encrypteData
 }
 
@@ -263,6 +262,7 @@ export const getAlysAddress = (mnemonic: any, baseURL: string) => {
  */
 export const getMnemonicKey = async (password: string): Promise<string|null> => {
   if (password !== undefined && password != "") {
+    console.log('mnemonicstorage', await getCachedData(CachedDataTypes.mnemonic))
     const mnemonicKey = decrypteData(
       await getCachedData(CachedDataTypes.mnemonic) || "",
       "",
