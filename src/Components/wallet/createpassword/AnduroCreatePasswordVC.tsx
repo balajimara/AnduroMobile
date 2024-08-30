@@ -29,6 +29,7 @@ const AnduroCreatePasswordVC = (props:any) => {
   })
   const [showWarning, setShowWarning] = React.useState(false)
   const [showPassword, setShowPassword] = React.useState<boolean>(false)
+  const [showConfPassword, setShowConfPassword] = React.useState<boolean>(false)
   const [isValidPassword, setIsValidPassword] = React.useState<boolean>(false)
   const [passwordCharacters] = React.useState([
     {
@@ -127,15 +128,16 @@ const AnduroCreatePasswordVC = (props:any) => {
     setIsValidPassword(hasValidPassword)
   }
 
-  const handleContinueAction = () => {
+  const handleContinueAction = async () => {
     let mnemonicKey = props.mnemonic
     const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
-    let result = encryptXpubKey(mnemonicKey, "", networkList)
+    console.log('networkList', networkList, mnemonicKey)
+    let secPass = (isValidPassword) ? password.password : ""
+    let result = encryptXpubKey(mnemonicKey, secPass, networkList)
     if (isValidPassword) {
-      result =  encryptXpubKey(mnemonicKey, password.password, networkList)
-      mnemonicKey =  encrypteData(mnemonicKey, password.password)
+      mnemonicKey =  await encrypteData(mnemonicKey,secPass)
     }
-
+    console.log('mnemonicKey', mnemonicKey)
     setdata({ type: StorageTypes.xpubKeys, data: result })
     setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
     const mnemonic = getMnemonicKey(password.password)
@@ -167,7 +169,7 @@ const AnduroCreatePasswordVC = (props:any) => {
   return (
       <SafeAreaView>
        <View className="bg-gray h-full flex flex-col justify-between">
-        <View className="p-14 px-6">
+        <View className="p-18 px-6">
          <View className="text-center w-64 m-auto mb-4"><Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("createpassword")}</Text></View>
          <View className="mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
@@ -188,11 +190,11 @@ const AnduroCreatePasswordVC = (props:any) => {
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("confirmpassword")}</Text>
           <View className="relative">
           <View className="absolute top-3.5 right-4 z-10">
-            <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
-            ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
+            <TouchableOpacity onPress={()=> setShowConfPassword(!showConfPassword)}
+            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
-           <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showPassword} onChangeText={(value) => { handlePasswordChangeAction(value, "confirmpassword") }}/>
+           <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showConfPassword} onChangeText={(value) => { handlePasswordChangeAction(value, "confirmpassword") }}/>
           </View>
           </View>
          </View>
@@ -228,7 +230,7 @@ const AnduroCreatePasswordVC = (props:any) => {
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
-            // disabled={!isValidPassword}
+            disabled={!isValidPassword}
           />
         </View>
          {showWarning && (

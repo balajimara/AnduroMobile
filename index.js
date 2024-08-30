@@ -15,6 +15,8 @@ import { getCachedData } from "./src/Utility/AndurocommonUtils"
 import { CachedDataTypes, StorageTypes } from "./src/model/AnduroStorageModel"
 import "./shim.js"
 import { PermissionsAndroid } from "react-native"
+import  'text-encoding-polyfill'
+
 
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide()

@@ -8,8 +8,8 @@ import * as bitcoin from "bitcoinjs-lib"
 import * as chroma from "chromajs-lib"
 import networks from "../Config/network.json"
 import { deriveKeyFromMnemonic } from "@chainsafe/bls-keygen"
-import { getPublicKey } from "@noble/bls12-381"
 import { ethers } from "ethers"
+import { bls12_381 as bls } from '@noble/curves/bls12-381';
 import { GetWalletInfoParams } from "../model/AnduroWalletModel"
 import { NetworkListModel } from "../model/AnduroNetworkModel"
 // import AES from 'react-native-aes-crypto';
@@ -18,6 +18,9 @@ const bip32 = BIP32Factory(ecc)
 bitcoin.initEccLib(ecc)
 chroma.initEccLib(ecc)
 import cryptoJS from "react-native-crypto-js"
+import { NativeModules, Platform } from 'react-native';
+import Aes from 'react-native-aes-crypto'
+
 
 /**
  * This function is used to get chain instance
@@ -53,20 +56,24 @@ export const getNetwork = (networkMode: string, networkType: string) => {
  * @param xPubKey -extended public key
  * @param secretKey -secretKey
  */
-export const decrypteData = (mnemonic: string, xPubKey: string, secretKey: string): string => {
-  try {
-    let data = mnemonic
-    if (xPubKey.length > 0) data = xPubKey
-    const decryptedResult = cryptoJS.AES.decrypt(data, secretKey).toString(cryptoJS.enc.Utf8)
-    if (xPubKey.length > 0) return decryptedResult
-    if (bip39.validateMnemonic(decryptedResult)) {
-      return decryptedResult
-    } else {
-      return ""
-    }
-  } catch (error) {
-    return ""
-  }
+export const decrypteData = async (mnemonic: string, xPubKey: string, secretKey: string): Promise<string> => {
+  // try {
+  //   let data = mnemonic
+  //   if (xPubKey.length > 0) data = xPubKey
+  //   const decryptedResult = cryptoJS.AES.decrypt(data, secretKey).toString(cryptoJS.enc.Utf8)
+  //   if (xPubKey.length > 0) return decryptedResult
+  //   if (bip39.validateMnemonic(decryptedResult)) {
+  //     return decryptedResult
+  //   } else {
+  //     return ""
+  //   }
+  // } catch (error) {
+  //   return ""
+  // }
+  let key = await Aes.pbkdf2(secretKey, '', 5000 , 256, 'sha256')
+  let iv = await Aes.randomKey(16)
+  let decrypteInfo = await Aes.decrypt(xPubKey, key, iv, "aes-256-cbc")
+  return decrypteInfo;
 }
 
 const getNativeCoins = (): string[] => {
@@ -127,19 +134,22 @@ export const getWallet = (
 ): { address: string; xPublickey: string; xPrivateKey: string } => {
   if (params.networkType == "bitcoin" || params.networkType == "sidechain") {
     const seed = bip39.mnemonicToSeedSync(params.mnemonic)
+    console.log("seedname", seed)
     const root = bip32.fromSeed(seed, getNetwork(params.networkMode || "", params.networkType))
     let path = getDerivationPath(params.networkType)
+    console.log("seedpath", path)
     const account = root.derivePath(path).derive(params.changeIndex)
 
     const xPublickey = account.neutered().toBase58()
     const xPrivateKey = account.toBase58()
-
+    console.log("seedpath", xPublickey)
     const node = account.derive(params.derivationIndex)
 
     const btcAddress = getChainInstance(params.networkType).payments.p2wpkh({
       pubkey: node.publicKey,
       network: getNetwork(params.networkMode || "", params.networkType),
     })
+    console.log("btcAddress", btcAddress)
     return {
       address: btcAddress.address || "",
       xPublickey,
@@ -173,8 +183,11 @@ export const getWallet = (
 //   });
 // }
 
-export const encrypteData = (dataToEncrypt: any, secretKey: string): string => {
-  return cryptoJS.AES.encrypt(dataToEncrypt, secretKey).toString()
+export const encrypteData = async (dataToEncrypt: any, secretKey: string): Promise<string> => {
+ let key = await Aes.pbkdf2(secretKey, '', 5000 , 256, 'sha256')
+ let iv = await Aes.randomKey(16)
+ let encrypteData = await Aes.encrypt(dataToEncrypt, key ,iv,"aes-256-cbc")
+ return encrypteData
 }
 
 /**
@@ -228,13 +241,15 @@ export const encryptXpubKey = (
 export const getAlysAddress = (mnemonic: any, baseURL: string) => {
   let path = getDerivationPath("alys")
   const masterSecretKey = deriveKeyFromMnemonic(mnemonic, path)
+  console.log('secKey', masterSecretKey)
   const privateKey = Buffer.from(masterSecretKey).toString("hex")
-  const pubKey = Buffer.from(getPublicKey(masterSecretKey)).toString("hex")
-
+  const pubKey = Buffer.from(bls.getPublicKey(masterSecretKey)).toString("hex")
+  console.log('pubKey', pubKey)
   // const address = keccak256(pubKey)
   // let alysaddress = "0x" + address.substring(address.length - 40, address.length)
   const provider = new ethers.JsonRpcProvider(baseURL)
   const signer = new ethers.Wallet(privateKey, provider)
+  console.log('signer.address', signer.address)
   return {
     address: signer.address,
     xPublickey: pubKey,

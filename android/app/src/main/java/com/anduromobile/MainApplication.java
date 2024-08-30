@@ -13,6 +13,8 @@ import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import java.util.List;
 import java.util.Arrays;
  import com.oblador.vectoricons.VectorIconsPackage;
+ import com.tectiv3.aes.RCTAesPackage;
+
 
 
 public class MainApplication extends NavigationApplication {
@@ -32,6 +34,7 @@ public class MainApplication extends NavigationApplication {
           // packages.add(new MyReactNativePackage());
           new SplashScreenReactPackage();  //here
           new VectorIconsPackage();
+          new RCTAesPackage();
           return packages;
         }
 

@@ -15,7 +15,7 @@ const SeedItemVW = (props: seedItemProps) => {
     <View style={styles.boxView} className="flex-row w-full">
      <Text style={styles.titleView}>{`${index}`}</Text>
      <Text style={styles.subtitleView}>
-      {title}
+      {`${title.charAt(0).toUpperCase()}${title.substring(1).toLowerCase()}`}
      </Text>
     </View>
   )
