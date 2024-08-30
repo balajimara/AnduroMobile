@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text,SafeAreaView,StyleSheet,ScrollView} from 'react-native';
+import { View, Text,SafeAreaView,ScrollView} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -160,11 +160,13 @@ const AnduroSeedConfirmVC = (props:any) => {
             buttonStyle={{
               backgroundColor: '#E8705C',
               borderRadius: 8,
-              height: 48
+              height: 48,
+              opacity:1
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
             disabled={isDisabled}
+            disabledStyle={{backgroundColor:'#E8705C', color:'#fff',opacity:0.40}} 
             onPress={handleNavigation}
           />
         </View>
@@ -173,22 +175,5 @@ const AnduroSeedConfirmVC = (props:any) => {
       </SafeAreaView> 
   )
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    color: '#fff',
-    fontSize: 14,
-  },
-  subtitleView: {
-    color: '#000',
-    padding:0
-  },
-  listView: {
-    backgroundColor: '#231B19',
-    borderRadius:12,
-    padding:10,
-    marginBottom:10
-  }
-});
 
 export default AnduroSeedConfirmVC
