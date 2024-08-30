@@ -16,7 +16,7 @@ const Toast = function (props: any) {
    }
   })
   return (
-    <View className="fixed top-5 right-0 px-5">
+    <View className="absolute top-5 right-0 px-5">
       <View className={`${toastclass} w-80 rounded-lg p-5 pr-8`}>
         <Text className="text-geistregular text-lightgray">{message}</Text>
         <View className="absolute right-2 top-1.5">
