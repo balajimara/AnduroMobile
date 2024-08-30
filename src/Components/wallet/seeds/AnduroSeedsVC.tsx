@@ -111,7 +111,7 @@ const AnduroSeedsVC = (props: any) => {
             ))}   
             </View>
           </View>
-          <View className="w-full">
+          <View className="flex-row flex-wrap mb-0">
             <View className="w-1/2 pr-1.5 m-auto">
               <Button
                 className="w-full bg-popupclr h-9 rounded-3xl text-lightgray"
@@ -147,6 +147,7 @@ const AnduroSeedsVC = (props: any) => {
                   borderRadius: 24,
                   height: 40,
                 }}
+                containerStyle={{ borderRadius: 24 }}
                 titleStyle={{ fontFamily: "Geist-Regular", fontSize: 12, opacity: 0.55 }}
                 onPress={() => downloadMnemonic()}
               />
