@@ -1233,6 +1233,13 @@
   resolved "https://registry.npmjs.org/@noble/bls12-381/-/bls12-381-1.4.0.tgz"
   integrity sha512-mIYqC2jMX7Lcu1QtU/FFftMPDSXNCdlGex6BSf5nPojHjnzzBgs1klFWpB1R8YjqHmOO9xrCzF19f2c42+z3vg==
 
+"@noble/curves@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.npmjs.org/@noble/curves/-/curves-1.5.0.tgz"
+  integrity sha512-J5EKamIHnKPyClwVrzmaf5wSdQXgdHcPZIZLu3bwnbeCx8/7NPK5q2ZBWF+5FvYGByjiQQsJYX6jfgB2wDPn3A==
+  dependencies:
+    "@noble/hashes" "1.4.0"
+
 "@noble/curves@1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@noble/curves/-/curves-1.2.0.tgz"
@@ -1240,7 +1247,7 @@
   dependencies:
     "@noble/hashes" "1.3.2"
 
-"@noble/hashes@^1.0.0", "@noble/hashes@^1.1.5", "@noble/hashes@^1.2.0", "@noble/hashes@~1.4.0":
+"@noble/hashes@^1.0.0", "@noble/hashes@^1.1.5", "@noble/hashes@^1.2.0", "@noble/hashes@~1.4.0", "@noble/hashes@1.4.0":
   version "1.4.0"
   resolved "https://registry.npmjs.org/@noble/hashes/-/hashes-1.4.0.tgz"
   integrity sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==
@@ -1293,7 +1300,7 @@
   dependencies:
     merge-options "^3.0.4"
 
-"@react-native-clipboard/clipboard@^1.13.0":
+"@react-native-clipboard/clipboard@^1.12.0":
   version "1.14.1"
   resolved "https://registry.npmjs.org/@react-native-clipboard/clipboard/-/clipboard-1.14.1.tgz"
   integrity sha512-SM3el0A28SwoeJljVNhF217o0nI4E7RfalLmuRQcT1/7tGcxUjgFa3jyrEndYUct8/uxxK5EUNGUu1YEDqzxqw==
@@ -2730,6 +2737,11 @@ better-npm-audit@^3.7.3:
     lodash.get "^4.4.2"
     semver "^7.6.3"
     table "^6.7.1"
+
+big-integer@^1.6.52:
+  version "1.6.52"
+  resolved "https://registry.npmjs.org/big-integer/-/big-integer-1.6.52.tgz"
+  integrity sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==
 
 binary-extensions@^2.0.0:
   version "2.3.0"
@@ -8576,6 +8588,11 @@ react-lifecycles-compat@2.0.0:
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-2.0.0.tgz"
   integrity sha512-txfpPCQYiazVdcbMRhatqWKcAxJweUu2wDXvts5/7Wyp6+Y9cHojqXHsLPEckzutfHlxZhG8Oiundbmp8Fd6eQ==
 
+react-native-aes-crypto@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/react-native-aes-crypto/-/react-native-aes-crypto-3.0.3.tgz"
+  integrity sha512-6yJjAix83xMDMCDUQLVpoHQMkTfeWoKrDXWP2Yrl68o2053aHPk3hTW6sCTYLj5HmftZ9S9DQ3DelP7WVlIDtw==
+
 react-native-crypto-js@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/react-native-crypto-js/-/react-native-crypto-js-1.0.0.tgz"
@@ -10014,6 +10031,11 @@ test-exclude@^6.0.0:
     "@istanbuljs/schema" "^0.1.2"
     glob "^7.1.4"
     minimatch "^3.0.4"
+
+text-encoding-polyfill@^0.6.7:
+  version "0.6.7"
+  resolved "https://registry.npmjs.org/text-encoding-polyfill/-/text-encoding-polyfill-0.6.7.tgz"
+  integrity sha512-/DZ1XJqhbqRkCop6s9ZFu8JrFRwmVuHg4quIRm+ziFkR3N3ec6ck6yBvJ1GYeEQZhLVwRW0rZE+C3SSJpy0RTg==
 
 text-table@^0.2.0:
   version "0.2.0"
