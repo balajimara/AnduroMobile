@@ -13,14 +13,38 @@ interface confirmseedItemProps {
 const ConfirmSeedItemVW = (props: confirmseedItemProps) => {
   const { mnemonicKey, position, selectAction, index } = props 
   return (
-    <ListItem style={styles.subtitleView} containerStyle={styles.listView} onPress={selectAction}>
-    <View className="flex-row items-center justify-between bg-popupclr py-2 px-4 rounded-xl w-full">
+    <ListItem style={styles.subtitleView} containerStyle={selectBoxStyle(position)} onPress={selectAction}>
+    <View className={`flex-row items-center justify-between py-2 px-4  w-full ${position > 0 ? "border-backupline rounded-2xl bg-backuphighlightbg" : "border-transparent bg-popupclr"}`}>
     <View><Text style={styles.headtitle}>{mnemonicKey.charAt(0).toUpperCase() + mnemonicKey.substring(1).toLowerCase()}</Text></View>
-    <View className="py-1.5 w-14 border-transparent border"><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
+    <View className={`py-1.5 w-14 border ${position > 0 ? "border-backupline rounded-3xl bg-popupclr" : "border-transparent bg-popupclr"}`}><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
     </View>
   </ListItem>
   )
 }
+
+
+const selectBoxStyle = function(position: number) {
+  if (position > 0) {
+    return {
+      backgroundColor: '#231B19',
+      borderWidth:1,
+      borderColor:'#453f3d',
+      borderRadius:12,
+      padding:10,
+      marginBottom:10
+    }
+  } else {
+    return {
+      backgroundColor: '#231B19',
+      borderWidth:1,
+      borderColor:'transparent',
+      borderRadius:12,
+      padding:10,
+      marginBottom:10
+    }
+  }
+   
+ }
 
 const styles = StyleSheet.create({
   icon: {
@@ -31,12 +55,7 @@ const styles = StyleSheet.create({
     color: '#000',
     padding:0
   },
-  listView: {
-    backgroundColor: '#231B19',
-    borderRadius:12,
-    padding:10,
-    marginBottom:10
-  },
+ 
   headtitle: {
     color:'#FFF2F0',
     fontSize: 16,
