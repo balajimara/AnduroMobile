@@ -14,7 +14,7 @@ const AnduroTypeHeaderVW = () => {
           className="w-72"
         />
       </View>
-      <View className="m-auto">
+      <View className="m-auto w-80">
         <Text className="font-geistmedium text-headingcolor text-lg text-center leading-6">
           {t("landingtext")}
         </Text>
