@@ -13,7 +13,7 @@ import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 // import PopupVW from "../../../Common/Views/popup/PopupVW"
 import { Navigation } from "react-native-navigation";
-import { View, Text,SafeAreaView,StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text,SafeAreaView,StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog, Input, ListItem } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -177,9 +177,9 @@ const AnduroCreatePasswordVC = (props:any) => {
          <View className="mb-5">
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
           <View className="relative">
-          <View className="absolute top-3.5 right-4 z-10">
-            <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
-            ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
+          <View className="absolute top-3.5 right-4 z-10 opacity-60">
+            <View onPress={()=> setShowPassword(!showPassword)}
+            ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></View>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
            <Input placeholder='Enter Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showPassword} onChangeText={(value) => handlePasswordChangeAction(value, "password")}/>
@@ -189,9 +189,9 @@ const AnduroCreatePasswordVC = (props:any) => {
          <View>
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("confirmpassword")}</Text>
           <View className="relative">
-          <View className="absolute top-3.5 right-4 z-10">
-            <TouchableOpacity onPress={()=> setShowConfPassword(!showConfPassword)}
-            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
+          <View className="absolute top-3.5 right-4 z-10 opacity-60">
+            <View onPress={()=> setShowConfPassword(!showConfPassword)}
+            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></View>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
            <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showConfPassword} onChangeText={(value) => { handlePasswordChangeAction(value, "confirmpassword") }}/>
@@ -252,6 +252,7 @@ input: {
 inputOne: {
   borderBottomWidth:0,
   borderRadius:8,
+  paddingLeft:10
 },
 icon: {
   color: '#fff',
