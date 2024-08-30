@@ -123,7 +123,7 @@ const AnduroSeedConfirmVC = (props:any) => {
           <View className="mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
           </View>
-        <View className="max-h-[66%] pb-14">
+        <View className="max-h-[70%] pb-20">
           <ScrollView>
           <View>
           {mnemonicVal.shuffledMnemonic.length > 0 &&
@@ -160,7 +160,7 @@ const AnduroSeedConfirmVC = (props:any) => {
             buttonStyle={{
               backgroundColor: '#E8705C',
               borderRadius: 8,
-              height: 48,
+              height: 48
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
