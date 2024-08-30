@@ -65,37 +65,40 @@ const AnduroCreatePasswordVC = (props:any) => {
   }
 
   const handleSkipAction = async (type: string) => {
-    setShowWarning(false)
-    if (type !== "continue") return
-    let mnemonicKey = props.mnemonic
-    const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
-
-    let result = encryptXpubKey(mnemonicKey, "", networkList)
-    setdata({ type: StorageTypes.xpubKeys, data: result })
-    await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
-    const mnemonic = await getMnemonicKey(password.password)
-    if (mnemonic) {
-      const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
-        return network.networkType == "alys"
+    if (type !== "continue") {
+      setShowWarning(false)
+      return
+    } else {
+      let mnemonicKey = props.mnemonic
+      const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
+      let result = encryptXpubKey(mnemonicKey, "", networkList)
+      setdata({ type: StorageTypes.xpubKeys, data: result })
+      await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
+      const mnemonic = await getMnemonicKey(password.password)
+      if (mnemonic) {
+        const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
+          return network.networkType == "alys"
+        })
+        if (alysNetworkInfo) {
+          const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
+          setdata({ type: StorageTypes.alysAddress, data: alysAddress })
+        }
+      }
+      setShowWarning(false)
+      Navigation.push(props.componentId, {
+        component: {
+          name: 'AnduroSuccess',
+        passProps:{
+          title: props.create
+            ? "Your account has been created"
+            : props.import
+              ? "Wallet successfully imported"
+              : "",
+              subtitle: "Reopen your wallet to begin your experience",
+        }
+      }
       })
-      if (alysNetworkInfo) {
-        const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
-        setdata({ type: StorageTypes.alysAddress, data: alysAddress })
-      }
     }
-    Navigation.push(props.componentId, {
-      component: {
-        name: 'AnduroSuccess',
-      passProps:{
-        title: props.create
-          ? "Your account has been created"
-          : props.import
-            ? "Wallet successfully imported"
-            : "",
-            subtitle: "Reopen your wallet to begin your experience",
-      }
-    }
-    })
   }
 
   const validatePassword = (value: string, type: string) => {
@@ -233,9 +236,7 @@ const AnduroCreatePasswordVC = (props:any) => {
             disabled={!isValidPassword}
           />
         </View>
-         {showWarning && (
-        <PopupVW callback={handleSkipAction} />
-        )}
+        <PopupVW callback={handleSkipAction} isvisible={showWarning} />
        </View>
       </SafeAreaView>
   )
