@@ -214,6 +214,7 @@ const AnduroCreatePasswordVC = (props:any) => {
               height: 48,
               marginBottom:15
             }}
+            containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
           />
             <Button className="w-full"
@@ -225,6 +226,7 @@ const AnduroCreatePasswordVC = (props:any) => {
               borderRadius: 8,
               height: 48,
             }}
+            containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
             // disabled={!isValidPassword}
           />

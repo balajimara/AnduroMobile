@@ -158,6 +158,7 @@ const AnduroCreateVC = (props: any) => {
               height: 48,
             }}
             titleStyle={{ fontFamily: "JetBrainsMono-SemiBold", fontSize: 16 }}
+            containerStyle={{ borderRadius: 8 }}
             onPress={() => {
               handleSubmitWalletName()
             }}

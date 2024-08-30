@@ -128,6 +128,7 @@ const AnduroSeedsVC = (props: any) => {
                   height: 40,
                 }}
                 titleStyle={{ fontFamily: "Geist-Regular", fontSize: 12, opacity: 0.55 }}
+                containerStyle={{ borderRadius: 24 }}
                 onPress={() => copyToClipboard()}
               />
             </View>
@@ -167,6 +168,7 @@ const AnduroSeedsVC = (props: any) => {
               height: 48,
             }}
             titleStyle={{ fontFamily: "JetBrainsMono-SemiBold", fontSize: 16 }}
+            containerStyle={{ borderRadius: 8 }}
             onPress={() => navigateConfirmPage()}
           />
         </View>

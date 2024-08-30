@@ -152,6 +152,7 @@ const AnduroImportVC = (props: any) => {
           borderRadius: 8,
           height: 48,
         }}
+        containerStyle={{ borderRadius: 8 }}
         titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
         onPress={validateMnemonic}
       />
