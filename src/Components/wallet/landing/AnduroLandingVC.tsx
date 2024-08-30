@@ -93,7 +93,7 @@ export const AnduroLandingVC = (props: any) => {
               onPress={() => setAgree(true)}
             />
             <Text
-              className={`font-geistregular ${agree ? "text-headingcolor" : "text-white"} text-xs`}
+              className={`font-geistregular ${agree ? "text-headingcolor" : "text-white"} text-xs w-80`}
             >
               {t("privacyagree")}
             </Text>
