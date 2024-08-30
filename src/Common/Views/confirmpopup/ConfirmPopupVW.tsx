@@ -31,13 +31,13 @@ const confirmPopupVW = (props: confirmProps) => {
 
     return (
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={isVisible} onBackdropPress={() => onClose()} animation={"slideInUp"}>
-    <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
-    <View className="mb-1"> 
-    <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold w-44">Do you want to review the recovery keys?</Text>
+    <View className="mt-2 mb-5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
+    <View className="mb-1 w-52"> 
+    <Text style={styles.headtitle}>Do you want to review the recovery keys?</Text>
     </View>
     <View className="opacity-70 pt-2 pb-4">
-    <Text className="font-geistregular text-headingcolor text-xs mb-4">{t("secretrecoverytext")}</Text>
-    <Text className="font-geistregular text-headingcolor text-xs">{t("secretrecoverysubtext")}</Text>
+    <Text style={styles.subheadtitle} className="font-geistregular text-headingcolor text-xs mb-4">{t("secretrecoverytext")}</Text>
+    <View className="mt-4"><Text style={styles.subheadtitle}>{t("secretrecoverysubtext")}</Text></View>
     </View>
     <View className="flex-row flex-wrap pt-4">
     <View className="w-1/2 pr-1">
@@ -72,5 +72,20 @@ const confirmPopupVW = (props: confirmProps) => {
     </Dialog>
     )
 }
+
+const styles = StyleSheet.create({
+ headtitle: {
+    color:'#FAFAFA',
+    fontSize: 18,
+    marginBottom:1,
+    fontFamily: 'Geist-SemiBold',
+    lineHeight:24
+ },
+ subheadtitle: {
+    fontFamily: 'Geist-Regular',
+    color:'#968F8D',
+    fontSize: 14
+ }
+ });
 
 export default confirmPopupVW
