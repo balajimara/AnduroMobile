@@ -13,7 +13,7 @@ import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 // import PopupVW from "../../../Common/Views/popup/PopupVW"
 import { Navigation } from "react-native-navigation";
-import { View, Text,SafeAreaView,StyleSheet } from 'react-native';
+import { View, Text,SafeAreaView,StyleSheet, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog, Input, ListItem } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -23,15 +23,16 @@ const AnduroCreatePasswordVC = (props:any) => {
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
+  const {create,importdata} = props;
   const [password, setPassword] = React.useState<{ password: string; confirmPassword: string }>({
     password: "",
     confirmPassword: "",
   })
-  const {type} = props;
   const [showWarning, setShowWarning] = React.useState(false)
   const [showPassword, setShowPassword] = React.useState<boolean>(false)
   const [showConfPassword, setShowConfPassword] = React.useState<boolean>(false)
   const [isValidPassword, setIsValidPassword] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState(true);
   const [passwordCharacters] = React.useState([
     {
       title: t("characterlistOne"),
@@ -65,11 +66,12 @@ const AnduroCreatePasswordVC = (props:any) => {
     validatePassword(value, type)
   }
 
-  const handleSkipAction = async (type: string) => {
+  const handleSkipAction = async (type:string) => {
     if (type !== "continue") {
       setShowWarning(false)
       return
     } else {
+      setLoading(true)
       let mnemonicKey = props.mnemonic
       const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
       let result = encryptXpubKey(mnemonicKey, "", networkList)
@@ -86,21 +88,21 @@ const AnduroCreatePasswordVC = (props:any) => {
         }
       }
       setShowWarning(false)
-      Navigation.push(props.componentId, {
-        component: {
-          name: 'AnduroSuccess',
-        passProps:{
-          title: props.create
-            ? "Your account has been created"
-            : props.import
-              ? "Wallet successfully imported"
-              : "",
-              subtitle: "Reopen your wallet to begin your experience",
-        }
-      }
-      })
-    }
-  }
+      setLoading(true)
+
+    Navigation.push(props.componentId, {
+    component: {
+      name: 'AnduroSuccess',
+      passProps:{
+      title: create
+        ? t("walletcreated")
+        : importdata
+        ? t("walletimported")
+        : "",
+          subtitle: t("reopenwallet"),
+      }}
+  })}}
+
 
   const validatePassword = (value: string, type: string) => {
     if (type == "password") {
@@ -138,7 +140,7 @@ const AnduroCreatePasswordVC = (props:any) => {
     console.log('networkList', networkList, mnemonicKey)
     let secPass = (isValidPassword) ? password.password : ""
     let result = encryptXpubKey(mnemonicKey, secPass, networkList)
-    if (isValidPassword) {
+    if(isValidPassword){
       mnemonicKey =  await encrypteData(mnemonicKey,secPass)
     }
     console.log('mnemonicKey', mnemonicKey)
@@ -155,19 +157,18 @@ const AnduroCreatePasswordVC = (props:any) => {
       }
     }
 
-  Navigation.push(props.componentId, {
-    component: {
-      name: 'AnduroSuccess',
-      passProps:{
-      title: type === "create"
-        ? "Your account has been created"
-        : type === "import"
-          ? "Wallet successfully imported"
+    Navigation.push(props.componentId, {
+      component: {
+        name: 'AnduroSuccess',
+        passProps:{
+        title: create
+          ? t("walletcreated")
+          : importdata
+          ? t("walletimported")
           : "",
-          subtitle: "Reopen your wallet to begin your experience",
-    }
-  }
-  })
+            subtitle: t("reopenwallet"),
+        }}
+    })
 }
 
 
@@ -183,8 +184,8 @@ const AnduroCreatePasswordVC = (props:any) => {
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
           <View className="relative">
           <View className="absolute top-3.5 right-4 z-10 opacity-60">
-            <View onPress={()=> setShowPassword(!showPassword)}
-            ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></View>
+            <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
+            ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
            <Input placeholder='Enter Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showPassword} onChangeText={(value) => handlePasswordChangeAction(value, "password")}/>
@@ -195,8 +196,8 @@ const AnduroCreatePasswordVC = (props:any) => {
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("confirmpassword")}</Text>
           <View className="relative">
           <View className="absolute top-3.5 right-4 z-10 opacity-60">
-            <View onPress={()=> setShowConfPassword(!showConfPassword)}
-            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></View>
+            <TouchableOpacity onPress={()=> setShowConfPassword(!showConfPassword)}
+            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
            <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showConfPassword} onChangeText={(value) => { handlePasswordChangeAction(value, "confirmpassword") }}/>
@@ -236,10 +237,10 @@ const AnduroCreatePasswordVC = (props:any) => {
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
             disabled={!isValidPassword}
-            disabledStyle={{backgroundColor:'#E8705C', color:'#fff',opacity:0.40}}
+            disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
           />
         </View>
-        <PopupVW callback={handleSkipAction} isvisible={showWarning} />
+        <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} />
        </View>
       </SafeAreaView>
   )

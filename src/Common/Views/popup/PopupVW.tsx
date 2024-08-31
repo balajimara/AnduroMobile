@@ -8,13 +8,15 @@ interface popupProps {
 isvisible?: boolean
 onbackdrop?: () => void
 callback: (value: any) => void
+disabled:boolean
   }
 
 const PopupVW = (props:popupProps) => {
     const {
         isvisible,
         onbackdrop,
-        callback
+        callback,
+        disabled
       } = props
           return(
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }}
