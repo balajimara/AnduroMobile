@@ -71,10 +71,9 @@ const AnduroCreatePasswordVC = (props:any) => {
       setShowWarning(false)
       return
     } else {
-      setLoading(true)
       let mnemonicKey = props.mnemonic
       const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
-      let result = encryptXpubKey(mnemonicKey, "", networkList)
+      let result = await encryptXpubKey(mnemonicKey, "", networkList)
       setdata({ type: StorageTypes.xpubKeys, data: result })
       await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
       const mnemonic = await getMnemonicKey(password.password)
@@ -89,19 +88,21 @@ const AnduroCreatePasswordVC = (props:any) => {
       }
       setShowWarning(false)
       setLoading(true)
-
-    Navigation.push(props.componentId, {
-    component: {
-      name: 'AnduroSuccess',
-      passProps:{
-      title: create
-        ? t("walletcreated")
-        : importdata
-        ? t("walletimported")
-        : "",
-          subtitle: t("reopenwallet"),
-      }}
-  })}}
+      Navigation.push(props.componentId, {
+      component: {
+        name: 'AnduroSuccess',
+        passProps:{
+        title: create
+          ? t("walletcreated")
+          : importdata
+          ? t("walletimported")
+          : "",
+            subtitle: t("reopenwallet"),
+        }
+      }
+      })
+    }
+  }
 
 
   const validatePassword = (value: string, type: string) => {
@@ -139,7 +140,7 @@ const AnduroCreatePasswordVC = (props:any) => {
     const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
     console.log('networkList', networkList, mnemonicKey)
     let secPass = (isValidPassword) ? password.password : ""
-    let result = encryptXpubKey(mnemonicKey, secPass, networkList)
+    let result = await encryptXpubKey(mnemonicKey, secPass, networkList)
     if(isValidPassword){
       mnemonicKey =  await encrypteData(mnemonicKey,secPass)
     }
@@ -175,7 +176,7 @@ const AnduroCreatePasswordVC = (props:any) => {
   return (
       <SafeAreaView>
        <View className="bg-gray h-full flex flex-col justify-between">
-        <View className="p-16 px-6 pb-0">
+        <View className="p-18 px-6 pb-0">
          <View className="text-center w-64 m-auto mb-4"><Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("createpassword")}</Text></View>
          <View className="mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
