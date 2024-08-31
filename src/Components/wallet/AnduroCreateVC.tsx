@@ -51,7 +51,7 @@ const AnduroCreateVC = (props: any) => {
             name: "AnduroCreatePassword",
             passProps:{
               mnemonic:props.mnemonic,
-              type:"import"
+              importdata:"import"
             },
             options: {
               topBar: {

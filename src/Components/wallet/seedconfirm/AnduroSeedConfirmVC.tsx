@@ -20,8 +20,8 @@ const AnduroSeedConfirmVC = (props:any) => {
       shuffledMnemonic: [],
       selectedMnemonic: [],
     })
-  
-    React.useEffect(() => {   
+
+    React.useEffect(() => {
       if (mnemonicVal) {
         setMnemonicVal({
           ...mnemonicVal,
@@ -30,8 +30,8 @@ const AnduroSeedConfirmVC = (props:any) => {
       }
     }, [])
 
-   
-    const {t} = useTranslation() 
+
+    const {t} = useTranslation()
 
     /**
    * This function is used to select the seed key.
@@ -41,7 +41,7 @@ const AnduroSeedConfirmVC = (props:any) => {
     // checking if the key has already been selected or not; if the key has not been selected, add selected keys.
     if (!mnemonicVal.selectedMnemonic.includes(mnemonicVal.shuffledMnemonic[index])) {
       let selectedMnemonicNew = mnemonicVal.selectedMnemonic
-      selectedMnemonicNew.push(mnemonicVal.shuffledMnemonic[index])   
+      selectedMnemonicNew.push(mnemonicVal.shuffledMnemonic[index])
       setMnemonicVal({
         ...mnemonicVal,
         selectedMnemonic: selectedMnemonicNew,
@@ -80,7 +80,7 @@ const AnduroSeedConfirmVC = (props:any) => {
         name: "AnduroCreatePassword",
         passProps: {
           mnemonic: mnemonic,
-          type: "create"
+          create: "create"
         },
         options: {
           topBar: {
@@ -127,15 +127,15 @@ const AnduroSeedConfirmVC = (props:any) => {
           <ScrollView>
           <View>
           {mnemonicVal.shuffledMnemonic.length > 0 &&
-          mnemonicVal.shuffledMnemonic.map((val: string, i: number) => ( 
-            <ConfirmSeedItemVW 
+          mnemonicVal.shuffledMnemonic.map((val: string, i: number) => (
+            <ConfirmSeedItemVW
             mnemonicKey={val}
             position={mnemonicVal.selectedMnemonic.indexOf(val) + 1}
             index={i}
             selectAction={() => selectAction(i)}
             key={i}
-            />          
-          ))}   
+            />
+          ))}
           </View>
           </ScrollView>
           </View>
@@ -166,13 +166,13 @@ const AnduroSeedConfirmVC = (props:any) => {
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
             disabled={isDisabled}
-            disabledStyle={{backgroundColor:'#E8705C', color:'#fff',opacity:0.40}} 
+            disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
             onPress={handleNavigation}
           />
         </View>
         <ConfirmPopupVW  mnemonic={mnemonic} isopen={open} onClose={() => handleClosePopup()} onRedirectPage={() => gotoNewPassword()}/>
         </View>
-      </SafeAreaView> 
+      </SafeAreaView>
   )
 }
 
