@@ -16,7 +16,7 @@ const ConfirmSeedItemVW = (props: confirmseedItemProps) => {
     <ListItem style={styles.subtitleView} containerStyle={selectBoxStyle(position)} onPress={selectAction}>
     <View className={`flex-row items-center justify-between py-2 px-4  w-full ${position > 0 ? "border-backupline rounded-2xl bg-backuphighlightbg" : "border-transparent bg-popupclr"}`}>
     <View><Text style={styles.headtitle}>{mnemonicKey.charAt(0).toUpperCase() + mnemonicKey.substring(1).toLowerCase()}</Text></View>
-    <View className={`py-1.5 w-14 border ${position > 0 ? "border-backupline rounded-3xl bg-popupclr" : "border-transparent bg-popupclr"}`}><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
+    <View className={`py-1.5 px-5 pr-6 border ${position > 0 ? "border-backupline rounded-3xl bg-popupclr" : "border-transparent bg-popupclr"}`}><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
     </View>
   </ListItem>
   )

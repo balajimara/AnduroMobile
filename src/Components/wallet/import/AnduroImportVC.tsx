@@ -126,7 +126,7 @@ const AnduroImportVC = (props: any) => {
               type: 'font-awesome',
               size: 16,
               color: 'white',
-              // marginRight:4
+              marginRight:4
             }}
           title="Import keys from a file"
           buttonStyle={{
@@ -137,6 +137,7 @@ const AnduroImportVC = (props: any) => {
             height: 48,
             marginBottom:0
           }}
+          containerStyle={{ borderRadius: 8 }}
           titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
           onPress={handleFileUpload}
         />
