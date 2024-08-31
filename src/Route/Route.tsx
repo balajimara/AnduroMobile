@@ -211,7 +211,7 @@ const send = {
     children: [
       {
         component: {
-          name: "AnduroSend",
+          name: "AnduroBackupWallet",
           options: {
             topBar: {
               visible: false,
