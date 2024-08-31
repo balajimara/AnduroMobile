@@ -27,6 +27,7 @@ const AnduroCreatePasswordVC = (props:any) => {
     password: "",
     confirmPassword: "",
   })
+  const {type} = props;
   const [showWarning, setShowWarning] = React.useState(false)
   const [showPassword, setShowPassword] = React.useState<boolean>(false)
   const [showConfPassword, setShowConfPassword] = React.useState<boolean>(false)
@@ -153,13 +154,14 @@ const AnduroCreatePasswordVC = (props:any) => {
         setdata({ type: StorageTypes.alysAddress, data: alysAddress })
       }
     }
+
   Navigation.push(props.componentId, {
     component: {
       name: 'AnduroSuccess',
       passProps:{
-      title: props.create
+      title: type === "create"
         ? "Your account has been created"
-        : props.import
+        : type === "import"
           ? "Wallet successfully imported"
           : "",
           subtitle: "Reopen your wallet to begin your experience",

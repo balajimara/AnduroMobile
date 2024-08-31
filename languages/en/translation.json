@@ -38,5 +38,8 @@
   "nothanks": "No thanks",
   "letreview": "Yes, let's review",
   "secretrecoverytext": "A secret recovery phrase is a set of words that correspond to numbers. These numbers make up a seed integer that generates all of the private keys in your wallet.",
-  "secretrecoverysubtext": "Each address for every crypto has its own private key. Private keys are used to authorize transactions and prove ownership of your funds."
+  "secretrecoverysubtext": "Each address for every crypto has its own private key. Private keys are used to authorize transactions and prove ownership of your funds.",
+  "walletcreated":"Your account has been created",
+  "walletimported":"Wallet successfully imported",
+  "reopenwallet":"Reopen your wallet to begin your experience"
 }
