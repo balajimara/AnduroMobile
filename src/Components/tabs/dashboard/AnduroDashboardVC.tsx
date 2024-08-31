@@ -12,27 +12,40 @@ import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
 
 const AnduroDashboardVC = (props: any) => {
   useEffect(() => {
+    console.log('props', props)
     Navigation.mergeOptions(props.componentId, {
       topBar: {
         leftButtons: [
           {
             id: "menuButton",
             icon: SimpleLineIcons.getImageSourceSync("menu", 22, "#fff"),
+            showAsAction: "always"
+          
           },
         ],
         title: {
           text: "Aaron's Wallet",
+          alignment: "center"
         },
       },
     })
-    Navigation.events().registerNavigationButtonPressedListener(
-      (event: NavigationButtonPressedEvent) => {
-        if (event.buttonId === "menuButton") {
-          openMenu()
-        }
+
+Navigation.events().registerComponentDidAppearListener(() => {
+  console.log('asdasdasdasdasd')
+  Navigation.events().registerNavigationButtonPressedListener(
+    (event: NavigationButtonPressedEvent) => {
+      console.log(event)
+      if (event.buttonId === "menuButton") {
+        openMenu()
       }
-    )
+    }
+  )
+})
+ 
+
+   
   }, [])
+
 
   const openMenu = async () => {
     await Navigation.dismissAllModals()
@@ -57,13 +70,13 @@ const AnduroDashboardVC = (props: any) => {
         </View>
 
         {
-            Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((item, i) => (
-                <FlatList
-                    data={Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}
-                    renderItem={({item}) => <ListSkeleton />}
-                    keyExtractor={item => item.toString()}
-                />
-            ))
+            // Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((item, i) => (
+            //     // <FlatList
+            //     //     data={Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}
+            //     //     renderItem={({item}) => <ListSkeleton />}
+            //     //     keyExtractor={item => item.toString()}
+            //     // />
+            // ))
         }
     
       </View>
