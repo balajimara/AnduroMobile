@@ -1,15 +1,27 @@
-import { SafeAreaView, View, Text, StyleSheet } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
 import { ListItem } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import { Navigation } from "react-native-navigation"
 
-const AnduroMenuVC = () => {
+const AnduroMenuVC = (props: any) => {
   return (
     <SafeAreaView>
      <View className="bg-gray h-full">
       <View className="navbar p-5 px-3.5 justify-between flex-row flex-wrap">
+        <TouchableOpacity onPress={() => {
+            Navigation.mergeOptions(props.componentId, {
+              sideMenu: {
+                left: {
+                  visible: false,
+                  width: Dimensions.get("window").width,
+                },
+              },
+            })
+        }}>
        <View className="navbar-start w-auto">
         <Icon style={[styles.iconClose]} name="close"></Icon>
        </View>
+       </TouchableOpacity>
        <View className="navbar-center">
         <Text className="text-center font-geistsemibold capitalize text-lg text-lightgray w-64 m-auto whitespace-nowrap overflow-hidden text-ellipsis">Profile</Text>
        </View>
