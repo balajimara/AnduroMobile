@@ -13,6 +13,15 @@ import AnduroAppsVC from "../Components/tabs/apps/AnduroAppsVC"
 import AnduroMenuVC from "../Components/menu/AnduroMenuVC"
 import Toast from "../Common/Views/Toast"
 import AnduroSuccessVC from "../Components/success/AnduroSuccessVC"
+import AnduroBackupWalletVC from "../Components/wallet/walletmenu/AnduroBackupWalletVC"
+import AndurChangeLanguageVC from "../Components/wallet/walletmenu/AnduroChangeLanguageVC"
+import AnduroChangePasswordVC from "../Components/wallet/walletmenu/AnduroChangePasswordVC"
+import AnduroNativeCoinsVC from "../Components/wallet/walletmenu/AnduroNativeCoinsVC"
+import AnduroSelectCurrencyVC from "../Components/wallet/walletmenu/AnduroSelectcurrencyVC"
+import AnduroSettingVC from "../Components/wallet/walletmenu/AnduroSettingVC"
+import AnduroTransactionHistoryVC from "../Components/wallet/walletmenu/AnduroTransactionHistoryVC"
+import AnduroSendVC from "../Components/send/AnduroSendVC"
+
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC)
 Navigation.registerComponent("AnduroCreateType", () => AnduroCreateTypeVC)
@@ -29,6 +38,14 @@ Navigation.registerComponent("apps", () => AnduroAppsVC)
 Navigation.registerComponent("menu", () => AnduroMenuVC)
 Navigation.registerComponent("Toast", () => Toast)
 Navigation.registerComponent("AnduroSuccess", () => AnduroSuccessVC)
+Navigation.registerComponent("AnduroBackupWallet", () => AnduroBackupWalletVC)
+Navigation.registerComponent("AndurChangeLanguage", () => AndurChangeLanguageVC)
+Navigation.registerComponent("AnduroChangePasswordVC", () => AnduroChangePasswordVC)
+Navigation.registerComponent("AnduroNativeCoins", () => AnduroNativeCoinsVC)
+Navigation.registerComponent("AnduroSelectCurrency", () => AnduroSelectCurrencyVC)
+Navigation.registerComponent("AnduroSetting", () => AnduroSettingVC)
+Navigation.registerComponent("AnduroTransactionHistory", () => AnduroTransactionHistoryVC)
+Navigation.registerComponent("AnduroSend", () => AnduroSendVC)
 
 /**
  * default root before login
@@ -116,6 +133,9 @@ const afterLogin = {
     left: {
       component: {
         name: "menu",
+        passProps: {
+          id: "menuid"
+        }
       },
     },
     center: {
@@ -179,6 +199,36 @@ const afterLogin = {
       },
     },
   },
+  
+}
+
+/**
+ * default crete type page
+ */
+
+const send = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroSend",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
 }
 
 const route = {
@@ -186,5 +236,6 @@ const route = {
   login: login,
   afterLogin,
   afterPrivacy,
+  send
 }
 export default route
