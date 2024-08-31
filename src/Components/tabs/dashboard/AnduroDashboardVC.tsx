@@ -12,16 +12,14 @@ import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
 
 const AnduroDashboardVC = (props: any) => {
   useEffect(() => {
-    console.log('props', props)
     Navigation.mergeOptions(props.componentId, {
       topBar: {
         leftButtons: [
           {
             id: "menuButton",
             icon: SimpleLineIcons.getImageSourceSync("menu", 22, "#fff"),
-            showAsAction: "always"
           
-          },
+          }
         ],
         title: {
           text: "Aaron's Wallet",
@@ -29,21 +27,14 @@ const AnduroDashboardVC = (props: any) => {
         },
       },
     })
-
-Navigation.events().registerComponentDidAppearListener(() => {
-  console.log('asdasdasdasdasd')
-  Navigation.events().registerNavigationButtonPressedListener(
-    (event: NavigationButtonPressedEvent) => {
-      console.log(event)
-      if (event.buttonId === "menuButton") {
-        openMenu()
+    Navigation.events().registerNavigationButtonPressedListener(
+      (event) => {
+        console.log(event)
+        if (event.buttonId === "menuButton") {
+          openMenu()
+        }
       }
-    }
-  )
-})
- 
-
-   
+    )   
   }, [])
 
 
