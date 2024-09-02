@@ -87,6 +87,7 @@ const AnduroBackupWalletVC = (props: any) => {
      <View className="bg-gray h-full flex flex-col justify-between">
       <View>
        <View className="p-14 px-6 pb-0">
+        <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">Backup your wallet</Text></View>
         <View className="m-auto mb-5 w-80"><Text className="font-geistregular text-headingcolor text-base text-center font-normal">Write down your seed phrase and make sure to keep it private.</Text></View>
         <Text className="font-geistregular text-headingcolor text-base text-center font-normal">This is the unique key to your wallet.</Text>
         <View className="mt-10">
@@ -132,7 +133,7 @@ const AnduroBackupWalletVC = (props: any) => {
            </View>
           </View>
          </View> 
-         <View className="flex-row flex-wrap mt-6">
+         <View className="flex-row flex-wrap mt-6 opacity-0">
             <View className="w-1/2 pr-1.5 m-auto">
               <Button
                 className="w-full bg-popupclr h-9 rounded-3xl text-lightgray"
