@@ -19,7 +19,10 @@ bitcoin.initEccLib(ecc)
 chroma.initEccLib(ecc)
 import { NativeModules, Platform } from 'react-native';
 import Aes from 'react-native-aes-crypto'
-import bip39 from "react-native-bip39"
+import * as bip39 from "bip39"
+import { Buffer } from "@craftzdog/react-native-buffer";
+import unorm from "unorm";
+import { pbkdf2Sync  } from 'react-native-crypto';
 
 
 
@@ -206,15 +209,8 @@ export const encryptXpubKey = async (
   const xpubKeys: XpubKeysModel[] = []
   const promises = [];
   console.log("start seed", new Date())
-  const seed = await bip39.mnemonicToSeed(mnemonic)
-  console.log("end seed", new Date())
-  // let btc_networks = networks.filter((element) => {
-  //   return element.networkType !== "alys"
-  // })
-  // let alys_network: NetworkListModel | undefined = networks.find((element) => {
-  //   return element.networkType === "alys"
-  // })
-  // let alys_address_info = getAlysAddress(mnemonic, alys_network?.chromaBookApi!, seed)
+  const seed = mnemonicToSeed(mnemonic)
+  console.log("end seed", new Date()) 
   for (let index = 0; index < networks.length; index++) {   
     const element =networks [index]
     const walletInfo = getWallet({
@@ -344,4 +340,19 @@ export const updateXpubKey = async (secretKey: string): Promise<XpubKeysModel[]>
     })
   }
   return decryptedXpubKeys
+}
+
+
+export const mnemonicToSeed = (
+  mnemonic: string,
+  password: string = ""
+) => {
+  const mnemonicBuffer = new Buffer(mnemonic, "utf8");
+  const saltBuffer = new Buffer(salt(password), "utf8");
+  return pbkdf2Sync(mnemonicBuffer, saltBuffer, 2048, 64, "sha512");
+}
+
+function salt(password: string) {
+  //Using unorm to get proper unicode string, string.normalize might not work well for some verions of browser
+  return "mnemonic" + (unorm.nfkd(password) || "");
 }
