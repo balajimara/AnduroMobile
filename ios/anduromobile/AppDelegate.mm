@@ -42,10 +42,6 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   bridge.surfacePresenter = _bridgeAdapter.surfacePresenter;
 #endif
 
-  
-
-  
-
   return YES;
 }
 

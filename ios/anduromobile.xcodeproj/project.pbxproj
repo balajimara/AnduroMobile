@@ -14,6 +14,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2CF1F95B18D0473E9B3D45DE /* Geist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */; };
+		48443AC72C85F695003286F2 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48443AC62C85F695003286F2 /* RobotoMono-Regular.ttf */; };
 		48575B8A2C6FA430005E358A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 48575B892C6FA430005E358A /* splash.png */; };
 		68F9DE189A7C4F128B3B9A14 /* Geist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-anduromobile-anduromobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-anduromobile-anduromobileTests.a */; };
@@ -45,6 +46,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = anduromobile/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-anduromobile-anduromobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-anduromobile-anduromobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-anduromobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anduromobile.debug.xcconfig"; path = "Target Support Files/Pods-anduromobile/Pods-anduromobile.debug.xcconfig"; sourceTree = "<group>"; };
+		48443AC62C85F695003286F2 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoMono-Regular.ttf"; path = "../src/assets/fonts/RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
 		48575B892C6FA430005E358A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = ../images/splash.png; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-anduromobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anduromobile.release.xcconfig"; path = "Target Support Files/Pods-anduromobile/Pods-anduromobile.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-anduromobile-anduromobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-anduromobile-anduromobileTests.debug.xcconfig"; path = "Target Support Files/Pods-anduromobile-anduromobileTests/Pods-anduromobile-anduromobileTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		67B1E293AB41429E896209C3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				48443AC62C85F695003286F2 /* RobotoMono-Regular.ttf */,
 				E736FE412F364A40BAC1E93A /* Geist-Bold.ttf */,
 				608CE4F92E0A4947B9904C05 /* Geist-Medium.ttf */,
 				8A01DCD8BFB24A5DA8CEE3CB /* Geist-Regular.ttf */,
@@ -284,6 +287,7 @@
 				B4E6BED4F6664C938AB37E67 /* Geist-Regular.ttf in Resources */,
 				02018600CEF74EC18475685A /* Geist-SemiBold.ttf in Resources */,
 				CC2152E82F34499AAB05061B /* JetBrainsMono-SemiBold.ttf in Resources */,
+				48443AC72C85F695003286F2 /* RobotoMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,10 +646,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
@@ -715,10 +716,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
