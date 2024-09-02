@@ -8,7 +8,7 @@ import React, { useState } from "react"
 import { Navigation } from "react-native-navigation"
 import RNFS, { DownloadDirectoryPath, writeFile } from "react-native-fs"
 import SeedItemVW from "../../../Common/Views/seeditem/SeedItem"
-import { generateMnemonic } from "../../../Utility/AndurocommonUtils"
+import { generateMnemonic, getMnemonicKey } from "../../../Utility/AndurocommonUtils"
 
 const AnduroSeedsVC = (props: any) => {
   const { t } = useTranslation()
@@ -16,12 +16,19 @@ const AnduroSeedsVC = (props: any) => {
   const [mnemonicFirst, setMnemonicFirst] = useState<any>([])
   const [mnemonicSec, setMnemonicSec] = useState<any>([])
   React.useEffect(() => {
-    setTimeout(() => {
-      const mnemonicVal = generateMnemonic().toString().split(" ")
+    const getMnemonicKey = async (): Promise<string> => {
+      const mnemonicKey = await generateMnemonic()
+      console.log('mnemonicKey', mnemonicKey)
+      return mnemonicKey.toString()
+    }
+    setTimeout(async () => {
+      const mnemonicKey = await getMnemonicKey()
+      const mnemonicVal: string[] =  mnemonicKey.toString().split(" ")
       setMnemonic(mnemonicVal)
       setMnemonicFirst(mnemonicVal.slice(0,6))
       setMnemonicSec(mnemonicVal.slice(6,12))
     }, 1000)
+
   }, [])
 
   const copyToClipboard = () => {

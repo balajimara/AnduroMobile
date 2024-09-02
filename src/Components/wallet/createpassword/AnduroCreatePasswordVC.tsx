@@ -74,16 +74,15 @@ const AnduroCreatePasswordVC = (props:any) => {
       let mnemonicKey = props.mnemonic
       const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
       let result = await encryptXpubKey(mnemonicKey, "", networkList)
+      let alys_result = result.filter((element) => {
+        return element.network === "alys"
+      })
       setdata({ type: StorageTypes.xpubKeys, data: result })
       await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
       const mnemonic = await getMnemonicKey(password.password)
-      if (mnemonic) {
-        const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
-          return network.networkType == "alys"
-        })
-        if (alysNetworkInfo) {
-          const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
-          setdata({ type: StorageTypes.alysAddress, data: alysAddress })
+      if (mnemonic) {      
+        if (alys_result.length > 0) {
+          setdata({ type: StorageTypes.alysAddress, data: alys_result[0].address })
         }
       }
       setShowWarning(false)
@@ -143,15 +142,15 @@ const AnduroCreatePasswordVC = (props:any) => {
     }
     console.log('mnemonicKey', mnemonicKey)
     setdata({ type: StorageTypes.xpubKeys, data: result })
+    let alys_result = result.filter((element) => {
+      return element.network === "alys"
+    })
     await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
     const mnemonic = await getMnemonicKey(password.password)
     if (mnemonic) {
-      const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
-        return network.networkType == "alys"
-      })
-      if (alysNetworkInfo) {
-        const alysAddress =  getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
-        setdata({ type: StorageTypes.alysAddress, data: alysAddress })
+     
+      if (alys_result.length > 0) {
+        setdata({ type: StorageTypes.alysAddress, data: alys_result[0].address })
       }
     }
 

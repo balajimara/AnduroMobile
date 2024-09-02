@@ -20,4 +20,5 @@ export enum StorageTypes {
 export interface XpubKeysModel {
   network: string
   xpub: string
+  address: string
 }

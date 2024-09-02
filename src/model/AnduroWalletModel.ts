@@ -7,5 +7,8 @@ export interface GetWalletInfoParams {
   changeIndex: number
   mnemonic: string
   network?: Network | Network
-  chromaBookApi?: string
+  chromaBookApi?: string,
+  name?: string
+  seed: any
+  
 }

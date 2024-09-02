@@ -1,25 +1,26 @@
 
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as bip39 from "bip39"
 import BIP32Factory, { BIP32Interface } from "bip32"
 import ecc from "@bitcoinerlab/secp256k1"
 import * as bitcoin from "bitcoinjs-lib"
 import * as chroma from "chromajs-lib"
 import networks from "../Config/network.json"
-import { deriveKeyFromMnemonic } from "@chainsafe/bls-keygen"
+import "react-native-get-random-values"
+import { deriveKeyFromEntropy } from "@chainsafe/bls-keygen"
+import "@ethersproject/shims"
 import { ethers } from "ethers"
 import { bls12_381 as bls } from '@noble/curves/bls12-381';
 import { GetWalletInfoParams } from "../model/AnduroWalletModel"
 import { NetworkListModel } from "../model/AnduroNetworkModel"
-// import AES from 'react-native-aes-crypto';
-import { CachedDataTypes,XpubKeysModel } from "../model/AnduroStorageModel"
+import { CachedDataTypes,StorageTypes,XpubKeysModel } from "../model/AnduroStorageModel"
 const bip32 = BIP32Factory(ecc)
 bitcoin.initEccLib(ecc)
 chroma.initEccLib(ecc)
-import cryptoJS from "react-native-crypto-js"
 import { NativeModules, Platform } from 'react-native';
 import Aes from 'react-native-aes-crypto'
+import bip39 from "react-native-bip39"
+
 
 
 /**
@@ -70,8 +71,7 @@ export const decrypteData = async (mnemonic: string, xPubKey: string, secretKey:
     } else {
       return ""
     }
-  } catch (error)
-  {
+  } catch (error) {
     return ""
   }
 
@@ -134,40 +134,38 @@ const getDerivationPath = (networkType: string) => {
  */
 export const getWallet = (
   params: GetWalletInfoParams,
-): { address: string; xPublickey: string; xPrivateKey: string; }=> {
-  if (params.networkType == "bitcoin" || params.networkType == "sidechain") {
-    const seed = bip39.mnemonicToSeedSync(params.mnemonic)
-    console.log("seedname", seed)
-    const root = bip32.fromSeed(seed, getNetwork(params.networkMode || "", params.networkType))
-    let path = getDerivationPath(params.networkType)
-    console.log("seedpath", path)
-    const account = root.derivePath(path).derive(params.changeIndex)
-
-    const xPublickey = account.neutered().toBase58()
-    const xPrivateKey = account.toBase58()
-    console.log("seedpath", xPublickey)
-    const node = account.derive(params.derivationIndex)
-
-    const btcAddress = getChainInstance(params.networkType).payments.p2wpkh({
-      pubkey: node.publicKey,
-      network: getNetwork(params.networkMode || "", params.networkType),
-    })
-    console.log("btcAddress", btcAddress)
-    return {
-      address: btcAddress.address || "",
-      xPublickey,
-      xPrivateKey,
-    }
+): Promise<{ address: string; xPublickey: string; xPrivateKey: string; name: string}> => {
+  return new Promise((resolve, reject) => {  
+  if (params.networkType == "bitcoin" || params.networkType == "sidechain") {        
+      const root = bip32.fromSeed(params.seed, getNetwork(params.networkMode || "", params.networkType))
+      let path = getDerivationPath(params.networkType)
+      const account = root.derivePath(path).derive(params.changeIndex)
+      const xPublickey = account.neutered().toBase58()
+      const xPrivateKey = account.toBase58()
+      const node = account.derive(params.derivationIndex)
+      const btcAddress = getChainInstance(params.networkType).payments.p2wpkh({
+        pubkey: node.publicKey,
+        network: getNetwork(params.networkMode || "", params.networkType),
+      })
+      resolve( {
+        address: btcAddress.address || "",
+        xPublickey,
+        xPrivateKey,
+        name: params.name!
+      })      
   } else if (params.networkType == "alys") {
-    let addressInfo = getAlysAddress(params.mnemonic, params.chromaBookApi || "")
-    return addressInfo || ""
+    let addressInfo = getAlysAddress(params.mnemonic, params.chromaBookApi || "", params.seed)
+    addressInfo.name = params.name!
+    resolve( addressInfo || "")
   } else {
-    return {
+    resolve( {
       address: "",
       xPublickey: "",
       xPrivateKey: "",
-    }
+      name: params.name!
+    })
   }
+  })
 }
 
 /**
@@ -206,7 +204,18 @@ export const encryptXpubKey = async (
 ): Promise<XpubKeysModel[]> => {
   const encryptedXpubKeys: XpubKeysModel[] = []
   const xpubKeys: XpubKeysModel[] = []
-  for (let index = 0; index < networks.length; index++) {
+  const promises = [];
+  console.log("start seed", new Date())
+  const seed = await bip39.mnemonicToSeed(mnemonic)
+  console.log("end seed", new Date())
+  // let btc_networks = networks.filter((element) => {
+  //   return element.networkType !== "alys"
+  // })
+  // let alys_network: NetworkListModel | undefined = networks.find((element) => {
+  //   return element.networkType === "alys"
+  // })
+  // let alys_address_info = getAlysAddress(mnemonic, alys_network?.chromaBookApi!, seed)
+  for (let index = 0; index < networks.length; index++) {   
     const element =networks [index]
     const walletInfo = getWallet({
       networkType: element.networkType,
@@ -215,29 +224,49 @@ export const encryptXpubKey = async (
       changeIndex: 0,
       mnemonic: mnemonic,
       chromaBookApi: element?.chromaBookApi,
+      name: element.name,
+      seed: seed
     })
-    console.log('111')
+    promises.push(walletInfo)
+  }
+  let walletListInfo: string | any[] =  []
+  let values = await Promise.all(promises)
+  walletListInfo = values
+  console.log('values', values)
+  // if (alys_network !== undefined) {
+  //   walletListInfo.push(alys_address_info)
+  // } 
+  for (let i = 0; i < walletListInfo.length; i ++) {
     let xpubkey: string = ""
     if (secretKey.length > 0) {
-      xpubkey = (walletInfo.xPublickey, secretKey)
+      xpubkey = (walletListInfo[i].xPublickey, secretKey)
     } else {
-      xpubkey = walletInfo.xPublickey
+      xpubkey = walletListInfo[i].xPublickey
     }
-    console.log('2222')
     encryptedXpubKeys.push({
-      network: element.name,
+      network: walletListInfo[i].name,
       xpub: xpubkey,
+      address:walletListInfo[i].address
     })
-    console.log('3333')
     xpubKeys.push({
-      network: element.name,
-      xpub: walletInfo.xPublickey,
+      network: walletListInfo[i].name,
+      xpub: walletListInfo[i].xPublickey,
+      address: walletListInfo[i].address
     })
-    console.log('333333')
-  }
-  console.log('444444')
+  } 
   await setCachedData(CachedDataTypes.xpubkeys, JSON.stringify(encryptedXpubKeys))
   return xpubKeys
+       
+      
+ 
+
+  // let addressInfo = getAlysAddress(mnemonic, alys_network?.chromaBookApi || "")
+  // addressInfo.name = alys_network?.name!
+
+    
+    
+  
+ 
 }
 
 /**
@@ -245,9 +274,11 @@ export const encryptXpubKey = async (
  * @param mnemonic -mnemonic
  * @param baseURL  -baseUrl
  */
-export const getAlysAddress = (mnemonic: any, baseURL: string) => {
+export const getAlysAddress = (mnemonic: any, baseURL: string, seed: Buffer) => {
   let path = getDerivationPath("alys")
-  const masterSecretKey =  deriveKeyFromMnemonic(mnemonic, path)
+  // const masterSecretKey = deriveKeyFromMnemonic(mnemonic, path)
+  // const seed = bip39.mnemonicToSeed(mnemonic)
+  const masterSecretKey = deriveKeyFromEntropy(seed, path)
   console.log('secKey', masterSecretKey)
   const privateKey = Buffer.from(masterSecretKey).toString("hex")
   const pubKey = Buffer.from(bls.getPublicKey(masterSecretKey)).toString("hex")
@@ -256,11 +287,12 @@ export const getAlysAddress = (mnemonic: any, baseURL: string) => {
   // let alysaddress = "0x" + address.substring(address.length - 40, address.length)
   const provider = new ethers.JsonRpcProvider(baseURL)
   const signer = new ethers.Wallet(privateKey, provider)
-  console.log('signer.address', signer.address)
+  const address = signer.address
   return {
-    address: signer.address,
+    address: address,
     xPublickey: pubKey,
     xPrivateKey: privateKey,
+    name: ''
   }
 }
 
@@ -287,11 +319,8 @@ export const getMnemonicKey = async (password: string): Promise<string|null> => 
 /**
  * This is the function used to generate new mnemonic key
  */
-export const generateMnemonic = (): string => {
-  console.log("time", new Date())
-  const mnemonicval: string = bip39.generateMnemonic()
-  console.log("mnemonicval", mnemonicval)
-  console.log("time1", new Date())
+export const generateMnemonic = async (): Promise<string> => {
+  const mnemonicval: string = await bip39.generateMnemonic()
   return mnemonicval
 }
 
