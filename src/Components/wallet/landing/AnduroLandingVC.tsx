@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, SafeAreaView, Image } from "react-native"
+import { View, Text, SafeAreaView} from "react-native"
 import { CheckBox, LinearProgress } from "@rneui/themed"
 import { Navigation } from "react-native-navigation"
 import { useAtom } from "jotai"
@@ -70,6 +70,9 @@ export const AnduroLandingVC = (props: any) => {
         clearTimeout(timeout)
       }
     }
+    else{
+      setProgress(0)
+    }
   }, [agree])
 
   return (
@@ -90,7 +93,7 @@ export const AnduroLandingVC = (props: any) => {
                 borderWidth: 0,
                 padding: 0,
               }}
-              onPress={() => setAgree(true)}
+              onPress={() => setAgree(!agree)}
             />
             <Text
               className={`font-geistregular ${agree ? "text-headingcolor" : "text-white"} text-xs w-80`}

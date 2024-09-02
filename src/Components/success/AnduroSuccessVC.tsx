@@ -6,7 +6,28 @@ import { Navigation } from "react-native-navigation";
 
 const AnduroSuccessVC = (props: any) => {
     const {title} = props;
-
+    React.useEffect(() => {
+      const handleBackPress = () => {
+        Navigation.push(props.componentId, {
+          component: {
+            name: 'AnduroLogin',
+            options: {
+              topBar: {
+                visible: false,
+              },
+              bottomTabs: {
+                visible: false,
+              },
+            },
+          },
+        });
+        return true;
+      };
+      BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+      };
+    }, []);
     return (
        <SafeAreaView>
         <View className="bg-gray h-full flex flex-col justify-center">
