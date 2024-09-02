@@ -1,6 +1,6 @@
 import { Text } from "@rneui/base"
 import { useEffect, useState } from "react"
-import { Button, Dimensions, FlatList, SafeAreaView, View } from "react-native"
+import { Button, Dimensions, SafeAreaView, View } from "react-native"
 import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
 import route from "../../../Route/Route"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
@@ -59,17 +59,12 @@ const AnduroDashboardVC = (props: any) => {
           </View>
           <ActionSkeleton />
         </View>
-
-        {
-            // Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((item, i) => (
-            //     // <FlatList
-            //     //     data={Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}
-            //     //     renderItem={({item}) => <ListSkeleton />}
-            //     //     keyExtractor={item => item.toString()}
-            //     // />
-            // ))
-        }
-    
+        <ListSkeleton />
+        <ListSkeleton />
+        <ListSkeleton />
+        <ListSkeleton />
+        <ListSkeleton />
+        <ListSkeleton />
       </View>
     </SafeAreaView>
   )
