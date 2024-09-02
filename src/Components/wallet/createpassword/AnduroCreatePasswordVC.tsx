@@ -184,9 +184,9 @@ const AnduroCreatePasswordVC = (props:any) => {
          <View className="mb-5">
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
           <View className="relative">
-          <View className="absolute top-3.5 right-4 z-10 opacity-60">
+          <View className="absolute top-3 right-4 z-10 opacity-60">
             <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
-            ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
+            ><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
            <Input placeholder='Enter Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showPassword} onChangeText={(value) => handlePasswordChangeAction(value, "password")}/>
@@ -196,9 +196,9 @@ const AnduroCreatePasswordVC = (props:any) => {
          <View>
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("confirmpassword")}</Text>
           <View className="relative">
-          <View className="absolute top-3.5 right-4 z-10 opacity-60">
+          <View className="absolute top-3 right-4 z-10 opacity-60">
             <TouchableOpacity onPress={()=> setShowConfPassword(!showConfPassword)}
-            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
+            ><Icon name={showConfPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
           </View>
           <View className="bg-popupclr h-11 pr-8 rounded-lg">
            <Input placeholder='Enter Confirm Password' placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputOne]} style={[styles.input]} secureTextEntry={!showConfPassword} onChangeText={(value) => { handlePasswordChangeAction(value, "confirmpassword") }}/>
