@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { SafeAreaView, View, Text, StyleSheet } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useTranslation } from "react-i18next"
-import { Button } from "@rneui/themed"
+import { Button, Input, Icon } from "@rneui/themed"
 import { Navigation } from "react-native-navigation"
 import { BlurView } from "@react-native-community/blur";
 import "react-native-get-random-values"
@@ -133,6 +133,18 @@ const AnduroBackupWalletVC = (props: any) => {
               />
            </View>
           </View>
+          <View className="popup-show absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center hidden">
+           <View>
+            <View className="relative">
+            <View className="absolute top-3 right-4 z-10 opacity-60">
+              <TouchableOpacity><Icon name='eye-slash' type='font-awesome' size={18} color="#FAFAFA" /></TouchableOpacity>
+            </View>
+            <View className="bg-backuphighlightbg w-56 h-12 pr-8 rounded-lg">
+             <Input placeholder='Password' placeholderTextColor="#5a4e4c" inputContainerStyle={[styles.inputOne]} style={[styles.input]} />
+            </View>
+            </View>
+           </View>
+          </View>
          </View> 
          <View className="flex-row flex-wrap mt-6 opacity-0">
             <View className="w-1/2 pr-1.5 m-auto">
@@ -209,6 +221,19 @@ const AnduroBackupWalletVC = (props: any) => {
       height: '100%',
       width: '100%',
       zIndex:1
+    },
+    input: {
+      height: 40,
+      fontFamily:'JetBrainsMono-SemiBold',
+      fontSize: 14,
+      padding:0,
+      color: '#fff',
+    },
+    inputOne: {
+      borderBottomWidth:0,
+      borderRadius:8,
+      paddingLeft:10,
+      paddingTop:3
     }
   });
 
