@@ -128,7 +128,7 @@ const AnduroLoginVC = (props: any) => {
         <View className="relative">
         <View className="absolute top-3.5 right-4 z-10 opacity-70">
         <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
-          ><Icon name={showPassword ? 'eye' : 'eye-slash'} color="#FAFAFA" /></TouchableOpacity>
+          ><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
           </View>
         <View className="bg-popupclr h-11 pr-8 rounded-lg">
          <Input placeholder='Password' placeholderTextColor="#968F8D"  secureTextEntry={!showPassword} inputContainerStyle={[styles.inputOne]} style={[styles.input]}
