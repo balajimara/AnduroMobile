@@ -113,21 +113,22 @@ const AnduroBackupWalletVC = (props: any) => {
            </View>
           </View>
           <View className="popup-show absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-           <View className="w-20">
+           <View className="w-24">
             <Button
                 icon={{
                   name: "eye-outline",
                   type: "material-community",
-                  size: 15,
+                  size: 20,
                   color: "white",
+                  marginRight:2
                 }}
                 title={t("Show")} 
                 buttonStyle={{
-                  backgroundColor: "#231B19",
+                  backgroundColor: "#2E2825",
                   borderRadius: 8,
-                  height: 34,
+                  height: 39
                 }}
-                titleStyle={{ fontFamily: "Geist-Regular", fontSize: 12, opacity: 0.55 }}
+                titleStyle={{ fontFamily: "JetBrainsMono-SemiBold", fontSize: 14 }}
                 containerStyle={{ borderRadius: 8 }}
               />
            </View>
