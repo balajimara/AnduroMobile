@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 import { Button } from "@rneui/themed"
 import { Navigation } from "react-native-navigation"
 import { BlurView } from "@react-native-community/blur";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import "react-native-get-random-values"
 import Clipboard from "@react-native-clipboard/clipboard"
 import RNFS, { DownloadDirectoryPath, writeFile } from "react-native-fs"
@@ -118,6 +117,7 @@ const AnduroBackupWalletVC = (props: any) => {
             <Button
                 icon={{
                   name: "eye-outline",
+                  type: "material-community",
                   size: 15,
                   color: "white",
                 }}
