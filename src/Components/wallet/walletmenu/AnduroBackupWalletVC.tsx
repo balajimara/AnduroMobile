@@ -121,7 +121,7 @@ const AnduroBackupWalletVC = (props: any) => {
                   size: 15,
                   color: "white",
                 }}
-                title={t("show")} 
+                title={t("Show")} 
                 buttonStyle={{
                   backgroundColor: "#231B19",
                   borderRadius: 8,
