@@ -340,6 +340,7 @@ export const updateXpubKey = async (secretKey: string): Promise<XpubKeysModel[]>
     decryptedXpubKeys.push({
       network: element.network,
       xpub: key,
+      address: ''
     })
   }
   return decryptedXpubKeys

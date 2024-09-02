@@ -49,11 +49,11 @@ const AnduroLoginVC = (props: any) => {
       const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
         return network.networkType == "alys"
       })
-      if (alysNetworkInfo) {
-        const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
-        console.log("alysaddressss=========",alysAddress)
-        setdata({ type: StorageTypes.alysAddress, data: alysAddress })
-      }
+      // if (alysNetworkInfo) {
+      //   const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi, alysNetworkInfo.name).address
+      //   console.log("alysaddressss=========",alysAddress)
+      //   setdata({ type: StorageTypes.alysAddress, data: alysAddress })
+      // }
       const CachedUserData = getdata({ type: StorageTypes.userData })
       CachedUserData.isLogged = true
       setdata({ type: StorageTypes.userData, value: CachedUserData })
