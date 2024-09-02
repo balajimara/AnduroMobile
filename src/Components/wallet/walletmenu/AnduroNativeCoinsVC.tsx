@@ -6,6 +6,11 @@ import ToggleSwitch from 'toggle-switch-react-native'
 type SwitchComponentProps = {};
 
 const AnduroNativeCoinsVC = () => {
+  const [ison, setIson] = useState(false)
+
+  React.useEffect(() => {
+
+  },[ison])
   return (
     <SafeAreaView>
      <View className="bg-gray h-full flex flex-col justify-between">
@@ -24,11 +29,11 @@ const AnduroNativeCoinsVC = () => {
           </View>
           <View>
            <ToggleSwitch
-              isOn={true}
+              isOn={ison}
               onColor="#A94C3D"
               offColor="#A94C3D"
               size="medium"
-              onToggle={isOff => console.log("changed to : ", isOff)}
+              onToggle={() => {setIson(!ison)}}
             />
           </View>
          </View>
