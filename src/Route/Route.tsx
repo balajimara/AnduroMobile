@@ -14,7 +14,7 @@ import AnduroMenuVC from "../Components/menu/AnduroMenuVC"
 import Toast from "../Common/Views/Toast"
 import AnduroSuccessVC from "../Components/success/AnduroSuccessVC"
 import AnduroBackupWalletVC from "../Components/wallet/walletmenu/AnduroBackupWalletVC"
-import AndurChangeLanguageVC from "../Components/wallet/walletmenu/AnduroChangeLanguageVC"
+import AnduroChangeLanguageVC from "../Components/wallet/walletmenu/AnduroChangeLanguageVC"
 import AnduroChangePasswordVC from "../Components/wallet/walletmenu/AnduroChangePasswordVC"
 import AnduroNativeCoinsVC from "../Components/wallet/walletmenu/AnduroNativeCoinsVC"
 import AnduroSelectCurrencyVC from "../Components/wallet/walletmenu/AnduroSelectcurrencyVC"
@@ -39,7 +39,7 @@ Navigation.registerComponent("menu", () => AnduroMenuVC)
 Navigation.registerComponent("Toast", () => Toast)
 Navigation.registerComponent("AnduroSuccess", () => AnduroSuccessVC)
 Navigation.registerComponent("AnduroBackupWallet", () => AnduroBackupWalletVC)
-Navigation.registerComponent("AndurChangeLanguage", () => AndurChangeLanguageVC)
+Navigation.registerComponent("AndurChangeLanguage", () => AnduroChangeLanguageVC)
 Navigation.registerComponent("AnduroChangePasswordVC", () => AnduroChangePasswordVC)
 Navigation.registerComponent("AnduroNativeCoins", () => AnduroNativeCoinsVC)
 Navigation.registerComponent("AnduroSelectCurrency", () => AnduroSelectCurrencyVC)
