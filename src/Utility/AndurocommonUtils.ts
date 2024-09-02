@@ -199,11 +199,11 @@ export const encrypteData = async (dataToEncrypt: any, secretKey: string): Promi
  * @param networks -networks
  */
 
-export const encryptXpubKey = (
+export const encryptXpubKey = async (
   mnemonic: string,
   secretKey: string,
   networks: NetworkListModel[],
-): XpubKeysModel[] => {
+): Promise<XpubKeysModel[]> => {
   const encryptedXpubKeys: XpubKeysModel[] = []
   const xpubKeys: XpubKeysModel[] = []
   for (let index = 0; index < networks.length; index++) {
@@ -216,22 +216,27 @@ export const encryptXpubKey = (
       mnemonic: mnemonic,
       chromaBookApi: element?.chromaBookApi,
     })
+    console.log('111')
     let xpubkey: string = ""
     if (secretKey.length > 0) {
       xpubkey = (walletInfo.xPublickey, secretKey)
     } else {
       xpubkey = walletInfo.xPublickey
     }
+    console.log('2222')
     encryptedXpubKeys.push({
       network: element.name,
       xpub: xpubkey,
     })
+    console.log('3333')
     xpubKeys.push({
       network: element.name,
       xpub: walletInfo.xPublickey,
     })
+    console.log('333333')
   }
-  setCachedData(CachedDataTypes.xpubkeys, JSON.stringify(encryptedXpubKeys))
+  console.log('444444')
+  await setCachedData(CachedDataTypes.xpubkeys, JSON.stringify(encryptedXpubKeys))
   return xpubKeys
 }
 
@@ -266,15 +271,15 @@ export const getAlysAddress = (mnemonic: any, baseURL: string) => {
 export const getMnemonicKey = async (password: string): Promise<string|null> => {
   console.log("inside getmnemonic keyy==========")
   if (password !== undefined && password != "") {
-    console.log('mnemonicstorage', getCachedData(CachedDataTypes.mnemonic))
-    const mnemonicKey = decrypteData(
-       await getCachedData(CachedDataTypes.mnemonic) || "",
+    console.log('mnemonicstorage', await getCachedData(CachedDataTypes.mnemonic))
+    const mnemonicKey = await decrypteData(
+      await getCachedData(CachedDataTypes.mnemonic) || "",
       "",
       password.trim(),
     )
     return mnemonicKey
   } else {
-    const mnemonicKey = getCachedData(CachedDataTypes.mnemonic) || ""
+    const mnemonicKey = await getCachedData(CachedDataTypes.mnemonic) || ""
     return mnemonicKey
   }
 }

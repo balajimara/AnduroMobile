@@ -20,6 +20,7 @@ const AnduroImportVC = (props: any) => {
   const handleFileUpload = async () => {
       const pickedFile = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.json],
+        copyTo: 'cachesDirectory',
       });
       const fileContent = await RNFS.readFile(pickedFile.uri);
       try {
