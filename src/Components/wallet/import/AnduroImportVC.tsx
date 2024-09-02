@@ -126,7 +126,7 @@ const AnduroImportVC = (props: any) => {
               type: 'font-awesome',
               size: 16,
               color: 'white',
-              marginRight:4
+              // marginRight:4
             }}
           title="Import keys from a file"
           buttonStyle={{

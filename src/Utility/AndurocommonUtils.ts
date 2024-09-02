@@ -57,7 +57,7 @@ export const getNetwork = (networkMode: string, networkType: string) => {
  * @param secretKey -secretKey
  */
 export const decrypteData = async (mnemonic: string, xPubKey: string, secretKey: string): Promise<string> => {
-  
+
   try {
     let data = mnemonic
     if (xPubKey.length > 0) data = xPubKey
@@ -70,11 +70,14 @@ export const decrypteData = async (mnemonic: string, xPubKey: string, secretKey:
     } else {
       return ""
     }
-  } catch (error) {
+  } catch (error)
+  {
     return ""
   }
- 
+
 }
+
+
 
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
@@ -131,7 +134,7 @@ const getDerivationPath = (networkType: string) => {
  */
 export const getWallet = (
   params: GetWalletInfoParams,
-): { address: string; xPublickey: string; xPrivateKey: string } => {
+): { address: string; xPublickey: string; xPrivateKey: string; }=> {
   if (params.networkType == "bitcoin" || params.networkType == "sidechain") {
     const seed = bip39.mnemonicToSeedSync(params.mnemonic)
     console.log("seedname", seed)
@@ -239,7 +242,7 @@ export const encryptXpubKey = (
  */
 export const getAlysAddress = (mnemonic: any, baseURL: string) => {
   let path = getDerivationPath("alys")
-  const masterSecretKey = deriveKeyFromMnemonic(mnemonic, path)
+  const masterSecretKey =  deriveKeyFromMnemonic(mnemonic, path)
   console.log('secKey', masterSecretKey)
   const privateKey = Buffer.from(masterSecretKey).toString("hex")
   const pubKey = Buffer.from(bls.getPublicKey(masterSecretKey)).toString("hex")
@@ -261,10 +264,11 @@ export const getAlysAddress = (mnemonic: any, baseURL: string) => {
  * @param password -password
  */
 export const getMnemonicKey = async (password: string): Promise<string|null> => {
+  console.log("inside getmnemonic keyy==========")
   if (password !== undefined && password != "") {
-    console.log('mnemonicstorage', await getCachedData(CachedDataTypes.mnemonic))
+    console.log('mnemonicstorage', getCachedData(CachedDataTypes.mnemonic))
     const mnemonicKey = decrypteData(
-      await getCachedData(CachedDataTypes.mnemonic) || "",
+       await getCachedData(CachedDataTypes.mnemonic) || "",
       "",
       password.trim(),
     )
@@ -286,3 +290,23 @@ export const generateMnemonic = (): string => {
   return mnemonicval
 }
 
+/**
+ * This function is used to update Xpubkey
+ * @param secretKey - secretkey
+ */
+export const updateXpubKey = async (secretKey: string): Promise<XpubKeysModel[]> => {
+  const decryptedXpubKeys: XpubKeysModel[] = []
+  const data = await getCachedData(CachedDataTypes.xpubkeys) || "[]"
+  const xpubkeys = JSON.parse(data)
+  for (let index = 0; index < xpubkeys.length; index++) {
+    const element = xpubkeys[index]
+    // let key: string = element.xpub
+    let key: string = element.xpub
+    if (secretKey.length > 0) key = await decrypteData("", element.xpub, secretKey)
+    decryptedXpubKeys.push({
+      network: element.network,
+      xpub: key,
+    })
+  }
+  return decryptedXpubKeys
+}

@@ -41,5 +41,7 @@
   "secretrecoverysubtext": "Each address for every crypto has its own private key. Private keys are used to authorize transactions and prove ownership of your funds.",
   "walletcreated":"Your account has been created",
   "walletimported":"Wallet successfully imported",
-  "reopenwallet":"Reopen your wallet to begin your experience"
+  "reopenwallet":"Reopen your wallet to begin your experience",
+  "passwordrequired":"Password is required",
+  "incorrectpassword":"Incorrect password"
 }

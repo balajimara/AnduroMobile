@@ -101,7 +101,7 @@ const AnduroSeedConfirmVC = (props:any) => {
         name: "AnduroCreatePassword",
         passProps: {
           mnemonic: mnemonic,
-          type: "create"
+          create: "create"
         },
         options: {
             topBar: {

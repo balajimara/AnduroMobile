@@ -99,7 +99,6 @@ const AnduroCreatePasswordVC = (props:any) => {
         : importdata
         ? t("walletimported")
         : "",
-          subtitle: t("reopenwallet"),
       }}
   })}}
 
@@ -152,7 +151,7 @@ const AnduroCreatePasswordVC = (props:any) => {
         return network.networkType == "alys"
       })
       if (alysNetworkInfo) {
-        const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
+        const alysAddress =  getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi).address
         setdata({ type: StorageTypes.alysAddress, data: alysAddress })
       }
     }
@@ -166,7 +165,6 @@ const AnduroCreatePasswordVC = (props:any) => {
           : importdata
           ? t("walletimported")
           : "",
-            subtitle: t("reopenwallet"),
         }}
     })
 }
