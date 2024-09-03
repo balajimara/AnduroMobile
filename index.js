@@ -45,6 +45,14 @@ Navigation.events().registerAppLaunchedListener(() => {
       orientation: ["portrait"],
       statusBar: false,
     },
+    animations: {
+      push: {
+        waitForRender: true,
+      },
+      pop: {
+        enabled: false
+      }
+    },
   })
   navigationLogic()
   requestStoragePermission()
