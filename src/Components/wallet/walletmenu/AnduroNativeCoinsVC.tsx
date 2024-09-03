@@ -31,7 +31,7 @@ const AnduroNativeCoinsVC = () => {
            <ToggleSwitch
               isOn={ison}
               onColor="#A94C3D"
-              offColor="#A94C3D"
+              offColor="#66332b"
               size="medium"
               onToggle={() => {setIson(!ison)}}
             />
@@ -48,7 +48,7 @@ const AnduroNativeCoinsVC = () => {
             <ToggleSwitch
               isOn={true}
               onColor="#A94C3D"
-              offColor="#A94C3D"
+              offColor="#66332b"
               size="medium"
               onToggle={isOff => console.log("changed to : ", isOff)}
             />
@@ -65,7 +65,7 @@ const AnduroNativeCoinsVC = () => {
             <ToggleSwitch
               isOn={true}
               onColor="#A94C3D"
-              offColor="#A94C3D"
+              offColor="#66332b"
               size="medium"
               onToggle={isOff => console.log("changed to : ", isOff)}
             />
