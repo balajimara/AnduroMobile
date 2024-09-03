@@ -80,18 +80,16 @@ export const AnduroLandingVC = (props: any) => {
       <View className="bg-gray h-full flex flex-col justify-between">
         <AnduroTypeHeaderVW />
         <View className="items-center p-8 px-0 pb-3">
-          <View className="flex-row items-center px-6 pb-10">
+          <View className="flex-row items-center pb-10">
             <CheckBox
               checked={agree}
-              iconType="material-community"
-              checkedIcon="checkbox-marked"
-              uncheckedIcon="checkbox-blank-outline"
               checkedColor="#FFF2F0"
               uncheckedColor="#FFF2F0"
               containerStyle={{
                 backgroundColor: "transparent",
                 borderWidth: 0,
                 padding: 0,
+                paddingLeft:10
               }}
               onPress={() => setAgree(!agree)}
             />
