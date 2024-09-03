@@ -39,7 +39,7 @@ Navigation.registerComponent("menu", () => AnduroMenuVC)
 Navigation.registerComponent("Toast", () => Toast)
 Navigation.registerComponent("AnduroSuccess", () => AnduroSuccessVC)
 Navigation.registerComponent("AnduroBackupWallet", () => AnduroBackupWalletVC)
-Navigation.registerComponent("AndurChangeLanguage", () => AnduroChangeLanguageVC)
+Navigation.registerComponent("AnduroChangeLanguage", () => AnduroChangeLanguageVC)
 Navigation.registerComponent("AnduroChangePasswordVC", () => AnduroChangePasswordVC)
 Navigation.registerComponent("AnduroNativeCoins", () => AnduroNativeCoinsVC)
 Navigation.registerComponent("AnduroSelectCurrency", () => AnduroSelectCurrencyVC)
@@ -56,6 +56,7 @@ const privacy = {
     children: [
       {
         component: {
+          id: "AnduroLanding",
           name: "AnduroLanding",
           options: {
             animations: {
@@ -108,6 +109,7 @@ const afterPrivacy = {
     children: [
       {
         component: {
+          id: "AnduroCreateType",
           name: "AnduroCreateType",
           options: {
             topBar: {
@@ -206,12 +208,12 @@ const afterLogin = {
  * default crete type page
  */
 
-const send = {
+const changelanguage = {
   stack: {
     children: [
       {
         component: {
-          name: "AnduroBackupWallet",
+          name: "AnduroNativeCoins",
           options: {
             topBar: {
               visible: false,
@@ -236,6 +238,6 @@ const route = {
   login: login,
   afterLogin,
   afterPrivacy,
-  send
+  changelanguage
 }
 export default route

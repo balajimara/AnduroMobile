@@ -8,6 +8,7 @@ import { setCachedData, getCachedData } from "../../../Utility/AndurocommonUtils
 import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useTranslation } from "react-i18next"
 import AnduroTypeHeaderVW from "../../../Common/Views/AccountTypeHeaderVW"
+import route from "../../../Route/Route"
 
 export const AnduroLandingVC = (props: any) => {
   const { t } = useTranslation()
@@ -76,20 +77,9 @@ export const AnduroLandingVC = (props: any) => {
 
         userDataV.privacyPolicy = true
         await setCachedData(StorageTypes.userData, JSON.stringify(userDataV))
-        setdata({ type: StorageTypes.userData, data: userDataV })
-        Navigation.push(props.componentId, {
-          component: {
-            id: "AnduroCreateType",
-            name: "AnduroCreateType",
-            options: {
-              topBar: {
-                visible: false,
-              },
-              bottomTabs: {
-                visible: false,
-              },
-            },
-          },
+        setdata({ type: StorageTypes.userData, data: userDataV })        
+        Navigation.setRoot({
+          root: route.afterPrivacy
         })
       }, 2000)
       return () => {

@@ -64,10 +64,10 @@ export const AnduroCreateTypeVC = (props: any) => {
       ]);     
       return true;
     }
-      const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        backPressEvent
-      );
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
       return () => subscription.remove();    
 }, []);
 

@@ -2,25 +2,16 @@ import React from "react"
 import { Button } from "@rneui/themed"
 import { SafeAreaView, View, Text, Image, BackHandler } from "react-native"
 import { Navigation } from "react-native-navigation";
+import route from "../../Route/Route";
 
 
 const AnduroSuccessVC = (props: any) => {
     const {title} = props;
     React.useEffect(() => {
       const handleBackPress = () => {
-        Navigation.push(props.componentId, {
-          component: {
-            name: 'AnduroLogin',
-            options: {
-              topBar: {
-                visible: false,
-              },
-              bottomTabs: {
-                visible: false,
-              },
-            },
-          },
-        });
+        Navigation.setRoot({
+          root: route.login
+        })
         return true;
       };
       BackHandler.addEventListener('hardwareBackPress', handleBackPress);
@@ -44,11 +35,9 @@ const AnduroSuccessVC = (props: any) => {
           <Button className="w-full"
             title="Close"
             onPress={() =>
-                Navigation.push(props.componentId, {
-                    component: {
-                      name: 'AnduroLogin',
-                  }
-                })
+              Navigation.setRoot({
+                root: route.login
+              })
             }
             buttonStyle={{
               backgroundColor: 'transparent',
