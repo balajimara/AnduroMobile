@@ -49,6 +49,9 @@ Navigation.events().registerAppLaunchedListener(() => {
       push: {
         waitForRender: true,
       },
+      setRoot: {
+        waitForRender: true,
+      },
       pop: {
         enabled: false
       }
