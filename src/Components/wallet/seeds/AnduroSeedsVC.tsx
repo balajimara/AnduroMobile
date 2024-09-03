@@ -64,9 +64,9 @@ const AnduroSeedsVC = (props: any) => {
     try {
       let path = `${RNFS.DownloadDirectoryPath}/Anduro`
       RNFS.mkdir(path)
-      path += "/data.txt"
+      path += "/data.json"
       // write the file
-      RNFS.writeFile(path, JSON.stringify(mnemonic.split(" ")), "utf8")
+      RNFS.writeFile(path, JSON.stringify(mnemonic), "utf8")
         .then((response: any) => {
           console.log("FILE WRITTEN!", response)
         })
