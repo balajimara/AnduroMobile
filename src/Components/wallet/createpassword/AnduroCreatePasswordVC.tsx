@@ -186,7 +186,7 @@ const AnduroCreatePasswordVC = (props:any) => {
         <View className="p-14 px-6 pb-0">
          <View className="text-center w-72 m-auto mb-4"><Text className="text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("createpassword")}</Text></View>
          <View className="mb-10">
-          <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
+          <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("createsecurepassword")}</Text>
          </View>
          <View className="mb-5">
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>

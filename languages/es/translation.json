@@ -43,5 +43,6 @@
   "incorrectpassword":"Incorrect password",
   "yes": "Yes",
   "no": "No",
-  "backpopuptext": "Are you sure you want to go back?"
+  "backpopuptext": "Are you sure you want to go back?",
+  "createsecurepassword": "Create a secure password"
 }

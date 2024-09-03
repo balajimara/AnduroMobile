@@ -21,6 +21,7 @@ import AnduroSelectCurrencyVC from "../Components/wallet/walletmenu/AnduroSelect
 import AnduroSettingVC from "../Components/wallet/walletmenu/AnduroSettingVC"
 import AnduroTransactionHistoryVC from "../Components/wallet/walletmenu/AnduroTransactionHistoryVC"
 import AnduroSendVC from "../Components/send/AnduroSendVC"
+import { Dimensions } from "react-native"
 
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC)
@@ -139,6 +140,7 @@ const afterLogin = {
           id: "menuid"
         }
       },
+      width: Dimensions.get("window").width,
     },
     center: {
       bottomTabs: {
