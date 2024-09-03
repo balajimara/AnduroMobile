@@ -5,8 +5,8 @@ import FastImage from 'react-native-fast-image'
 const CoinItemVW = (props:any) => {
   return (
     <View style={styles.container}> 
-       <View style={styles.leftContainer}>
-           <FastImage source={{uri: props.data.image}} style={styles.imgContainer} />
+       <View style={props.data.type === "nft" ? styles.nftLeftContainer: styles.leftContainer}>
+           <FastImage source={{uri: props.data.image}} style={props.data.type === "nft" ? styles.nftImgContainer : styles.imgContainer} />
            <View style={styles.contentContainer}>
                 {props.data.type === "native" &&
                   <>
@@ -14,12 +14,19 @@ const CoinItemVW = (props:any) => {
                     <Text style={styles.nameText}>{props.data.name}</Text>
                   </>
                 } 
+                {props.data.type === "nft" &&
+                  <>
+                    <Text style={styles.symbolText}>{props.data.name}</Text>
+                    <Text style={styles.nameText}>{props.data.symbol}</Text>
+                    <Text style={styles.addtionalText} numberOfLines={1}>{props.data.info}</Text>
+                  </>
+                } 
                 {props.data.type === "token" &&
                    <Text style={styles.symbolText}>{props.data.name}</Text>
                 }
            </View>
        </View>
-       <View style={styles.contentContainer}>
+       <View style={styles.rightContainer}>
           <Text style={styles.balanceText}>{props.data.balance} <Text style={styles.balanceSymbolText}>{props.data.symbol}</Text></Text>
           {props.data.type === "native" &&
              <Text style={styles.usdText}>$200.00</Text>
@@ -46,6 +53,12 @@ const styles = StyleSheet.create({
       minHeight: 36,
       paddingLeft: 50
    },
+   nftLeftContainer: {
+    position:'relative',
+    flex:1,
+    minHeight: 80,
+    paddingLeft: 94
+ },
    imgContainer: {
     width: 36,
     height: 36,
@@ -54,6 +67,15 @@ const styles = StyleSheet.create({
     left:0,
     top:0,
     borderRadius: 36
+   },
+   nftImgContainer: {
+    width: 80,
+    height: 80,
+    resizeMode: 'cover',
+    position:'absolute',
+    left:0,
+    top:0,
+    borderRadius: 10
    },
    symbolText: {
     fontSize: 16,
@@ -90,7 +112,19 @@ const styles = StyleSheet.create({
     display: 'flex', 
     flexDirection:'column', 
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingRight: 20
+   },
+   rightContainer: {
+    display:"flex", 
+    justifyContent:'center'
+   },
+   addtionalText: {
+    fontSize: 14,
+    fontFamily:'Geist-Regular',
+    color: "#666",
+    marginTop: 15,
+    textTransform:"capitalize"
    }
 });
   

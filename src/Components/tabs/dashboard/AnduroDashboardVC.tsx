@@ -4,7 +4,6 @@ import { Button, Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image
 import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
 import route from "../../../Route/Route"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
-import AnduroHeaderVC from "../../header/AnduroHeader"
 import BalanceSkeleton from "../../../Common/Skeleton/Dashboard/BalanceSkeleton"
 import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
 import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
