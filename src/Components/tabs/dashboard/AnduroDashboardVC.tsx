@@ -235,7 +235,7 @@ const AnduroDashboardVC = (props: any) => {
             </View>
           }
         </View>
-         <View>
+         <View style={{flex:1}}>
           {loading &&
             <>
               <ListSkeleton />
