@@ -1,6 +1,6 @@
 import { Icon, Text } from "@rneui/base"
 import { useEffect, useState } from "react"
-import { Button, Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image } from "react-native"
+import { Button, Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image, SectionList, StyleSheet, StatusBar, Pressable } from "react-native"
 import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
 import route from "../../../Route/Route"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
@@ -8,11 +8,144 @@ import AnduroHeaderVC from "../../header/AnduroHeader"
 import BalanceSkeleton from "../../../Common/Skeleton/Dashboard/BalanceSkeleton"
 import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
 import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
+import CoinItemVW from "../../../Common/Views/dashboard/CoinItemVW"
+import CoinHeaderVW from "../../../Common/Views/dashboard/CoinHeaderVW"
+
 
 
 const AnduroDashboardVC = (props: any) => {
   const [loading, setLoading] = useState(true)
+  const [data] = useState([{
+    title: "Native Assets",
+    data: [
+      {
+        name: 'BTC Testnet',
+        symbol: 'BTC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'Coordinate Testnet',
+        symbol: 'CBTC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'Alys Testnet',
+        symbol: 'ALYS',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+    ]
+  },{
+    title: "Tokens",
+    data:[
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+      {
+        name: 'USD Coin',
+        symbol: 'USDC',
+        image: 'https://picsum.photos/id/1/300/300',
+        balance: '0.457'
+      },
+    ]  
+  }])
 
+  const [expandedSections, setExpandedSections] = useState(new Set());
+  const handleToggle = (title:any) => {
+    setExpandedSections((expandedSections) => {
+      // Using Set here but you can use an array too
+      const next = new Set(expandedSections);
+      if (next.has(title)) {
+        next.delete(title);
+      } else {
+        next.add(title);
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     Navigation.mergeOptions(props.componentId, {
@@ -58,7 +191,7 @@ const AnduroDashboardVC = (props: any) => {
 
   return (
     <SafeAreaView className="bg-gray flex flex-1">
-      <View className="m-4">
+      <View className="m-4" style={{flex: 1}}>
         <View className="bg-popupclr rounded-xl p-3.5">
           <View className="py-10">
             {loading &&
@@ -102,19 +235,42 @@ const AnduroDashboardVC = (props: any) => {
             </View>
           }
         </View>
-        {loading &&
-        <>
-          <ListSkeleton />
-          <ListSkeleton />
-          <ListSkeleton />
-          <ListSkeleton />
-          <ListSkeleton />
-          <ListSkeleton />
-        </>
-        }
+         <View>
+          {loading &&
+            <>
+              <ListSkeleton />
+              <ListSkeleton />
+              <ListSkeleton />
+              <ListSkeleton />
+            </>
+          }
+         {!loading &&
+          <SectionList
+            sections={data}
+            extraData={expandedSections} // extraData is required to re-render the list when expandedSections changes
+            keyExtractor={(item, index) => item.name }
+            renderItem={({ section: { title }, item }) => {
+              // check to see if the section is expanded
+              const isExpanded = expandedSections.has(title);
+    
+              //return null if it is
+              if (isExpanded) return null;
+    
+              return <CoinItemVW data={item} />;
+            }}
+            renderSectionHeader={({ section: { title } }) => (
+              <Pressable onPress={() => handleToggle(title)}>
+                <CoinHeaderVW title={title} />
+              </Pressable>
+            )}
+           />
+          }
+         </View>
+ 
       </View>
     </SafeAreaView>
   )
 }
+
 
 export default AnduroDashboardVC
