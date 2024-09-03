@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from "react-native"
+import { View, Text, SafeAreaView, BackHandler } from "react-native"
 import { useTranslation } from "react-i18next"
 import { Button } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
@@ -8,21 +8,16 @@ import React, { useState } from "react"
 import { Navigation } from "react-native-navigation"
 import RNFS, { DownloadDirectoryPath, writeFile } from "react-native-fs"
 import SeedItemVW from "../../../Common/Views/seeditem/SeedItem"
-import { generateMnemonic, getMnemonicKey } from "../../../Utility/AndurocommonUtils"
+import { generateMnemonic } from "../../../Utility/AndurocommonUtils"
 
 const AnduroSeedsVC = (props: any) => {
   const { t } = useTranslation()
   const [mnemonic, setMnemonic] = useState<any>([])
   const [mnemonicFirst, setMnemonicFirst] = useState<any>([])
   const [mnemonicSec, setMnemonicSec] = useState<any>([])
-  React.useEffect(() => {
-    const getMnemonicKey = async (): Promise<string> => {
-      const mnemonicKey = await generateMnemonic()
-      console.log('mnemonicKey', mnemonicKey)
-      return mnemonicKey.toString()
-    }
-    setTimeout(async () => {
-      const mnemonicKey = await getMnemonicKey()
+  React.useEffect(() => { 
+    setTimeout(() => {
+      const mnemonicKey = generateMnemonic()
       const mnemonicVal: string[] =  mnemonicKey.toString().split(" ")
       setMnemonic(mnemonicVal)
       setMnemonicFirst(mnemonicVal.slice(0,6))
@@ -30,6 +25,18 @@ const AnduroSeedsVC = (props: any) => {
     }, 1000)
 
   }, [])
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.pop(props.componentId) 
+      return true;
+    }
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
+    return () => subscription.remove();    
+  }, []);
 
   const copyToClipboard = () => {
     Clipboard.setString(mnemonic.join(" "))
@@ -92,6 +99,8 @@ const AnduroSeedsVC = (props: any) => {
 
   return (
     <SafeAreaView>
+    {mnemonic.length > 0 && (
+   
       <View className="bg-gray h-full flex flex-col justify-between">
         <View className="p-14 pb-0 px-6">
           <View className="w-64 m-auto mb-4">
@@ -181,7 +190,9 @@ const AnduroSeedsVC = (props: any) => {
           />
         </View>
       </View>
-    </SafeAreaView>
+    
+    )}    
+          </SafeAreaView>  
   )
 }
 

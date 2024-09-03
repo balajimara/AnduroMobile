@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text,SafeAreaView,ScrollView} from 'react-native';
+import { View, Text,SafeAreaView,ScrollView, BackHandler} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -29,6 +29,18 @@ const AnduroSeedConfirmVC = (props:any) => {
         })
       }
     }, [])
+
+    React.useEffect(() => {    
+      const backPressEvent = () => {
+        Navigation.pop(props.componentId) 
+        return true;
+      }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();    
+    }, []);
 
 
     const {t} = useTranslation()

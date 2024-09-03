@@ -13,7 +13,7 @@ import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 // import PopupVW from "../../../Common/Views/popup/PopupVW"
 import { Navigation } from "react-native-navigation";
-import { View, Text,SafeAreaView,StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text,SafeAreaView,StyleSheet, TouchableOpacity, BackHandler } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog, Input, ListItem } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -55,6 +55,18 @@ const AnduroCreatePasswordVC = (props:any) => {
       isValid: false,
     },
   ])
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.pop(props.componentId) 
+      return true;
+    }
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
+    return () => subscription.remove();    
+  }, []);
 
 
   const handlePasswordChangeAction = (value:string, type: string) => {

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, StyleSheet } from "react-native"
+import { View, Text, SafeAreaView, TextInput, StyleSheet, BackHandler } from "react-native"
 import { useSSR, useTranslation } from "react-i18next"
 import React, { useState } from "react"
 import { StorageTypes } from "../../model/AnduroStorageModel"
@@ -74,7 +74,7 @@ const AnduroCreateVC = (props: any) => {
               },
               bottomTabs: {
                 visible: false,
-              },
+              },             
             },
           },
 
@@ -87,6 +87,18 @@ const AnduroCreateVC = (props: any) => {
       setToasttype(type);
       setIsShownToast(true);
     };
+
+    React.useEffect(() => {    
+      const backPressEvent = () => {
+        Navigation.pop(props.componentId) 
+        return true;
+      }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();    
+    }, []);
 
     React.useEffect(() => {
       if (isShownToast) {
@@ -101,12 +113,16 @@ const AnduroCreateVC = (props: any) => {
               overlay: {
                 interceptTouchOutside: false,
               },
+              
             },
             passProps: {
               type: toasttype,
               message: toastmessage,
             },
+            
           },
+          
+        
         });
         setIsShownToast(false);
       }

@@ -1,15 +1,17 @@
-import { View, SafeAreaView } from "react-native"
-import { Navigation } from "react-native-navigation"
+import { View, SafeAreaView, BackHandler, Alert } from "react-native"
+import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
 import { useTranslation } from "react-i18next"
 import AnduroTypeVW from "../../../Common/Views/AccountTypeVW"
 import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useAtom } from "jotai"
-import { StorageTypes } from "../../../model/AnduroStorageModel"
-import React from "react"
+import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
+import React, { useEffect } from "react"
 import AnduroTypeHeaderVW from "../../../Common/Views/AccountTypeHeaderVW"
-import { getCachedData, setCachedData } from "../../../Utility/AndurocommonUtils"
+import { encrypteData, encryptXpubKey, getAlysAddress, getCachedData, getMnemonicKey, setCachedData } from "../../../Utility/AndurocommonUtils"
+import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 
 export const AnduroCreateTypeVC = (props: any) => {
+  console.log('props', props)
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
@@ -44,7 +46,35 @@ export const AnduroCreateTypeVC = (props: any) => {
     }
 
     setUserInfo()
+    
+
   }, [])
+
+  useEffect(() => {    
+    const backPressEvent = () => {
+      Alert.alert("", t("backpopuptext"), [
+        {
+          text: t("no"),
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: t("yes"), onPress: () => {  
+          BackHandler.exitApp() 
+        }}
+      ]);     
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();    
+}, []);
+
+
+
+  
+
 
   return (
     <SafeAreaView>

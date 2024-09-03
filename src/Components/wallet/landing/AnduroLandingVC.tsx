@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { View, Text, SafeAreaView} from "react-native"
+import React, { useEffect, useState } from "react"
+import { View, Text, SafeAreaView, BackHandler, Alert} from "react-native"
 import { CheckBox, LinearProgress } from "@rneui/themed"
 import { Navigation } from "react-native-navigation"
 import { useAtom } from "jotai"
@@ -15,6 +15,31 @@ export const AnduroLandingVC = (props: any) => {
   const [progress, setProgress] = useState(0)
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
+
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Alert.alert("", t("backpopuptext"), [
+        {
+          text: t("no"),
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: t("yes"), onPress: () => {  
+          BackHandler.exitApp() 
+        }}
+      ]);     
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();
+    
+}, []);
+
+
   React.useEffect(() => {
     const setUserInfo = async () => {
       const userdata = await getCachedData(StorageTypes.userData)
@@ -29,6 +54,7 @@ export const AnduroLandingVC = (props: any) => {
       }
     }
     setUserInfo()
+
   }, [])
 
   React.useEffect(() => {
@@ -53,6 +79,7 @@ export const AnduroLandingVC = (props: any) => {
         setdata({ type: StorageTypes.userData, data: userDataV })
         Navigation.push(props.componentId, {
           component: {
+            id: "AnduroCreateType",
             name: "AnduroCreateType",
             options: {
               topBar: {

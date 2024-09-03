@@ -1,7 +1,7 @@
 import { useAtom } from "jotai"
 import React from "react"
-import route from "../../../Route/Route"
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from "react-native"
+// import route from "../../../Route/Route"
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Alert, BackHandler } from "react-native"
 import { Navigation } from "react-native-navigation"
 import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
 import { getData, setData, userData } from "../../../Storage/AnduroStorage"
@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import * as bip39 from "bip39"
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
+import route from "../../../Route/Route"
 
 const AnduroLoginVC = (props: any) => {
   const { t } = useTranslation()
@@ -111,6 +112,28 @@ const AnduroLoginVC = (props: any) => {
       setIsShownToast(false);
     }
   }, [isShownToast]);
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Alert.alert("", t("backpopuptext"), [
+        {
+          text: t("no"),
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: t("yes"), onPress: () => {  
+          BackHandler.exitApp() 
+        }}
+      ]);     
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();
+    
+}, []);
 
 
   return (

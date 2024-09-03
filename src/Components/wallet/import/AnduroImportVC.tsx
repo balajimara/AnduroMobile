@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Navigation } from "react-native-navigation";
 import DocumentPicker from 'react-native-document-picker';
 import { Button } from "@rneui/themed"
-import { SafeAreaView,TouchableOpacity, View, Text } from "react-native";
+import { SafeAreaView,TouchableOpacity, View, Text, BackHandler } from "react-native";
 import ImportSeedVW from "../../../Common/Views/importseeditem/ImportSeedVW";
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import RNFS from 'react-native-fs';
@@ -76,7 +76,20 @@ const AnduroImportVC = (props: any) => {
     setToasttype(type);
     setIsShownToast(true);
   };
+  
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.pop(props.componentId) 
+      return true;
+    }
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
+    return () => subscription.remove();    
+  }, []);
 
+  
   React.useEffect(() => {
     if (isShownToast) {
       Navigation.dismissAllOverlays();
