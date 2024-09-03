@@ -141,10 +141,7 @@ const AnduroLoginVC = (props: any) => {
      <View className="bg-gray h-full flex flex-col justify-between">
       <View className="p-14 px-6">
        <View className="w-56 m-auto mb-4"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("signanduro")}</Text>
-       </View>
-       <View className="mb-10">
-        <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
-       </View>
+       </View>      
        {hasPassword && (
        <View>
         <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
