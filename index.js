@@ -1,12 +1,7 @@
 /**
  * @format
  */
-//import {AppRegistry} from 'react-native';
-//import {name as appName} from './app.json';
-
-//AppRegistry.registerComponent(appName, () => App);
-//import route, { screens } from './src/Route/Route';
-//screens();
+import { LogBox } from 'react-native';
 import { Navigation } from "react-native-navigation"
 import route from "./src/Route/Route"
 import SplashScreen from "react-native-splash-screen"
@@ -17,7 +12,7 @@ import "./shim.js"
 import { PermissionsAndroid } from "react-native"
 import  'text-encoding-polyfill'
 
-
+LogBox.ignoreAllLogs()
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide()
   Navigation.setDefaultOptions({
