@@ -80,7 +80,7 @@ const AnduroCreatePasswordVC = (props:any) => {
       setdata({ type: StorageTypes.xpubKeys, data: result })
       await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
       const mnemonic = await getMnemonicKey(password.password)
-      if (mnemonic) {      
+      if (mnemonic) {
         if (alys_result.length > 0) {
           setdata({ type: StorageTypes.alysAddress, data: alys_result[0].address })
         }
@@ -148,7 +148,7 @@ const AnduroCreatePasswordVC = (props:any) => {
     await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
     const mnemonic = await getMnemonicKey(password.password)
     if (mnemonic) {
-     
+
       if (alys_result.length > 0) {
         setdata({ type: StorageTypes.alysAddress, data: alys_result[0].address })
       }
@@ -236,7 +236,7 @@ const AnduroCreatePasswordVC = (props:any) => {
             disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
           />
         </View>
-        <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} />
+        <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} onbackdrop={()=> setShowWarning(false)}/>
        </View>
       </SafeAreaView>
   )

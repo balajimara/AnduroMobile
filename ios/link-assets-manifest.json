@@ -20,6 +20,10 @@
     {
       "path": "src/assets/fonts/JetBrainsMono-SemiBold.ttf",
       "sha1": "e3d7be641d058d453e939a65ecf875a825476d85"
+    },
+    {
+      "path": "src/assets/fonts/RobotoMono-Regular.ttf",
+      "sha1": "c25a072c96240ab8fc288b61edf2bb133aaa975d"
     }
   ]
 }
