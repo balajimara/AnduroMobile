@@ -1,11 +1,12 @@
 import React from "react"
-import { Image, StyleSheet, Text, View } from "react-native"
+import {StyleSheet, Text, View } from "react-native"
+import FastImage from 'react-native-fast-image'
 
 const CoinItemVW = (props:any) => {
   return (
     <View style={styles.container}> 
        <View style={styles.leftContainer}>
-           <Image source={{uri: props.data.image}} style={styles.imgContainer} />
+           <FastImage source={{uri: props.data.image}} style={styles.imgContainer} />
            <View style={styles.contentContainer}>
                 <Text style={styles.symbolText}>{props.data.symbol}</Text>
                 <Text style={styles.nameText}>{props.data.name}</Text>

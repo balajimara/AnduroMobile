@@ -263,6 +263,7 @@ const AnduroDashboardVC = (props: any) => {
                 <CoinHeaderVW title={title} />
               </Pressable>
             )}
+            stickySectionHeadersEnabled={true}
            />
           }
          </View>
