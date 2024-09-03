@@ -19,18 +19,21 @@ const AnduroDashboardVC = (props: any) => {
     title: "Native Assets",
     data: [
       {
+        type: "native",
         name: 'BTC Testnet',
         symbol: 'BTC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "native",
         name: 'Coordinate Testnet',
         symbol: 'CBTC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "native",
         name: 'Alys Testnet',
         symbol: 'ALYS',
         image: 'https://picsum.photos/id/1/300/300',
@@ -41,90 +44,105 @@ const AnduroDashboardVC = (props: any) => {
     title: "Tokens",
     data:[
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457'
       },
       {
+        type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',

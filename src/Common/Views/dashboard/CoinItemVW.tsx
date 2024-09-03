@@ -8,13 +8,22 @@ const CoinItemVW = (props:any) => {
        <View style={styles.leftContainer}>
            <FastImage source={{uri: props.data.image}} style={styles.imgContainer} />
            <View style={styles.contentContainer}>
-                <Text style={styles.symbolText}>{props.data.symbol}</Text>
-                <Text style={styles.nameText}>{props.data.name}</Text>
+                {props.data.type === "native" &&
+                  <>
+                    <Text style={styles.symbolText}>{props.data.symbol}</Text>
+                    <Text style={styles.nameText}>{props.data.name}</Text>
+                  </>
+                } 
+                {props.data.type === "token" &&
+                   <Text style={styles.symbolText}>{props.data.name}</Text>
+                }
            </View>
        </View>
        <View style={styles.contentContainer}>
           <Text style={styles.balanceText}>{props.data.balance} <Text style={styles.balanceSymbolText}>{props.data.symbol}</Text></Text>
-          <Text style={styles.usdText}>$200.00</Text>
+          {props.data.type === "native" &&
+             <Text style={styles.usdText}>$200.00</Text>
+          }
        </View>
     </View>
   )
