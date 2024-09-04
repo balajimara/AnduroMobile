@@ -74,6 +74,31 @@ const privacy = {
   },
 }
 
+
+/**
+ * default root before login
+ */
+
+const gettingstarted = {
+  stack: {
+    children: [
+      {
+        component: {
+          id: "AnduroGettingStarted",
+          name: "AnduroGettingStarted",
+          options: {
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+}
+
 /**
  * default crete type page
  */
@@ -242,6 +267,7 @@ const route = {
   login: login,
   afterLogin,
   afterPrivacy,
-  changelanguage
+  changelanguage,
+  gettingstarted
 }
 export default route
