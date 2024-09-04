@@ -87,6 +87,12 @@ const gettingstarted = {
           id: "AnduroGettingStarted",
           name: "AnduroGettingStarted",
           options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
             animations: {
               setRoot: {
                 waitForRender: true,

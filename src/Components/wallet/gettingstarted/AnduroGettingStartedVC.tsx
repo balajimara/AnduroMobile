@@ -86,7 +86,7 @@ export const AnduroGettingStartedVC = (props: any) => {
             className="w-52 mx-auto"
           />
           <View className="w-72 m-auto pt-10">
-           <Text className="text-2xl text-fixedbg leading-8 font-geistmedium font-medium text-center">Multiple chains, one Bitcoin experience</Text>
+           <Text className="text-2xl text-fixedbg leading-8 font-geistmedium font-medium text-center">{t("gettingstartedtext")}</Text>
           </View>
          </View>
         </View>
@@ -95,7 +95,7 @@ export const AnduroGettingStartedVC = (props: any) => {
         <View className="mb-5">
          <Button
             className="w-full"
-            title="Get Started"
+            title={t("getstartbutton")}
             buttonStyle={{
               backgroundColor: "#000000",
               borderRadius: 8,
