@@ -49,5 +49,8 @@
   "warning": "Warning",
   "passwordwarning": "Warning: Due to security reasons, we strongly recommend you set the password for the wallet",
   "confirmbackuptext": "Select words in order to match your seed phrase",
-  "secretrecoverytitle": "Do you want to review the recovery keys?"  
+  "secretrecoverytitle": "Do you want to review the recovery keys?",
+  "logouttext": "Are you sure you want to logout of your account?",
+  "gettingstartedtext": "Multiple chains, one Bitcoin experience",
+  "getstartbutton": "Get Started"
 }

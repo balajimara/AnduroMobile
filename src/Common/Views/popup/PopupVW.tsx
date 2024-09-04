@@ -26,7 +26,7 @@ const PopupVW = (props:popupProps) => {
         type,
       } = props
   return(
-    <>
+    <SafeAreaView>
     {type === 'createpassword' && (
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }}
     isVisible={isvisible} onBackdropPress={onbackdrop}>
@@ -40,7 +40,7 @@ const PopupVW = (props:popupProps) => {
     <View className="flex-row flex-wrap pt-4">
      <View className="w-1/2 pr-1">
          <Button className="w-full"
-           title="Continue"
+           title={t("continue")}
            onPress={callback ? () => callback("continue") : () => {}}
            buttonStyle={{
              backgroundColor: 'transparent',
@@ -54,7 +54,7 @@ const PopupVW = (props:popupProps) => {
      </View>
      <View className="w-1/2 pl-1">
      <Button className="w-full"
-       title="Close"
+       title={t("close")}
        onPress={callback ? () => callback("close") : () => {}}
        buttonStyle={{
          backgroundColor: '#E8705C',
@@ -70,13 +70,13 @@ const PopupVW = (props:popupProps) => {
    </Dialog>
      )}
       {type === "logout" && (
-        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'fixed', top:'0', }}  isVisible={isvisible} onBackdropPress={onbackdrop} animation={"slideInUp"}>
+        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', top:0, }}  isVisible={isvisible} onBackdropPress={onbackdrop}>
       <View className="p-1">
        <View className="mb-4 w-20 h-20 w-full-in h-auto-in rounded-2xl bg-backuphighlightbg flex items-center justify-center">
-        <Icon name='crosshairs' opacity={0.70} size={40} color="#FAFAFA" />
+        <Icon name='crosshairs' size={40} color="#FAFAFA" />
         </View>
         <View className="mb-1 w-60">
-        <Text className="font-geistsemibold text-lightgray text-xl">Are you sure you want to logout of your account?</Text>
+        <Text className="font-geistsemibold text-lightgray text-xl">{t("logouttext")}</Text>
         </View>
         <View className="flex-row flex-wrap pt-4">
         <View className="w-1/2 pr-1">
@@ -111,7 +111,7 @@ const PopupVW = (props:popupProps) => {
        </View>
       </Dialog>
       )}
-     </>
+      </SafeAreaView>
    );
  };
 
