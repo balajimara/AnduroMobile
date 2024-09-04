@@ -22,17 +22,22 @@ const AnduroSuccessVC = (props: any) => {
     return (
        <SafeAreaView>
         <View className="bg-gray h-full flex flex-col justify-center">
-         <View>
-         <Image
-          resizeMode={"contain"}
-          source={require("../../assets/images/success.png")}
-          className="w-56 m-auto"
-         />
-         <View className="w-80 m-auto"><Text className="text-center text-3xl leading-10 font-geistsemibold text-lightgray">{title}</Text></View>
-         {/* <View className="opacity-50 mt-6"><Text className="text-center text-base font-geistregular text-lightgray">{subtitle}</Text></View> */}
-         </View>
-         <View className="w-full p-5 px-6 absolute bottom-0">
-          <Button className="w-full"
+         <View className="flex-1 relative z-10">
+          <View className="flex flex-col justify-center align-center h-full">
+           <View>
+            <Image
+              resizeMode={"contain"}
+              source={require("../../assets/images/success.png")}
+              className="w-56 m-auto"
+             />
+            <View className="w-80 m-auto"><Text className="text-center text-3xl leading-10 font-geistsemibold text-lightgray">{title}</Text></View>
+            {/* <View className="opacity-50 mt-6"><Text className="text-center text-base font-geistregular text-lightgray">{subtitle}</Text></View> */}
+           </View>
+          </View>
+         </View>  
+         <View className="w-full px-6 relative z-10">
+          <View className="mb-5">
+           <Button className="w-full"
             title="Close"
             onPress={() =>
               Navigation.setRoot({
@@ -49,8 +54,9 @@ const AnduroSuccessVC = (props: any) => {
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
-          />
-         </View>
+            />
+          </View>
+         </View> 
         </View>
        </SafeAreaView>
     )
