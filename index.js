@@ -56,6 +56,7 @@ Navigation.events().registerAppLaunchedListener(() => {
         enabled: false
       }
     },
+    popGesture: false
   })
   navigationLogic()
   requestStoragePermission()
