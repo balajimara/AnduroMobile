@@ -76,7 +76,7 @@ export const AnduroGettingStartedVC = (props: any) => {
     }
   return (
     <SafeAreaView>
-      <View className="bg-continue after:bg-continue flex flex-col h-full max-w-7-full after:fixed after:w-full after:h-full after:bottom-0 after:left-0 after:right-0 after:m-auto">
+      <View className="bg-continue h-full">
        <View className="flex-1 relative z-10">
         <View className="flex flex-col justify-center align-center h-full">
          <View>
