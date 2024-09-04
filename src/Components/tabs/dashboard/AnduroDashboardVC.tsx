@@ -273,7 +273,7 @@ const AnduroDashboardVC = (props: any) => {
               //return null if it is
               if (isExpanded) return null;
     
-              return <CoinItemVW data={item} />;
+              return <CoinItemVW data={item} key={item.symbol}/>;
             }}
             renderSectionHeader={({ section: { title } }) => (
               <Pressable onPress={() => handleToggle(title)}>
