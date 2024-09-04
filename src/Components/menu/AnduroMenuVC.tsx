@@ -7,24 +7,22 @@ import { useTranslation } from "react-i18next"
 
 const AnduroMenuVC = (props: any) => {
   const {t} = useTranslation()
-  const [visible1, setVisible1] = useState(false);
-  const toggleDialog1 = () => {
-   setVisible1(!visible1);
-  };
+
+  const closeMenu = async () => {
+    await Navigation.dismissAllModals()
+    Navigation.mergeOptions(props.componentId, {
+      sideMenu: {
+        left: {
+          visible: false,
+        },
+      },
+    })
+  }
   return (
     <SafeAreaView>
      <View className="bg-gray h-full">
       <View className="navbar p-5 px-3.5 justify-between flex-row flex-wrap">
-        <TouchableOpacity onPress={() => {
-            Navigation.mergeOptions(props.componentId, {
-              sideMenu: {
-                left: {
-                  visible: false,
-                  width: Dimensions.get("window").width,
-                },
-              },
-            })
-        }}>
+        <TouchableOpacity onPress={() => {closeMenu()}}>
        <View className="navbar-start w-auto">
         <Icon style={[styles.iconClose]} name="close"></Icon>
        </View>

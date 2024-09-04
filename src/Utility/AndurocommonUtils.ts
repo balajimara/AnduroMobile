@@ -316,7 +316,7 @@ export const getMnemonicKey = async (password: string): Promise<string|null> => 
 /**
  * This is the function used to generate new mnemonic key
  */
-export const generateMnemonic = (): string => {
+export const generateMnemonic = async () => {
   const mnemonicval: string = bip39.generateMnemonic()
   return mnemonicval
 }

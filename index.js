@@ -56,7 +56,11 @@ Navigation.events().registerAppLaunchedListener(() => {
         enabled: false
       }
     },
-    popGesture: false
+    popGesture: false,
+    layout: {
+      componentBackgroundColor: '#140401',
+    }
+    
   })
   navigationLogic()
   requestStoragePermission()

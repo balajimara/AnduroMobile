@@ -20,15 +20,16 @@ const AnduroSeedsVC = (props: any) => {
   const [mnemonicSec, setMnemonicSec] = useState<any>([])
   const [,getdata] = useAtom(getData)
   React.useEffect(() => { 
-    setTimeout(() => {
-      const mnemonicKey = generateMnemonic()
-      const mnemonicVal: string[] =  mnemonicKey.toString().split(" ")
-      setMnemonic(mnemonicVal)
-      setMnemonicFirst(mnemonicVal.slice(0,6))
-      setMnemonicSec(mnemonicVal.slice(6,12))
-    }, 1000)
-
+    createMnemonic()
   }, [])
+
+  const createMnemonic = async() => {
+    const mnemonicKey = await generateMnemonic()
+    const mnemonicVal: string[] =  mnemonicKey.toString().split(" ")
+    setMnemonic(mnemonicVal)
+    setMnemonicFirst(mnemonicVal.slice(0,6))
+    setMnemonicSec(mnemonicVal.slice(6,12))
+  }
 
   React.useEffect(() => {    
     const backPressEvent = () => {

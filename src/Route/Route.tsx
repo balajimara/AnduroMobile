@@ -167,7 +167,7 @@ const afterLogin = {
           id: "menuid"
         }
       },
-      width: Dimensions.get("window").width,
+      width: 414,
     },
     center: {
       bottomTabs: {

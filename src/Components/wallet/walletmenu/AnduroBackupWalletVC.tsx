@@ -16,13 +16,15 @@ const AnduroBackupWalletVC = (props: any) => {
   const [mnemonicFirst, setMnemonicFirst] = useState<any>([])
   const [mnemonicSec, setMnemonicSec] = useState<any>([])
   React.useEffect(() => {
-    setTimeout(() => {
-      const mnemonicVal = generateMnemonic().toString().split(" ")
-      setMnemonic(mnemonicVal)
-      setMnemonicFirst(mnemonicVal.slice(0,6))
-      setMnemonicSec(mnemonicVal.slice(6,12))
-    }, 1000)
+    backupMnemonic()
   }, [])
+
+  const backupMnemonic = async() => {
+    const mnemonicVal = generateMnemonic().toString().split(" ")
+    setMnemonic(mnemonicVal)
+    setMnemonicFirst(mnemonicVal.slice(0,6))
+    setMnemonicSec(mnemonicVal.slice(6,12))
+  }
 
   const copyToClipboard = () => {
     Clipboard.setString(mnemonic.join(" "))   

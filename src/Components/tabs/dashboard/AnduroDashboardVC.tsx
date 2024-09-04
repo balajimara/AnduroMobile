@@ -182,7 +182,6 @@ const AnduroDashboardVC = (props: any) => {
     })
     Navigation.events().registerNavigationButtonPressedListener(
       (event) => {
-        console.log(event)
         if (event.buttonId === "menuButton") {
           openMenu()
         }
