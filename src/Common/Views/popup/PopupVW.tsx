@@ -18,15 +18,17 @@ const PopupVW = (props:popupProps) => {
         callback,
         disabled,
       } = props
+    const { t } = useTranslation()
           return(
+            <SafeAreaView>
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }}
     isVisible={isvisible} onBackdropPress={onbackdrop}>
     <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
     <View className="mb-0.5">
-     <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold">Warning</Text>
+     <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold">{t("warning")}</Text>
     </View>
     <View className="opacity-70 pt-2">
-     <Text className="font-geistregular text-headingcolor text-xs">Warning: Due to security reasons, we strongly recommend you set the password for the wallet</Text>
+     <Text className="font-geistregular text-headingcolor text-xs">{t("passwordwarning")}</Text>
     </View>
     <View className="flex-row flex-wrap pt-4">
      <View className="w-1/2 pr-1">
@@ -59,6 +61,7 @@ const PopupVW = (props:popupProps) => {
      </View>
     </View>
    </Dialog>
+   </SafeAreaView>
     )
 }
 

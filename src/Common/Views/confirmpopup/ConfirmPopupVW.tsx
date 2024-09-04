@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native"
+import { View, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native"
 import { Text, Dialog, Button } from "@rneui/themed"
 import { useState } from "react"
 import React from "react"
@@ -30,10 +30,11 @@ const confirmPopupVW = (props: confirmProps) => {
   
 
     return (
+      <SafeAreaView>
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }} isVisible={isVisible} onBackdropPress={() => onClose()} animation={"slideInUp"}>
     <View className="mt-2 mb-5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
     <View className="mb-1 w-52"> 
-    <Text style={styles.headtitle}>Do you want to review the recovery keys?</Text>
+    <Text style={styles.headtitle}>{t("secretrecoverytitle")}</Text>
     </View>
     <View className="opacity-70 pt-2 pb-4">
     <Text style={styles.subheadtitle} className="font-geistregular text-headingcolor text-xs mb-4">{t("secretrecoverytext")}</Text>
@@ -70,6 +71,7 @@ const confirmPopupVW = (props: confirmProps) => {
     </View>
     </View>
     </Dialog>
+    </SafeAreaView>
     )
 }
 
