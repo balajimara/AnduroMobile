@@ -78,16 +78,16 @@ navigationLogic = () => {
       } else {
         if (Object.keys(userinfo).length === 0) {
           Navigation.setRoot({
-            root: route.beforeLogin,
+            root: route.gettingstarted,
           })
         } else {
           if (userinfo.privacyPolicy) {
             Navigation.setRoot({
-              root: route.afterPrivacy,
+              root: route.gettingstarted,
             })
           } else {
             Navigation.setRoot({
-              root: route.beforeLogin,
+              root: route.gettingstarted,
             })
           }
         }

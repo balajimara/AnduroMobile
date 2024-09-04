@@ -249,7 +249,7 @@ const AnduroCreatePasswordVC = (props:any) => {
             disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
           />
         </View>
-        <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} onbackdrop={()=> setShowWarning(false)}/>
+        <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} onbackdrop={() => setShowWarning(false)} type="createpassword"/>
        </View>
       </SafeAreaView>
   )
