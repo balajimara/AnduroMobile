@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
-import { ListItem, Dialog } from "@rneui/themed"
+import { ListItem, Dialog, Button } from "@rneui/themed"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { Navigation } from "react-native-navigation"
 import { useTranslation } from "react-i18next"
