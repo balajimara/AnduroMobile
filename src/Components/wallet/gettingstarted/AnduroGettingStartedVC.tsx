@@ -85,7 +85,7 @@ export const AnduroGettingStartedVC = (props: any) => {
             source={require("../../../assets/images/walletLogo.png")}
             className="w-52 mx-auto"
           />
-          <View className="w-60 m-auto pt-10">
+          <View className="w-72 m-auto pt-10">
            <Text className="text-2xl text-fixedbg leading-8 font-geistmedium font-medium text-center">Multiple chains, one Bitcoin experience</Text>
           </View>
          </View>
