@@ -5,7 +5,7 @@ import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Alert, BackHand
 import { Navigation } from "react-native-navigation"
 import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
 import { getData, setData, userData } from "../../../Storage/AnduroStorage"
-import { decrypteData, getAlysAddress, getCachedData, getMnemonicKey, setCachedData, updateXpubKey } from "../../../Utility/AndurocommonUtils"
+import { decrypteData, getAlysAddress, getCachedData, getMnemonicKey, setCachedData, showToasterMsg, updateXpubKey } from "../../../Utility/AndurocommonUtils"
 import { Button, Input } from "@rneui/themed"
 import { useTranslation } from 'react-i18next'
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -49,15 +49,14 @@ const AnduroLoginVC = (props: any) => {
       console.log("Alyssinfooo====",networkList)
       const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
         return network.networkType == "alys"
-      })
-      // if (alysNetworkInfo) {
-      //   const alysAddress = getAlysAddress(mnemonic, alysNetworkInfo.chromaBookApi, alysNetworkInfo.name).address
-      //   console.log("alysaddressss=========",alysAddress)
-      //   setdata({ type: StorageTypes.alysAddress, data: alysAddress })
-      // }
+      })  
+      if (alysNetworkInfo) {
+        let alysAddress = await getCachedData(CachedDataTypes.alysAddress)
+        setdata({ type: StorageTypes.alysAddress, data: alysAddress })
+      }
       const CachedUserData = getdata({ type: StorageTypes.userData })
       CachedUserData.isLogged = true
-      setdata({ type: StorageTypes.userData, value: CachedUserData })
+      setdata({ type: StorageTypes.userData, data: CachedUserData })
       setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
       Navigation.setRoot({
         root: route.afterLogin,
@@ -91,24 +90,7 @@ const AnduroLoginVC = (props: any) => {
 
   React.useEffect(() => {
     if (isShownToast) {
-      Navigation.dismissAllOverlays();
-      Navigation.showOverlay({
-        component: {
-          name: "Toast",
-          options: {
-            layout: {
-              componentBackgroundColor: "transparent",
-            },
-            overlay: {
-              interceptTouchOutside: false,
-            },
-          },
-          passProps: {
-            type: toasttype,
-            message: toastmessage,
-          },
-        },
-      });
+      showToasterMsg(toasttype, toastmessage)
       setIsShownToast(false);
     }
   }, [isShownToast]);

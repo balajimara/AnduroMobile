@@ -95,6 +95,7 @@ const AnduroCreatePasswordVC = (props:any) => {
       if (mnemonic) {
         if (alys_result.length > 0) {
           setdata({ type: StorageTypes.alysAddress, data: alys_result[0].address })
+          await setCachedData(CachedDataTypes.alysAddress,  alys_result[0].address)
         }
       }
       setShowWarning(false)

@@ -8,6 +8,7 @@ import ImportSeedVW from "../../../Common/Views/importseeditem/ImportSeedVW";
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import RNFS from 'react-native-fs';
 import * as bip39 from 'bip39';
+import { showToasterMsg } from "../../../Utility/AndurocommonUtils";
 
 const AnduroImportVC = (props: any) => {
   const {t} = useTranslation()
@@ -92,24 +93,7 @@ const AnduroImportVC = (props: any) => {
   
   React.useEffect(() => {
     if (isShownToast) {
-      Navigation.dismissAllOverlays();
-      Navigation.showOverlay({
-        component: {
-          name: "Toast",
-          options: {
-            layout: {
-              componentBackgroundColor: "transparent",
-            },
-            overlay: {
-              interceptTouchOutside: false,
-            },
-          },
-          passProps: {
-            type: toasttype,
-            message: toastmessage,
-          },
-        },
-      });
+      showToasterMsg(toasttype, toastmessage)
       setIsShownToast(false);
     }
   }, [isShownToast]);

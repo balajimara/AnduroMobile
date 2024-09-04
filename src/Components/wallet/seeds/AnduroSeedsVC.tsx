@@ -8,13 +8,17 @@ import React, { useState } from "react"
 import { Navigation } from "react-native-navigation"
 import RNFS, { DownloadDirectoryPath, writeFile } from "react-native-fs"
 import SeedItemVW from "../../../Common/Views/seeditem/SeedItem"
-import { generateMnemonic } from "../../../Utility/AndurocommonUtils"
+import { generateMnemonic, showToasterMsg } from "../../../Utility/AndurocommonUtils"
+import { StorageTypes } from "../../../model/AnduroStorageModel"
+import { getData } from "../../../Storage/AnduroStorage"
+import { useAtom } from "jotai"
 
 const AnduroSeedsVC = (props: any) => {
   const { t } = useTranslation()
   const [mnemonic, setMnemonic] = useState<any>([])
   const [mnemonicFirst, setMnemonicFirst] = useState<any>([])
   const [mnemonicSec, setMnemonicSec] = useState<any>([])
+  const [,getdata] = useAtom(getData)
   React.useEffect(() => { 
     setTimeout(() => {
       const mnemonicKey = generateMnemonic()
@@ -39,36 +43,20 @@ const AnduroSeedsVC = (props: any) => {
   }, []);
 
   const copyToClipboard = () => {
-    Clipboard.setString(mnemonic.join(" "))
-    Navigation.dismissAllOverlays()
-    Navigation.showOverlay({
-      component: {
-        name: "Toast",
-        options: {
-          layout: {
-            componentBackgroundColor: "transparent",
-          },
-          overlay: {
-            interceptTouchOutside: false,
-          },
-        },
-        passProps: {
-          type: "success",
-          message: `${t("copymnemonic")}`,
-        },
-      },
-    })
+    Clipboard.setString(mnemonic.join(" ").toLowerCase())
+    showToasterMsg("success",`${t("copymnemonic")}` )  
   }
 
   const downloadMnemonic = async () => {
     try {
-      let path = `${RNFS.DownloadDirectoryPath}/Anduro`
+      let userdata = getdata({ type: StorageTypes.userData })
+      let path = `${RNFS.DownloadDirectoryPath}/Anduro/`
       RNFS.mkdir(path)
-      path += "/data.json"
+      path += `${userdata.walletName}.json`
       // write the file
       RNFS.writeFile(path, JSON.stringify(mnemonic), "utf8")
         .then((response: any) => {
-          console.log("FILE WRITTEN!", response)
+          showToasterMsg("success",`${t("downloadkeysuccess")}` )
         })
         .catch((err: any) => {
           console.log(err.message)

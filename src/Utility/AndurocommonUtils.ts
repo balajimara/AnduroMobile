@@ -23,6 +23,7 @@ import * as bip39 from "bip39"
 import { Buffer } from "@craftzdog/react-native-buffer";
 import unorm from "unorm";
 import { pbkdf2Sync  } from 'react-native-crypto';
+import { Navigation } from 'react-native-navigation';
 
 
 
@@ -275,7 +276,7 @@ export const getAlysAddress = (mnemonic: any, baseURL: string, seed: Buffer) => 
   // const masterSecretKey = deriveKeyFromMnemonic(mnemonic, path)
   // const seed = bip39.mnemonicToSeed(mnemonic)
   const masterSecretKey = deriveKeyFromEntropy(seed, path)
-  console.log('secKey', masterSecretKey)
+  console.log("inside alys - 2", new Date())
   const privateKey = Buffer.from(masterSecretKey).toString("hex")
   const pubKey = Buffer.from(bls.getPublicKey(masterSecretKey)).toString("hex")
   console.log('pubKey', pubKey)
@@ -355,4 +356,25 @@ export const mnemonicToSeed = (
 function salt(password: string) {
   //Using unorm to get proper unicode string, string.normalize might not work well for some verions of browser
   return "mnemonic" + (unorm.nfkd(password) || "");
+}
+
+export const showToasterMsg = (type: string, message: string) => {
+  Navigation.dismissAllOverlays()
+    Navigation.showOverlay({
+      component: {
+        name: "Toast",
+        options: {
+          layout: {
+            componentBackgroundColor: "transparent",
+          },
+          overlay: {
+            interceptTouchOutside: false,
+          },
+        },
+        passProps: {
+          type: type,
+          message: message,
+        },
+      },
+    })
 }

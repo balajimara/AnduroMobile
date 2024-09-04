@@ -6,7 +6,7 @@ import { getData, setData } from "../../Storage/AnduroStorage"
 import { useAtom } from "jotai"
 import { Button, Input } from "@rneui/themed"
 import validator from "validator"
-import { getCachedData, setCachedData } from "../../Utility/AndurocommonUtils"
+import { getCachedData, setCachedData, showToasterMsg } from "../../Utility/AndurocommonUtils"
 import { Navigation } from "react-native-navigation"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
@@ -40,10 +40,9 @@ const AnduroCreateVC = (props: any) => {
     const isValidate = validateWalletName(walletname)
     if (isValidate) {
       Navigation.dismissAllOverlays()
-      const CachedUserData = getdata({ type: StorageTypes.userData })
-      console.log("CachedUserData", CachedUserData, walletname)
+      let CachedUserData = getdata({ type: StorageTypes.userData })
       CachedUserData.walletName = walletname
-      setdata({ type: StorageTypes.userData, value: CachedUserData })
+      setdata({ type: StorageTypes.userData, data: CachedUserData })
       await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
       if (props.mnemonic) {
         Navigation.push(props.componentId, {
@@ -102,28 +101,7 @@ const AnduroCreateVC = (props: any) => {
 
     React.useEffect(() => {
       if (isShownToast) {
-        Navigation.dismissAllOverlays();
-        Navigation.showOverlay({
-          component: {
-            name: "Toast",
-            options: {
-              layout: {
-                componentBackgroundColor: "transparent",
-              },
-              overlay: {
-                interceptTouchOutside: false,
-              },
-              
-            },
-            passProps: {
-              type: toasttype,
-              message: toastmessage,
-            },
-            
-          },
-          
-        
-        });
+        showToasterMsg(toasttype, toastmessage)
         setIsShownToast(false);
       }
     }, [isShownToast]);

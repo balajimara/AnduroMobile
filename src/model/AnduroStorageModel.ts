@@ -5,6 +5,7 @@ export enum CachedDataTypes {
   derivationIndex = "derivationindex",
   userdata = "userdata",
   CONNECTEDSITES = "connectedSites",
+  alysAddress = "alysaddress",
 }
 export enum StorageTypes {
   userData = "userdata",

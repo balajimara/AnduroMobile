@@ -8,7 +8,7 @@ import "react-native-get-random-values"
 import Clipboard from "@react-native-clipboard/clipboard"
 import RNFS, { DownloadDirectoryPath, writeFile } from "react-native-fs"
 import SeedItemVW from "../../../Common/Views/seeditem/SeedItem"
-import { generateMnemonic } from "../../../Utility/AndurocommonUtils"
+import { generateMnemonic, showToasterMsg } from "../../../Utility/AndurocommonUtils"
 
 const AnduroBackupWalletVC = (props: any) => {
   const { t } = useTranslation()
@@ -25,25 +25,8 @@ const AnduroBackupWalletVC = (props: any) => {
   }, [])
 
   const copyToClipboard = () => {
-    Clipboard.setString(mnemonic.join(" "))
-    Navigation.dismissAllOverlays()
-    Navigation.showOverlay({
-      component: {
-        name: "Toast",
-        options: {
-          layout: {
-            componentBackgroundColor: "transparent",
-          },
-          overlay: {
-            interceptTouchOutside: false,
-          },
-        },
-        passProps: {
-          type: "success",
-          message: `${t("copymnemonic")}`,
-        },
-      },
-    })
+    Clipboard.setString(mnemonic.join(" "))   
+    showToasterMsg("success", `${t("copymnemonic")}`)
   }
 
   const downloadMnemonic = async () => {
