@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Navigation } from "react-native-navigation";
 import DocumentPicker from 'react-native-document-picker';
 import { Button } from "@rneui/themed"
-import { SafeAreaView,TouchableOpacity, View, Text, BackHandler } from "react-native";
+import { SafeAreaView,TouchableOpacity, View, Text, BackHandler, ScrollView } from "react-native";
 import ImportSeedVW from "../../../Common/Views/importseeditem/ImportSeedVW";
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import RNFS from 'react-native-fs';
@@ -44,7 +44,7 @@ const AnduroImportVC = (props: any) => {
 
 
   const validateMnemonic = () => {
-    const isValid = bip39.validateMnemonic(mnemonic.join(" "))
+    const isValid = bip39.validateMnemonic(mnemonic.join(" ").toLowerCase())
     if (!isValid) {
       const errorMessage = mnemonic.some((word: string) => word.trim() === "")
         ? t("mnemonic")
@@ -122,17 +122,19 @@ const AnduroImportVC = (props: any) => {
     <SafeAreaView>
   <View className="bg-gray h-full flex flex-col justify-between">
       <View className="p-14 pb-0 px-4">
+      <ScrollView>
         <View className="m-auto mb-3 px-5 relative w-80">
           <Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("walletphrase")}</Text>
         </View>
         <View className="text-center mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("importwallet")}</Text>
           </View>
-        <View className="list-numbers flex-row flex-wrap relative z-10 mb-3">
-          {mnemonic.map((word: any, index: any) => (
-            <ImportSeedVW key={index} index={index} word={word} onUpdateWord={updateWord} />
-          ))}
-        </View>
+          <View className="list-numbers flex-row flex-wrap relative z-10 mb-3">
+            {mnemonic.map((word: any, index: any) => (
+              <ImportSeedVW key={index} index={index} word={word} onUpdateWord={updateWord} />
+            ))}
+          </View>
+          </ScrollView>
         <View className="px-2">
         <Button className="w-full"
          icon={{

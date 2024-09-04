@@ -18,6 +18,9 @@ const ImportSeedVW: React.FC<ImportSeedVWProps> = ({ index, word, onUpdateWord }
         className="bg-popupclr border border-backupline rounded-lg h-11 w-full p-3 pl-12 font-geistsemibold text-white text-xs focus:outline-none [&::-webkit-inner-spin-button]:appearance-none"
         value={word}
         onChangeText={handleChange}
+        autoCorrect={false}
+        spellCheck={false}
+        keyboardType='visible-password'
       />
       <View className="absolute left-11 top-3.5 w-px h-3.5 bg-backupline"></View>
       <View className="absolute left-6 top-3">

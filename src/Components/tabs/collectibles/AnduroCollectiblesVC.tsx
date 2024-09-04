@@ -256,7 +256,7 @@ const AnduroCollectiblesVC = (props: any)  => {
                   //return null if it is
                   if (isExpanded) return null;
         
-                  return <CoinItemVW data={item} />;
+                  return <CoinItemVW data={item} key={item.name}/>;
                 }}
                 renderSectionHeader={({ section: { title } }) => (
                   <Pressable onPress={() => handleToggle(title)}>
