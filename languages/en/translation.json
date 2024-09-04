@@ -48,5 +48,6 @@
   "no": "No",
   "backpopuptext": "Are you sure you want to go back?",
   "createsecurepassword": "Create a secure password",
-  "downloadkeysuccess": "Mnemonic has been downloaded successfully"
+  "downloadkeysuccess": "Mnemonic has been downloaded successfully",
+  "logmeout":"Yes, log me out"
 }

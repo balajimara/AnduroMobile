@@ -1,26 +1,33 @@
+
+
 import { View, Text,Image} from 'react-native';
 import { useTranslation } from "react-i18next"
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Dialog } from '@rneui/themed';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
+import { Navigation } from 'react-native-navigation';
+import route from '../../../Route/Route';
 
 interface popupProps {
 isvisible?: boolean
 onbackdrop?: () => void
-callback: (value: any) => void
-disabled:boolean
+callback?: (value: any) => void
+disabled?:boolean
+type:string
   }
 
 const PopupVW = (props:popupProps) => {
+  const {t} = useTranslation()
     const {
         isvisible,
         onbackdrop,
         callback,
         disabled,
+        type,
       } = props
-    const { t } = useTranslation()
-          return(
-            <SafeAreaView>
+  return(
+    <>
+    {type === 'createpassword' && (
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }}
     isVisible={isvisible} onBackdropPress={onbackdrop}>
     <View className="mb-2.5 w-14 h-14 w-full-in h-auto-in opacity-70"><Icon name='crosshairs' size={50} color="#FAFAFA" /></View>
@@ -61,9 +68,52 @@ const PopupVW = (props:popupProps) => {
      </View>
     </View>
    </Dialog>
-   </SafeAreaView>
-    )
-}
+     )}
+      {type === "logout" && (
+        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'fixed', top:'0', }}  isVisible={isvisible} onBackdropPress={onbackdrop} animation={"slideInUp"}>
+      <View className="p-1">
+       <View className="mb-4 w-20 h-20 w-full-in h-auto-in rounded-2xl bg-backuphighlightbg flex items-center justify-center">
+        <Icon name='crosshairs' opacity={0.70} size={40} color="#FAFAFA" />
+        </View>
+        <View className="mb-1 w-60">
+        <Text className="font-geistsemibold text-lightgray text-xl">Are you sure you want to logout of your account?</Text>
+        </View>
+        <View className="flex-row flex-wrap pt-4">
+        <View className="w-1/2 pr-1">
+            <Button className="w-full"
+            title={t("no")}
+            buttonStyle={{
+                backgroundColor: 'transparent',
+                borderWidth:1,
+                borderColor:'#514e4e',
+                borderRadius: 8,
+                height: 40,
+            }}
+            onPress={callback ? () => callback("close") : () => {}}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 13 }}
+            />
+        </View>
+        <View className="w-1/2 pl-1">
+        <Button className="w-full"
+        title={t("logmeout")}
+        onPress={callback ? () => callback("continue") : () => {}}
+        buttonStyle={{
+            backgroundColor: '#E8705C',
+            borderWidth:1,
+            borderColor: '#E8705C',
+            borderRadius: 8,
+            height: 40,
+        }}
+        titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 13 }}
+        />
+        </View>
+       </View>
+       </View>
+      </Dialog>
+      )}
+     </>
+   );
+ };
 
 
 export default PopupVW

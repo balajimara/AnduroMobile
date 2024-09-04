@@ -230,7 +230,7 @@ const afterLogin = {
       },
     },
   },
-  
+
 }
 
 /**
@@ -262,12 +262,39 @@ const changelanguage = {
   },
 }
 
+const backupwallet = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroBackupWallet",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+}
+
+
 const route = {
   beforeLogin: privacy,
   login: login,
   afterLogin,
   afterPrivacy,
   changelanguage,
-  gettingstarted
+  gettingstarted,
+  backupwallet
 }
 export default route
