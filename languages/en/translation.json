@@ -72,5 +72,17 @@
   "changepassword": "Change Password",
   "backupwalletmenu": "Backup Wallet",
   "changelanguage": "Change Language",
-  "logout": "Logout"
+  "logout": "Logout",
+  "oldpassword": "Old Password",
+  "newpassword": "New Password",
+  "confirmnewpassword": "Confirm New Password",
+  "enteroldpassword": "Enter Old Password",
+  "enternewpassword": "Enter New Password",
+  "enterconfirmpassword": "Enter Confirm New Password",
+  "emptypassword": "Please Enter Your password",
+  "incorrectoldpassword": "Incorrect old password",
+  "passwordmismatch": "New password shouldn't be the same as your previous password.",
+  "passwordvalidationerror": "Use at least 8 characters. 1 uppercase letter, 1 lowercase letter, and 1 number",
+  "confirmpasswordmismatch": "Password and confirm password should be the same",
+  "setpassword": "Set Password"
 }

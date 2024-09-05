@@ -42,7 +42,7 @@ Navigation.registerComponent("Toast", () => Toast)
 Navigation.registerComponent("AnduroSuccess", () => AnduroSuccessVC)
 Navigation.registerComponent("AnduroBackupWallet", () => AnduroBackupWalletVC)
 Navigation.registerComponent("AnduroChangeLanguage", () => AnduroChangeLanguageVC)
-Navigation.registerComponent("AnduroChangePasswordVC", () => AnduroChangePasswordVC)
+Navigation.registerComponent("AnduroChangePassword", () => AnduroChangePasswordVC)
 Navigation.registerComponent("AnduroNativeCoins", () => AnduroNativeCoinsVC)
 Navigation.registerComponent("AnduroSelectCurrency", () => AnduroSelectCurrencyVC)
 Navigation.registerComponent("AnduroSetting", () => AnduroSettingVC)
@@ -318,6 +318,31 @@ const nativeCoin = {
   },
 }
 
+const changepassword = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroChangePassword",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+}
+
 
 const route = {
   beforeLogin: privacy,
@@ -327,6 +352,7 @@ const route = {
   changelanguage,
   gettingstarted,
   backupwallet,
-  nativeCoin
+  nativeCoin,
+  changepassword
 }
 export default route

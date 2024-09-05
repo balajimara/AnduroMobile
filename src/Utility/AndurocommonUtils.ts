@@ -378,3 +378,25 @@ export const showToasterMsg = (type: string, message: string) => {
       },
     })
 }
+
+/**
+ * This function is used to validate the password format
+ * @param password -password
+ * @param confirmPassword -confirmPassword
+ */
+export const validatePassword = (password: string): boolean => {
+  let isValidPassword = true
+  const passwordRegex = [/.{8,}/, /[A-Z]/, /[a-z]/, /\d/]
+  for (let i = 0; i < passwordRegex.length; i++) {
+    if (!passwordRegex[i].test(password)) isValidPassword = false
+  }
+  return isValidPassword
+}
+
+/**
+ * This function is used to verifying user has password
+*/
+export const checkPassword = async () => {
+  let mnemonicKey = await getCachedData(CachedDataTypes.mnemonic) || ""
+  return !bip39.validateMnemonic(mnemonicKey)
+}
