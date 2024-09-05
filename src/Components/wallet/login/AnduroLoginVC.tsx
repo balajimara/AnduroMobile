@@ -1,7 +1,7 @@
 import { useAtom } from "jotai"
 import React from "react"
 // import route from "../../../Route/Route"
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Alert, BackHandler } from "react-native"
+import { ScrollView, SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Alert, BackHandler } from "react-native"
 import { Navigation } from "react-native-navigation"
 import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
 import { getData, setData, userData } from "../../../Storage/AnduroStorage"
@@ -122,26 +122,28 @@ const AnduroLoginVC = (props: any) => {
     <SafeAreaView>
      <View className="bg-gray h-full flex flex-col justify-between">
       <View className="p-14 px-6">
-       <View className="w-56 m-auto mb-4"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("signanduro")}</Text>
+       <View className="w-56 m-auto mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("signanduro")}</Text>
        </View>      
        {hasPassword && (
-       <View>
-        <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
-        <View className="relative">
-        <View className="absolute top-3.5 right-4 z-10 opacity-70">
-        <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
+       <ScrollView>
+        <View>
+         <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
+         <View className="relative">
+         <View className="absolute top-3.5 right-4 z-10 opacity-70">
+          <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
           ><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
           </View>
-        <View className="bg-popupclr h-11 pr-8 rounded-lg">
+         <View className="bg-popupclr h-11 pr-8 rounded-lg">
          <Input placeholder='Password' placeholderTextColor="#968F8D"  secureTextEntry={!showPassword} inputContainerStyle={[styles.inputOne]} style={[styles.input]}
          onChangeText={(value) => {
           console.log("Input Value:", value);
           setCurrentPassword(value)
-        }}
+          }}
          />
+         </View>
+         </View>
         </View>
-        </View>
-       </View>
+       </ScrollView> 
       )}
       </View>
       <View className="p-5">
