@@ -58,5 +58,12 @@
   "close": "Close",
   "gettingstartedtext": "Multiple chains, one Bitcoin experience",
   "getstartbutton": "Get Started",
-  "Loading": "Loading ...."
+  "Loading": "Loading ....",
+  "Show":"Show",
+  "backupwallet":"Backup your wallet",
+  "seedpharse":"Write down your seed phrase and make sure to keep it private.",
+  "walletuniquekey":"This is the unique key to your wallet.",
+  "goback":"Go back",
+  "revealseedphrase":" Enter password to reveal your seed phrase",
+  "confirm":"Confirm"
 }

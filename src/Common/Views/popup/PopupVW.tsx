@@ -1,9 +1,9 @@
 
 
-import { View, Text,Image} from 'react-native';
+import { View, Text,Image, TouchableOpacity, StyleSheet} from 'react-native';
 import { useTranslation } from "react-i18next"
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Dialog } from '@rneui/themed';
+import { Button, Dialog, Input } from '@rneui/themed';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import { Navigation } from 'react-native-navigation';
 import route from '../../../Route/Route';
@@ -19,21 +19,24 @@ type:string
 
 const PopupVW = (props:popupProps) => {
   const {t} = useTranslation()
+  const [password, setPassword] = React.useState<string>("")
+  const [showPassword, setShowPassword] = React.useState<boolean>(false)
   const [title, setTitle] = useState<string>(t("continue"))
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false)
+
     const {
         isvisible,
         onbackdrop,
         callback,
         type,
       } = props
-  
+
       React.useEffect(() => {
         if (isDisabled) {
           if (callback) {
             callback("continue")
             setIsDisabled(false)
-          }          
+          }
         }
       }, [isDisabled])
 
@@ -62,7 +65,7 @@ const PopupVW = (props:popupProps) => {
              backgroundColor: 'transparent',
              borderWidth:1,
              borderColor:'#514e4e',
-             borderRadius: 0, 
+             borderRadius: 0,
              height: 40,
            }}
            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
@@ -129,9 +132,70 @@ const PopupVW = (props:popupProps) => {
        </View>
       </Dialog>
       )}
+      {type === "password" && (
+        <View className="absolute border border-popupoutline top-0 left-0 w-full bg-popupclr rounded-lg p-5 shadow-lg z-20 z-50">
+          <View className="w-full">
+            <View className="pb-4 flex-row justify-between items-start border-b border-[#877f7e] border-b-[1px]">
+              <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold">
+                {t("revealseedphrase")}
+              </Text>
+              <TouchableOpacity onPress={callback ? () => callback(null) : () => {}}>
+                <Image resizeMode={"contain"} source={require("../../../assets/images/close.png")} className="w-3" />
+              </TouchableOpacity>
+            </View>
+            <View className="py-4 pb-3">
+              <Text className="block text-lightgray text-sm font-inter mb-2">{t("password")}</Text>
+              <View className="relative">
+              <View className="absolute top-3 right-4 z-10 opacity-60">
+            <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
+            ><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
+            </View>
+                <Input
+                  placeholder='Enter Your Password'
+                  placeholderTextColor="#5a4e4c"
+                  inputContainerStyle={styles.inputOne}
+                  style={styles.input}
+                  value={password}
+                  onChangeText={(text) => setPassword(text)}
+                  secureTextEntry={!showPassword}
+                  />
+              </View>
+            </View>
+            <View className="mb-5">
+              <Button
+                className="w-full"
+                title={t("confirm")}
+                onPress={callback ? () => callback(password) : () => {}}
+                buttonStyle={{
+                  backgroundColor: '#E8705C',
+                  borderRadius: 8,
+                  height: 48,
+                }}
+                containerStyle={{ borderRadius: 8 }}
+                titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
+              />
+            </View>
+          </View>
+        </View>
+      )}
       </SafeAreaView>
    );
  };
 
+ const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    fontFamily:'JetBrainsMono-SemiBold',
+    fontSize: 14,
+    padding:0,
+    color: '#fff',
+  },
+  inputOne: {
+    borderBottomWidth:0,
+    borderRadius:8,
+    paddingLeft:10,
+    paddingTop:3
+  }
+});
 
 export default PopupVW
