@@ -109,8 +109,8 @@ const AnduroMenuVC = (props: any) => {
         </View>
        </ListItem>
       </View>
-      <PopupVW type="logout" isvisible={showWarning} onbackdrop={()=> setShowWarning(false)} callback={handleLogoutAction} />
      </View>
+     <PopupVW type="logout" isvisible={showWarning} onbackdrop={()=> setShowWarning(false)} callback={handleLogoutAction} />
     </SafeAreaView>
   )
 }
