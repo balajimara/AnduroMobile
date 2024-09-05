@@ -130,12 +130,12 @@ const AnduroSeedConfirmVC = (props:any) => {
   return (
       <SafeAreaView>
         <View className="bg-gray h-full flex flex-col justify-between">
-        <View className="px-6">
+        <View className="px-5">
           <View className="w-64 m-auto mb-4"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">{t("confirmbackup")}</Text></View>
           <View className="mb-10">
-          <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("confirmbackuptext")}</Text>
+          <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("typenumber")}</Text>
           </View>
-        <View className="max-h-[70%] pb-20">
+        <View className="max-h-[70%] pb-20 px-1">
           <ScrollView>
           <View>
           {mnemonicVal.shuffledMnemonic.length > 0 &&

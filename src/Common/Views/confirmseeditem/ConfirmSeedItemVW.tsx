@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native"
+import { SafeAreaView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { Text, ListItem } from "@rneui/themed"
 import { useState } from "react"
 import React from "react"
@@ -13,12 +13,14 @@ interface confirmseedItemProps {
 const ConfirmSeedItemVW = (props: confirmseedItemProps) => {
   const { mnemonicKey, position, selectAction, index } = props 
   return (
+   <SafeAreaView>
     <ListItem style={styles.subtitleView} containerStyle={selectBoxStyle(position)} onPress={selectAction}>
-    <View className={`flex-row items-center justify-between py-2 px-4  w-full ${position > 0 ? "border-backupline rounded-2xl bg-backuphighlightbg" : "border-transparent bg-popupclr"}`}>
-    <View><Text style={styles.headtitle}>{mnemonicKey.charAt(0).toUpperCase() + mnemonicKey.substring(1).toLowerCase()}</Text></View>
-    <View className={`py-1.5 px-5 pr-6 border ${position > 0 ? "border-backupline rounded-3xl bg-popupclr" : "border-transparent bg-popupclr"}`}><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
-    </View>
-  </ListItem>
+     <View className={`flex-row items-center justify-between py-2 px-4  w-full ${position > 0 ? "border-backupline rounded-2xl bg-backuphighlightbg" : "border-transparent bg-popupclr"}`}>
+      <View><Text style={styles.headtitle}>{mnemonicKey.charAt(0).toUpperCase() + mnemonicKey.substring(1).toLowerCase()}</Text></View>
+      <View className={`py-1.5 px-5 pr-6 border ${position > 0 ? "border-backupline rounded-3xl bg-popupclr" : "border-transparent bg-popupclr"}`}><Text style={styles.subheadtitle}> {position > 0 ? position : "X"}</Text></View>
+     </View>
+    </ListItem>
+   </SafeAreaView>
   )
 }
 
