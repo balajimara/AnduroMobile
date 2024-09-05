@@ -22,6 +22,7 @@ import AnduroSettingVC from "../Components/wallet/walletmenu/AnduroSettingVC"
 import AnduroTransactionHistoryVC from "../Components/wallet/walletmenu/AnduroTransactionHistoryVC"
 import AnduroSendVC from "../Components/send/AnduroSendVC"
 import AnduroGettingStartedVC from "../Components/wallet/gettingstarted/AnduroGettingStartedVC"
+import AnduroReceiveVC from "../Components/tabs/dashboard/AnduroReceiveVC"
 
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC)
@@ -48,7 +49,7 @@ Navigation.registerComponent("AnduroSetting", () => AnduroSettingVC)
 Navigation.registerComponent("AnduroTransactionHistory", () => AnduroTransactionHistoryVC)
 Navigation.registerComponent("AnduroSend", () => AnduroSendVC)
 Navigation.registerComponent("AnduroGettingStarted", () => AnduroGettingStartedVC)
-
+Navigation.registerComponent("AnduroReceive", () => AnduroReceiveVC)
 /**
  * default root before login
  */
