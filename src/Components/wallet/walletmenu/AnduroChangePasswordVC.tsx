@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Text, StyleSheet } from "react-native"
+import { ScrollView, SafeAreaView, View, Text, StyleSheet } from "react-native"
 import { useTranslation } from 'react-i18next';
 import { Button, Input } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -9,6 +9,7 @@ const AnduroChangePasswordVC = () => {
     <SafeAreaView>
      <View className="bg-gray h-full flex flex-col justify-between">
       <View>
+      <ScrollView>
        <View className="p-12 px-6 pb-0">
         <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">Set Password</Text></View>
         <View className="mb-5">
@@ -33,6 +34,7 @@ const AnduroChangePasswordVC = () => {
         </View>
        </View>
        </View>
+       </ScrollView>
       </View>
       <View className="w-full p-5 px-6">
         <Button className="w-full"
