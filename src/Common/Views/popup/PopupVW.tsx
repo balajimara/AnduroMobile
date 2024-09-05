@@ -108,7 +108,7 @@ const PopupVW = (props:popupProps) => {
                 height: 40,
             }}
             onPress={callback ? () => callback("close") : () => {}}
-            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 13 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 12 }}
             />
         </View>
         <View className="w-1/2 pl-1">
@@ -122,7 +122,7 @@ const PopupVW = (props:popupProps) => {
             borderRadius: 8,
             height: 40,
         }}
-        titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 13 }}
+        titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 12 }}
         />
         </View>
        </View>
