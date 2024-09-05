@@ -57,5 +57,6 @@
   "logouttext": "Are you sure you want to logout of your account?",
   "close": "Close",
   "gettingstartedtext": "Multiple chains, one Bitcoin experience",
-  "getstartbutton": "Get Started"
+  "getstartbutton": "Get Started",
+  "Loading": "Loading ...."
 }

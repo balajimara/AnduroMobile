@@ -52,5 +52,6 @@
   "secretrecoverytitle": "Do you want to review the recovery keys?",
   "logouttext": "Are you sure you want to logout of your account?",
   "gettingstartedtext": "Multiple chains, one Bitcoin experience",
-  "getstartbutton": "Get Started"
+  "getstartbutton": "Get Started",
+  "Loading": "Loading ...."
 }

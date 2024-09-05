@@ -7,6 +7,7 @@ import { Button, Dialog } from '@rneui/themed';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import { Navigation } from 'react-native-navigation';
 import route from '../../../Route/Route';
+import React, { useState } from 'react';
 
 interface popupProps {
 isvisible?: boolean
@@ -18,13 +19,28 @@ type:string
 
 const PopupVW = (props:popupProps) => {
   const {t} = useTranslation()
+  const [title, setTitle] = useState<string>(t("continue"))
+  const [isDisabled, setIsDisabled] = React.useState<boolean>(false)
     const {
         isvisible,
         onbackdrop,
         callback,
-        disabled,
         type,
       } = props
+  
+      React.useEffect(() => {
+        if (isDisabled) {
+          if (callback) {
+            callback("continue")
+            setIsDisabled(false)
+          }          
+        }
+      }, [isDisabled])
+
+      const createwallet = () => {
+        setIsDisabled(true)
+        setTitle(t("Loading"))
+      }
   return(
     <SafeAreaView>
     {type === 'createpassword' && (
@@ -40,16 +56,18 @@ const PopupVW = (props:popupProps) => {
     <View className="flex-row flex-wrap pt-4">
      <View className="w-1/2 pr-1">
          <Button className="w-full"
-           title={t("continue")}
-           onPress={callback ? () => callback("continue") : () => {}}
+           title={title}
+           onPress={callback ? () => createwallet() : () => {}}
            buttonStyle={{
              backgroundColor: 'transparent',
              borderWidth:1,
              borderColor:'#514e4e',
-             borderRadius: 0,
+             borderRadius: 0, 
              height: 40,
            }}
            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
+           disabled={isDisabled}
+           disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
          />
      </View>
      <View className="w-1/2 pl-1">
