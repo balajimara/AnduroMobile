@@ -13,7 +13,7 @@ import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 // import PopupVW from "../../../Common/Views/popup/PopupVW"
 import { Navigation } from "react-native-navigation";
-import { View, Text,SafeAreaView,StyleSheet, TouchableOpacity, BackHandler } from 'react-native';
+import { View, Text,SafeAreaView,ScrollView,StyleSheet, TouchableOpacity, BackHandler } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog, Input, ListItem } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -189,6 +189,7 @@ const AnduroCreatePasswordVC = (props:any) => {
          <View className="mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("createsecurepassword")}</Text>
          </View>
+         <ScrollView>
          <View className="mb-5">
           <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("password")}</Text>
           <View className="relative">
@@ -218,6 +219,7 @@ const AnduroCreatePasswordVC = (props:any) => {
             <PasswordList data={val} key={i} />
           ))}
           </View>
+          </ScrollView>
         </View>
         <View className="w-full p-5 px-6">
           <Button className="w-full"
@@ -249,8 +251,8 @@ const AnduroCreatePasswordVC = (props:any) => {
             disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
           />
         </View>
-        <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} onbackdrop={() => setShowWarning(false)} type="createpassword"/>
        </View>
+       <PopupVW callback={handleSkipAction} isvisible={showWarning} disabled={loading} onbackdrop={() => setShowWarning(false)} type="createpassword"/>
       </SafeAreaView>
   )
 }

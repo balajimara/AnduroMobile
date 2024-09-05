@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, StyleSheet, BackHandler } from "react-native"
+import { View, Text, SafeAreaView, ScrollView, TextInput, StyleSheet, BackHandler } from "react-native"
 import { useSSR, useTranslation } from "react-i18next"
 import React, { useState } from "react"
 import { StorageTypes } from "../../model/AnduroStorageModel"
@@ -120,6 +120,7 @@ const AnduroCreateVC = (props: any) => {
               {t("createwalletsubdec")}
             </Text>
           </View>
+         <ScrollView> 
           <View>
             <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">
               {t("walletname")}
@@ -141,6 +142,7 @@ const AnduroCreateVC = (props: any) => {
               </View>
             </View>
           </View>
+         </ScrollView>
         </View>
         <View className="w-full p-5 px-6">
           <Button
