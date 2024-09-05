@@ -103,8 +103,8 @@ const handleNavigation = (menutype: string, componentName: any) => {
        </View>
       </View>
       <View className="p-3.5 px-5 settings-menu">       
-       {menudata.map((menu) => (
-          <MenuItemVW menuname={menu.menuname} iconname={menu.iconname} menutype={menu.menutype} callback={() => handleNavigation(menu.menutype, menu.componentName)} />
+       {menudata.map((menu,index) => (
+          <MenuItemVW menuname={menu.menuname} iconname={menu.iconname} menutype={menu.menutype} callback={() => handleNavigation(menu.menutype, menu.componentName)} key={index}/>
        ))}
       </View>
      </View>
