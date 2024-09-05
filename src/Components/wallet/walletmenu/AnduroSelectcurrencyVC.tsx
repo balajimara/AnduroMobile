@@ -72,8 +72,8 @@ const AnduroSelectcurrencyVC = () => {
               height: 48,
             }}
             containerStyle={{ borderRadius: 8 }}
-            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
-            disabledStyle={{backgroundColor:'#E8705C', color:'#fff',opacity:0.40}}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16, color:'#fff' }}
+            disabledStyle={{backgroundColor:'#E8705C', opacity:0.40}}
           />
       </View>
      </View>   

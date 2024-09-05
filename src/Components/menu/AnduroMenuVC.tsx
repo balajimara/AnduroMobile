@@ -9,12 +9,15 @@ import { StorageTypes } from '../../model/AnduroStorageModel';
 import { setCachedData } from '../../Utility/AndurocommonUtils';
 import route from '../../Route/Route';
 import PopupVW from '../../Common/Views/popup/PopupVW';
+import { useTranslation } from 'react-i18next';
+import MenuItemVW from '../../Common/Views/setting/MenuItemVW';
 
 const AnduroMenuVC = (props: any) => {
   const [showWarning, setShowWarning] = React.useState(false)
   const [_openMenu, setOpenMenu] = useAtom(menuOpen)
   const [, setdata] = useAtom(setData)
   const [, getdata] = useAtom(getData)
+  const { t } = useTranslation()
 
   const handleLogoutAction = (type: string) => {
     setShowWarning(false)
@@ -40,6 +43,49 @@ const AnduroMenuVC = (props: any) => {
       },
     })
   }
+
+const menudata = [{
+  "menuname": t("backupwalletmenu"),
+  "iconname": "wallet-outline",
+  "menutype": "backup",
+  "componentName": route.backupwallet
+},{
+  "menuname": t("selectcurrency"),
+  "iconname": "currency-sign",
+  "menutype": "selectcurrency",
+  "componentName": "AnduroSelectCurrency"
+},{
+  "menuname": t("changelanguage"),
+  "iconname": "translate",
+  "menutype": "changelanguage",
+  "componentName": route.changelanguage
+},{
+  "menuname": t("nativecoins"),
+  "iconname": "hand-coin-outline",
+  "menutype": "nativecoins",
+  "componentName": route.nativeCoin
+},{
+  "menuname": t("changepassword"),
+  "iconname": "form-textbox-password",
+  "menutype": "changepassword",
+  "componentName": "AnduroChangePassword"
+},{
+  "menuname": t("logout"),
+  "iconname": "logout",
+  "menutype": "logout",
+  "componentName": ""
+}]
+
+const handleNavigation = (menutype: string, componentName: any) => {
+  if (menutype === "logout") {
+    setShowWarning(true)
+  } else {
+    closeMenu()
+    Navigation.setRoot({
+      root: componentName
+    })
+  }
+}
   
   return (
     <SafeAreaView>
@@ -56,58 +102,10 @@ const AnduroMenuVC = (props: any) => {
        <View className="navbar-end w-auto">
        </View>
       </View>
-      <View className="p-3.5 px-5 settings-menu">
-       <ListItem className="bg-transparent" containerStyle={styles.listView}>
-       <View className="flex justify-between pb-8 w-full relative"
-        >
-           <TouchableOpacity onPress={()=> Navigation.setRoot({
-            root: route.backupwallet,
-          })}>
-          <View className="flex-row flex-wrap items-center">
-           <View><Icon style={[styles.iconOne]} name="wallet-outline"></Icon></View>
-           <View><Text className="font-geistregular text-lg text-walletLight font-normal cursor-pointer">Backup Wallet</Text></View>
-          </View>
-          <View className="absolute right-0"><Icon style={[styles.icon]} name="chevron-right"></Icon></View>
-          </TouchableOpacity>
-        </View>
-         <View className="flex justify-between pb-8 w-full relative">
-          <View className="flex-row flex-wrap items-center">
-           <View><Icon style={[styles.iconOne]} name="currency-sign"></Icon></View>
-           <View><Text className="font-geistregular text-lg text-walletLight font-normal cursor-pointer">Select Currency</Text></View>
-           <View className="absolute right-0"><Icon style={[styles.icon]} name="chevron-right"></Icon></View>
-          </View>
-         </View>
-         <View className="flex justify-between pb-8 w-full relative">
-          <View className="flex-row flex-wrap items-center">
-           <View><Icon style={[styles.iconOne]} name="translate"></Icon></View>
-           <View><Text className="font-geistregular text-lg text-walletLight font-normal cursor-pointer">Change Language</Text></View>
-           <View className="absolute right-0"><Icon style={[styles.icon]} name="chevron-right"></Icon></View>
-          </View>
-         </View>
-         <View className="flex justify-between pb-8 w-full relative">
-          <View className="flex-row flex-wrap items-center">
-           <View><Icon style={[styles.iconOne]} name="hand-coin-outline"></Icon></View>
-           <View><Text className="font-geistregular text-lg text-walletLight font-normal cursor-pointer">Native Coins</Text></View>
-           <View className="absolute right-0"><Icon style={[styles.icon]} name="chevron-right"></Icon></View>
-          </View>
-         </View>
-         <View className="flex justify-between pb-8 w-full relative">
-          <View className="flex-row flex-wrap items-center">
-           <View><Icon style={[styles.iconOne]} name="form-textbox-password"></Icon></View>
-           <View><Text className="font-geistregular text-lg text-walletLight font-normal cursor-pointer">Set Password</Text></View>
-           <View className="absolute right-0"><Icon style={[styles.icon]} name="chevron-right"></Icon></View>
-          </View>
-         </View>
-         <View className="flex justify-between pb-8 w-full relative"
-        ><TouchableOpacity onPress={()=> setShowWarning(true)}>
-          <View className="flex-row flex-wrap items-center">
-           <View><Icon style={[styles.iconOne]} name="logout"></Icon></View>
-           <View><Text className="font-geistregular text-lg text-walletLight font-normal cursor-pointer">Logout</Text></View>
-           <View className="absolute right-0"><Icon style={[styles.icon]} name="chevron-right"></Icon></View>
-          </View>
-          </TouchableOpacity>
-        </View>
-       </ListItem>
+      <View className="p-3.5 px-5 settings-menu">       
+       {menudata.map((menu) => (
+          <MenuItemVW menuname={menu.menuname} iconname={menu.iconname} menutype={menu.menutype} callback={() => handleNavigation(menu.menutype, menu.componentName)} />
+       ))}
       </View>
      </View>
      <PopupVW type="logout" isvisible={showWarning} onbackdrop={()=> setShowWarning(false)} callback={handleLogoutAction} />
@@ -115,24 +113,10 @@ const AnduroMenuVC = (props: any) => {
   )
 }
 
-  const styles = StyleSheet.create({
-   icon: {
-    color: "#fff",
-    fontSize: 24,
-   },
-   iconOne: {
-    color: "#fff",
-    fontSize: 18,
-    marginRight:15
-   },
+  const styles = StyleSheet.create({  
    iconClose: {
     color: "#fff",
     fontSize: 24
-   },
-   listView: {
-    backgroundColor: 'transparent',
-    flexDirection: 'column',
-    padding:0
    }
   })
 

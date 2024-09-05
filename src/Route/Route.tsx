@@ -248,7 +248,7 @@ const changelanguage = {
     children: [
       {
         component: {
-          name: "AnduroNativeCoins",
+          name: "changelanguage",
           options: {
             topBar: {
               visible: false,
@@ -293,6 +293,31 @@ const backupwallet = {
   },
 }
 
+const nativeCoin = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroNativeCoins",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+}
+
 
 const route = {
   beforeLogin: privacy,
@@ -301,6 +326,7 @@ const route = {
   afterPrivacy,
   changelanguage,
   gettingstarted,
-  backupwallet
+  backupwallet,
+  nativeCoin
 }
 export default route

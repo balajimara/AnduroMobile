@@ -1,90 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native"
-import { ListItem, Button } from "@rneui/themed"
-import ToggleSwitch from 'toggle-switch-react-native'
+import { Button } from "@rneui/themed"
+import LanguageListVW from '../../../Common/Views/setting/LanguageListVW';
+import { getData, setData } from '../../../Storage/AnduroStorage';
+import { useAtom } from 'jotai';
+import { NetworkListModel } from '../../../model/AnduroNetworkModel';
+import { CachedDataTypes, StorageTypes } from '../../../model/AnduroStorageModel';
+import { useTranslation } from 'react-i18next';
+import { setCachedData } from '../../../Utility/AndurocommonUtils';
+import { Navigation } from 'react-native-navigation';
+import route from '../../../Route/Route';
 
-type SwitchComponentProps = {};
 
 const AnduroNativeCoinsVC = () => {
-  const [ison, setIson] = useState(false)
+  const { t } = useTranslation()
+  const [, getdata] = useAtom(getData)
+  const [, setdata] = useAtom(setData)
+  const [networks] = React.useState<NetworkListModel[]>(getdata({ type: StorageTypes.networkList }))
+  const [nativeCoins, setNativeCoins] = React.useState<string[]>(
+    getdata({ type: StorageTypes.userData }).nativeCoins,
+  )
+  const [isUpdated, setIsUpdated] = React.useState<boolean>(false)
 
   React.useEffect(() => {
+    setdata({ type: StorageTypes.pageTitle, data: t("nativecoins") })
+  }, [])
 
-  },[ison])
+  const handleCallback = async (networkName: string) => {
+    const CachedUserData = getdata({ type: StorageTypes.userData })
+    let nativeCoins: string[] = CachedUserData.nativeCoins
+    if (nativeCoins.length === 1 && nativeCoins.includes(networkName)) return
+    if (nativeCoins.includes(networkName)) {
+      nativeCoins = nativeCoins.filter((coin) => coin !== networkName)
+    } else {
+      nativeCoins.push(networkName)
+    }
+    CachedUserData.nativeCoins = nativeCoins
+    await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
+    setdata({ type: CachedDataTypes.userdata, data: CachedUserData })
+    setNativeCoins(nativeCoins)
+    setIsUpdated(!isUpdated)
+  }
+
+  const navigateDashboard = () => {
+    Navigation.setRoot({
+      root: route.afterLogin
+    })
+  }
+
   return (
     <SafeAreaView>
      <View className="bg-gray h-full flex flex-col justify-between">
       <View>
        <View className="p-12 px-6 pb-0">
-        <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">Native Coins</Text></View>
+        <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("nativecoins")}</Text></View>
        </View>
        <View className="px-5">
-        <ListItem className="bg-transparent" containerStyle={styles.listView}>
-         <View className="bg-popupclr p-4 py-2 pr-2.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
-          <View className="flex-row flex-wrap items-center"> 
-           <View className="mr-3"><Image resizeMode={"contain"} source={require("../../../assets/images/euro-flag.png")} className="w-8 m-auto" /></View>
-           <View>
-            <Text className="text-lightgray capitalize text-base">bitcoin</Text>
-           </View>
-          </View>
-          <View>
-           <ToggleSwitch
-              isOn={ison}
-              onColor="#A94C3D"
-              offColor="#66332b"
-              size="medium"
-              onToggle={() => {setIson(!ison)}}
-            />
-          </View>
-         </View>
-         <View className="bg-popupclr p-4 py-2 pr-2.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
-          <View className="flex-row flex-wrap items-center"> 
-           <View className="mr-3"><Image resizeMode={"contain"} source={require("../../../assets/images/euro-flag.png")} className="w-8 m-auto" /></View>
-           <View>
-            <Text className="text-lightgray capitalize text-base">coordinate</Text>
-           </View>
-          </View>
-          <View>
-            <ToggleSwitch
-              isOn={true}
-              onColor="#A94C3D"
-              offColor="#66332b"
-              size="medium"
-              onToggle={isOff => console.log("changed to : ", isOff)}
-            />
-          </View>
-         </View>
-         <View className="bg-popupclr p-4 py-2 pr-2.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
-          <View className="flex-row flex-wrap items-center"> 
-           <View className="mr-3"><Image resizeMode={"contain"} source={require("../../../assets/images/euro-flag.png")} className="w-8 m-auto" /></View>
-           <View>
-            <Text className="text-lightgray capitalize text-base">alys</Text>
-           </View>
-          </View>
-          <View>
-            <ToggleSwitch
-              isOn={true}
-              onColor="#A94C3D"
-              offColor="#66332b"
-              size="medium"
-              onToggle={isOff => console.log("changed to : ", isOff)}
-            />
-          </View>
-         </View>
-        </ListItem>
+        {networks.map((network: NetworkListModel, i: number) => (
+          <LanguageListVW 
+            title={network.name}
+            key={i}
+            callback={async () => handleCallback(network.name)}
+            isChecked={nativeCoins.includes(network.name)}
+            symbol={network.symbol}
+            type="native-coins"
+            nativeCoins={nativeCoins}/>
+
+        ))}
        </View>
       </View>
       <View className="p-5">
        <Button className="w-full"
-            title="Go Back"
+            title={t("goback")}
             buttonStyle={{
               backgroundColor: '#E8705C',
               borderRadius: 8,
               height: 48,
             }}
             containerStyle={{ borderRadius: 8 }}
-            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
-            disabledStyle={{backgroundColor:'#E8705C', color:'#fff',opacity:0.40}}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16, color:'#FFFFFF' }}
+            disabledStyle={{backgroundColor:'#E8705C', opacity:0.40}}
+            onPress={() => navigateDashboard()}
           />
       </View>
      </View>   

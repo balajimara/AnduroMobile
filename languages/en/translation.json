@@ -65,5 +65,12 @@
   "walletuniquekey":"This is the unique key to your wallet.",
   "goback":"Go back",
   "revealseedphrase":" Enter password to reveal your seed phrase",
-  "confirm":"Confirm"
+  "confirm":"Confirm",
+  "nativecoinerror": "At least one native needs to be selected",
+  "nativecoins": "Native Coins",
+  "selectcurrency": "Select Currency",
+  "changepassword": "Change Password",
+  "backupwalletmenu": "Backup Wallet",
+  "changelanguage": "Change Language",
+  "logout": "Logout"
 }
