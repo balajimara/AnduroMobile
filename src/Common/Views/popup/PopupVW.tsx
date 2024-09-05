@@ -88,7 +88,7 @@ const PopupVW = (props:popupProps) => {
    </Dialog>
      )}
       {type === "logout" && (
-        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', top:0, }}  isVisible={isvisible} onBackdropPress={onbackdrop}>
+        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute' }}  isVisible={isvisible} onBackdropPress={onbackdrop}>
       <View className="p-1">
        <View className="mb-4 w-20 h-20 w-full-in h-auto-in rounded-2xl bg-backuphighlightbg flex items-center justify-center">
         <Icon name='crosshairs' size={40} color="#FAFAFA" />
