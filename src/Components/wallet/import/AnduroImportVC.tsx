@@ -58,7 +58,7 @@ const AnduroImportVC = (props: any) => {
       component: {
         name: 'AnduroCreate',
         passProps: {
-        mnemonic: mnemonic.join(" ")
+        mnemonic: mnemonic.join(" ").toLowerCase()
         },
         options: {
           topBar: {
