@@ -133,23 +133,26 @@ const PopupVW = (props:popupProps) => {
       </Dialog>
       )}
       {type === "password" && (
-        <View className="absolute border border-popupoutline top-0 left-0 w-full bg-popupclr rounded-lg p-5 shadow-lg z-20 z-50">
+        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute' }}>
           <View className="w-full">
-            <View className="pb-4 flex-row justify-between items-start border-b border-[#877f7e] border-b-[1px]">
-              <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold">
+            <View className="pb-2 flex-row justify-between items-start border-b border-[#877f7e] border-b-[1px]">
+              <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold w-60">
                 {t("revealseedphrase")}
               </Text>
+              <View className="relative bottom-3">
               <TouchableOpacity onPress={callback ? () => callback(null) : () => {}}>
                 <Image resizeMode={"contain"} source={require("../../../assets/images/close.png")} className="w-3" />
               </TouchableOpacity>
+              </View>
             </View>
             <View className="py-4 pb-3">
-              <Text className="block text-lightgray text-sm font-inter mb-2">{t("password")}</Text>
+              <Text className="block text-lightgray text-base font-inter mb-2">{t("password")}</Text>
               <View className="relative">
-              <View className="absolute top-3 right-4 z-10 opacity-60">
-            <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}
-            ><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
-            </View>
+               <View className="absolute top-3 right-4 z-10 opacity-60">
+                <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
+               </View>
+               <View className="bg-btcinnerbg h-12 rounded-lg" style={styles.inputOut}>
+               
                 <Input
                   placeholder='Enter Your Password'
                   placeholderTextColor="#5a4e4c"
@@ -159,9 +162,11 @@ const PopupVW = (props:popupProps) => {
                   onChangeText={(text) => setPassword(text)}
                   secureTextEntry={!showPassword}
                   />
+                  
               </View>
+             </View> 
             </View>
-            <View className="mb-5">
+            <View className="pt-2">
               <Button
                 className="w-full"
                 title={t("confirm")}
@@ -176,7 +181,7 @@ const PopupVW = (props:popupProps) => {
               />
             </View>
           </View>
-        </View>
+        </Dialog>
       )}
       </>
    );
@@ -184,17 +189,20 @@ const PopupVW = (props:popupProps) => {
 
  const styles = StyleSheet.create({
   input: {
-    height: 40,
-    fontFamily:'JetBrainsMono-SemiBold',
+    height: 45,
+    fontFamily:'Geist-SemiBold',
     fontSize: 14,
     padding:0,
-    color: '#fff',
+    color: '#fafafa',
   },
   inputOne: {
     borderBottomWidth:0,
     borderRadius:8,
-    paddingLeft:10,
-    paddingTop:3
+    paddingLeft:10
+  },
+  inputOut: {
+    borderWidth:1,
+    borderColor:'#4e4e4e'
   }
 });
 
