@@ -248,7 +248,7 @@ const changelanguage = {
     children: [
       {
         component: {
-          name: "changelanguage",
+          name: "AnduroChangeLanguage",
           options: {
             topBar: {
               visible: false,

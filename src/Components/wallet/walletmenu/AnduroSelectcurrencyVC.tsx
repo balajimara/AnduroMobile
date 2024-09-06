@@ -81,7 +81,7 @@ const AnduroSelectcurrencyVC = () => {
       </View>
       <View className="p-5">
        <Button className="w-full"
-            title="Go Back"
+            title={t("goback")}
             onPress={()=> Navigation.setRoot({
               root: route.afterLogin,
             })}
