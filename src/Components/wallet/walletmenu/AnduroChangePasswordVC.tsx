@@ -1,4 +1,4 @@
-import { ScrollView, SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { ScrollView, SafeAreaView, View, Text, StyleSheet, TouchableOpacity, BackHandler } from "react-native"
 import { useTranslation } from 'react-i18next';
 import { Button, Input } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
@@ -45,6 +45,21 @@ const AnduroChangePasswordVC: React.FC = () => {
     }    
     setPasswordInfo()
   }, [])
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.setRoot({
+        root: route.afterLogin
+      })
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();
+    
+   }, []);
 
   const gotToMenuPage = async () => {
     setIsDisabled(true)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, Image, BackHandler } from "react-native"
 import { ListItem, CheckBox, Icon, Button } from "@rneui/themed"
 import { CurrencyDataModel } from '../../../model/AnduroUserDataModel';
 import { StorageTypes } from '../../../model/AnduroStorageModel';
@@ -29,6 +29,21 @@ const AnduroSelectcurrencyVC = () => {
     getCurrencyList()
   }, [])
 
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.setRoot({
+        root: route.afterLogin
+      })
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();
+    
+   }, []);
+
   const getCurrencyList = async () => {
     const networks: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
     if (networks.length > 0)
@@ -50,7 +65,7 @@ const AnduroSelectcurrencyVC = () => {
       <View>
        <View className="p-14 px-6 pb-0">
         <View className="mb-10">
-          <Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">Select Currency</Text>
+          <Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("selectcurrency")}</Text>
         </View>
        </View>
        <View>

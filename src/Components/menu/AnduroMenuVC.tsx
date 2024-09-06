@@ -5,8 +5,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { Navigation } from "react-native-navigation"
 import { useAtom } from 'jotai';
 import { getData, menuOpen, setData } from '../../Storage/AnduroStorage';
-import { StorageTypes } from '../../model/AnduroStorageModel';
-import { setCachedData, checkPassword } from '../../Utility/AndurocommonUtils';
+import { CachedDataTypes, StorageTypes } from '../../model/AnduroStorageModel';
+import { setCachedData, checkPassword, getCachedData } from '../../Utility/AndurocommonUtils';
 import route from '../../Route/Route';
 import PopupVW from '../../Common/Views/popup/PopupVW';
 import { useTranslation } from 'react-i18next';
@@ -61,14 +61,14 @@ const AnduroMenuVC = (props: any) => {
       passwordStatus()
   })
 
-  const handleLogoutAction = (type: string) => {
+  const handleLogoutAction = async (type: string) => {
     setShowWarning(false)
     if (type !== "close") {
       setOpenMenu(false)
-      const CachedUserData = getdata({ type: StorageTypes.userData })
+      const CachedUserData = JSON.parse(await getCachedData(CachedDataTypes.userdata) || "{}")
       CachedUserData.isLogged = false
       setdata({ type: StorageTypes.userData, data: CachedUserData })
-      setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
+      await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
       Navigation.setRoot({
         root: route.login,
       })
