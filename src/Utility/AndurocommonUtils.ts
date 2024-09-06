@@ -24,7 +24,7 @@ import { Buffer } from "@craftzdog/react-native-buffer";
 import unorm from "unorm";
 import { pbkdf2Sync  } from 'react-native-crypto';
 import { Navigation } from 'react-native-navigation';
-import { GET_CURRENCY_VALUE } from '../Config/CoordinateIndexerApi';
+import { GET_CURRENCY_VALUE, GET_LANGUAGE_LIST } from '../Config/CoordinateIndexerApi';
 import axios from "axios"
 
 /**
@@ -413,4 +413,14 @@ export const getMultiCurrency = async (chromaBookApi: string, networkMode: strin
    currencyList.push(element)
  }
  return currencyResult.data.status ? currencyList : []
+}
+
+/**
+ * This function is used to get language list
+ * @param chromaBookApi -chromabook api
+ */
+
+export const getMultiLanguage = async (chromaBookApi: string) => {
+  const result = await axios.get(chromaBookApi + GET_LANGUAGE_LIST)
+  return result.data.status ? result.data.result : []
 }
