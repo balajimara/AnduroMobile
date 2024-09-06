@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, Touchable, TouchableOpacity } from "reac
 import { useTranslation } from "react-i18next"
 import React from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { ListItem } from "@rneui/themed"
+import { CheckBox, ListItem } from "@rneui/themed"
 import ToggleSwitch from "toggle-switch-react-native"
 import { showToasterMsg } from "../../../Utility/AndurocommonUtils"
 
@@ -19,10 +19,19 @@ const LanguageListVW = (props: LanguageListProps) => {
   const { t } = useTranslation()
   const { title, callback, isChecked, symbol, type, nativeCoins } = props
   const [isActive, setIsActive] = React.useState<boolean>(isChecked)
-   
+
+
+  const Icons = () => {
+    if (title === "USD") {
+      return require("../../../assets/images/usa-flag.png")
+    } else if (title === "EUR") {
+      return require("../../../assets/images/euro-flag.png")
+    }
+  }
+
   const validateNativeCoins = () => {
-    if (type === "native-coins" && isChecked && nativeCoins?.length === 1) {      
-      showToasterMsg("error", t("nativecoinerror"))  
+    if (type === "native-coins" && isChecked && nativeCoins?.length === 1) {
+      showToasterMsg("error", t("nativecoinerror"))
       setIsActive(true)
     }
   }
@@ -30,13 +39,13 @@ const LanguageListVW = (props: LanguageListProps) => {
   React.useEffect(() => {}, [])
 
   const updateCoins = async () => {
-    if (type === "native-coins" && isChecked && nativeCoins?.length === 1) {      
-        showToasterMsg("error", t("nativecoinerror"))  
+    if (type === "native-coins" && isChecked && nativeCoins?.length === 1) {
+        showToasterMsg("error", t("nativecoinerror"))
         setIsActive(true)
     } else {
         setIsActive(!isActive)
         await callback()
-    }   
+    }
   }
 
   return (
@@ -45,7 +54,7 @@ const LanguageListVW = (props: LanguageListProps) => {
                 <TouchableOpacity onPress={() => updateCoins()}>
                 <ListItem className="bg-transparent" containerStyle={styles.listView}>
                 <View className="bg-popupclr p-4 py-2 pr-2.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
-                <View className="flex-row flex-wrap items-center"> 
+                <View className="flex-row flex-wrap items-center">
                 <View className="mr-3"><Image resizeMode={"contain"} source={require("../../../assets/images/euro-flag.png")} className="w-8 m-auto" /></View>
                 <View>
                     <Text className="text-lightgray capitalize text-base">{title}</Text>
@@ -64,6 +73,35 @@ const LanguageListVW = (props: LanguageListProps) => {
                 </ListItem>
                 </TouchableOpacity>
              )}
+            {type !== "native-coins" && (
+              <TouchableOpacity onPress={callback}>
+              <ListItem className="bg-transparent" containerStyle={styles.listView}>
+              <View className="py-2 px-5 w-full">
+                <View className="border-b-2 border-currencyLine p-2 pr-0 mb-0">
+                <View className="justify-between flex-row flex-wrap">
+                  <View className="flex-row items-center">
+                  <View className="mr-2"><Image resizeMode={"contain"} source={Icons()} className="w-8 m-auto" /></View>
+                  <Text className="text-base font-geistregular text-walletLight custom-radio relative cursor-pointer">{title}</Text>
+                  </View>
+                  <View>
+                  <CheckBox
+                    checked={isChecked}
+                    onPress={callback}
+                    iconType="material-community"
+                    checkedIcon="radiobox-marked"
+                    uncheckedIcon="radiobox-blank"
+                    uncheckedColor="#2E2825"
+                    checkedColor="#E8705C"
+                    size={26}
+                    containerStyle={styles.radioButton}
+                  />
+                  </View>
+                </View>
+                </View>
+              </View>
+              </ListItem>
+              </TouchableOpacity>
+             )}
         </SafeAreaView>
   )
 }
@@ -72,6 +110,10 @@ const styles = StyleSheet.create({
    listView: {
     backgroundColor: 'transparent',
     flexDirection: 'column',
+    padding:0
+   },
+   radioButton: {
+    backgroundColor:'transparent',
     padding:0
    }
   })

@@ -53,7 +53,7 @@ const menudata = [{
   "menuname": t("selectcurrency"),
   "iconname": "currency-sign",
   "menutype": "selectcurrency",
-  "componentName": "AnduroSelectCurrency"
+  "componentName": route.selectcurrency
 },{
   "menuname": t("changelanguage"),
   "iconname": "translate",
@@ -86,7 +86,7 @@ const handleNavigation = (menutype: string, componentName: any) => {
     })
   }
 }
-  
+
   return (
     <SafeAreaView>
      <View className="bg-gray h-full">
@@ -102,7 +102,7 @@ const handleNavigation = (menutype: string, componentName: any) => {
        <View className="navbar-end w-auto">
        </View>
       </View>
-      <View className="p-3.5 px-5 settings-menu">       
+      <View className="p-3.5 px-5 settings-menu">
        {menudata.map((menu,index) => (
           <MenuItemVW menuname={menu.menuname} iconname={menu.iconname} menutype={menu.menutype} callback={() => handleNavigation(menu.menutype, menu.componentName)} key={index}/>
        ))}
@@ -113,7 +113,7 @@ const handleNavigation = (menutype: string, componentName: any) => {
   )
 }
 
-  const styles = StyleSheet.create({  
+  const styles = StyleSheet.create({
    iconClose: {
     color: "#fff",
     fontSize: 24

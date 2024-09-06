@@ -319,6 +319,31 @@ const nativeCoin = {
 }
 
 
+const selectcurrency = {
+  stack: {
+    children: [
+      {
+        component: {
+          name: "AnduroSelectCurrency",
+          options: {
+            topBar: {
+              visible: false,
+            },
+            bottomTabs: {
+              visible: false,
+            },
+            animations: {
+              setRoot: {
+                waitForRender: true,
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+}
+
 const route = {
   beforeLogin: privacy,
   login: login,
@@ -327,6 +352,7 @@ const route = {
   changelanguage,
   gettingstarted,
   backupwallet,
-  nativeCoin
+  nativeCoin,
+  selectcurrency
 }
 export default route

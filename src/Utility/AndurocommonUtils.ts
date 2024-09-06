@@ -24,8 +24,8 @@ import { Buffer } from "@craftzdog/react-native-buffer";
 import unorm from "unorm";
 import { pbkdf2Sync  } from 'react-native-crypto';
 import { Navigation } from 'react-native-navigation';
-
-
+import { GET_CURRENCY_VALUE } from '../Config/CoordinateIndexerApi';
+import axios from "axios"
 
 /**
  * This function is used to get chain instance
@@ -139,8 +139,8 @@ const getDerivationPath = (networkType: string) => {
 export const getWallet = (
   params: GetWalletInfoParams,
 ): Promise<{ address: string; xPublickey: string; xPrivateKey: string; name: string}> => {
-  return new Promise((resolve, reject) => {  
-  if (params.networkType == "bitcoin" || params.networkType == "sidechain") {        
+  return new Promise((resolve, reject) => {
+  if (params.networkType == "bitcoin" || params.networkType == "sidechain") {
       const root = bip32.fromSeed(params.seed, getNetwork(params.networkMode || "", params.networkType))
       let path = getDerivationPath(params.networkType)
       const account = root.derivePath(path).derive(params.changeIndex)
@@ -156,7 +156,7 @@ export const getWallet = (
         xPublickey,
         xPrivateKey,
         name: params.name!
-      })      
+      })
   } else if (params.networkType == "alys") {
     let addressInfo = getAlysAddress(params.mnemonic, params.chromaBookApi || "", params.seed)
     addressInfo.name = params.name!
@@ -211,8 +211,8 @@ export const encryptXpubKey = async (
   const promises = [];
   console.log("start seed", new Date())
   const seed = mnemonicToSeed(mnemonic)
-  console.log("end seed", new Date()) 
-  for (let index = 0; index < networks.length; index++) {   
+  console.log("end seed", new Date())
+  for (let index = 0; index < networks.length; index++) {
     const element =networks [index]
     const walletInfo = getWallet({
       networkType: element.networkType,
@@ -232,7 +232,7 @@ export const encryptXpubKey = async (
   console.log('values', values)
   // if (alys_network !== undefined) {
   //   walletListInfo.push(alys_address_info)
-  // } 
+  // }
   for (let i = 0; i < walletListInfo.length; i ++) {
     let xpubkey: string = ""
     if (secretKey.length > 0) {
@@ -250,20 +250,20 @@ export const encryptXpubKey = async (
       xpub: walletListInfo[i].xPublickey,
       address: walletListInfo[i].address
     })
-  } 
+  }
   await setCachedData(CachedDataTypes.xpubkeys, JSON.stringify(encryptedXpubKeys))
   return xpubKeys
-       
-      
- 
+
+
+
 
   // let addressInfo = getAlysAddress(mnemonic, alys_network?.chromaBookApi || "")
   // addressInfo.name = alys_network?.name!
 
-    
-    
-  
- 
+
+
+
+
 }
 
 /**
@@ -377,4 +377,19 @@ export const showToasterMsg = (type: string, message: string) => {
         },
       },
     })
+}
+
+/**
+ * This function is used to get currency list
+ * @param chromaBookApi -chromabook api
+ */
+
+export const getMultiCurrency = async (chromaBookApi: string, networkMode: string) => {
+  const currencyResult = await axios.get(chromaBookApi + GET_CURRENCY_VALUE)
+  let currencyList = []
+  for (let i = 0; i < currencyResult.data.result.length; i++) {
+    let element = currencyResult.data.result[i]
+    currencyList.push(element)
+  }
+  return currencyResult.data.status ? currencyList : []
 }
