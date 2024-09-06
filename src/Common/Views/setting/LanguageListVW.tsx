@@ -22,8 +22,14 @@ const LanguageListVW = (props: LanguageListProps) => {
 
 
   const Icons = () => {
-    if (title === "USD") {
+    if (title === "USD" || title === "English" ) {
       return require("../../../assets/images/usa-flag.png")
+    } else if (title === "Spanish") {
+      return require("../../../assets/images/spanish.png")
+    } else if (title === "Germany") {
+      return require("../../../assets/images/germany.png")
+    } else if (title === "French") {
+      return require("../../../assets/images/french.png")
     } else if (title === "EUR") {
       return require("../../../assets/images/euro-flag.png")
     } else  if (symbol === "BTC") {
