@@ -141,7 +141,7 @@ const AnduroChangePasswordVC: React.FC = () => {
         </View>
        </View>
         )}
-       <View>
+       <View className="mb-5">
         <Text className="block text-lightgray opacity-70 text-xs uppercase font-geistsemibold font-semibold mb-1">{t("newpassword")}</Text>
         <View className="relative">
         <View className="absolute top-3 right-4 z-10 opacity-60">
