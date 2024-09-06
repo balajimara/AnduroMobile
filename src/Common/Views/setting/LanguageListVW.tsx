@@ -26,6 +26,14 @@ const LanguageListVW = (props: LanguageListProps) => {
       return require("../../../assets/images/usa-flag.png")
     } else if (title === "EUR") {
       return require("../../../assets/images/euro-flag.png")
+    } else  if (symbol === "BTC") {
+      return require("../../../assets/icons/btc.png")
+    } else if (symbol === "CBTC") {
+      return require("../../../assets/icons/cbtc.png")
+    } else if (symbol === "ALYS") {
+      return require("../../../assets/icons/alys.png")
+    } else {
+      return require("../../../assets/icons/btc.png")
     }
   }
 
@@ -55,7 +63,7 @@ const LanguageListVW = (props: LanguageListProps) => {
                 <ListItem className="bg-transparent" containerStyle={styles.listView}>
                 <View className="bg-popupclr p-4 py-2 pr-2.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
                 <View className="flex-row flex-wrap items-center">
-                <View className="mr-3"><Image resizeMode={"contain"} source={require("../../../assets/images/euro-flag.png")} className="w-8 m-auto" /></View>
+                <View className="mr-3"><Image resizeMode={"contain"} source={Icons()} className="w-8 m-auto" /></View>
                 <View>
                     <Text className="text-lightgray capitalize text-base">{title}</Text>
                 </View>
