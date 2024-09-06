@@ -51,10 +51,10 @@ const AnduroSelectcurrencyVC = () => {
   }
 
   const handleSelectCurrency = async (selectedCurrency: string) => {
-    const CachedUserData = await getdata({ type: StorageTypes.userData })
+    const CachedUserData = getdata({ type: StorageTypes.userData })
     CachedUserData.selectedCurrency = selectedCurrency
     setdata({ type: StorageTypes.userData, value: CachedUserData })
-    setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
+    await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
     setSelectedCurrency(selectedCurrency)
   }
 

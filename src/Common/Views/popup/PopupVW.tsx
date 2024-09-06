@@ -45,7 +45,7 @@ const PopupVW = (props:popupProps) => {
         setTitle(t("Loading"))
       }
   return(
-    <>
+    <SafeAreaView>
     {type === 'createpassword' && (
     <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom:20, }}
     isVisible={isvisible} onBackdropPress={onbackdrop}>
@@ -183,7 +183,7 @@ const PopupVW = (props:popupProps) => {
           </View>
         </Dialog>
       )}
-      </>
+      </SafeAreaView>
    );
  };
 
