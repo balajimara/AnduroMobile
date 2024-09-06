@@ -42,19 +42,6 @@ const AnduroBackupWalletVC = (props: any) => {
     setShowMnemonic(true);
   }, []);
 
-
-  React.useEffect(() => {
-    const backPressEvent = () => {
-      Navigation.pop(props.componentId)
-      return true;
-    }
-    const subscription = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backPressEvent
-    );
-    return () => subscription.remove();
-  }, []);
-
   React.useEffect(() => {    
     const backPressEvent = () => {
       Navigation.setRoot({
@@ -274,15 +261,7 @@ const AnduroBackupWalletVC = (props: any) => {
       <View className="p-5">
        <Button className="w-full"
             title={t("goback")}
-            onPress={()=> {
-              Navigation.mergeOptions(props.componentId, {
-                bottomTabs: {
-                  backgroundColor: "#140401",
-                  titleDisplayMode: "alwaysHide",
-                  currentTabIndex: 1,
-                  visible: true,
-                }
-              })
+            onPress={()=> {              
               Navigation.setRoot({
                 root: route.afterLogin,
             })

@@ -12,7 +12,7 @@ import { NetworkListModel } from "../../../model/AnduroNetworkModel";
 import { Navigation } from "react-native-navigation";
 import route from "../../../Route/Route";
 
-const AnduroChangePasswordVC: React.FC = () => {
+const AnduroChangePasswordVC: React.FC = (props: any) => {
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
@@ -181,6 +181,22 @@ const AnduroChangePasswordVC: React.FC = () => {
             onPress={() => gotToMenuPage()}
             disabled={isDisabled}
             disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
+          />
+            <Button className="w-full"
+            title={t("goback")}
+            onPress={()=> {           
+              Navigation.setRoot({
+                root: route.afterLogin,
+            })
+            }
+            }
+            buttonStyle={{
+              backgroundColor: '#E8705C',
+              borderRadius: 8,
+              height: 48,
+            }}
+            containerStyle={{ borderRadius: 8 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
           />
         </View>
      </View>
