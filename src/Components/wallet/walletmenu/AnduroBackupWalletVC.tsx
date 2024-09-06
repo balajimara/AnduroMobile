@@ -42,6 +42,34 @@ const AnduroBackupWalletVC = (props: any) => {
     setShowMnemonic(true);
   }, []);
 
+
+  React.useEffect(() => {
+    const backPressEvent = () => {
+      Navigation.pop(props.componentId)
+      return true;
+    }
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
+    return () => subscription.remove();
+  }, []);
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.setRoot({
+        root: route.afterLogin
+      })
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();
+    
+}, []);
+
   const handleShow = async () => {
     const seeds: string = await getCachedData(CachedDataTypes.mnemonic) || "";
     console.log("seeds===",seeds)
@@ -110,17 +138,6 @@ const AnduroBackupWalletVC = (props: any) => {
     setIsShownToast(true);
   };
 
-  React.useEffect(() => {
-    const backPressEvent = () => {
-      Navigation.pop(props.componentId)
-      return true;
-    }
-    const subscription = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backPressEvent
-    );
-    return () => subscription.remove();
-  }, []);
 
   React.useEffect(() => {
     if (isShownToast) {
@@ -167,7 +184,6 @@ const AnduroBackupWalletVC = (props: any) => {
                     type: "material-community",
                     size: 20,
                     color: "white",
-                    marginRight: 2
                   }}
                   title={t("Show")}
                   onPress={handleShow}
@@ -254,14 +270,24 @@ const AnduroBackupWalletVC = (props: any) => {
        </View>
       </View>
 
-      {!showMnemonic && (
+     
       <View className="p-5">
        <Button className="w-full"
             title={t("goback")}
-            onPress={()=>
+            onPress={()=> {
+              Navigation.mergeOptions(props.componentId, {
+                bottomTabs: {
+                  backgroundColor: "#140401",
+                  titleDisplayMode: "alwaysHide",
+                  currentTabIndex: 1,
+                  visible: true,
+                }
+              })
               Navigation.setRoot({
                 root: route.afterLogin,
-            })}
+            })
+            }
+            }
             buttonStyle={{
               backgroundColor: '#E8705C',
               borderRadius: 8,
@@ -271,7 +297,7 @@ const AnduroBackupWalletVC = (props: any) => {
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
           />
       </View>
-      )}
+      
      </View>
     </SafeAreaView>
   )}

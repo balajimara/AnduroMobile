@@ -1,6 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { Navigation } from "react-native-navigation"
+import { SafeAreaView } from "react-native-safe-area-context"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 const Toast = function (props: any) {
@@ -24,6 +25,7 @@ const Toast = function (props: any) {
   },[type, props.componentId])
 
   return (
+    <SafeAreaView>
     <View className="absolute top-5 right-0 px-5">
       <View className={`${toastclass} w-80 rounded-lg p-5 pr-8`}>
         <Text className="text-geistregular text-lightgray">{message}</Text>
@@ -34,6 +36,7 @@ const Toast = function (props: any) {
         </View>
       </View>
     </View>
+    </SafeAreaView>
   )
 }
 

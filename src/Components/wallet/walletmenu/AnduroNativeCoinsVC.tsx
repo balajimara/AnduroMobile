@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, Image, BackHandler } from "react-native"
 import { Button } from "@rneui/themed"
 import LanguageListVW from '../../../Common/Views/setting/LanguageListVW';
 import { getData, setData } from '../../../Storage/AnduroStorage';
@@ -25,6 +25,22 @@ const AnduroNativeCoinsVC = () => {
   React.useEffect(() => {
     setdata({ type: StorageTypes.pageTitle, data: t("nativecoins") })
   }, [])
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      Navigation.setRoot({
+        root: route.afterLogin
+      })
+      return true;
+    }
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backPressEvent
+      );
+      return () => subscription.remove();
+    
+   }, []);
+
 
   const handleCallback = async (networkName: string) => {
     const CachedUserData = getdata({ type: StorageTypes.userData })
