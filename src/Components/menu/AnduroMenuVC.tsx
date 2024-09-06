@@ -6,7 +6,7 @@ import { Navigation } from "react-native-navigation"
 import { useAtom } from 'jotai';
 import { getData, menuOpen, setData } from '../../Storage/AnduroStorage';
 import { StorageTypes } from '../../model/AnduroStorageModel';
-import { setCachedData } from '../../Utility/AndurocommonUtils';
+import { setCachedData, checkPassword } from '../../Utility/AndurocommonUtils';
 import route from '../../Route/Route';
 import PopupVW from '../../Common/Views/popup/PopupVW';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +17,49 @@ const AnduroMenuVC = (props: any) => {
   const [_openMenu, setOpenMenu] = useAtom(menuOpen)
   const [, setdata] = useAtom(setData)
   const [, getdata] = useAtom(getData)
+  const [haspassword, setHasPassword] = useState(false)
   const { t } = useTranslation()
+  console.log("haspasswordhaspasswordhaspasswordhaspassword", haspassword)
+  const menudata = [{
+    "menuname": t("backupwalletmenu"),
+    "iconname": "wallet-outline",
+    "menutype": "backup",
+    "componentName": route.backupwallet
+  },{
+    "menuname": t("selectcurrency"),
+    "iconname": "currency-sign",
+    "menutype": "selectcurrency",
+    "componentName": route.selectcurrency
+  },{
+    "menuname": t("changelanguage"),
+    "iconname": "translate",
+    "menutype": "changelanguage",
+    "componentName": route.changelanguage
+  },{
+    "menuname": t("nativecoins"),
+    "iconname": "hand-coin-outline",
+    "menutype": "nativecoins",
+    "componentName": route.nativeCoin
+  },{
+    "menuname": `${haspassword}` ? `${t("changepassword")}` : `${t("setpassword")}`,
+    "iconname": "form-textbox-password",
+    "menutype": "changepassword",
+    "componentName": route.changepassword
+  },{
+    "menuname": t("logout"),
+    "iconname": "logout",
+    "menutype": "logout",
+    "componentName": ""
+  }]
+
+  React.useEffect(() => {
+      const passwordStatus = async () => {
+        let passwordstatus = await checkPassword()
+        setHasPassword(passwordstatus)
+        console.log('haspassword', haspassword)
+      }
+      passwordStatus()
+  })
 
   const handleLogoutAction = (type: string) => {
     setShowWarning(false)
@@ -25,7 +67,7 @@ const AnduroMenuVC = (props: any) => {
       setOpenMenu(false)
       const CachedUserData = getdata({ type: StorageTypes.userData })
       CachedUserData.isLogged = false
-      setdata({ type: StorageTypes.userData, value: CachedUserData })
+      setdata({ type: StorageTypes.userData, data: CachedUserData })
       setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
       Navigation.setRoot({
         root: route.login,
@@ -44,38 +86,7 @@ const AnduroMenuVC = (props: any) => {
     })
   }
 
-const menudata = [{
-  "menuname": t("backupwalletmenu"),
-  "iconname": "wallet-outline",
-  "menutype": "backup",
-  "componentName": route.backupwallet
-},{
-  "menuname": t("selectcurrency"),
-  "iconname": "currency-sign",
-  "menutype": "selectcurrency",
-  "componentName": route.selectcurrency
-},{
-  "menuname": t("changelanguage"),
-  "iconname": "translate",
-  "menutype": "changelanguage",
-  "componentName": route.changelanguage
-},{
-  "menuname": t("nativecoins"),
-  "iconname": "hand-coin-outline",
-  "menutype": "nativecoins",
-  "componentName": route.nativeCoin
-},{
-  "menuname": t("changepassword"),
-  "iconname": "form-textbox-password",
-  "menutype": "changepassword",
-  "componentName": "AnduroChangePassword"
-},{
-  "menuname": t("logout"),
-  "iconname": "logout",
-  "menutype": "logout",
-  "componentName": ""
-}]
-
+console.log(menudata)
 const handleNavigation = (menutype: string, componentName: any) => {
   if (menutype === "logout") {
     setShowWarning(true)
@@ -104,7 +115,7 @@ const handleNavigation = (menutype: string, componentName: any) => {
       </View>
       <View className="p-3.5 px-5 settings-menu">
        {menudata.map((menu,index) => (
-          <MenuItemVW menuname={menu.menuname} iconname={menu.iconname} menutype={menu.menutype} callback={() => handleNavigation(menu.menutype, menu.componentName)} key={index}/>
+          <MenuItemVW menuname={menu.menutype !== "changepassword" ? menu.menuname : (haspassword ? t("changepassword") : t("setpassword"))} iconname={menu.iconname} menutype={menu.menutype} callback={() => handleNavigation(menu.menutype, menu.componentName)} key={index}/>
        ))}
       </View>
      </View>

@@ -10,10 +10,12 @@ import RNFS, { DownloadDirectoryPath, writeFile } from "react-native-fs"
 import SeedItemVW from "../../../Common/Views/seeditem/SeedItem"
 import { decrypteData, generateMnemonic, getCachedData, showToasterMsg } from "../../../Utility/AndurocommonUtils"
 import SecretRecoveryList from "../../../Common/Views/setting/secretRecoveryVW"
-import { CachedDataTypes } from "../../../model/AnduroStorageModel"
+import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
 import * as bip39 from 'bip39';
 import PopupVW from "../../../Common/Views/popup/PopupVW"
 import route from "../../../Route/Route"
+import { useAtom } from "jotai"
+import { getData } from "../../../Storage/AnduroStorage"
 
 
 const AnduroBackupWalletVC = (props: any) => {
@@ -27,7 +29,7 @@ const AnduroBackupWalletVC = (props: any) => {
   const [isShownToast, setIsShownToast] = React.useState<boolean>(false);
   const [toasttype, setToasttype] = React.useState<string>("");
   const [toastmessage, setToastMessage] = React.useState<string>("");
-
+  const [,getdata] = useAtom(getData)
 
   const data = [
     {title: "vivid" },{title: "power" },{title: "gesture" },{title: "badge" },{title: "shoulder" },{title: "gap" },{title: "image" },
@@ -83,12 +85,16 @@ const AnduroBackupWalletVC = (props: any) => {
 
   const downloadMnemonic = async () => {
     try {
-      let path = `${RNFS.DownloadDirectoryPath}/Anduro`
+      let userdata = getdata({ type: StorageTypes.userData })
+      let path = `${RNFS.DownloadDirectoryPath}/Anduro/`
       RNFS.mkdir(path)
-      path += "/data.txt"
-      RNFS.writeFile(path, JSON.stringify(mnemonic.split(" ")), "utf8")
+      console.log('userdata.walletName', userdata)
+      path += `${userdata.walletName}.json`
+      // write the file
+      RNFS.writeFile(path, JSON.stringify(mnemonic.join(" ")), "utf8")
         .then((response: any) => {
-          console.log("FILE WRITTEN!", response)
+          console.log('response', response)
+          showToasterMsg("success",`${t("downloadkeysuccess")}` )
         })
         .catch((err: any) => {
           console.log(err.message)
@@ -297,3 +303,5 @@ const AnduroBackupWalletVC = (props: any) => {
   });
 
   export default AnduroBackupWalletVC
+
+

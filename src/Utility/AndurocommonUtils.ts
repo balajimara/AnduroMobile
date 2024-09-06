@@ -380,16 +380,37 @@ export const showToasterMsg = (type: string, message: string) => {
 }
 
 /**
- * This function is used to get currency list
- * @param chromaBookApi -chromabook api
+ * This function is used to validate the password format
+ * @param password -password
+ * @param confirmPassword -confirmPassword
  */
+export const validatePassword = (password: string): boolean => {
+  let isValidPassword = true
+  const passwordRegex = [/.{8,}/, /[A-Z]/, /[a-z]/, /\d/]
+  for (let i = 0; i < passwordRegex.length; i++) {
+    if (!passwordRegex[i].test(password)) isValidPassword = false
+  }
+  return isValidPassword
+}
+
+/**
+ * This function is used to verifying user has password
+*/
+export const checkPassword = async () => {
+  let mnemonicKey = await getCachedData(CachedDataTypes.mnemonic) || ""
+  return !bip39.validateMnemonic(mnemonicKey)
+}
+
+/* This function is used to get currency list
+* @param chromaBookApi -chromabook api
+*/
 
 export const getMultiCurrency = async (chromaBookApi: string, networkMode: string) => {
-  const currencyResult = await axios.get(chromaBookApi + GET_CURRENCY_VALUE)
-  let currencyList = []
-  for (let i = 0; i < currencyResult.data.result.length; i++) {
-    let element = currencyResult.data.result[i]
-    currencyList.push(element)
-  }
-  return currencyResult.data.status ? currencyList : []
+ const currencyResult = await axios.get(chromaBookApi + GET_CURRENCY_VALUE)
+ let currencyList = []
+ for (let i = 0; i < currencyResult.data.result.length; i++) {
+   let element = currencyResult.data.result[i]
+   currencyList.push(element)
+ }
+ return currencyResult.data.status ? currencyList : []
 }

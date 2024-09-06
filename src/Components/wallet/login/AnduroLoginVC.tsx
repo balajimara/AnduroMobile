@@ -54,7 +54,7 @@ const AnduroLoginVC = (props: any) => {
         let alysAddress = await getCachedData(CachedDataTypes.alysAddress)
         setdata({ type: StorageTypes.alysAddress, data: alysAddress })
       }
-      const CachedUserData = getdata({ type: StorageTypes.userData })
+      let CachedUserData = JSON.parse(await getCachedData(StorageTypes.userData) || "{}")
       CachedUserData.isLogged = true
       setdata({ type: StorageTypes.userData, data: CachedUserData })
       setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
