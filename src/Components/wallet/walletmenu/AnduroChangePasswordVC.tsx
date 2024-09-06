@@ -175,6 +175,8 @@ const AnduroChangePasswordVC: React.FC = (props: any) => {
               backgroundColor: '#E8705C',
               borderRadius: 8,
               height: 48,
+              
+              marginBottom:15
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
@@ -182,7 +184,7 @@ const AnduroChangePasswordVC: React.FC = (props: any) => {
             disabled={isDisabled}
             disabledStyle={{backgroundColor:'#E8705C', borderColor:'#fff',opacity:0.40}}
           />
-            <Button className="w-full"
+        <Button className="w-full"
             title={t("goback")}
             onPress={()=> {           
               Navigation.setRoot({
@@ -191,9 +193,11 @@ const AnduroChangePasswordVC: React.FC = (props: any) => {
             }
             }
             buttonStyle={{
-              backgroundColor: '#E8705C',
+              backgroundColor: 'transparent',
+              borderWidth:1,
+              borderColor:'#514e4e',
               borderRadius: 8,
-              height: 48,
+              height: 48
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
