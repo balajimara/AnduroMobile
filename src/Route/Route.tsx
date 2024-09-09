@@ -23,6 +23,9 @@ import AnduroTransactionHistoryVC from "../Components/wallet/walletmenu/AnduroTr
 import AnduroSendVC from "../Components/send/AnduroSendVC"
 import AnduroGettingStartedVC from "../Components/wallet/gettingstarted/AnduroGettingStartedVC"
 import AnduroReceiveVC from "../Components/tabs/dashboard/AnduroReceiveVC"
+import AnduroConvertVC from "../Components/convert/AnduroConvertVC"
+import AnduroReviewConvertVC from "../Components/convert/AnduroReviewConvertVC"
+import AnduroConfirmVC from "../Components/confirm/AnduroConfirmVC"
 
 
 Navigation.registerComponent("AnduroLanding", () => AnduroLandingVC)
@@ -50,6 +53,10 @@ Navigation.registerComponent("AnduroTransactionHistory", () => AnduroTransaction
 Navigation.registerComponent("AnduroSend", () => AnduroSendVC)
 Navigation.registerComponent("AnduroGettingStarted", () => AnduroGettingStartedVC)
 Navigation.registerComponent("AnduroReceive", () => AnduroReceiveVC)
+Navigation.registerComponent("AnduroConvert", () => AnduroConvertVC)
+Navigation.registerComponent("AnduroReviewConfirm", () => AnduroReviewConvertVC)
+Navigation.registerComponent("AnduroConfirm", () => AnduroConfirmVC)
+
 /**
  * default root before login
  */
