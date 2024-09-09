@@ -67,9 +67,26 @@ const LanguageListVW = (props: LanguageListProps) => {
              {type === "native-coins" && (
                 <TouchableOpacity onPress={() => updateCoins()}>
                 <ListItem className="bg-transparent" containerStyle={styles.listView}>
-                <View className="bg-popupclr p-4 py-2 pr-2.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
+                <View className="bg-popupclr p-4 px-3.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
                 <View className="flex-row flex-wrap items-center">
-                <View className="mr-3"><Image resizeMode={"contain"} source={Icons()} className="w-8 m-auto" /></View>
+                <View>
+                    <Text className="text-lightgray capitalize text-base">{title}</Text>
+                </View>
+                </View>
+                <View>
+                <ToggleSwitch
+                    isOn={isActive}
+                    onColor="#A94C3D"
+                    offColor="#66332b"
+                    size="medium"
+                    onToggle={() => updateCoins()}
+                    />
+                </View>
+                </View>
+
+                <View className="p-4 py-0 px-5 mb-3 w-full justify-between flex-row flex-wrap items-center">
+                <View className="flex-row flex-wrap items-center">
+                <View className="mr-3"><Image resizeMode={"contain"} source={Icons()} className="w-6 m-auto" /></View>
                 <View>
                     <Text className="text-lightgray capitalize text-base">{title}</Text>
                 </View>
