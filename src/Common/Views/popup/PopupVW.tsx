@@ -133,7 +133,8 @@ const PopupVW = (props:popupProps) => {
       </Dialog>
       )}
       {type === "password" && (
-        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute' }}>
+        <Dialog overlayStyle={{ borderRadius: 12, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute' }}
+        onBackdropPress={onbackdrop}>
           <View className="w-full">
             <View className="pb-2 flex-row justify-between items-start border-b border-[#877f7e] border-b-[1px]">
               <Text className="text-base text-lightgray opacity-95 leading-5 font-geistsemibold font-semibold w-60">
@@ -152,7 +153,7 @@ const PopupVW = (props:popupProps) => {
                 <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}><Icon name={showPassword ? 'eye' : 'eye-slash'} size={18} color="#FAFAFA" /></TouchableOpacity>
                </View>
                <View className="bg-btcinnerbg h-12 rounded-lg" style={styles.inputOut}>
-               
+
                 <Input
                   placeholder='Enter Your Password'
                   placeholderTextColor="#5a4e4c"
@@ -162,9 +163,9 @@ const PopupVW = (props:popupProps) => {
                   onChangeText={(text) => setPassword(text)}
                   secureTextEntry={!showPassword}
                   />
-                  
+
               </View>
-             </View> 
+             </View>
             </View>
             <View className="pt-2">
               <Button

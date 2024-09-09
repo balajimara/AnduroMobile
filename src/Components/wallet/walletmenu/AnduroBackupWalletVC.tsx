@@ -42,7 +42,7 @@ const AnduroBackupWalletVC = (props: any) => {
     setShowMnemonic(true);
   }, []);
 
-  React.useEffect(() => {    
+  React.useEffect(() => {
     const backPressEvent = () => {
       Navigation.setRoot({
         root: route.afterLogin
@@ -54,7 +54,7 @@ const AnduroBackupWalletVC = (props: any) => {
         backPressEvent
       );
       return () => subscription.remove();
-    
+
 }, []);
 
   const handleShow = async () => {
@@ -202,7 +202,7 @@ const AnduroBackupWalletVC = (props: any) => {
           </View>
        )}
       {showPasswordPopup && (
-        <PopupVW type="password" callback={verifyPassword}/>
+        <PopupVW type="password" onbackdrop={()=> setShowPasswordPopup(false)}  callback={verifyPassword}/>
         )}
         </View>
          {!showMnemonic && (
@@ -257,11 +257,11 @@ const AnduroBackupWalletVC = (props: any) => {
        </View>
       </View>
 
-     
+
       <View className="p-5">
        <Button className="w-full"
             title={t("goback")}
-            onPress={()=> {              
+            onPress={()=> {
               Navigation.setRoot({
                 root: route.afterLogin,
             })
@@ -276,7 +276,7 @@ const AnduroBackupWalletVC = (props: any) => {
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
           />
       </View>
-      
+
      </View>
     </SafeAreaView>
   )}
