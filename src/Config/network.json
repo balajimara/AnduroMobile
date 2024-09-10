@@ -3,7 +3,7 @@
     "id": 1,
     "name": "bitcoin",
     "image": "assets/images/networks/bitcoin-regtest.png",
-    "explorer": "http://192.168.1.43:3002",
+    "explorer": "https://mempool.space/testnet",
     "symbol": "BTC",
     "pegNetwork": "coordinate",
     "blockCount": 0,
@@ -12,7 +12,7 @@
     "networkMode": "regtest",
     "isSandbox": true,
     "derivationIndex": 0,
-    "chromaBookApi": "http://192.168.1.55:4000/",
+    "chromaBookApi": "http://btc-testnet-wallet.mara.technology:19130/",
     "federationApi": "",
     "networkVersion": 4
   },
@@ -20,7 +20,7 @@
     "id": 2,
     "name": "coordinate",
     "image": "assets/images/networks/coordinate-main.png",
-    "explorer": "http://192.168.1.43:3005",
+    "explorer": "https://testnet.coordiscan.io",
     "symbol": "CBTC",
     "pegNetwork": "bitcoin",
     "blockCount": 0,
@@ -29,7 +29,7 @@
     "networkMode": "regtest",
     "isSandbox": true,
     "derivationIndex": 0,
-    "chromaBookApi": "http://192.168.1.55:4001/",
+    "chromaBookApi": "http://btc-testnet-wallet.mara.technology:9130/",
     "federationApi": "",
     "networkVersion": 4
   },
@@ -48,7 +48,7 @@
     "derivationIndex": 0,
     "url": "https://alyscan.io/api/v2/",
     "chromaBookApi": "http://54.224.209.248:8545",
-    "federationApi": "http://192.168.1.55:4001/",
+    "federationApi": "http://btc-testnet-wallet.mara.technology:9130/",
     "chainId": 212121,
     "networkVersion": 4
   }
