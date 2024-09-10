@@ -13,7 +13,8 @@
     "isSandbox": true,
     "derivationIndex": 0,
     "chromaBookApi": "http://192.168.1.55:4000/",
-    "federationApi": ""
+    "federationApi": "",
+    "networkVersion": 4
   },
   {
     "id": 2,
@@ -29,7 +30,8 @@
     "isSandbox": true,
     "derivationIndex": 0,
     "chromaBookApi": "http://192.168.1.55:4001/",
-    "federationApi": ""
+    "federationApi": "",
+    "networkVersion": 4
   },
   {
     "id": 3,
@@ -47,6 +49,7 @@
     "url": "https://alyscan.io/api/v2/",
     "chromaBookApi": "http://54.224.209.248:8545",
     "federationApi": "http://192.168.1.55:4001/",
-    "chainId": 212121
+    "chainId": 212121,
+    "networkVersion": 4
   }
 ]

@@ -19,7 +19,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "0"
       },
       {
         type: "nft",
@@ -27,7 +28,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "1"
       },
       {
         type: "nft",
@@ -35,7 +37,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "3"
       },
       {
         type: "nft",
@@ -43,7 +46,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "4"
       },
       {
         type: "nft",
@@ -51,7 +55,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "5"
       },
       {
         type: "nft",
@@ -59,7 +64,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "6"
       },
       {
         type: "nft",
@@ -67,7 +73,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "7"
       },
       {
         type: "nft",
@@ -75,7 +82,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "8"
       },
       {
         type: "nft",
@@ -83,7 +91,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "9"
       }
     ]  
   },{
@@ -95,7 +104,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "1"
       },
       {
         type: "nft",
@@ -103,7 +113,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "2"
       },
       {
         type: "nft",
@@ -111,7 +122,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "3"
       },
       {
         type: "nft",
@@ -119,7 +131,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "4"
       },
       {
         type: "nft",
@@ -127,7 +140,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "5"
       },
       {
         type: "nft",
@@ -135,7 +149,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "6"
       },
       {
         type: "nft",
@@ -143,7 +158,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "7"
       },
       {
         type: "nft",
@@ -151,7 +167,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Asset ID: 1"
+        info: "Asset ID: 1",
+        key: "8"
       },
       {
         type: "nft",
@@ -159,7 +176,8 @@ const AnduroCollectiblesVC = (props: any)  => {
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
         balance: '0.457',
-        info: "Contract Address: 0x72b...edbf9"
+        info: "Contract Address: 0x72b...edbf9",
+        key: "9"
       },
     ]  
   }])
@@ -248,15 +266,15 @@ const AnduroCollectiblesVC = (props: any)  => {
               <SectionList
                 sections={data}
                 extraData={expandedSections} // extraData is required to re-render the list when expandedSections changes
-                keyExtractor={(item, index) => item.name }
-                renderItem={({ section: { title }, item }) => {
+                keyExtractor={(item, index) => item.key }
+                renderItem={({ section: { title }, item, index }) => {
                   // check to see if the section is expanded
                   const isExpanded = expandedSections.has(title);
         
                   //return null if it is
                   if (isExpanded) return null;
         
-                  return <CoinItemVW data={item} key={item.name}/>;
+                  return <CoinItemVW data={item} key={index}/>;
                 }}
                 renderSectionHeader={({ section: { title } }) => (
                   <Pressable onPress={() => handleToggle(title)}>

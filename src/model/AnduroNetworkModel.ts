@@ -21,5 +21,6 @@ export interface NetworkListModel {
   usdIcon?: object
   url?: string
   chainId?: number
-  alysNodeApi?: string
+  alysNodeApi?: string,
+  networkVersion: number
 }

@@ -22,21 +22,24 @@ const AnduroDashboardVC = (props: any) => {
         name: 'BTC Testnet',
         symbol: 'BTC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "0"
       },
       {
         type: "native",
         name: 'Coordinate Testnet',
         symbol: 'CBTC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "2"
       },
       {
         type: "native",
         name: 'Alys Testnet',
         symbol: 'ALYS',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "3"
       },
     ]
   },{
@@ -47,105 +50,120 @@ const AnduroDashboardVC = (props: any) => {
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "1"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "2"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "3"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "4"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "5"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "6"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "7"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "8"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "9"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "10"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "11"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "12"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "13"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "14"
       },
       {
         type: "token",
         name: 'USD Coin',
         symbol: 'USDC',
         image: 'https://picsum.photos/id/1/300/300',
-        balance: '0.457'
+        balance: '0.457',
+        key: "15"
       },
     ]  
   }])
@@ -264,19 +282,18 @@ const AnduroDashboardVC = (props: any) => {
           <SectionList
             sections={data}
             extraData={expandedSections} // extraData is required to re-render the list when expandedSections changes
-            keyExtractor={(item, index) => item.name }
-            renderItem={({ section: { title }, item }) => {
+            keyExtractor={(item, index) => item.key }
+            renderItem={({ section: { title }, item, index }) => {
               // check to see if the section is expanded
               const isExpanded = expandedSections.has(title);
-    
-              //return null if it is
+              //return null if it  is
               if (isExpanded) return null;
     
-              return <CoinItemVW data={item} key={item.symbol}/>;
+              return <CoinItemVW data={item} key={index}/>;
             }}
             renderSectionHeader={({ section: { title } }) => (
               <Pressable onPress={() => handleToggle(title)}>
-                <CoinHeaderVW title={title} />
+                <CoinHeaderVW title={title}/>
               </Pressable>
             )}
             stickySectionHeadersEnabled={true}

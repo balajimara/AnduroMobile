@@ -114,7 +114,7 @@ const requestStoragePermission = async () => {
         buttonPositive: "OK",
       }
     )
-    console.log("granted", granted)
+    // console.log("granted", granted)
     const readGranted = await PermissionsAndroid.check(
       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
     )
@@ -122,7 +122,7 @@ const requestStoragePermission = async () => {
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
     )
     if (!readGranted || !writeGranted) {
-      console.log("Read and write permissions have not been granted")
+      // console.log("Read and write permissions have not been granted")
       return
     }
   } catch (err) {

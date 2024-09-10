@@ -35,7 +35,7 @@ const AnduroChangePasswordVC: React.FC = (props: any) => {
   React.useEffect(() => {
     const setPasswordInfo = async () => {      
       let passwordstatus = await checkPassword()
-      console.log('passwordstatus', passwordstatus)
+      // console.log('passwordstatus', passwordstatus)
       setHasPassword(passwordstatus)
       if (passwordstatus) {
         setdata({ type: StorageTypes.pageTitle, data: t("changepassword")})

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Image, BackHandler } from "react-native"
 import { Button } from "@rneui/themed"
 import LanguageListVW from '../../../Common/Views/setting/LanguageListVW';
@@ -10,12 +10,14 @@ import { useTranslation } from 'react-i18next';
 import { setCachedData } from '../../../Utility/AndurocommonUtils';
 import { Navigation } from 'react-native-navigation';
 import route from '../../../Route/Route';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 
 const AnduroNativeCoinsVC = () => {
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
+  const [isActive, setIsActive] = useState<boolean>(true)
   const [networks] = React.useState<NetworkListModel[]>(getdata({ type: StorageTypes.networkList }))
   const [nativeCoins, setNativeCoins] = React.useState<string[]>(
     getdata({ type: StorageTypes.userData }).nativeCoins,
@@ -72,6 +74,22 @@ const AnduroNativeCoinsVC = () => {
         <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("nativecoins")}</Text></View>
        </View>
        <View className="px-5">
+       <View className="bg-popupclr p-4 px-3.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
+                <View className="flex-row flex-wrap items-center">                
+                <View>
+                    <Text className="text-lightgray capitalize text-base">Testnet 4</Text>
+                </View>
+                </View>
+                <View>
+                <ToggleSwitch
+                    isOn={isActive}
+                    onColor="#A94C3D"
+                    offColor="#66332b"
+                    size="medium"
+                    onToggle={() => {setIsActive(!isActive)}}
+                    />
+                </View>
+                </View>
         {networks.map((network: NetworkListModel, i: number) => (
           <LanguageListVW 
             title={network.name}
