@@ -66,12 +66,17 @@ const AnduroNativeCoinsVC = () => {
     })
   }
 
+  const updateNetworkVersion = () => {
+    setIsActive(!isActive)
+    setdata({ type: StorageTypes.isTestnet4, data: isActive })
+  }
+
   return (
     <SafeAreaView>
      <View className="bg-gray h-full flex flex-col justify-between">
       <View>
        <View className="p-12 px-6 pb-0">
-        <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("nativecoins")}</Text></View>
+        <View className="mb-10"><Text className="text-center text-3xl text-lightgray opacity-95 leading-10 font-geistsemibold">{t("selectnetwork")}</Text></View>
        </View>
        <View className="px-5">
        <View className="bg-popupclr p-4 px-3.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
@@ -86,7 +91,7 @@ const AnduroNativeCoinsVC = () => {
                     onColor="#A94C3D"
                     offColor="#66332b"
                     size="medium"
-                    onToggle={() => {setIsActive(!isActive)}}
+                    onToggle={() => updateNetworkVersion()}
                     />
                 </View>
                 </View>

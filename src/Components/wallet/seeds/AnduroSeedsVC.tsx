@@ -45,7 +45,7 @@ const AnduroSeedsVC = (props: any) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(mnemonic.join(" ").toLowerCase())
-    showToasterMsg("success",`${t("copymnemonic")}` )  
+    showToasterMsg("success",`${t("copyrecoverytext")}` )  
   }
 
   const downloadMnemonic = async () => {
@@ -162,8 +162,7 @@ const AnduroSeedsVC = (props: any) => {
 
         <View className="p-5 pt-0">
           <Text className="font-geistregular text-center text-headingcolor text-xs font-normal mb-5">
-            You’ll be asked to confirm the positions in the next step. Make sure you’ve backed these
-            up somewhere
+            {t("seedsubtext")}
           </Text>
           <Button
             className="w-full"

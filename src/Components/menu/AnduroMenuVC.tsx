@@ -36,7 +36,7 @@ const AnduroMenuVC = (props: any) => {
     "menutype": "changelanguage",
     "componentName": route.changelanguage
   },{
-    "menuname": t("nativecoins"),
+    "menuname": t("selectnetwork"),
     "iconname": "hand-coin-outline",
     "menutype": "nativecoins",
     "componentName": route.nativeCoin
