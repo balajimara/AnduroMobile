@@ -2,7 +2,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
 
@@ -78,8 +78,8 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
+# Configure IOS
 
-# Configure IOS 
 1. Go to ios directory
 2. Run 'bundle install'
 3. run 'bundle exec pod install'
@@ -87,3 +87,25 @@ To learn more about React Native, take a look at the following resources:
 
 Use below command to link font react native
 npx react-native-asset
+
+# For Sidemenu IOS
+
+1.Go to node modules go to the following directory 
+node_modules/react-native-navigation/lib/ios/RNNSideMenu/MMDrawerController/MMDrawerController.m
+
+change line number 221
+From
+  [self setMaximumLeftDrawerWidth:MMDrawerDefaultWidth];
+To
+   [self setMaximumLeftDrawerWidth:[UIScreen mainScreen].bounds.size.width];
+
+# For Sidemenu Android
+1.Go to the following directory 
+/home/bsetec/hema/blockchain/andurowalletmobile/AnduroMobile/node_modules/react-native-navigation/lib/android/app/src/main/java/com/reactnativenavigation/views/sidemenu/SideMenuRoot.java
+
+change line number 64
+From
+  int width = MATCH_PARENT; 
+To
+   int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+
