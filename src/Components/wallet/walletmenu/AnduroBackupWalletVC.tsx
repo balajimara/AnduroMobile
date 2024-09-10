@@ -100,13 +100,13 @@ const AnduroBackupWalletVC = (props: any) => {
 
   const downloadMnemonic = async () => {
     try {
-      let userdata = getdata({ type: StorageTypes.userData })
+      let userdata = await getdata({ type: StorageTypes.userData })
       let path = `${RNFS.DownloadDirectoryPath}/Anduro/`
       RNFS.mkdir(path)
       console.log('userdata.walletName', userdata)
       path += `${userdata.walletName}.json`
       // write the file
-      RNFS.writeFile(path, JSON.stringify(mnemonic.join(" ")), "utf8")
+      RNFS.writeFile(path, JSON.stringify(mnemonic), "utf8")
         .then((response: any) => {
           console.log('response', response)
           showToasterMsg("success",`${t("downloadkeysuccess")}` )

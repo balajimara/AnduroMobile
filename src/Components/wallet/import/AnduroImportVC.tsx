@@ -39,7 +39,7 @@ const AnduroImportVC = (props: any) => {
 
   const updateWord = (index: number, word: string) => {
     const updatedWords = [...mnemonic];
-    updatedWords[index] = word.trim();
+    updatedWords[index] = word.trim().toLowerCase();
     setMnemonic(updatedWords);
   };
 
