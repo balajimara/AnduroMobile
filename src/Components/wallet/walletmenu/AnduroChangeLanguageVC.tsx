@@ -9,20 +9,19 @@ import { LanguageDataModel } from '../../../model/AnduroUserDataModel';
 import { StorageTypes } from '../../../model/AnduroStorageModel';
 import { NetworkListModel } from '../../../model/AnduroNetworkModel';
 import { getMultiLanguage, setCachedData } from '../../../Utility/AndurocommonUtils';
-import i18n from '../../../../i18n';
 import LanguageListVW from '../../../Common/Views/setting/LanguageListVW';
 import { Navigation } from 'react-native-navigation';
 import route from '../../../Route/Route';
 
 const AnduroChangeLanguageVC = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
   const [languageList, setLanguageList] = React.useState<LanguageDataModel[]>([])
   const [selectedLanguage, setSelectedLanguage] = React.useState<string>("en")
 
   React.useEffect(() => {
-    setdata({ type: StorageTypes.pageTitle, data: t("Change Language") })
+    setdata({ type: StorageTypes.pageTitle, data: t("changelanguage") })
     const userData = getdata({ type: StorageTypes.userData })
     if (userData) setSelectedLanguage(userData.selectedLanguage)
     getLanguageList()
@@ -39,7 +38,7 @@ const AnduroChangeLanguageVC = () => {
     setdata({ type: StorageTypes.userData, value: CachedUserData })
     setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
     setSelectedLanguage(selectedLanguage)
-    i18n.changeLanguage(selectedLanguage)
+    // await i18n.changeLanguage(selectedLanguage)
   }
 
   return (

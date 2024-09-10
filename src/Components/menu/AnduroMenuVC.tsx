@@ -86,7 +86,6 @@ const AnduroMenuVC = (props: any) => {
     })
   }
 
-console.log(menudata)
 const handleNavigation = (menutype: string, componentName: any) => {
   if (menutype === "logout") {
     setShowWarning(true)

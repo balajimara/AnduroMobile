@@ -20,7 +20,7 @@ const AnduroSelectcurrencyVC = () => {
   const [, setdata] = useAtom(setData)
 
   React.useEffect(() => {
-    setdata({ type: StorageTypes.pageTitle, data: t("Select Currency") })
+    setdata({ type: StorageTypes.pageTitle, data: t("selectcurrency") })
     const userData = getdata({ type: StorageTypes.userData })
     if (userData) {
       setCachedData(StorageTypes.userData, JSON.stringify(userData))
@@ -46,6 +46,7 @@ const AnduroSelectcurrencyVC = () => {
 
   const getCurrencyList = async () => {
     const networks: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
+    console.log('networks', networks)
     if (networks.length > 0)
       setCurrencyList(await getMultiCurrency(networks[0].chromaBookApi, networks[0].networkMode))
   }
