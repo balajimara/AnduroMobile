@@ -12,7 +12,8 @@ import "./shim.js"
 import { PermissionsAndroid } from "react-native"
 import  'text-encoding-polyfill'
 
-LogBox.ignoreAllLogs()
+LogBox.ignoreLogs(["Require cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(true)
 Navigation.events().registerAppLaunchedListener(() => {
   SplashScreen.hide()
   Navigation.setDefaultOptions({
