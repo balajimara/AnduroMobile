@@ -1,6 +1,6 @@
 import { Icon, Text } from "@rneui/base"
 import { useEffect, useState } from "react"
-import { Button, Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image, SectionList, StyleSheet, StatusBar, Pressable } from "react-native"
+import { Button, Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image, SectionList, StyleSheet, StatusBar, Pressable, TouchableOpacity } from "react-native"
 import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
 import route from "../../../Route/Route"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
@@ -254,18 +254,46 @@ const AnduroDashboardVC = (props: any) => {
                   <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Receive</Text>
                 </View>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={() => {
+                Navigation.push(props.componentId, {
+                  component: {
+                    name: "AnduroSend",                 
+                    options: {
+                      topBar: {
+                        visible: false,
+                      },
+                      bottomTabs: {
+                        visible: false,
+                      },
+                    },
+                  }})
+              }}>
                 <View style={{display:"flex", flexDirection:'row', backgroundColor:"#1C1513", justifyContent:"center", alignContent:'center', alignItems:'center', height:44, width:(Dimensions.get("screen").width - 90) / 3, borderRadius: 5, marginHorizontal: 13}}>
                   <Image resizeMode={"contain"} source={require("./../../../assets/images/swap.png")} style={{width:24,height:24}} />
                   <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Send</Text>
                 </View>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback>
+              <TouchableOpacity onPress={() => {
+                console.log('inside onpress')
+                Navigation.push(props.componentId, {
+                  component: {
+                    name: "AnduroConvert",
+                 
+                    options: {
+                      topBar: {
+                        visible: false,
+                      },
+                      bottomTabs: {
+                        visible: false,
+                      },
+                    },
+                  }})
+              }}>
                 <View style={{display:"flex", flexDirection:'row', backgroundColor:"#1C1513", justifyContent:"center", alignContent:'center', alignItems:'center', height:44, width:(Dimensions.get("screen").width - 90) / 3, borderRadius: 5}}>
                   <Image resizeMode={"contain"} source={require("./../../../assets/images/swap.png")} style={{width:24,height:24}} />
                   <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Convert</Text>
                 </View>
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </View>
           }
         </View>

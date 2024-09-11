@@ -5,7 +5,7 @@ const AnduroSendVC = () => {
     
   return (
     <SafeAreaView>
-
+       <View><Text>Send</Text></View>
     </SafeAreaView>
   )}
 
