@@ -57,7 +57,9 @@ const AnduroLoginVC = (props: any) => {
       let CachedUserData = JSON.parse(await getCachedData(StorageTypes.userData) || "{}")
       CachedUserData.isLogged = true
       setdata({ type: StorageTypes.userData, data: CachedUserData })
-      setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
+      await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
+      let isTestnetfour = await getCachedData(StorageTypes.isTestnet4)
+      setdata({ type: StorageTypes.isTestnet4, data: isTestnetfour })
       Navigation.setRoot({
         root: route.afterLogin,
       });

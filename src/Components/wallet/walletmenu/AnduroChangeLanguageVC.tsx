@@ -35,7 +35,7 @@ const AnduroChangeLanguageVC = () => {
   const handleSelectLanguage = async (selectedLanguage: string) => {
     const CachedUserData = await getdata({ type: StorageTypes.userData })
     CachedUserData.selectedLanguage = selectedLanguage
-    setdata({ type: StorageTypes.userData, value: CachedUserData })
+    setdata({ type: StorageTypes.userData, data: CachedUserData })
     setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
     setSelectedLanguage(selectedLanguage)
     // await i18n.changeLanguage(selectedLanguage)

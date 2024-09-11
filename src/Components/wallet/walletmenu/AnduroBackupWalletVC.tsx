@@ -262,9 +262,9 @@ const AnduroBackupWalletVC = (props: any) => {
        <Button className="w-full"
             title={t("goback")}
             onPress={()=> {
-              Navigation.setRoot({
+                 Navigation.setRoot({
                 root: route.afterLogin,
-            })
+              })
             }
             }
             buttonStyle={{

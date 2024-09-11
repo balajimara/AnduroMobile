@@ -17,7 +17,8 @@ const AnduroNativeCoinsVC = () => {
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
-  const [isActive, setIsActive] = useState<boolean>(getdata({ type: StorageTypes.isTestnet4 }))
+  const [isEnableNW, setIsEnableNW] = React.useState<string>(getdata({ type: StorageTypes.isTestnet4}))
+
   const [networks] = React.useState<NetworkListModel[]>(getdata({ type: StorageTypes.networkList }))
   const [nativeCoins, setNativeCoins] = React.useState<string[]>(
     getdata({ type: StorageTypes.userData }).nativeCoins,
@@ -66,10 +67,10 @@ const AnduroNativeCoinsVC = () => {
   }
 
   const updateNetworkVersion = async () => {
-    let activeStatus = !isActive
-    setIsActive(activeStatus)
-    await setCachedData(StorageTypes.isTestnet4, activeStatus.toString())
-    setdata({ type: StorageTypes.isTestnet4, data: activeStatus })
+    let activeStatus = (isEnableNW == "1" ? "0" : "1")
+    setIsEnableNW(activeStatus)
+    await setCachedData(StorageTypes.isTestnet4, activeStatus.toString())    
+    setdata({ type: StorageTypes.isTestnet4, data: activeStatus.toString()})
   }
 
   return (
@@ -88,7 +89,7 @@ const AnduroNativeCoinsVC = () => {
                 </View>
                 <View>
                 <ToggleSwitch
-                    isOn={isActive}
+                    isOn={isEnableNW == "1"}
                     onColor="#A94C3D"
                     offColor="#66332b"
                     size="medium"

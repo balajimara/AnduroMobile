@@ -9,10 +9,14 @@ import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
 import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
 import CoinItemVW from "../../../Common/Views/dashboard/CoinItemVW"
 import CoinHeaderVW from "../../../Common/Views/dashboard/CoinHeaderVW"
+import { getData } from "../../../Storage/AnduroStorage"
+import { StorageTypes } from "../../../model/AnduroStorageModel"
+import { useAtom } from "jotai"
 
 
 
 const AnduroDashboardVC = (props: any) => {
+  const [,getdata] = useAtom(getData)
   const [loading, setLoading] = useState(true)
   const [data] = useState([{
     title: "Native Assets",
@@ -248,7 +252,20 @@ const AnduroDashboardVC = (props: any) => {
           }
           {!loading &&
             <View style={{display:"flex", flexDirection:'row'}}>
-              <TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={() => {
+                Navigation.push(props.componentId, {
+                  component: {
+                    name: "AnduroReceive",                 
+                    options: {
+                      topBar: {
+                        visible: false,
+                      },
+                      bottomTabs: {
+                        visible: false,
+                      },
+                    },
+                  }})
+              }}>
                 <View style={{display:"flex", flexDirection:'row', backgroundColor:"#1C1513", justifyContent:"center", alignContent:'center', alignItems:'center', height:44, width:(Dimensions.get("screen").width - 90) / 3, borderRadius: 5}}>
                   <Image resizeMode={"contain"} source={require("./../../../assets/images/receive.png")} style={{width:24,height:24}} />
                   <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Receive</Text>

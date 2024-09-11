@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
   for (let index = 0; index < networks.length; index++) {
+    console.log('networks[index].networkVersion', networks[index].networkVersion)
     if (networks[index].networkVersion == 4) {
       nativeCoins.push(networks[index].name)
     }    
@@ -60,7 +61,7 @@ export const pageHeader = atom<boolean>(false)
 export const selectedConvertNetwork = atom<any>(null)
 export const requestType = atom<string>("")
 export const isInjector = atom<boolean>(false)
-export const isTestnet4 = atom<boolean>(true)
+export const isTestnet4 = atom<string>("1")
 export const userData = atom<UserDataModel>({
   developerMode: true,
   showFiatValue: false,
@@ -105,7 +106,7 @@ const getState = (type: string): any => {
     return isInjector
   } else if (type === StorageTypes.selectedConvertNetwork) {
     return selectedConvertNetwork
-  }  else if (type === StorageTypes.isTestnet4) {
-       return isTestnet4
+  } else if (type === StorageTypes.isTestnet4) {
+    return isTestnet4
   }
 }
