@@ -95,7 +95,7 @@ const AnduroBackupWalletVC = (props: any) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(mnemonic.join(" "))
-    showToasterMsg("success", `${t("copymnemonic")}`)
+    showToasterMsg("success", `${t("copyrecoverytext")}`)
   }
 
   const downloadMnemonic = async () => {

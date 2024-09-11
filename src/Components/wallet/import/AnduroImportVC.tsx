@@ -13,6 +13,8 @@ import { showToasterMsg } from "../../../Utility/AndurocommonUtils";
 const AnduroImportVC = (props: any) => {
   const {t} = useTranslation()
   const [mnemonic, setMnemonic] = React.useState<string[]>([]);
+  const [mnemonicFirst, setMnemonicFirst] = React.useState<string[]>([]);
+  const [mnemonicSec, setMnemonicSec] = React.useState<string[]>([]);
   const [isShownToast, setIsShownToast] = React.useState<boolean>(false);
   const [toasttype, setToasttype] = React.useState<string>("");
   const [toastmessage, setToastMessage] = React.useState<string>("");
@@ -28,6 +30,8 @@ const AnduroImportVC = (props: any) => {
         const parsedWords = JSON.parse(fileContent);
         if (Array.isArray(parsedWords) && parsedWords.length === 12) {
           setMnemonic(parsedWords);
+          setMnemonicFirst(parsedWords.slice(0,6))
+          setMnemonicSec(parsedWords.slice(6,12))
         } else {
           showToast(t("invalidjsonformat"), "error");
         }
@@ -41,6 +45,8 @@ const AnduroImportVC = (props: any) => {
     const updatedWords = [...mnemonic];
     updatedWords[index] = word.trim();
     setMnemonic(updatedWords);
+    setMnemonicFirst(updatedWords.slice(0,6))
+    setMnemonicSec(updatedWords.slice(6,12))
   };
 
 
@@ -100,6 +106,8 @@ const AnduroImportVC = (props: any) => {
 
   React.useEffect(() => {
     setMnemonic(Array(12).fill(""));
+    setMnemonicFirst(Array(6).fill(""));
+    setMnemonicSec(Array(6).fill(""));
   }, []);
 
   return (
@@ -113,10 +121,17 @@ const AnduroImportVC = (props: any) => {
         <View className="text-center mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("importwallet")}</Text>
           </View>
-          <View className="list-numbers flex-row flex-wrap relative z-10 mb-3">
-            {mnemonic.map((word: any, index: any) => (
-              <ImportSeedVW key={index} index={index} word={word} onUpdateWord={updateWord} />
-            ))}
+          <View className="list-numbers mb-6 px-4 py-4 pb-3 flex-row flex-wrap">
+            <View className="w-1/2 px-4">
+              {mnemonicFirst.map((word: any, index: any) => (
+                <ImportSeedVW key={index} index={index} word={word} onUpdateWord={updateWord} />
+              ))}           
+            </View>
+            <View className="w-1/2 px-4">  
+            {mnemonicSec.map((word: any, index: any) => (
+                <ImportSeedVW key={index} index={index+6} word={word} onUpdateWord={updateWord} />
+              ))}
+            </View>
           </View>
           </ScrollView>
         <View className="px-2">

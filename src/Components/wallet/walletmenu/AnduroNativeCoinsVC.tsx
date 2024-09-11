@@ -17,15 +17,14 @@ const AnduroNativeCoinsVC = () => {
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
-  const [isActive, setIsActive] = useState<boolean>(true)
+  const [isActive, setIsActive] = useState<boolean>(getdata({ type: StorageTypes.isTestnet4 }))
   const [networks] = React.useState<NetworkListModel[]>(getdata({ type: StorageTypes.networkList }))
   const [nativeCoins, setNativeCoins] = React.useState<string[]>(
     getdata({ type: StorageTypes.userData }).nativeCoins,
   )
   const [isUpdated, setIsUpdated] = React.useState<boolean>(false)
-
   React.useEffect(() => {
-    setdata({ type: StorageTypes.pageTitle, data: t("nativecoins") })
+    setdata({ type: StorageTypes.pageTitle, data: t("selectnetwork") })
   }, [])
 
   React.useEffect(() => {    
@@ -66,9 +65,11 @@ const AnduroNativeCoinsVC = () => {
     })
   }
 
-  const updateNetworkVersion = () => {
-    setIsActive(!isActive)
-    setdata({ type: StorageTypes.isTestnet4, data: isActive })
+  const updateNetworkVersion = async () => {
+    let activeStatus = !isActive
+    setIsActive(activeStatus)
+    await setCachedData(StorageTypes.isTestnet4, activeStatus.toString())
+    setdata({ type: StorageTypes.isTestnet4, data: activeStatus })
   }
 
   return (
@@ -91,7 +92,7 @@ const AnduroNativeCoinsVC = () => {
                     onColor="#A94C3D"
                     offColor="#66332b"
                     size="medium"
-                    onToggle={() => updateNetworkVersion()}
+                    onToggle={async () => updateNetworkVersion()}
                     />
                 </View>
                 </View>

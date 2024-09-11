@@ -105,7 +105,7 @@ const getState = (type: string): any => {
     return isInjector
   } else if (type === StorageTypes.selectedConvertNetwork) {
     return selectedConvertNetwork
-  }  else if (type === StorageTypes.selectedConvertNetwork) {
-    return isTestnet4
+  }  else if (type === StorageTypes.isTestnet4) {
+       return isTestnet4
   }
 }
