@@ -8,11 +8,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
-  for (let index = 0; index < networks.length; index++) {
-    console.log('networks[index].networkVersion', networks[index].networkVersion)
-    if (networks[index].networkVersion == 4) {
-      nativeCoins.push(networks[index].name)
-    }    
+  for (let i = 0; i < networks.length; i++) {
+    const element = networks[i]
+    if (element.networkType === "alys" && element.networkVersion === 4) {
+      continue
+    }
+    nativeCoins.push(networks[i].name)    
   }
   return nativeCoins
 }

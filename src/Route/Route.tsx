@@ -57,13 +57,6 @@ Navigation.registerComponent("AnduroConvert", () => AnduroConvertVC)
 Navigation.registerComponent("AnduroReviewConfirm", () => AnduroReviewConvertVC)
 Navigation.registerComponent("AnduroConfirm", () => AnduroConfirmVC)
 
-const BottomTabconfig =  {
-  backgroundColor: "#140401",
-  titleDisplayMode: "alwaysHide",
-  currentTabIndex: 1,
-  visible: true,
-  drawBehind: true,
-}
 /**
  * default root before login
  */
@@ -207,7 +200,7 @@ const afterLogin = {
                   icon: require("./../assets/images/tab/collectible.png"),
                   selectedIcon: require("./../assets/images/tab/collectible_active.png"),
                 },
-                bottomTabs: BottomTabconfig
+              
               },
             },
           },
@@ -225,8 +218,9 @@ const afterLogin = {
                 bottomTab: {
                   icon: require("./../assets/images/tab/dashboard.png"),
                   selectedIcon: require("./../assets/images/tab/dashboard_active.png"),
+                
                 },
-                bottomTabs: BottomTabconfig,
+               
               },
             },
           },
@@ -245,11 +239,16 @@ const afterLogin = {
                   icon: require("./../assets/images/tab/apps.png"),
                   selectedIcon: require("./../assets/images/tab/apps_active.png"),
                 },
-                bottomTabs: BottomTabconfig,
+               
               },
             },
           },
         ],
+        options: {
+          bottomTabs: {                 
+            currentTabIndex: 1,
+          }
+        }
       },
     },
   },
