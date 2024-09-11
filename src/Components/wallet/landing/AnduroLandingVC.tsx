@@ -9,27 +9,30 @@ import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useTranslation } from "react-i18next"
 import AnduroTypeHeaderVW from "../../../Common/Views/AccountTypeHeaderVW"
 import route from "../../../Route/Route"
+import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
 
 export const AnduroLandingVC = (props: any) => {
   const { t } = useTranslation()
   const [agree, setAgree] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [isBackPopupOpen, setIsBackPopupOpen] = useState(false)
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
 
 
   React.useEffect(() => {    
     const backPressEvent = () => {
-      Alert.alert("", t("backpopuptext"), [
-        {
-          text: t("no"),
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: t("yes"), onPress: () => {  
-          BackHandler.exitApp() 
-        }}
-      ]);     
+      // Alert.alert("", t("backpopuptext"), [
+      //   {
+      //     text: t("no"),
+      //     onPress: () => null,
+      //     style: "cancel"
+      //   },
+      //   { text: t("yes"), onPress: () => {  
+      //     BackHandler.exitApp() 
+      //   }}
+      // ]);     
+      setIsBackPopupOpen(true)
       return true;
     }
       const subscription = BackHandler.addEventListener(
@@ -124,7 +127,11 @@ export const AnduroLandingVC = (props: any) => {
             value={progress}
           />
         </View>
+        { isBackPopupOpen && (
+        <BackPopupVW />
+      )}
       </View>
+     
     </SafeAreaView>
   )
 }
