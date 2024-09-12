@@ -123,13 +123,14 @@ const AnduroSendVC = () => {
         containerStyle={{ borderRadius: 0, backgroundColor: 'transparent', padding: 0, justifyContent: 'space-between' }}
       >
         <Text className="font-geistmedium text-headingcolor text-base text-sm">Wallet Address</Text>
+        <View className="opacity-60">
         <Icon
           name={expanded ? 'angle-up' : 'angle-down'}
           color='white'
           size={22}
-          opacity={0.65}
           containerStyle={{ marginLeft: 'auto' }}
         />
+        </View>
       </ListItem>
       {expanded && (
        <View className="pt-3"> 
