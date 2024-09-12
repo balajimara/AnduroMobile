@@ -30,6 +30,7 @@ import { nftMempoolListOutputModel } from '../model/AnduroResponseModel';
 import { getUsermempoolList, RpcServiceAPI, wishlistAddressAPI, } from '../Services/CoordinateIndexerService';
 import { GET_BLOCK_COUNT } from '../Config/AnduroRPCMethods';
 import { getXpubKey } from "./AnduroStorageUtils"
+import { mnemonic } from '../Storage/AnduroStorage';
 
 /**
  * This function is used to get chain instance
@@ -646,3 +647,12 @@ export const wishlistAddress = async (
     return { status: true }
   }
 }
+
+/**
+ * This function is used to check user has password.
+ * @param mnemonic -mnemonic
+ */
+export const checkUserHasPassword = (mnemonic: string) => {
+  return bip39.validateMnemonic(mnemonic)
+}
+

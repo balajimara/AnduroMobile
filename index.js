@@ -4,18 +4,18 @@
 import { LogBox } from 'react-native';
 import { Navigation } from "react-native-navigation"
 import route from "./src/Route/Route"
-import SplashScreen from "react-native-splash-screen"
 import "./i18n"
-import { getCachedData } from "./src/Utility/AndurocommonUtils"
+import { getCachedData, checkUserHasPassword } from "./src/Utility/AndurocommonUtils"
 import { CachedDataTypes, StorageTypes } from "./src/model/AnduroStorageModel"
 import "./shim.js"
 import { PermissionsAndroid } from "react-native"
 import  'text-encoding-polyfill'
+import SplashScreen from "react-native-splash-screen"
+
 
 LogBox.ignoreLogs(["Require cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]); // Ignore log notification by message
 LogBox.ignoreAllLogs(true)
 Navigation.events().registerAppLaunchedListener(() => {
-  SplashScreen.hide()
   Navigation.setDefaultOptions({
     topBar: {
       background: {
@@ -72,10 +72,20 @@ navigationLogic = () => {
   getCachedData(StorageTypes.userData).then((userData) => {
     getCachedData(CachedDataTypes.mnemonic).then((mnemonic) => {
       let userinfo = JSON.parse(userData || "{}")
+      SplashScreen.hide()
+
       if (mnemonic !== null) {
-        Navigation.setRoot({
-          root: route.login,
-        })
+        const isValidMnemonic = checkUserHasPassword(mnemonic)
+        console.log('isValidMnemonic', isValidMnemonic)
+        if (!isValidMnemonic) {
+          Navigation.setRoot({
+            root: route.login,
+          })
+        } else {
+          Navigation.setRoot({
+            root: route.gettingstarted,
+          })
+        }    
       } else {
         if (Object.keys(userinfo).length === 0) {
           Navigation.setRoot({
