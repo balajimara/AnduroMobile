@@ -1,15 +1,18 @@
+import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet } from "react-native"
-import { Input, Button } from "@rneui/themed"
+import { Input, Button, ListItem } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 
 const AnduroSendVC = () => {
-    
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <SafeAreaView>
+    <ScrollView>
       <View className="bg-gray">
        <View className="p-8 px-6 pb-0">
         <View className="pb-8"><Text className="text-2xl text-lightgray opacity-95 leading-10 font-geistsemibold font-semibold text-center">Send</Text></View>
-       <ScrollView> 
+        
         <View className="bg-popupclr rounded-lg p-4 relative z-10">
          <View className="border-b border-headingborder mb-4 pb-1">
           <Text className="font-geistmedium text-headingcolor text-sm">From</Text>
@@ -82,6 +85,90 @@ const AnduroSendVC = () => {
         </View>
        </View>
 
+       {/*convert*/}
+       <View className="bg-popupclr rounded-lg p-4 relative z-10 mt-3.5">
+         <View className="border-b border-headingborder mb-4 pb-1">
+          <Text className="font-geistmedium text-headingcolor text-sm">You receive</Text>
+         </View>
+         <View className="flex-row flex-wrap justify-between">
+          <View className="bg-backuphighlightbg rounded w-3/5">
+           <View className="flex-row flex-wrap justify-between items-center">
+            <View className="w-3/4">  
+             <View className="p-3">
+              <Text className="text-headingcolor font-geistregular text-sm">0.1 USD</Text>
+             </View>
+            </View>
+           </View>
+          </View>
+          <View className="w-2/5 pl-2">
+           <View className="bg-backuphighlightbg items-center rounded-lg flex-row flex-wrap justify-between px-2.5">
+            <View className="flex-row items-center">
+             <Image resizeMode={"contain"} source={require("../../assets/icons/cbtc.png")} className="w-4" />
+             <Text className="text-white font-geistregular uppercase text-xs px-1.5 leading-5 max-w-16 overflow-hidden text-ellipsis whitespace-nowrap">CBTC</Text>
+            </View>
+            <View>
+             <Icon name={'angle-down'} size={18} color="#FAFAFA" />
+            </View>
+           </View>
+          </View> 
+         </View>
+         <View className="border border-btcvalue opacity-50 rounded-md w-full mt-3 p-3">
+          <Text className="font-geistmedium text-lightgray text-sm text-left font-medium opacity-70">0.1 BTC = 0.1 CBTC</Text>
+         </View>
+       </View>
+
+       <View className="bg-popupclr rounded-lg p-4 py-5 rounded-lg mt-3.5">
+        <ListItem
+        isExpanded={expanded}
+        onPress={() => setExpanded(!expanded)}
+        containerStyle={{ borderRadius: 0, backgroundColor: 'transparent', padding: 0, justifyContent: 'space-between' }}
+      >
+        <Text className="font-geistmedium text-headingcolor text-base text-sm">Wallet Address</Text>
+        <Icon
+          name={expanded ? 'angle-up' : 'angle-down'}
+          type='feather'
+          color='white'
+          size={22}
+          opacity={0.65}
+          containerStyle={{ marginLeft: 'auto' }}
+        />
+      </ListItem>
+      {expanded && (
+       <View className="pt-3"> 
+        <View className="border-t border-headingborder">
+         <View className="pt-3">
+          <ListItem containerStyle={{ borderRadius: 0, backgroundColor: 'transparent', padding: 0, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', width:'100%' }}>
+            <View className="w-full bg-backuphighlightbg h-12 rounded px-3 relative">
+             <Input placeholder="0.1 tCBTC" placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputThird]} style={[styles.inputThirdsm]} />
+             <View className="absolute right-4 top-2.5 z-10">
+             <Button className="w-full"
+                title="Change"
+                buttonStyle={{
+                  backgroundColor: 'transparent',
+                  borderRadius: 6,
+                  borderWidth:1,
+                  borderColor:'#6c6765',
+                  height: 26,
+                  marginBottom:0,
+                  color:'#9aa2a7',
+                  padding:0
+                }}
+                containerStyle={{ borderRadius: 6 }}
+                titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 12, color:'#9aa2a7' }}
+              />
+             </View> 
+            </View>
+            <View>
+             <Text className="font-geistregular font-normal text-xs text-headingcolor pt-2">Make sure the wallet address is on Coordiate</Text>
+            </View>
+          </ListItem>
+         </View> 
+        </View>
+       </View> 
+      )}
+       </View>
+       {/*end*/}
+
        <View className="bg-popupclr rounded-md p-4 my-3.5 mb-0 cursor-pointer">
         <View className="flex-row justify-between items-center">
          <View>
@@ -120,10 +207,10 @@ const AnduroSendVC = () => {
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
           />
         </View>
-        </ScrollView>
+        
        </View>
       </View> 
-     
+     </ScrollView>
     </SafeAreaView>
   )}
 
@@ -157,6 +244,26 @@ const AnduroSendVC = () => {
     fontFamily:'Geist-SemiBold',
     fontSize: 12,
     padding:0,
+    margin:0,
+    color: '#fff'
+  },
+  inputThird: {
+    borderBottomWidth:0,
+    borderWidth:0,
+    borderRadius:0,
+    minHeight:0,
+    maxHeight:'none',
+    padding:0
+  },
+  inputThirdsm: {
+    height: 45,
+    minHeight:0,
+    maxHeight:'none',
+    minWidth:0,
+    fontFamily:'Geist-SemiBold',
+    fontSize: 12,
+    padding:0,
+    paddingRight:65,
     margin:0,
     color: '#fff'
   }
