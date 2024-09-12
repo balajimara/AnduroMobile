@@ -119,14 +119,12 @@ const AnduroSendVC = () => {
 
        <View className="bg-popupclr rounded-lg p-4 py-5 rounded-lg mt-3.5">
         <ListItem
-        isExpanded={expanded}
         onPress={() => setExpanded(!expanded)}
         containerStyle={{ borderRadius: 0, backgroundColor: 'transparent', padding: 0, justifyContent: 'space-between' }}
       >
         <Text className="font-geistmedium text-headingcolor text-base text-sm">Wallet Address</Text>
         <Icon
           name={expanded ? 'angle-up' : 'angle-down'}
-          type='feather'
           color='white'
           size={22}
           opacity={0.65}
@@ -150,7 +148,6 @@ const AnduroSendVC = () => {
                   borderColor:'#6c6765',
                   height: 26,
                   marginBottom:0,
-                  color:'#9aa2a7',
                   padding:0
                 }}
                 containerStyle={{ borderRadius: 6 }}
@@ -252,13 +249,11 @@ const AnduroSendVC = () => {
     borderWidth:0,
     borderRadius:0,
     minHeight:0,
-    maxHeight:'none',
     padding:0
   },
   inputThirdsm: {
     height: 45,
     minHeight:0,
-    maxHeight:'none',
     minWidth:0,
     fontFamily:'Geist-SemiBold',
     fontSize: 12,
