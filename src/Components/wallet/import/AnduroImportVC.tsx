@@ -121,13 +121,13 @@ const AnduroImportVC = (props: any) => {
         <View className="text-center mb-10">
           <Text className="font-geistregular text-headingcolor text-sm text-center font-normal">{t("importwallet")}</Text>
           </View>
-          <View className="list-numbers mb-6 px-4 py-4 pb-3 flex-row flex-wrap">
-            <View className="w-1/2 px-4">
+          <View className="list-numbers mb-6 py-4 pb-3 flex-row flex-wrap">
+            <View className="w-1/2">
               {mnemonicFirst.map((word: any, index: any) => (
                 <ImportSeedVW key={index} index={index} word={word} onUpdateWord={updateWord} />
               ))}           
             </View>
-            <View className="w-1/2 px-4">  
+            <View className="w-1/2">  
             {mnemonicSec.map((word: any, index: any) => (
                 <ImportSeedVW key={index} index={index+6} word={word} onUpdateWord={updateWord} />
               ))}

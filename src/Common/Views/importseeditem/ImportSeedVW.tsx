@@ -13,7 +13,7 @@ const ImportSeedVW: React.FC<ImportSeedVWProps> = ({ index, word, onUpdateWord }
   }
 
   return (
-    <View className="form-group mb-2 relative w-1/2 px-2">
+    <View className="form-group mb-2 relative w-full px-2">
       <TextInput
         className="bg-popupclr border border-backupline rounded-lg h-11 w-full p-3 pl-12 font-geistsemibold text-white text-xs focus:outline-none [&::-webkit-inner-spin-button]:appearance-none"
         value={word}
