@@ -24,8 +24,12 @@ import { Buffer } from "@craftzdog/react-native-buffer";
 import unorm from "unorm";
 import { pbkdf2Sync  } from 'react-native-crypto';
 import { Navigation } from 'react-native-navigation';
-import { GET_CURRENCY_VALUE, GET_LANGUAGE_LIST } from '../Config/CoordinateIndexerApi';
+import { GET_CURRENCY_VALUE, GET_LANGUAGE_LIST, RPC_REQUEST } from '../Config/CoordinateIndexerApi';
 import axios from "axios"
+import { nftMempoolListOutputModel } from '../model/AnduroResponseModel';
+import { getUsermempoolList, RpcServiceAPI, wishlistAddressAPI, } from '../Services/CoordinateIndexerService';
+import { GET_BLOCK_COUNT } from '../Config/AnduroRPCMethods';
+import { getXpubKey } from "./AnduroStorageUtils"
 
 /**
  * This function is used to get chain instance
@@ -423,4 +427,222 @@ export const getMultiCurrency = async (chromaBookApi: string, networkMode: strin
 export const getMultiLanguage = async (chromaBookApi: string) => {
   const result = await axios.get(chromaBookApi + GET_LANGUAGE_LIST)
   return result.data.status ? result.data.result : []
+}
+
+/**
+ * This function is used to get currency list
+ * @param chromaBookApi -chromabook api
+ */
+export const getFiatCurrency = async (chromaBookApi: string) => {
+  try {
+    const currencyResult = await axios.get(chromaBookApi + GET_CURRENCY_VALUE)
+    return currencyResult.data.status ? currencyResult.data.result : []
+  } catch (error) {
+    return []
+  }
+}
+
+/**
+ * This function is used to get the bitcoin price in Doller and update the cache.
+ * @param currency -currency
+ * @param chromaBookApi -chromabook api
+ */
+export const getFiatValues = async (params: {
+  currency: string
+  networklist: NetworkListModel[]
+}): Promise<number> => {
+  let currenctCurrencyValue = 0
+  for (let i = 0; i < params.networklist.length; i++) {
+    const network = params.networklist[i]
+    const multiCurrency = await getFiatCurrency(network.chromaBookApi)
+    for (let index = 0; index < multiCurrency.length; index += 1) {
+      const element = multiCurrency[index]
+      if (element.currency === params.currency) {
+        currenctCurrencyValue = element.value
+        break
+      }
+    }
+    if (currenctCurrencyValue > 0) break
+  }
+  return currenctCurrencyValue
+}
+
+/**
+ * This function is used to get active networks.
+ * @param networks - networks
+ * @returns
+ */
+export const getActiveNetworks = (
+  networks: NetworkListModel[],
+  activeNtiveCoins: { name: string; networkVersion: string }[],
+  developerMode: boolean,
+  selectedNetworkVersion: string,
+): { activeNetworks: NetworkListModel[]; isConvertEnabled: boolean } => {
+  let activeNetworks: NetworkListModel[] = []
+  let isConvertEnabled: boolean = false
+  const activeChains: string[] = []
+  for (let j = 0; j < activeNtiveCoins.length; j++) {
+    if (activeNtiveCoins[j].networkVersion == selectedNetworkVersion) {
+      activeChains.push(activeNtiveCoins[j].name)
+    }
+  }
+  for (let i = 0; i < networks.length; i++) {
+    const element = networks[i]
+    let hasActive: boolean = element.networkVersion === selectedNetworkVersion
+    if (!hasActive) continue
+    if (
+      activeChains.includes(element.name) &&
+      ((developerMode && element.isSandbox) || (!developerMode && !element.isSandbox))
+    ) {
+      activeNetworks.push(element)
+      if (element.networkType === "bitcoin") isConvertEnabled = true
+    }
+  }
+  if (isConvertEnabled) isConvertEnabled = activeNetworks.length > 1
+  return {
+    activeNetworks,
+    isConvertEnabled,
+  }
+}
+
+
+/**
+ * This function is used to get Preconf transaction history.
+ * @param network -network
+ * @param chromaBookApi -chromabook api
+ * @param xPubKey -extended public key
+ */
+
+export const getMempoolNftList = async (
+  chromaBookApi: string,
+  xpubKey: string,
+  assetType: number,
+): Promise<nftMempoolListOutputModel> => {
+  const nftsResponse: nftMempoolListOutputModel = await getUsermempoolList({
+    baseURL: chromaBookApi,
+    xpub: xpubKey,
+    assetType: assetType,
+    page: 1,
+    limit: 10,
+  })
+  return nftsResponse
+}
+
+/**
+ * This function is used to convert value to ALYS format
+ * @param value - The value to be converted to BTC format
+ */
+export const convertToAlys = (value: number): number => {
+  return parseFloat(convertValueToEther(value))
+}
+
+
+
+/**
+ * This function is used to convert wei value to Ether.
+ * @param Wei - wei value from api
+ */
+export const convertValueToEther = (value: number): any => {
+  if (isNaN(value)) {
+    return 0
+  } else {
+    const ethvalue = ethers.formatEther(value.toString())
+    return ethvalue
+  }
+}
+
+/**
+ * This function is used to  get mined blockcount
+ * @param chromaBookApi - chromabook base URL
+ */
+export const getMinedBlockCount = async (
+  chromaBookApi: string,
+): Promise<{ status: boolean; height: number }> => {
+  const params = getRpcParams(GET_BLOCK_COUNT, [], "anduro")
+  const result: any = await RpcServiceAPI(params, chromaBookApi + RPC_REQUEST)
+  return {
+    status: result.status,
+    height: result.status ? result.result : 0,
+  }
+}
+
+/**
+ * This function is used to get derivation index by network
+ * @param network -network
+ */
+export const getDerivationIndex = async (network: string): Promise<number> => {
+  const deriveInfo = JSON.parse(await getCachedData(CachedDataTypes.derivationIndex) || "[]")
+  let index: number = 0
+  for (let i = 0; i < deriveInfo.length; i++) {
+    const element = deriveInfo[i]
+    if (element.network === network) {
+      index = element.derivationIndex
+      break
+    }
+  }
+  return index
+}
+
+/**
+ * This function is used to convert Sat to BTC.
+ * @param Balance - balance
+ */
+export const convertSatToBTC = (balance: number): number => {
+  if (isNaN(balance)) {
+    return 0
+  } else {
+    return balance / 10 ** 8
+  }
+}
+
+/**
+ *This function is used to get rpc params
+ * @param method -rpc method
+ * @param value - value
+ */
+ export const getRpcParams = (
+  method: string,
+  value: any,
+  node: string,
+): { params: string; node: string } => {
+  return {
+    params: `{'jsonrpc': '1.0','id': 'curltest','method': '${method}','params':[${value}]}`,
+    node: node,
+  }
+}
+
+export const getAlysBalance = async (address: string, url: any) => {
+  try {
+    const provider = new ethers.JsonRpcProvider(url)
+    const result = await provider.getBalance(address)
+    return Number(ethers.formatEther(result))
+  } catch (error) {
+    return 0
+  }
+}
+
+
+/**
+ * This function is used to wishlist addresses.
+ * @param networkInfo -networkInfo
+ * @param derivationIndex -derivationIndex
+ * @param xpubKeys -xpubKeys
+ */
+export const wishlistAddress = async (
+  networkInfo: NetworkListModel,
+  derivationIndex: number,
+  xpubKeys: XpubKeysModel[],
+) => {
+  const xpubKey = getXpubKey(networkInfo.name, xpubKeys)
+  let params = {
+    xpub: xpubKey || "",
+    address: "",
+    derivation_index: derivationIndex,
+    baseUrl: networkInfo.chromaBookApi,
+  }
+  if (networkInfo.networkType == "bitcoin" || networkInfo.networkType == "sidechain") {
+    await wishlistAddressAPI(params)
+  } else if (networkInfo.name == "alys") {
+    return { status: true }
+  }
 }

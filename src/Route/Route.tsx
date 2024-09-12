@@ -192,6 +192,9 @@ const afterLogin = {
                 {
                   component: {
                     name: "collectible",
+                    passProps: {
+                      
+                    }
                   },
                 },
               ],
@@ -211,6 +214,9 @@ const afterLogin = {
                 {
                   component: {
                     name: "dashboard",
+                    passProps: {
+
+                    }
                   },
                 },
               ],
@@ -231,6 +237,9 @@ const afterLogin = {
                 {
                   component: {
                     name: "apps",
+                    passProps: {
+                      
+                    }
                   },
                 },
               ],

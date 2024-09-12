@@ -3,14 +3,12 @@ import networks from "../Config/network.json"
 import { UserDataModel } from "../model/AnduroUserDataModel"
 import { NetworkListModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
-import { atomWithStorage, createJSONStorage } from "jotai/utils"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const getNativeCoins = (): string[] => {
   const nativeCoins: string[] = []
   for (let i = 0; i < networks.length; i++) {
     const element = networks[i]
-    if (element.networkType === "alys" && element.networkVersion === 4) {
+    if (element.networkType === "alys" && element.networkVersion === "4") {
       continue
     }
     nativeCoins.push(networks[i].name)    
@@ -18,38 +16,6 @@ const getNativeCoins = (): string[] => {
   return nativeCoins
 }
 
-export const atomWithAsyncStorage = (key: string, initialValue: any) => {
-  const storage = createJSONStorage(() => AsyncStorage)
-
-  // preserve original getItem and setItem
-  const { getItem, setItem } = storage
-
-  // override setItem
-  storage.setItem = (value) => {
-    return setItem(key, value)
-  }
-
-  // override getItem
-  storage.getItem = async () => {
-    const value = await getItem(key, initialValue)
-    return value
-  }
-  return atomWithStorage(key, initialValue, storage)
-}
-
-// export const userData =
-// atomWithAsyncStorage(StorageTypes.userData, {
-//     developerMode: true,
-//     showFiatValue: false,
-//     showCollectionArt: false,
-//     hideBalance: false,
-//     selectedCurrency: "USD",
-//     selectedLanguage: "en",
-//     defaultReserveAmount: 0,
-//     nativeCoins: getNativeCoins(),
-//     isLogged: false,
-//     privacyPolicy: false,
-//   })
 
 export const networkList = atom<NetworkListModel[]>(networks)
 export const xpubkeys = atom<XpubKeysModel[]>([])
@@ -62,7 +28,7 @@ export const pageHeader = atom<boolean>(false)
 export const selectedConvertNetwork = atom<any>(null)
 export const requestType = atom<string>("")
 export const isInjector = atom<boolean>(false)
-export const isTestnet4 = atom<string>("1")
+export const selectedNetworkVer = atom<string>("4")
 export const userData = atom<UserDataModel>({
   developerMode: true,
   showFiatValue: false,
@@ -107,7 +73,7 @@ const getState = (type: string): any => {
     return isInjector
   } else if (type === StorageTypes.selectedConvertNetwork) {
     return selectedConvertNetwork
-  } else if (type === StorageTypes.isTestnet4) {
-    return isTestnet4
+  } else if (type === StorageTypes.selectedNetworkVer) {
+    return selectedNetworkVer
   }
 }

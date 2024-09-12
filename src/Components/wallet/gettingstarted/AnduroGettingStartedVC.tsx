@@ -4,42 +4,36 @@ import { Navigation } from "react-native-navigation"
 import { getCachedData, setCachedData } from "../../../Utility/AndurocommonUtils"
 import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
 import route from "../../../Route/Route"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useAtom } from "jotai"
+import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
 
 export const AnduroGettingStartedVC = (props: any) => {
     const { t } = useTranslation()
     const [,getdata] = useAtom(getData)
     const [,setdata] = useAtom(setData)
+    const [isBackPopupOpen, setIsBackPopupOpen] = useState(false)
+
     useEffect(() => {
-            const setUserInfo = async () => {
-              const userdata = await getCachedData(StorageTypes.userData)
-              const userinfo = JSON.parse(userdata || "{}")
-              if (Object.keys(userinfo).length == 0) {
-                setCachedData(
-                  StorageTypes.userData,
-                  JSON.stringify(getdata({ type: StorageTypes.userData }))
-                )
-              } else {
-                setdata({ type: StorageTypes.userData, data: userinfo })
-              }
-            }
-            setUserInfo()        
+      const setUserInfo = async () => {
+        const userdata = await getCachedData(StorageTypes.userData)
+        const userinfo = JSON.parse(userdata || "{}")
+        if (Object.keys(userinfo).length == 0) {
+          setCachedData(
+            StorageTypes.userData,
+            JSON.stringify(getdata({ type: StorageTypes.userData }))
+          )
+        } else {
+          setdata({ type: StorageTypes.userData, data: userinfo })
+        }
+      }
+      setUserInfo()        
     }, [])
     useEffect(() => {    
         const backPressEvent = () => {
-          Alert.alert("", t("backpopuptext"), [
-            {
-              text: t("no"),
-              onPress: () => null,
-              style: "cancel"
-            },
-            { text: t("yes"), onPress: () => {  
-              BackHandler.exitApp() 
-            }}
-          ]);     
+          setIsBackPopupOpen(true)  
           return true;
         }
           const subscription = BackHandler.addEventListener(
@@ -74,6 +68,16 @@ export const AnduroGettingStartedVC = (props: any) => {
             }
         }         
     }
+
+    const yescallback = () => {
+      setIsBackPopupOpen(false)
+      BackHandler.exitApp()
+    } 
+  
+    const nocallback = () => {
+      setIsBackPopupOpen(false)
+    }
+
   return (
     <SafeAreaView>
       <View className="bg-continue h-full">
@@ -108,6 +112,9 @@ export const AnduroGettingStartedVC = (props: any) => {
          </View> 
        </View>
       </View>
+      {isBackPopupOpen && (
+        <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
+      )}
     </SafeAreaView>
   )
 }

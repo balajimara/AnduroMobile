@@ -12,6 +12,8 @@ import  Icon  from 'react-native-vector-icons/FontAwesome';
 import * as bip39 from "bip39"
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 import route from "../../../Route/Route"
+import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
+
 
 const AnduroLoginVC = (props: any) => {
   const { t } = useTranslation()
@@ -23,6 +25,7 @@ const AnduroLoginVC = (props: any) => {
   const [isShownToast, setIsShownToast] = React.useState<boolean>(false);
   const [toasttype, setToasttype] = React.useState<string>("");
   const [toastmessage, setToastMessage] = React.useState<string>("");
+  const [isBackPopupOpen, setIsBackPopupOpen] = React.useState<boolean>(false)
 
 
   // React.useEffect(() => {
@@ -58,10 +61,16 @@ const AnduroLoginVC = (props: any) => {
       CachedUserData.isLogged = true
       setdata({ type: StorageTypes.userData, data: CachedUserData })
       await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
-      let isTestnetfour = await getCachedData(StorageTypes.isTestnet4)
-      setdata({ type: StorageTypes.isTestnet4, data: isTestnetfour })
+      let isTestnetfour = await getCachedData(StorageTypes.selectedNetworkVer)
+      setdata({ type: StorageTypes.selectedNetworkVer, data: isTestnetfour })
+      let networkVersion = await getCachedData(StorageTypes.selectedNetworkVer)
+      setdata({ type: StorageTypes.selectedNetworkVer, data: networkVersion })
+      let routeinfo = route.afterLogin
+      routeinfo.sideMenu.center.bottomTabs.children[1].stack.children[0].component.passProps = {
+        password: currentPassword || ""
+      }
       Navigation.setRoot({
-        root: route.afterLogin,
+        root: routeinfo,
       });
     }
   }
@@ -99,25 +108,25 @@ const AnduroLoginVC = (props: any) => {
 
   React.useEffect(() => {    
     const backPressEvent = () => {
-      Alert.alert("", t("backpopuptext"), [
-        {
-          text: t("no"),
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: t("yes"), onPress: () => {  
-          BackHandler.exitApp() 
-        }}
-      ]);     
-      return true;
+      setIsBackPopupOpen(true)
+      return true;  
     }
-      const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        backPressEvent
-      );
-      return () => subscription.remove();
-    
-}, []);
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
+    return () => subscription.remove();    
+  }, []);
+
+
+const yescallback = () => {
+  setIsBackPopupOpen(false)
+  BackHandler.exitApp()
+} 
+
+const nocallback = () => {
+  setIsBackPopupOpen(false)
+}
 
 
   return (
@@ -164,6 +173,9 @@ const AnduroLoginVC = (props: any) => {
       />
       </View>
      </View>
+     {isBackPopupOpen && (
+        <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
+      )}
     </SafeAreaView>
   )
 }

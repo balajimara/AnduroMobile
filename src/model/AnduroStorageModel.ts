@@ -17,7 +17,7 @@ export enum StorageTypes {
   requestType = "requestType",
   isInjector = "isInjector",
   selectedConvertNetwork = "selectedConvertNetwork",
-  isTestnet4= "isTestnet4"
+  selectedNetworkVer= "selectedNetworkVer"
 }
 export interface XpubKeysModel {
   network: string

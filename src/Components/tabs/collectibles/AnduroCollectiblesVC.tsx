@@ -1,12 +1,14 @@
 import { Text } from "@rneui/base"
 import { useEffect, useState } from "react"
-import { Dimensions, Pressable, SafeAreaView, SectionList, View } from "react-native"
+import { Input } from "@rneui/themed"
+import { BackHandler, Dimensions, Pressable, SafeAreaView, SectionList, View } from "react-native"
 import { Navigation } from "react-native-navigation"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
 import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
 import CoinItemVW from "../../../Common/Views/dashboard/CoinItemVW"
 import CoinHeaderVW from "../../../Common/Views/dashboard/CoinHeaderVW"
-import { Input } from "@rneui/themed"
+import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
+
 
 const AnduroCollectiblesVC = (props: any)  => {
   const [loading, setLoading] = useState(true)
@@ -182,6 +184,9 @@ const AnduroCollectiblesVC = (props: any)  => {
     ]  
   }])
   const [expandedSections, setExpandedSections] = useState(new Set());
+  const [isBackPopupOpen, setIsBackPopupOpen] = useState<boolean>(false)
+
+
   const handleToggle = (title:any) => {
     setExpandedSections((expandedSections) => {
       // Using Set here but you can use an array too
@@ -194,6 +199,15 @@ const AnduroCollectiblesVC = (props: any)  => {
       return next;
     });
   };
+
+  const yescallback = () => {
+    setIsBackPopupOpen(false)
+    BackHandler.exitApp()
+  } 
+  
+  const nocallback = () => {
+    setIsBackPopupOpen(false)
+  }
 
   useEffect(() => {
     Navigation.mergeOptions(props.componentId, {
@@ -286,6 +300,9 @@ const AnduroCollectiblesVC = (props: any)  => {
             }
           </View>
        </View>
+       {isBackPopupOpen && (
+        <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
+      )}
     </SafeAreaView>
   )
 }

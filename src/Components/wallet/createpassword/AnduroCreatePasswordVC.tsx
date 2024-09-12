@@ -98,7 +98,7 @@ const AnduroCreatePasswordVC = (props:any) => {
           await setCachedData(CachedDataTypes.alysAddress,  alys_result[0].address)
         }
       }
-      await setCachedData(StorageTypes.isTestnet4, "1")
+      await setCachedData(StorageTypes.selectedNetworkVer, "1")
       setShowWarning(false)
       setLoading(true)
 
@@ -160,7 +160,7 @@ const AnduroCreatePasswordVC = (props:any) => {
       return element.network === "alys"
     })
     await setCachedData(CachedDataTypes.mnemonic, mnemonicKey)
-    await setCachedData(StorageTypes.isTestnet4, "1")
+    await setCachedData(StorageTypes.selectedNetworkVer, "1")
     const mnemonic = await getMnemonicKey(password.password)
     if (mnemonic) {
 

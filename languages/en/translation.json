@@ -88,5 +88,6 @@
   "copyrecoverytext": "Recovery phrase has been copied successfully",
   "seedsubtext": "You will be asked to confirm the order of these words in the next screen. Make sure you save this information.",
   "seedconfirmsubtext": "Select the words in the order they appeared before",
-  "selectnetwork": "Select Network"
+  "selectnetwork": "Select Network",
+  "testnet4": "Testnet 4" 
 }

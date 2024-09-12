@@ -17,10 +17,10 @@ export interface NetworkListModel {
   derivationIndex: number
   chromaBookApi: string
   federationApi?: string
-  icon?: object
-  usdIcon?: object
+  icon?: string
+  usdIcon?: string
   url?: string
   chainId?: number
   alysNodeApi?: string,
-  networkVersion: number
+  networkVersion: string
 }

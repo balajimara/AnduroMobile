@@ -17,7 +17,7 @@ const AnduroNativeCoinsVC = () => {
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
-  const [isEnableNW, setIsEnableNW] = React.useState<string>(getdata({ type: StorageTypes.isTestnet4}))
+  const [isEnableNW, setIsEnableNW] = React.useState<string>(getdata({ type: StorageTypes.selectedNetworkVer}))
 
   const [networks] = React.useState<NetworkListModel[]>(getdata({ type: StorageTypes.networkList }))
   const [nativeCoins, setNativeCoins] = React.useState<string[]>(
@@ -67,10 +67,10 @@ const AnduroNativeCoinsVC = () => {
   }
 
   const updateNetworkVersion = async () => {
-    let activeStatus = (isEnableNW == "1" ? "0" : "1")
+    let activeStatus = (isEnableNW == "4" ? "3" : "4")
     setIsEnableNW(activeStatus)
-    await setCachedData(StorageTypes.isTestnet4, activeStatus.toString())    
-    setdata({ type: StorageTypes.isTestnet4, data: activeStatus.toString()})
+    await setCachedData(StorageTypes.selectedNetworkVer, activeStatus.toString())    
+    setdata({ type: StorageTypes.selectedNetworkVer, data: activeStatus.toString()})
   }
 
   return (
@@ -84,12 +84,12 @@ const AnduroNativeCoinsVC = () => {
        <View className="bg-popupclr p-4 px-3.5 mb-3 w-full justify-between flex-row flex-wrap items-center">
                 <View className="flex-row flex-wrap items-center">                
                 <View>
-                    <Text className="text-lightgray capitalize text-base">Testnet 4</Text>
+                    <Text className="text-lightgray capitalize text-base">{t("testnet4")}</Text>
                 </View>
                 </View>
                 <View>
                 <ToggleSwitch
-                    isOn={isEnableNW == "1"}
+                    isOn={isEnableNW == "4"}
                     onColor="#A94C3D"
                     offColor="#66332b"
                     size="medium"

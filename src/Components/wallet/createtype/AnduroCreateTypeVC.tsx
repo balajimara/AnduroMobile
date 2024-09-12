@@ -5,16 +5,19 @@ import AnduroTypeVW from "../../../Common/Views/AccountTypeVW"
 import { getData, setData } from "../../../Storage/AnduroStorage"
 import { useAtom } from "jotai"
 import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import AnduroTypeHeaderVW from "../../../Common/Views/AccountTypeHeaderVW"
 import { encrypteData, encryptXpubKey, getAlysAddress, getCachedData, getMnemonicKey, setCachedData } from "../../../Utility/AndurocommonUtils"
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
+import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
+
 
 export const AnduroCreateTypeVC = (props: any) => {
   console.log('props', props)
   const { t } = useTranslation()
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
+  const [isBackPopupOpen, setIsBackPopupOpen] = useState<boolean>(false)
   const navigatePage = function (type: string) {
     Navigation.push(props.componentId, {
       component: {
@@ -52,16 +55,7 @@ export const AnduroCreateTypeVC = (props: any) => {
 
   useEffect(() => {    
     const backPressEvent = () => {
-      Alert.alert("", t("backpopuptext"), [
-        {
-          text: t("no"),
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: t("yes"), onPress: () => {  
-          BackHandler.exitApp() 
-        }}
-      ]);     
+      setIsBackPopupOpen(true)  
       return true;
     }
     const subscription = BackHandler.addEventListener(
@@ -71,7 +65,14 @@ export const AnduroCreateTypeVC = (props: any) => {
       return () => subscription.remove();    
 }, []);
 
+const yescallback = () => {
+  setIsBackPopupOpen(false)
+  BackHandler.exitApp()
+} 
 
+const nocallback = () => {
+  setIsBackPopupOpen(false)
+}
 
   
 
@@ -95,6 +96,9 @@ export const AnduroCreateTypeVC = (props: any) => {
           />
         </View>
       </View>
+      {isBackPopupOpen && (
+        <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
+      )}
     </SafeAreaView>
   )
 }

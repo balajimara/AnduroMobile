@@ -1,23 +1,63 @@
+import React from "react"
 import { Icon, Text } from "@rneui/base"
 import { useEffect, useState } from "react"
-import { Button, Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image, SectionList, StyleSheet, StatusBar, Pressable, TouchableOpacity } from "react-native"
-import { Navigation, NavigationButtonPressedEvent } from "react-native-navigation"
-import route from "../../../Route/Route"
+import {  Dimensions, SafeAreaView, TouchableWithoutFeedback, View, Image, SectionList, StyleSheet, StatusBar, Pressable, TouchableOpacity, BackHandler } from "react-native"
+import { Navigation } from "react-native-navigation"
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
+import { useAtom } from "jotai"
+import { useTranslation } from "react-i18next"
+import {
+  getFiatValues,
+  getActiveNetworks,
+  getMempoolNftList,
+} from "../../../Utility/AndurocommonUtils"
 import BalanceSkeleton from "../../../Common/Skeleton/Dashboard/BalanceSkeleton"
 import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
 import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
 import CoinItemVW from "../../../Common/Views/dashboard/CoinItemVW"
 import CoinHeaderVW from "../../../Common/Views/dashboard/CoinHeaderVW"
-import { getData } from "../../../Storage/AnduroStorage"
+import { getData, setData } from "../../../Storage/AnduroStorage"
 import { StorageTypes } from "../../../model/AnduroStorageModel"
-import { useAtom } from "jotai"
+import { NetworkListModel } from "../../../model/AnduroNetworkModel"
+import { AssetDetailsResponse } from "../../../model/AnduroResponseModel"
+import { prepareNetwork } from "../../../Utility/AnduroStorageUtils"
+import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
+
+interface DashboardProps {
+  password: string,
+  componentId: string
+}
 
 
-
-const AnduroDashboardVC = (props: any) => {
+const AnduroDashboardVC = (props: DashboardProps) => {
+  const { t } = useTranslation()
   const [,getdata] = useAtom(getData)
+  const [,setdata] = useAtom(setData)
   const [loading, setLoading] = useState(true)
+  const [networks, setNetworks] = React.useState<NetworkListModel[]>([])
+  const [isInterval, setIsInterval] = React.useState<boolean>(false)
+  const [fiatValue, setFiatValue] = React.useState<number>(0)
+  const [selectedCurrency] = React.useState<string>(
+    getdata({ type: StorageTypes.userData }).selectedCurrency || "USD",
+  )
+  const [balance, setBalance] = React.useState<{
+    pendingBalance: number
+    confirmedBalance: number
+  }>({
+    pendingBalance: 0,
+    confirmedBalance: 0,
+  })
+
+  const { password } = props
+  const [tokenList, setTokenList] = React.useState<any>([])
+  const [isConvertEnabled, setIsConvertEnabled] = React.useState<boolean>(false)
+  const [MempoolTokenList, setMempoolTokenList] = React.useState<any>([])
+  const [selectedNetworkVersion] = React.useState<string>(
+    getdata({ type: StorageTypes.selectedNetworkVer })
+  )  
+  const [isBackPopupOpen, setIsBackPopupOpen] = React.useState<boolean>(false)
+
+  
   const [data] = useState([{
     title: "Native Assets",
     data: [
@@ -186,7 +226,47 @@ const AnduroDashboardVC = (props: any) => {
     });
   };
 
-  useEffect(() => {
+  const yescallback = () => {
+    setIsBackPopupOpen(false)
+    BackHandler.exitApp()
+  } 
+  
+  const nocallback = () => {
+    setIsBackPopupOpen(false)
+  }
+
+  React.useEffect(() => {    
+    const backPressEvent = () => {
+      setIsBackPopupOpen(true)
+      return true;  
+    }
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backPressEvent
+    );
+    return () => subscription.remove();    
+  }, []);
+
+
+
+  React.useEffect(() => {
+    if (isInterval) {
+      const interval = setInterval(async () => {
+        await prepareNetworks()
+      }, 3000)
+      return () => clearInterval(interval)
+    }
+    return undefined
+  }, [networks, isInterval])
+  React.useEffect(() => {
+    if (networks.length === 0) {
+      prepareNetworks().then(() => {
+        setIsInterval(true)
+      })
+    }
+  }, [isInterval])
+
+  React.useEffect(() => {
     Navigation.mergeOptions(props.componentId, {
       topBar: {
         leftButtons: [
@@ -214,6 +294,44 @@ const AnduroDashboardVC = (props: any) => {
     }, 3000);
   }, [])
 
+  // This function is used to prepare a network list with a balance
+  const prepareNetworks = async () => {
+    const xpubKeys = getdata({ type: StorageTypes.xpubKeys })
+    const address = getdata({ type: StorageTypes.alysAddress })
+    const userData = getdata({ type: StorageTypes.userData })
+    const activeNetwork = getActiveNetworks(
+      getdata({ type: StorageTypes.networkList }),
+      userData.nativeCoins,
+      userData.developerMode,
+      userData.networkVersion,
+    )
+    setIsConvertEnabled(activeNetwork.isConvertEnabled)
+    const result: NetworkListModel[] = await prepareNetwork(
+      activeNetwork.activeNetworks,
+      xpubKeys,
+      address,
+    )
+    let confirmedBalance: number = 0
+    let pendingBalance: number = 0
+    for (let index = 0; index < result.length; index++) {
+      confirmedBalance += result[index].balance
+      pendingBalance += result[index].pendingBalance || 0
+      result[index].icon = "../../../assets/icons/btc.png"      
+      result[index].usdIcon = ""
+      if (result[index].networkType == "sidechain") {
+        result[index].icon = "../../../assets/icons/cbtc.png"
+        result[index].usdIcon = ""
+      } else if (result[index].networkType == "alys") {
+        result[index].icon = "../../../assets/icons/alys.png"
+        result[index].usdIcon = ""
+      }
+    }
+    setBalance({ pendingBalance, confirmedBalance })
+    setNetworks(result)
+    getFiatValue(result)
+    setLoading(false)
+  }
+
 
   const openMenu = async () => {
     await Navigation.dismissAllModals()
@@ -226,6 +344,15 @@ const AnduroDashboardVC = (props: any) => {
       },
     })
   }
+
+    // This function is used to get fiat value.
+    const getFiatValue = async (networks: NetworkListModel[]) => {
+      const result = await getFiatValues({
+        currency: selectedCurrency,
+        networklist: networks,
+      })
+      setFiatValue(result)
+    }
 
   return (
     <SafeAreaView className="bg-gray flex flex-1">
@@ -344,9 +471,11 @@ const AnduroDashboardVC = (props: any) => {
             stickySectionHeadersEnabled={true}
            />
           }
-         </View>
- 
+         </View> 
       </View>
+      {isBackPopupOpen && (
+        <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
+      )}
     </SafeAreaView>
   )
 }

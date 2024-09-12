@@ -21,17 +21,7 @@ export const AnduroLandingVC = (props: any) => {
 
 
   React.useEffect(() => {    
-    const backPressEvent = () => {
-      // Alert.alert("", t("backpopuptext"), [
-      //   {
-      //     text: t("no"),
-      //     onPress: () => null,
-      //     style: "cancel"
-      //   },
-      //   { text: t("yes"), onPress: () => {  
-      //     BackHandler.exitApp() 
-      //   }}
-      // ]);     
+    const backPressEvent = () => {  
       setIsBackPopupOpen(true)
       return true;
     }
@@ -95,6 +85,15 @@ export const AnduroLandingVC = (props: any) => {
     }
   }, [agree])
 
+  const yescallback = () => {
+    setIsBackPopupOpen(false)
+    BackHandler.exitApp()
+  } 
+
+  const nocallback = () => {
+    setIsBackPopupOpen(false)
+  }
+
   return (
     <SafeAreaView>
       <View className="bg-gray h-full flex flex-col justify-between">
@@ -126,12 +125,11 @@ export const AnduroLandingVC = (props: any) => {
             trackColor="gray"
             value={progress}
           />
-        </View>
-        { isBackPopupOpen && (
-        <BackPopupVW />
-      )}
+        </View>     
       </View>
-     
+      { isBackPopupOpen && (
+        <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
+      )}
     </SafeAreaView>
   )
 }
