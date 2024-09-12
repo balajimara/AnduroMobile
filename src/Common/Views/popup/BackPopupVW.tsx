@@ -12,30 +12,32 @@ const BackPopupVW = (props:any) => {
       <View className="flex-row flex-wrap pt-4">
        <View className="w-1/2 pr-1">
         <Button className="w-full"
-        title="Yes"
-        buttonStyle={{
-          backgroundColor: '#E8705C',
-          borderWidth:1,
-          borderColor: '#E8705C',
-          borderRadius: 8,
-          height: 40,
-        }}
-        containerStyle={{ borderRadius: 8 }}
-        titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
-        />
-       </View> 
-       <View className="w-1/2 pl-1">
-        <Button className="w-full"
-        title="No"
+        title="No take me back"
         buttonStyle={{
           backgroundColor: 'transparent',
           borderWidth:1,
           borderColor:'#514e4e',
           borderRadius: 8,
           height: 40,
+          padding:0
         }}
         containerStyle={{ borderRadius: 8 }}
-        titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 14 }}
+        titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 12 }}
+        />
+       </View> 
+       <View className="w-1/2 pl-1">
+        <Button className="w-full"
+        title="Yes, do not show again"
+        buttonStyle={{
+          backgroundColor: '#E8705C',
+          borderWidth:1,
+          borderColor: '#E8705C',
+          borderRadius: 8,
+          height: 40,
+          padding:0
+        }}
+        containerStyle={{ borderRadius: 8 }}
+        titleStyle={{ fontFamily: 'Geist-SemiBold', fontSize: 12 }}
         />
        </View>
       </View> 
