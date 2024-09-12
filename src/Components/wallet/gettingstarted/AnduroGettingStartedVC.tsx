@@ -4,10 +4,9 @@ import { Navigation } from "react-native-navigation"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useAtom } from "jotai"
-import * as bip39 from "bip39"
 import { getData, setData } from "../../../Storage/AnduroStorage"
 import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
-import { getCachedData, setCachedData, updateXpubKey } from "../../../Utility/AndurocommonUtils"
+import { checkUserHasPassword, getCachedData, setCachedData, updateXpubKey } from "../../../Utility/AndurocommonUtils"
 import { CachedDataTypes, StorageTypes } from "../../../model/AnduroStorageModel"
 import route from "../../../Route/Route"
 import { NetworkListModel } from "../../../model/AnduroNetworkModel"
@@ -32,7 +31,8 @@ export const AnduroGettingStartedVC = (props: any) => {
         } else {
           setdata({ type: StorageTypes.userData, data: userinfo })
           const userdata = await getCachedData(CachedDataTypes.mnemonic) || ""
-          setHasPassword(!bip39.validateMnemonic(userdata))
+          const isValidMnemonic = checkUserHasPassword(userdata)
+          setHasPassword(!isValidMnemonic)
         }
       }
       setUserInfo()        
