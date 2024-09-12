@@ -35,8 +35,8 @@ const AnduroSuccessVC = (props: any) => {
            </View>
           </View>
          </View>  
-         <View className="w-full px-6 relative z-10">
-          <View className="mb-5">
+         <View className="w-full px-6 pb-5 relative z-10">
+          <View>
            <Button className="w-full"
             title="Close"
             onPress={() =>
@@ -50,7 +50,7 @@ const AnduroSuccessVC = (props: any) => {
               borderColor:'#514e4e',
               borderRadius: 8,
               height: 48,
-              marginBottom:15
+              marginBottom:0
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}

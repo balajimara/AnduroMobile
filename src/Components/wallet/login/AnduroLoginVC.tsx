@@ -148,7 +148,7 @@ const AnduroLoginVC = (props: any) => {
        </ScrollView> 
       )}
       </View>
-      <View className="p-5">
+      <View className="p-6 pb-5">
        <Button className="w-full"
        onPress={()=> gotoDashboard()}
         title="Login to wallet"

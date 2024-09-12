@@ -6,8 +6,8 @@ const AnduroTypeHeaderVW = () => {
   const { t } = useTranslation()
   React.useEffect(() => {}, [])
   return (
-    <View className="p-14 px-10">
-      <View className="m-auto my-4 mb-8">
+    <View className="p-14 px-0">
+      <View className="m-auto my-4 mb-8 px-10">
         <Image
           resizeMode={"contain"}
           source={require("../../assets/images/logo.png")}
