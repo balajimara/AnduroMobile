@@ -128,7 +128,6 @@ const AnduroSendVC = () => {
           name={expanded ? 'angle-up' : 'angle-down'}
           color='white'
           size={22}
-          containerStyle={{ marginLeft: 'auto' }}
         />
         </View>
       </ListItem>

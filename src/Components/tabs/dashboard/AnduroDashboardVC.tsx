@@ -8,11 +8,9 @@ import { useAtom } from "jotai"
 import { useTranslation } from "react-i18next"
 import {
   getFiatValues,
-  getActiveNetworks,
+getActiveNetworks,
   getMempoolNftList,
 } from "../../../Utility/AndurocommonUtils"
-import BalanceSkeleton from "../../../Common/Skeleton/Dashboard/BalanceSkeleton"
-import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
 import ListSkeleton from "../../../Common/Skeleton/Dashboard/ListSkeleton"
 import CoinItemVW from "../../../Common/Views/dashboard/CoinItemVW"
 import CoinHeaderVW from "../../../Common/Views/dashboard/CoinHeaderVW"
@@ -22,6 +20,9 @@ import { NetworkListModel } from "../../../model/AnduroNetworkModel"
 import { AssetDetailsResponse } from "../../../model/AnduroResponseModel"
 import { prepareNetwork } from "../../../Utility/AnduroStorageUtils"
 import BackPopupVW from "../../../Common/Views/popup/BackPopupVW"
+import AnduroWalletBalanceVW from "../../../Common/Views/walletbalance/AnduroWalletBalanceVW"
+import BalanceSkeleton from "../../../Common/Skeleton/Dashboard/BalanceSkeleton"
+import ActionSkeleton from "../../../Common/Skeleton/Dashboard/ActionSkeleton"
 
 interface DashboardProps {
   password: string,
@@ -56,7 +57,7 @@ const AnduroDashboardVC = (props: DashboardProps) => {
     getdata({ type: StorageTypes.selectedNetworkVer })
   )  
   const [isBackPopupOpen, setIsBackPopupOpen] = React.useState<boolean>(false)
-
+  const [sectionData, setSectionData] = React.useState<any>([])
   
   const [data] = useState([{
     title: "Native Assets",
@@ -257,7 +258,7 @@ const AnduroDashboardVC = (props: DashboardProps) => {
       return () => clearInterval(interval)
     }
     return undefined
-  }, [networks, isInterval])
+  }, [networks, isInterval, sectionData])
   React.useEffect(() => {
     if (networks.length === 0) {
       prepareNetworks().then(() => {
@@ -299,11 +300,12 @@ const AnduroDashboardVC = (props: DashboardProps) => {
     const xpubKeys = getdata({ type: StorageTypes.xpubKeys })
     const address = getdata({ type: StorageTypes.alysAddress })
     const userData = getdata({ type: StorageTypes.userData })
+    const networkVersion = getdata({ type: StorageTypes.selectedNetworkVer })
     const activeNetwork = getActiveNetworks(
       getdata({ type: StorageTypes.networkList }),
       userData.nativeCoins,
       userData.developerMode,
-      userData.networkVersion,
+      networkVersion,
     )
     setIsConvertEnabled(activeNetwork.isConvertEnabled)
     const result: NetworkListModel[] = await prepareNetwork(
@@ -316,18 +318,21 @@ const AnduroDashboardVC = (props: DashboardProps) => {
     for (let index = 0; index < result.length; index++) {
       confirmedBalance += result[index].balance
       pendingBalance += result[index].pendingBalance || 0
-      result[index].icon = "../../../assets/icons/btc.png"      
-      result[index].usdIcon = ""
+      result[index].image = require("../../../assets/icons/btc.png"   )   
       if (result[index].networkType == "sidechain") {
-        result[index].icon = "../../../assets/icons/cbtc.png"
-        result[index].usdIcon = ""
+        result[index].image = require("../../../assets/icons/cbtc.png")
       } else if (result[index].networkType == "alys") {
-        result[index].icon = "../../../assets/icons/alys.png"
-        result[index].usdIcon = ""
+        result[index].image = require("../../../assets/icons/alys.png")
       }
+      result[index].type = "native"
+
     }
     setBalance({ pendingBalance, confirmedBalance })
-    setNetworks(result)
+    setNetworks(result)    
+    setSectionData([{
+      "title": "Natvie Assets",
+      "data": networks
+    }])
     getFiatValue(result)
     setLoading(false)
   }
@@ -357,91 +362,77 @@ const AnduroDashboardVC = (props: DashboardProps) => {
   return (
     <SafeAreaView className="bg-gray flex flex-1">
       <View className="m-4" style={{flex: 1}}>
-        <View className="bg-popupclr rounded-xl p-3.5">
-          <View className="py-10">
-            {loading &&
-               <BalanceSkeleton />
-            }
-            {!loading &&
-             <View style={{display:"flex", flexDirection:'column',justifyContent:"center", alignContent:'center', alignItems:'center'}}>
-               <View style={{display:"flex", flexDirection:'row'}}>
-                  <Text style={{fontFamily:"RobotoMono-Regular", color:"#fff", fontSize:30, marginRight: 12}}>1.000007 BTC</Text>
-                  <SimpleLineIcons name="refresh" color="#999999" size={14} style={{marginTop:12}} />
-               </View>
-               <View style={{backgroundColor:'#3D2F2D', height: 1, width: "50%", marginVertical: 10}}></View>
-               <Text style={{fontFamily:"RobotoMono-Regular", color:"#999", fontSize:18, marginRight: 12}}>50,000 USD</Text>
-             </View>
-            }
-             
-          </View>
-          {loading &&
-             <ActionSkeleton />
-          }
-          {!loading &&
-            <View style={{display:"flex", flexDirection:'row'}}>
-              <TouchableWithoutFeedback onPress={() => {
-                Navigation.push(props.componentId, {
-                  component: {
-                    name: "AnduroReceive",                 
-                    options: {
-                      topBar: {
-                        visible: false,
-                      },
-                      bottomTabs: {
-                        visible: false,
-                      },
+      <View className="bg-popupclr rounded-xl p-3.5">
+
+      {!loading && (
+      <AnduroWalletBalanceVW
+            isConvertEnabled={isConvertEnabled}
+            confirmedBalance={balance.confirmedBalance}
+            showRefresh={true}
+            pendingBalance={balance.pendingBalance}
+            fiatValue={fiatValue}
+            selectedCurrency={selectedCurrency}
+            symbol="BTC"
+            type="network"
+            selelectedNetwork=""
+            receiveAction={() => {
+              Navigation.push(props.componentId, {
+                component: {
+                  name: "AnduroReceive",                 
+                  options: {
+                    topBar: {
+                      visible: false,
                     },
-                  }})
-              }}>
-                <View style={{display:"flex", flexDirection:'row', backgroundColor:"#1C1513", justifyContent:"center", alignContent:'center', alignItems:'center', height:44, width:(Dimensions.get("screen").width - 90) / 3, borderRadius: 5}}>
-                  <Image resizeMode={"contain"} source={require("./../../../assets/images/receive.png")} style={{width:24,height:24}} />
-                  <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Receive</Text>
-                </View>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={() => {
-                Navigation.push(props.componentId, {
-                  component: {
-                    name: "AnduroSend",                 
-                    options: {
-                      topBar: {
-                        visible: false,
-                      },
-                      bottomTabs: {
-                        visible: false,
-                      },
+                    bottomTabs: {
+                      visible: false,
                     },
-                  }})
-              }}>
-                <View style={{display:"flex", flexDirection:'row', backgroundColor:"#1C1513", justifyContent:"center", alignContent:'center', alignItems:'center', height:44, width:(Dimensions.get("screen").width - 90) / 3, borderRadius: 5, marginHorizontal: 13}}>
-                  <Image resizeMode={"contain"} source={require("./../../../assets/images/swap.png")} style={{width:24,height:24}} />
-                  <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Send</Text>
-                </View>
-              </TouchableWithoutFeedback>
-              <TouchableOpacity onPress={() => {
-                console.log('inside onpress')
-                Navigation.push(props.componentId, {
-                  component: {
-                    name: "AnduroConvert",
-                 
-                    options: {
-                      topBar: {
-                        visible: false,
-                      },
-                      bottomTabs: {
-                        visible: false,
-                      },
+                  },
+                }})
+            }}
+            sendAction={() => {
+              Navigation.push(props.componentId, {
+                component: {
+                  name: "AnduroSend",                 
+                  options: {
+                    topBar: {
+                      visible: false,
                     },
-                  }})
-              }}>
-                <View style={{display:"flex", flexDirection:'row', backgroundColor:"#1C1513", justifyContent:"center", alignContent:'center', alignItems:'center', height:44, width:(Dimensions.get("screen").width - 90) / 3, borderRadius: 5}}>
-                  <Image resizeMode={"contain"} source={require("./../../../assets/images/swap.png")} style={{width:24,height:24}} />
-                  <Text style={{fontFamily: 'JetBrainsMono-SemiBold', color:"#ffff", fontSize:14, paddingLeft: 8}}>Convert</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          }
+                    bottomTabs: {
+                      visible: false,
+                    },
+                  },
+                }})
+            }}
+            convertAction={() => {
+              Navigation.push(props.componentId, {
+                component: {
+                  name: "AnduroConvert",                 
+                  options: {
+                    topBar: {
+                      visible: false,
+                    },
+                    bottomTabs: {
+                      visible: false,
+                    },
+                  },
+                }})
+            }}
+            prepareNetworks={() => prepareNetworks()}
+            copyAction={() => {}}
+      />
+      
+      )}
+      {loading && (
+        <View className="py-10">
+        <BalanceSkeleton/>
         </View>
-         <View style={{flex:1}}>
+      )}
+      {loading && (
+        <View style={{display:"flex", flexDirection:'row'}}>
+        <ActionSkeleton/>
+        </View>
+      )}
+         <View style={{display:"flex", flexDirection:'row'}}>
           {loading &&
             <>
               <ListSkeleton />
@@ -452,26 +443,27 @@ const AnduroDashboardVC = (props: DashboardProps) => {
           }
          {!loading &&
           <SectionList
-            sections={data}
+            sections={sectionData}
             extraData={expandedSections} // extraData is required to re-render the list when expandedSections changes
-            keyExtractor={(item, index) => item.key }
-            renderItem={({ section: { title }, item, index }) => {
+            keyExtractor={(item, index) => item.symbol }
+            renderItem={({ section: { name }, item, index }) => {
               // check to see if the section is expanded
-              const isExpanded = expandedSections.has(title);
+              const isExpanded = expandedSections.has(name);
               //return null if it  is
               if (isExpanded) return null;
     
               return <CoinItemVW data={item} key={index}/>;
             }}
-            renderSectionHeader={({ section: { title } }) => (
-              <Pressable onPress={() => handleToggle(title)}>
-                <CoinHeaderVW title={title}/>
+            renderSectionHeader={({ section: { name } }) => (
+              <Pressable onPress={() => handleToggle(name)}>
+                <CoinHeaderVW title={name}/>
               </Pressable>
             )}
             stickySectionHeadersEnabled={true}
            />
           }
          </View> 
+      </View>
       </View>
       {isBackPopupOpen && (
         <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>

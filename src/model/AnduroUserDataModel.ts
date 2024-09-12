@@ -7,7 +7,7 @@ export interface UserDataModel {
   selectedLanguage: string
   walletName: string
   defaultReserveAmount: number
-  nativeCoins: string[]
+  nativeCoins: {name: string, networkVersion: string}[]
   isLogged: boolean
   privacyPolicy: boolean
 }

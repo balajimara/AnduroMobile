@@ -22,5 +22,6 @@ export interface NetworkListModel {
   url?: string
   chainId?: number
   alysNodeApi?: string,
-  networkVersion: string
+  networkVersion: string,
+  type?:string
 }

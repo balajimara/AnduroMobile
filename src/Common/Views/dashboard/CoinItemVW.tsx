@@ -6,7 +6,7 @@ const CoinItemVW = (props:any) => {
   return (
     <View style={styles.container}> 
        <View style={props.data.type === "nft" ? styles.nftLeftContainer: styles.leftContainer}>
-           <FastImage source={{uri: props.data.image}} style={props.data.type === "nft" ? styles.nftImgContainer : styles.imgContainer} />
+           <FastImage source={props.data.type == "native" ? props.data.image : {uri: props.data.image}} style={props.data.type === "nft" ? styles.nftImgContainer : styles.imgContainer} />
            <View style={styles.contentContainer}>
                 {props.data.type === "native" &&
                   <>

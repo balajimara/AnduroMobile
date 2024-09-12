@@ -14,7 +14,7 @@
     "derivationIndex": 0,
     "chromaBookApi": "http://btc-testnet-wallet.mara.technology:19130/",
     "federationApi": "",
-    "networkVersion": "4"
+    "networkVersion": "3"
   },
   {
     "id": 2,
@@ -31,7 +31,7 @@
     "derivationIndex": 0,
     "chromaBookApi": "http://btc-testnet-wallet.mara.technology:9130/",
     "federationApi": "",
-    "networkVersion": "4"
+    "networkVersion": "3"
   },
   {
     "id": 3,
@@ -50,6 +50,6 @@
     "chromaBookApi": "http://54.224.209.248:8545",
     "federationApi": "http://btc-testnet-wallet.mara.technology:9130/",
     "chainId": 212121,
-    "networkVersion": "4"
+    "networkVersion": "3"
   }
 ]

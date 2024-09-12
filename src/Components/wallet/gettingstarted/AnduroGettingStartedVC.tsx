@@ -18,7 +18,7 @@ export const AnduroGettingStartedVC = (props: any) => {
     const [,getdata] = useAtom(getData)
     const [,setdata] = useAtom(setData)
     const [isBackPopupOpen, setIsBackPopupOpen] = useState(false)
-    const [hasPassword, setHasPassword] = useState<boolean>(false)
+    const [hasPassword, setHasPassword] = useState<boolean>(true)
     useEffect(() => {
       const setUserInfo = async () => {
         const userdata = await getCachedData(StorageTypes.userData)

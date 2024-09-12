@@ -4,14 +4,16 @@ import { UserDataModel } from "../model/AnduroUserDataModel"
 import { NetworkListModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
 
-const getNativeCoins = (): string[] => {
-  const nativeCoins: string[] = []
+const getNativeCoins = (): { name: string; networkVersion: string }[] => {
+  const nativeCoins: { name: string; networkVersion: string }[] = []
   for (let i = 0; i < networks.length; i++) {
     const element = networks[i]
     if (element.networkType === "alys" && element.networkVersion === "4") {
       continue
     }
-    nativeCoins.push(networks[i].name)    
+    nativeCoins.push({ name: networks[i].name, 
+      networkVersion: networks[i].networkVersion 
+    })    
   }
   return nativeCoins
 }
