@@ -451,7 +451,12 @@ const AnduroDashboardVC = (props: DashboardProps) => {
               //return null if it  is
               if (isExpanded) return null;
     
-              return <CoinItemVW data={item} key={index}/>;
+              return <CoinItemVW data={item} key={index} 
+              fiatValue={fiatValue}
+              fiatSymbol={selectedCurrency}
+              type="native"
+              networksymbol={item.symbol}
+              onClick={() => {}} />;
             }}
             renderSectionHeader={({ section: { name } }) => (
               <Pressable onPress={() => handleToggle(name)}>

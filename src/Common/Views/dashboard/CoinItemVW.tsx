@@ -1,35 +1,57 @@
 import React from "react"
 import {StyleSheet, Text, View } from "react-native"
 import FastImage from 'react-native-fast-image'
+import { formatBTCValue, formatFiatValue } from "../../../Utility/AndurocommonUtils"
+interface NetworkListParams {
+  data: any
+  fiatValue: number
+  fiatSymbol: string
+  networksymbol?: string
+  type?: string
+  islast?: boolean
+  isTokenSelect?: boolean
+  onClick: () => void
+}
 
-const CoinItemVW = (props:any) => {
+const CoinItemVW = (props:NetworkListParams) => {
+  const {
+    data,
+    fiatValue,
+    fiatSymbol,
+    networksymbol,
+    islast,
+    type,
+    isTokenSelect,
+    onClick
+  } = props
+  const fiatBalance: string = (data.balance * fiatValue).toString()
   return (
     <View style={styles.container}> 
-       <View style={props.data.type === "nft" ? styles.nftLeftContainer: styles.leftContainer}>
-           <FastImage source={props.data.type == "native" ? props.data.image : {uri: props.data.image}} style={props.data.type === "nft" ? styles.nftImgContainer : styles.imgContainer} />
+       <View style={data.type === "nft" ? styles.nftLeftContainer: styles.leftContainer}>
+           <FastImage source={data.type == "native" ? data.image : {uri: data.image}} style={data.type === "nft" ? styles.nftImgContainer : styles.imgContainer} />
            <View style={styles.contentContainer}>
-                {props.data.type === "native" &&
+                {data.type === "native" &&
                   <>
-                    <Text style={styles.symbolText}>{props.data.symbol}</Text>
-                    <Text style={styles.nameText}>{props.data.name}</Text>
+                    <Text style={styles.symbolText}>{data.symbol}</Text>
+                    <Text style={styles.nameText}>{data.name}</Text>
                   </>
                 } 
-                {props.data.type === "nft" &&
+                {data.type === "nft" &&
                   <>
-                    <Text style={styles.symbolText}>{props.data.name}</Text>
-                    <Text style={styles.nameText}>{props.data.symbol}</Text>
-                    <Text style={styles.addtionalText} numberOfLines={1}>{props.data.info}</Text>
+                    <Text style={styles.symbolText}>{data.name}</Text>
+                    <Text style={styles.nameText}>{data.symbol}</Text>
+                    <Text style={styles.addtionalText} numberOfLines={1}>{data.info}</Text>
                   </>
                 } 
-                {props.data.type === "token" &&
-                   <Text style={styles.symbolText}>{props.data.name}</Text>
+                {data.type === "token" &&
+                   <Text style={styles.symbolText}>{data.name}</Text>
                 }
            </View>
        </View>
        <View style={styles.rightContainer}>
-          <Text style={styles.balanceText}>{props.data.balance} <Text style={styles.balanceSymbolText}>{props.data.symbol}</Text></Text>
-          {props.data.type === "native" &&
-             <Text style={styles.usdText}>$200.00</Text>
+          <Text style={styles.balanceText}>{`${data.balance}`} <Text style={styles.balanceSymbolText}>{data.symbol}</Text></Text>
+          {data.type === "native" &&
+             <Text style={styles.usdText}>{`${fiatBalance} ${fiatSymbol}`}</Text>
           }
        </View>
     </View>

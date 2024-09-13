@@ -678,6 +678,7 @@ export const hasActiveNetwork = (
  */
 export const formatBTCValue = (BTCValue: number): number => {
   let btcValues: any = 0
+  console.log('BTCValue', BTCValue, BTCValue)
   try {
     const decimalPart = BTCValue.toString().split(".")[1]
     if (decimalPart || Number.isInteger(BTCValue)) {
@@ -689,6 +690,31 @@ export const formatBTCValue = (BTCValue: number): number => {
     }
     return Number(btcValues.replace("BTC", "").trim())
   } catch (error) {
+    console.log("error", error, BTCValue)
     return btcValues
+  }
+}
+
+/**
+ * This function is used to format a fiat value.
+ * @param fiatValue - fiatValue
+ */
+export const formatFiatValue = (fiatValue: number): string => {
+  let fiatValues: string = "$0"
+  try {
+    const decimalPart = fiatValue.toString().split(".")[1]
+    if (decimalPart || Number.isInteger(fiatValue)) {
+      fiatValues = new Intl.NumberFormat("en-EN", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: Number.isInteger(fiatValue)
+          ? 0
+          : decimalPart.length - Number(decimalPart).toString().length + 2,
+      }).format(fiatValue)
+    }
+    return fiatValues.replace("$", "")
+  } catch (error) {
+    console.log('error', error)
+    return fiatValues.replace("$", "")
   }
 }
