@@ -423,6 +423,7 @@ const AnduroDashboardVC = (props: DashboardProps) => {
       />
       
       )}
+      </View>
       {loading && (
         <View className="py-10">
         <BalanceSkeleton/>
@@ -464,7 +465,7 @@ const AnduroDashboardVC = (props: DashboardProps) => {
            />
           }
          </View> 
-      </View>
+      
       </View>
       {isBackPopupOpen && (
         <BackPopupVW yescallback={yescallback} nocallback={nocallback} isVisible={isBackPopupOpen}/>
