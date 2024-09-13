@@ -67,6 +67,7 @@ module.exports = {
         toastred: "#BD362F",
         toastyellow: "#f89406",
         toastsuccess: "#51a351",
+        receiptline: "#2b2422",
       },
       backgroundImage: {
         checkboximage: "url('/public/assets/images/checkboxIcon.svg')",
