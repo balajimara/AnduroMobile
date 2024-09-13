@@ -1,11 +1,11 @@
 import { atom } from "jotai"
 import networks from "../Config/network.json"
 import { UserDataModel } from "../model/AnduroUserDataModel"
-import { NetworkListModel } from "../model/AnduroNetworkModel"
+import { NetworkListModel, NativeCoinModel } from "../model/AnduroNetworkModel"
 import { StorageTypes, XpubKeysModel } from "../model/AnduroStorageModel"
 
-const getNativeCoins = (): { name: string; networkVersion: string }[] => {
-  const nativeCoins: { name: string; networkVersion: string }[] = []
+const getNativeCoins = (): NativeCoinModel[] => {
+  const nativeCoins: NativeCoinModel[] = []
   for (let i = 0; i < networks.length; i++) {
     const element = networks[i]
     if (element.networkType === "alys" && element.networkVersion === "4") {

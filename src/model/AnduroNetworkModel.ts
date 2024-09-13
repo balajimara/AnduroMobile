@@ -25,3 +25,8 @@ export interface NetworkListModel {
   networkVersion: string,
   type?:string
 }
+
+export interface NativeCoinModel {
+  name: string, 
+  networkVersion: string
+}

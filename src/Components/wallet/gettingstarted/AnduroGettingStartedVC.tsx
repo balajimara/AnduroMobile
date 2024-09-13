@@ -58,7 +58,7 @@ export const AnduroGettingStartedVC = (props: any) => {
               root: route.login,
             })
           } else {
-            setdata({ type: StorageTypes.xpubKeys, data: updateXpubKey("") })
+            setdata({ type: StorageTypes.xpubKeys, data: await updateXpubKey("") })
             const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
             const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {
               return network.networkType == "alys"
@@ -79,6 +79,7 @@ export const AnduroGettingStartedVC = (props: any) => {
             routeinfo.sideMenu.center.bottomTabs.children[1].stack.children[0].component.passProps = {
               password: ""
             }
+            console.log("getxpub", getdata({ type: StorageTypes.xpubKeys}))
             Navigation.setRoot({
               root: routeinfo,
             })

@@ -329,10 +329,11 @@ const AnduroDashboardVC = (props: DashboardProps) => {
     }
     setBalance({ pendingBalance, confirmedBalance })
     setNetworks(result)    
+    // console.log('result', result)
     setSectionData([{
       "title": "Natvie Assets",
       "data": networks
-    }])
+    },])
     getFiatValue(result)
     setLoading(false)
   }

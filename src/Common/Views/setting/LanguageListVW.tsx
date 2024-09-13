@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { CheckBox, ListItem } from "@rneui/themed"
 import ToggleSwitch from "toggle-switch-react-native"
 import { showToasterMsg } from "../../../Utility/AndurocommonUtils"
+import { NativeCoinModel } from "../../../model/AnduroNetworkModel"
 
 interface LanguageListProps {
     type?: string
@@ -12,7 +13,7 @@ interface LanguageListProps {
     callback: () => Promise<void>
     isChecked: boolean
     symbol?: string
-    nativeCoins?: string[]
+    nativeCoins?: NativeCoinModel[]
   }
 
 const LanguageListVW = (props: LanguageListProps) => {

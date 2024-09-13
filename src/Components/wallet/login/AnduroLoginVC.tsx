@@ -47,7 +47,7 @@ const AnduroLoginVC = (props: any) => {
     if (await verifyPassword()) {
       const mnemonic = await getMnemonicKey(currentPassword)
       console.log("Current password===",currentPassword)
-      setdata({ type: StorageTypes.xpubKeys, data: updateXpubKey(currentPassword) })
+      setdata({ type: StorageTypes.xpubKeys, data: await updateXpubKey(currentPassword) })
       const networkList: NetworkListModel[] = getdata({ type: StorageTypes.networkList })
       console.log("Alyssinfooo====",networkList)
       const alysNetworkInfo: NetworkListModel | undefined = networkList.find((network) => {

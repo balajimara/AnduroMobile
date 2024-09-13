@@ -1,3 +1,5 @@
+import { NativeCoinModel } from "./AnduroNetworkModel"
+
 export interface UserDataModel {
   developerMode: boolean
   showFiatValue: boolean
@@ -7,7 +9,7 @@ export interface UserDataModel {
   selectedLanguage: string
   walletName: string
   defaultReserveAmount: number
-  nativeCoins: {name: string, networkVersion: string}[]
+  nativeCoins: NativeCoinModel[]
   isLogged: boolean
   privacyPolicy: boolean
 }

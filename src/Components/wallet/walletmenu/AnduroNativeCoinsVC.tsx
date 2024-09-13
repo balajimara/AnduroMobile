@@ -4,10 +4,10 @@ import { Button } from "@rneui/themed"
 import LanguageListVW from '../../../Common/Views/setting/LanguageListVW';
 import { getData, setData } from '../../../Storage/AnduroStorage';
 import { useAtom } from 'jotai';
-import { NetworkListModel } from '../../../model/AnduroNetworkModel';
+import { NativeCoinModel, NetworkListModel } from '../../../model/AnduroNetworkModel';
 import { CachedDataTypes, StorageTypes } from '../../../model/AnduroStorageModel';
 import { useTranslation } from 'react-i18next';
-import { setCachedData } from '../../../Utility/AndurocommonUtils';
+import { setCachedData, hasActiveNetwork, showToasterMsg } from '../../../Utility/AndurocommonUtils';
 import { Navigation } from 'react-native-navigation';
 import route from '../../../Route/Route';
 import ToggleSwitch from 'toggle-switch-react-native';
@@ -18,12 +18,11 @@ const AnduroNativeCoinsVC = () => {
   const [, getdata] = useAtom(getData)
   const [, setdata] = useAtom(setData)
   const [isEnableNW, setIsEnableNW] = React.useState<string>(getdata({ type: StorageTypes.selectedNetworkVer}))
-
+  console.log('isEnableNW', isEnableNW)
   const [networks] = React.useState<NetworkListModel[]>(getdata({ type: StorageTypes.networkList }))
-  const [nativeCoins, setNativeCoins] = React.useState<string[]>(
+  const [nativeCoins, setNativeCoins] = React.useState<NativeCoinModel[]>(
     getdata({ type: StorageTypes.userData }).nativeCoins,
   )
-  const [isUpdated, setIsUpdated] = React.useState<boolean>(false)
   React.useEffect(() => {
     setdata({ type: StorageTypes.pageTitle, data: t("selectnetwork") })
   }, [])
@@ -44,26 +43,50 @@ const AnduroNativeCoinsVC = () => {
    }, []);
 
 
-  const handleCallback = async (networkName: string) => {
+  const handleCallback = async (networkInfo: NativeCoinModel) => {
     const CachedUserData = getdata({ type: StorageTypes.userData })
-    let nativeCoins: string[] = CachedUserData.nativeCoins
-    if (nativeCoins.length === 1 && nativeCoins.includes(networkName)) return
-    if (nativeCoins.includes(networkName)) {
-      nativeCoins = nativeCoins.filter((coin) => coin !== networkName)
+    let nativeCoins: NativeCoinModel[] = CachedUserData.nativeCoins
+    if (
+      getUpdatedNativeCoins(nativeCoins).length === 1 &&
+      hasActiveNetwork(networkInfo.name, nativeCoins, isEnableNW)
+    ) {
+      showToasterMsg("error",t("nativecoinerror"))
+      return
+    }
+    if (hasActiveNetwork(networkInfo.name, nativeCoins, isEnableNW)) {
+      nativeCoins = nativeCoins.filter((coin) => {
+        if (coin.name === networkInfo.name && coin.networkVersion === isEnableNW) {
+          return false
+        } else {
+          return true
+        }
+      })
     } else {
-      nativeCoins.push(networkName)
+      nativeCoins.push({
+        name: networkInfo.name,
+        networkVersion: networkInfo.networkVersion,
+      })
     }
     CachedUserData.nativeCoins = nativeCoins
     await setCachedData(StorageTypes.userData, JSON.stringify(CachedUserData))
     setdata({ type: CachedDataTypes.userdata, data: CachedUserData })
     setNativeCoins(nativeCoins)
-    setIsUpdated(!isUpdated)
   }
 
   const navigateDashboard = () => {
     Navigation.setRoot({
       root: route.afterLogin
     })
+  }
+
+  const getUpdatedNativeCoins = (
+    nativeCoins: { name: string; networkVersion: string }[],
+  ): { name: string; networkVersion: string }[] => {
+    let updatedNativeCoins = []
+    updatedNativeCoins = nativeCoins.filter((coin) => {
+      return coin.networkVersion === isEnableNW
+    })  
+    return updatedNativeCoins
   }
 
   const updateNetworkVersion = async () => {
@@ -101,8 +124,8 @@ const AnduroNativeCoinsVC = () => {
           <LanguageListVW 
             title={network.name}
             key={i}
-            callback={async () => handleCallback(network.name)}
-            isChecked={nativeCoins.includes(network.name)}
+            callback={async () => handleCallback(network)}
+            isChecked={hasActiveNetwork(network.name, nativeCoins, isEnableNW)}
             symbol={network.symbol}
             type="native-coins"
             nativeCoins={nativeCoins}/>

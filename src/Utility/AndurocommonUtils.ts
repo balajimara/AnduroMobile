@@ -12,7 +12,7 @@ import "@ethersproject/shims"
 import { ethers } from "ethers"
 import { bls12_381 as bls } from '@noble/curves/bls12-381';
 import { GetWalletInfoParams } from "../model/AnduroWalletModel"
-import { NetworkListModel } from "../model/AnduroNetworkModel"
+import { NativeCoinModel, NetworkListModel } from "../model/AnduroNetworkModel"
 import { CachedDataTypes,StorageTypes,XpubKeysModel } from "../model/AnduroStorageModel"
 const bip32 = BIP32Factory(ecc)
 bitcoin.initEccLib(ecc)
@@ -156,6 +156,7 @@ export const getWallet = (
         pubkey: node.publicKey,
         network: getNetwork(params.networkMode || "", params.networkType),
       })
+      console.log('address', btcAddress.address)
       resolve( {
         address: btcAddress.address || "",
         xPublickey,
@@ -344,6 +345,7 @@ export const updateXpubKey = async (secretKey: string): Promise<XpubKeysModel[]>
       xpub: key,
       address: ''
     })
+    console.log('decryptedXpubKeys', decryptedXpubKeys)
   }
   return decryptedXpubKeys
 }
@@ -475,7 +477,7 @@ export const getFiatValues = async (params: {
  */
 export const getActiveNetworks = (
   networks: NetworkListModel[],
-  activeNtiveCoins: { name: string; networkVersion: string }[],
+  activeNtiveCoins: NativeCoinModel[],
   developerMode: boolean,
   selectedNetworkVersion: string,
 ): { activeNetworks: NetworkListModel[]; isConvertEnabled: boolean } => {
@@ -656,3 +658,37 @@ export const checkUserHasPassword = (mnemonic: string) => {
   return bip39.validateMnemonic(mnemonic)
 }
 
+
+export const hasActiveNetwork = (
+  name: string,
+  activeNtiveCoins: NativeCoinModel[],
+  selectedNetworkVersion: string,
+): boolean => {
+  console.log('selectedNetworkVersion', selectedNetworkVersion)
+  let coinList = activeNtiveCoins.filter((coin) => {
+      return coin.name === name && coin.networkVersion === selectedNetworkVersion
+  })
+  return coinList.length > 0
+}
+
+
+/**
+ * This function is used to format a bitcoin value.
+ * @param BTCValue - BTCValue
+ */
+export const formatBTCValue = (BTCValue: number): number => {
+  let btcValues: any = 0
+  try {
+    const decimalPart = BTCValue.toString().split(".")[1]
+    if (decimalPart || Number.isInteger(BTCValue)) {
+      btcValues = new Intl.NumberFormat("en-EN", {
+        style: "currency",
+        currency: "BTC",
+        maximumFractionDigits: Number.isInteger(BTCValue) ? 0 : 8,
+      }).format(BTCValue)
+    }
+    return Number(btcValues.replace("BTC", "").trim())
+  } catch (error) {
+    return btcValues
+  }
+}
