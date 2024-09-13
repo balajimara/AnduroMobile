@@ -56,16 +56,16 @@ const AnduroCreatePasswordVC = (props:any) => {
     },
   ])
 
-  React.useEffect(() => {    
+  React.useEffect(() => {
     const backPressEvent = () => {
-      Navigation.pop(props.componentId) 
+      Navigation.pop(props.componentId)
       return true;
     }
     const subscription = BackHandler.addEventListener(
       'hardwareBackPress',
       backPressEvent
     );
-    return () => subscription.remove();    
+    return () => subscription.remove();
   }, []);
 
 
@@ -111,7 +111,8 @@ const AnduroCreatePasswordVC = (props:any) => {
         : importdata
         ? t("walletimported")
         : "",
-      }}
+      haspassword:password.password
+      }},
   })}}
 
 
@@ -178,6 +179,7 @@ const AnduroCreatePasswordVC = (props:any) => {
           : importdata
           ? t("walletimported")
           : "",
+          haspassword:password.password
         }}
     })
 }

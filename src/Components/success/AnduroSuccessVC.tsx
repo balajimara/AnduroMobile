@@ -6,12 +6,18 @@ import route from "../../Route/Route";
 
 
 const AnduroSuccessVC = (props: any) => {
-    const {title} = props;
+    const {title,haspassword} = props;
     React.useEffect(() => {
       const handleBackPress = () => {
-        Navigation.setRoot({
-          root: route.login
-        })
+        if(haspassword) {
+          Navigation.setRoot({
+            root: route.login
+          })
+        } else {
+          Navigation.setRoot({
+            root: route.gettingstarted
+          })
+        }
         return true;
       };
       BackHandler.addEventListener('hardwareBackPress', handleBackPress);
@@ -34,16 +40,22 @@ const AnduroSuccessVC = (props: any) => {
             {/* <View className="opacity-50 mt-6"><Text className="text-center text-base font-geistregular text-lightgray">{subtitle}</Text></View> */}
            </View>
           </View>
-         </View>  
+         </View>
          <View className="w-full px-6 pb-5 relative z-10">
           <View>
            <Button className="w-full"
             title="Close"
-            onPress={() =>
+            onPress={() => {
+            if(haspassword) {
               Navigation.setRoot({
                 root: route.login
               })
+            } else {
+              Navigation.setRoot({
+                root: route.gettingstarted
+              })
             }
+            }}
             buttonStyle={{
               backgroundColor: 'transparent',
               borderWidth:1,
@@ -56,7 +68,7 @@ const AnduroSuccessVC = (props: any) => {
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
             />
           </View>
-         </View> 
+         </View>
         </View>
        </SafeAreaView>
     )
