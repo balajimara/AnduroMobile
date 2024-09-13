@@ -5,8 +5,11 @@ import  Icon  from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 const AnduroSendVC = () => {
+  const [visible1, setVisible1] = useState(false);
   const [expanded, setExpanded] = useState(false);
-
+  const toggleDialog1 = () => {
+    setVisible1(!visible1);
+  };
   return (
     <SafeAreaView>
     <ScrollView>
@@ -121,6 +124,7 @@ const AnduroSendVC = () => {
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 10 }}
+            onPress={toggleDialog1}
           />
           </View>
           <View className="w-2/3 pl-2">
@@ -271,7 +275,43 @@ const AnduroSendVC = () => {
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
           />
         </View>
-        
+        <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute' }} isVisible={visible1} onBackdropPress={toggleDialog1}>
+         <View> 
+          <Text className="text-lightgray text-lg font-geistsemibold w-64">Premium transactions are a hassle free way to transact on the blockchain</Text>
+          <Text className="text-lightgray text-xs opacity-50 my-4">You can set the maximum amount you’re willing to pay for transactions (or a particular transaction) - and know whether your transaction was confirmed or not in around ~90 seconds.</Text>
+          <Text className="text-lightgray text-xs opacity-50">If you’ve got important transactions that need to go through faster, no more waiting endlessly for transactions to get confirmed on the blockchain.</Text>
+         </View>
+         <View className="mt-4 flex-row flex-wrap items-center justify-between">
+           <View className="w-1/3">
+           <Button className="w-full"
+            title="No thanks"
+            buttonStyle={{
+              backgroundColor: 'transparent',
+              borderWidth:1,
+              borderColor:'#514e4e',
+              borderRadius: 8,
+              height: 48,
+              padding:0
+            }}
+            containerStyle={{ borderRadius: 8 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 11 }}
+          />
+          </View>
+          <View className="w-2/3 pl-2">
+          <Button className="w-full"
+            title="Set default value (30s)"
+            buttonStyle={{
+              backgroundColor: '#E8705C',
+              borderRadius: 8,
+              height: 48,
+              padding:0
+            }}
+            containerStyle={{ borderRadius: 8 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 11 }}
+          />
+          </View>
+          </View> 
+        </Dialog>
        </View>
       </View> 
      </ScrollView>
