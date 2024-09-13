@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet } from "react-native"
 import { Input, Button, ListItem } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 const AnduroSendVC = () => {
   const [expanded, setExpanded] = useState(false);
@@ -84,6 +85,63 @@ const AnduroSendVC = () => {
          </View>
         </View>
        </View>
+
+       <View className="mt-3.5">
+        <View className="bg-popupclr border border-accounthighlightline rounded-lg p-4 rounded-lg">
+         <View className="flex flex-row flex-wrap items-center justify-between">
+          <View>
+           <Text className="font-geistmedium text-sm text-white leading-12">Premium Transaction</Text>
+           <Text className="font-geistmedium text-xs text-breakdown">Max fee Value : 1000 SAT</Text>
+          </View>
+          <View>
+           <ToggleSwitch
+            isOn={false}
+            onColor="#A94C3D"
+            offColor="#66332b"
+            size="medium"
+            onToggle={isOn => console.log("changed to : ", isOn)}
+          />
+          </View>
+         </View>
+         <View>
+          <View className="relative mt-4">
+           <View className="absolute left-3 top-3.5 z-10"><Icon name={'bitcoin'} size={18} color="#FAFAFA" /></View>
+           <View className="rounded-lg bg-backuphighlightbg h-12"><Input placeholder="Enter your value" placeholderTextColor="#ffffff" inputContainerStyle={[styles.inputFourth]} style={[styles.inputFourthsm]} /></View>
+           <View className="absolute right-4 top-3.5"><Text className="text-xs text-lightgray">Per byte</Text></View>
+          </View>
+          <View className="mt-4 flex-row flex-wrap items-center justify-between">
+           <View className="w-1/3">
+           <Button className="w-full"
+            title="Set default"
+            buttonStyle={{
+              backgroundColor: '#E8705C',
+              borderRadius: 8,
+              height: 48,
+              padding:0
+            }}
+            containerStyle={{ borderRadius: 8 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 10 }}
+          />
+          </View>
+          <View className="w-2/3 pl-2">
+          <Button className="w-full"
+            title="Just use for this transaction"
+            buttonStyle={{
+              backgroundColor: 'transparent',
+              borderWidth:1,
+              borderColor:'#514e4e',
+              borderRadius: 8,
+              height: 48,
+              padding:0
+            }}
+            containerStyle={{ borderRadius: 8 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 10 }}
+          />
+          </View>
+          </View>
+         </View>
+        </View>
+       </View> 
 
        {/*convert*/}
        <View className="bg-popupclr rounded-lg p-4 relative z-10 mt-3.5">
@@ -259,6 +317,25 @@ const AnduroSendVC = () => {
     fontSize: 12,
     padding:0,
     paddingRight:65,
+    margin:0,
+    color: '#fff'
+  },
+  inputFourth: {
+    borderBottomWidth:0,
+    borderWidth:0,
+    borderRadius:0,
+    minHeight:0,
+    padding:0
+  },
+  inputFourthsm: {
+    height: 48,
+    minHeight:0,
+    minWidth:0,
+    fontFamily:'Geist-SemiBold',
+    fontSize: 12,
+    padding:0,
+    paddingRight:60,
+    paddingLeft:25,
     margin:0,
     color: '#fff'
   }
