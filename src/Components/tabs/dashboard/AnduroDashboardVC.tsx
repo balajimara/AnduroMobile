@@ -364,7 +364,11 @@ const AnduroDashboardVC = (props: DashboardProps) => {
     <SafeAreaView className="bg-gray flex flex-1">
       <View className="m-4" style={{flex: 1}}>
       <View className="bg-popupclr rounded-xl p-3.5">
-
+       {loading && (
+        <View className="py-10">
+        <BalanceSkeleton/>
+        </View>
+      )}
       {!loading && (
       <AnduroWalletBalanceVW
             isConvertEnabled={isConvertEnabled}
@@ -423,18 +427,11 @@ const AnduroDashboardVC = (props: DashboardProps) => {
       />
       
       )}
-      </View>
       {loading && (
-        <View className="py-10">
-        <BalanceSkeleton/>
-        </View>
-      )}
-      {loading && (
-        <View style={{display:"flex", flexDirection:'row'}}>
         <ActionSkeleton/>
-        </View>
       )}
-         <View style={{display:"flex", flexDirection:'row'}}>
+      </View>
+         <View style={{flex:1}}>
           {loading &&
             <>
               <ListSkeleton />
