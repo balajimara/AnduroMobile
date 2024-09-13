@@ -143,6 +143,15 @@ const AnduroSendVC = () => {
         </View>
        </View> 
 
+       <View className="mt-3.5">
+        <View className="border border-accounthighlightline rounded-lg p-4 rounded-lg">
+         <View className="flex-row flex-wrap justify-between items-center">
+          <Text className="font-geistmedium text-lightgray text-xs text-center">Gas Price</Text>
+          <Text className="font-geistregular text-end text-white text-xs">0 ALYS</Text>
+         </View> 
+        </View>
+       </View>
+
        {/*convert*/}
        <View className="bg-popupclr rounded-lg p-4 relative z-10 mt-3.5">
          <View className="border-b border-headingborder mb-4 pb-1">
