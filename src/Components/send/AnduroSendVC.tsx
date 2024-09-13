@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet } from "react-native"
-import { Input, Button, ListItem } from "@rneui/themed"
+import { Input, Button, ListItem, Dialog } from "@rneui/themed"
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 const AnduroSendVC = () => {
   const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const toggleDialog1 = () => {
     setVisible1(!visible1);
+  };
+  const toggleDialog2 = () => {
+    setVisible2(!visible2);
   };
   return (
     <SafeAreaView>
@@ -69,11 +73,24 @@ const AnduroSendVC = () => {
 
        <View className="mt-3.5">
         <View className="bg-popupclr rounded-lg p-4 rounded-lg">
-         <View className="border-b border-headingborder mb-4 pb-1">
-          <Text className="font-geistmedium text-headingcolor text-sm">To</Text>
+         <View>
+          <View className="border-b border-headingborder mb-4 pb-1">
+           <Text className="font-geistmedium text-headingcolor text-sm">To</Text>
+          </View>
+          <View className="bg-backuphighlightbg rounded-lg px-2 h-12">
+           <Input placeholder="Enter receiver address" placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputSecond]} style={[styles.inputSecondsm]} />
+          </View>
          </View>
-         <View className="bg-backuphighlightbg rounded-lg px-2 h-12">
-          <Input placeholder="Enter receiver address" placeholderTextColor="#968F8D" inputContainerStyle={[styles.inputSecond]} style={[styles.inputSecondsm]} />
+         <View className="bg-backuphighlightbg rounded-lg w-full p-4 mt-4">
+          <View className="flex-row flex-wrap justify-between items-center">
+           <View className="flex-row flex-wrap items-center">
+            <Icon name={'user'} size={28} color="#FAFAFA" />
+            <Text className="text-lightgray ml-3 opacity-50">tc1qwn...ezu3</Text>
+           </View>
+           <View>
+            <Icon name={'angle-right'} size={28} color="#FAFAFA" />
+           </View>
+          </View>
          </View>
         </View>
        </View>
@@ -140,6 +157,7 @@ const AnduroSendVC = () => {
             }}
             containerStyle={{ borderRadius: 8 }}
             titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 10 }}
+            onPress={toggleDialog2}
           />
           </View>
           </View>
@@ -312,6 +330,116 @@ const AnduroSendVC = () => {
           </View>
           </View> 
         </Dialog>
+        <Dialog overlayStyle={{ borderRadius: 8, borderWidth: 1, backgroundColor: '#231B19', borderColor: '#342d2b', width: "90%", position: 'absolute', bottom: 20 }} isVisible={visible2} onBackdropPress={toggleDialog2}>
+         <View>
+
+          <View className="opacity-70 pb-4">
+           <View className="flex-row justify-between">
+            <Text className="text-lg text-lightgray opacity-95 font-geistregular">Edit Fee</Text>
+            <Icon name={'close'} size={22} color="#FAFAFA" />
+           </View>
+          </View>
+
+          <View className="relative mb-4 w-full">
+           <Text className="block text-white opacity-70 text-sm font-geistsemibold mb-2">Fee</Text>
+           <View className="relative">
+            <View className="border-[#685c59] border h-12 rounded-lg"><Input placeholder="1" placeholderTextColor="#ffffff" inputContainerStyle={[styles.inputFifth]} style={[styles.inputFifthsm]} /></View>
+            <View className="absolute top-3.5 right-4">
+             <Text className="font-geistregular font-normal text-white text-sm">sat/B</Text>
+            </View>
+           </View>
+          </View>
+
+          <View className="flex-row justify-between">
+           <Text className="text-white font-geistregular text-xs">Total Amount: 58.082 USD</Text>
+           <Text className="text-white font-geistregular text-xs">Total Fee: 0.082 USD</Text>
+          </View>
+
+          <View className="flex-row justify-between py-6">
+           <View className="w-1/4 px-1 pl-0">
+              <Button className="w-full"
+              title="Low"
+              buttonStyle={{
+                backgroundColor: '#E8705C',
+                borderWidth:1,
+                borderColor:'#E8705C',
+                borderRadius: 8,
+                height: 40,
+                padding:0
+              }}
+              containerStyle={{ borderRadius: 8 }}
+              titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 11, textTransform:'uppercase' }}
+             />
+           </View>
+           <View className="w-1/4 px-1 opacity-70">
+             <Button className="w-full"
+              title="Medium"
+              buttonStyle={{
+                backgroundColor: '#E8705C',
+                borderWidth:1,
+                borderColor:'#E8705C',
+                borderRadius: 8,
+                height: 40,
+                padding:0
+              }}
+              containerStyle={{ borderRadius: 8 }}
+              titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 11, textTransform:'uppercase' }}
+             />
+           </View>
+           <View className="w-1/4 px-1">
+             <Button className="w-full"
+              title="High"
+              buttonStyle={{
+                backgroundColor: '#E8705C',
+                borderWidth:1,
+                borderColor:'#E8705C',
+                borderRadius: 8,
+                height: 40,
+                padding:0
+              }}
+              containerStyle={{ borderRadius: 8 }}
+              titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 11, textTransform:'uppercase' }}
+             />
+           </View>
+           <View className="w-1/4 px-1 pr-0"> 
+             <Button className="w-full"
+              title="Custom"
+              buttonStyle={{
+                backgroundColor: '#E8705C',
+                borderWidth:1,
+                borderColor:'#E8705C',
+                borderRadius: 8,
+                height: 40,
+                padding:0
+              }}
+              containerStyle={{ borderRadius: 8 }}
+              titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 11, textTransform:'uppercase' }}
+             />
+           </View> 
+          </View>
+
+          <View>
+           <Text className="text-white font-geistregular text-xs">Apply a higher fee to help your transaction confirm quickly, especially when the network is congested.</Text>
+          </View>
+
+          <View className="relative py-7 pb-2">
+           <Button className="w-full"
+            title="Apply"
+            buttonStyle={{
+              backgroundColor: '#E8705C',
+              borderWidth:1,
+              borderColor:'#E8705C',
+              borderRadius: 8,
+              height: 48,
+              padding:0
+            }}
+            containerStyle={{ borderRadius: 8 }}
+            titleStyle={{ fontFamily: 'JetBrainsMono-SemiBold', fontSize: 16 }}
+           />
+          </View>
+
+         </View>
+        </Dialog>
        </View>
       </View> 
      </ScrollView>
@@ -385,6 +513,25 @@ const AnduroSendVC = () => {
     padding:0,
     paddingRight:60,
     paddingLeft:25,
+    margin:0,
+    color: '#fff'
+  },
+  inputFifth: {
+    borderBottomWidth:0,
+    borderWidth:0,
+    borderRadius:0,
+    minHeight:0,
+    padding:0
+  },
+  inputFifthsm: {
+    height: 48,
+    minHeight:0,
+    minWidth:0,
+    fontFamily:'Geist-SemiBold',
+    fontSize: 14,
+    padding:0,
+    paddingRight:60,
+    paddingLeft:10,
     margin:0,
     color: '#fff'
   }
